@@ -25,10 +25,12 @@ jobs:
           flutter-version-file: .fvmrc
           cache: true
       - run: flutter pub get
-      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: dart format --output=none --set-exit-if-changed lib test tool
       - run: flutter analyze
       - name: No hard-coded strings in presentation/ (T-006)
         run: dart run tool/check_hardcoded_strings.dart
+      - name: env/ holds public values only (T-007)
+        run: dart run tool/check_env.dart
       - run: flutter test
 
   secrets:

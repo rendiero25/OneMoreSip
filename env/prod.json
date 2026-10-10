@@ -1,0 +1,10 @@
+{
+  "APP_ENV": "prod",
+  "SUPABASE_URL": "",
+  "SUPABASE_PUBLISHABLE_KEY": "",
+  "REVENUECAT_IOS_PUBLIC_KEY": "",
+  "REVENUECAT_ANDROID_PUBLIC_KEY": "",
+  "SENTRY_DSN": "",
+  "POSTHOG_API_KEY": "",
+  "POSTHOG_HOST": "https://eu.i.posthog.com"
+}

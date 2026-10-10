@@ -133,7 +133,7 @@ Precedence when docs disagree: **decisions.md > PRD.md > system-design.md > desi
 fvm flutter pub get
 fvm flutter analyze
 fvm flutter test
-fvm flutter run --flavor dev -t lib/main_dev.dart
+fvm flutter run --flavor dev -t lib/main_dev.dart --dart-define-from-file=env/dev.json
 supabase start                     # local stack
 supabase db reset                  # re-run migrations + seed
 supabase functions serve           # local edge functions
