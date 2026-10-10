@@ -30,8 +30,9 @@
 
 ## M0 — Foundation & design
 
-- [ ] **T-001 Create Flutter project** — flavors `dev`/`prod`, FVM pin, `very_good_analysis`, iOS 16 min, Android minSdk 28 + current required targetSdk, bundle/app IDs (owner confirms, e.g. `app.onemoresip`), display name `Sip!`.
+- [~] **T-001 Create Flutter project** — flavors `dev`/`prod`, FVM pin, `very_good_analysis`, iOS 16 min, Android minSdk 28 + current required targetSdk, bundle/app IDs (owner confirms, e.g. `app.onemoresip`), display name `Sip!`.
   Refs: SD-2, SD-3.3, D-01 · Verify: both flavors run on iOS sim + Android emulator; label shows "Sip!".
+  Note 2026-10-11: done per D-25 (targetSdk 36; dev label `Sip! Dev`). Android dev + prod verified on emulator. Open: iOS sim run needs a Mac (iOS flavors/schemes hand-written in `project.pbxproj`, not yet opened in Xcode). FVM symlink `.fvm/flutter_sdk` needs Windows Developer Mode; `fvm flutter …` works without it.
 - [ ] **T-002 App skeleton** — folder layout, Riverpod, go_router with placeholder routes for UI-01…UI-18.
   Refs: SD-3.1–3.2 · Deps: T-001 · Verify: navigation smoke test passes.
 - [ ] **T-003 CI** — GitHub Actions: format, analyze, test, secret scan, dependency audit.

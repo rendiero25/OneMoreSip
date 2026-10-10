@@ -88,3 +88,6 @@ Why: Beverage Hydration Index multipliers >1 would nudge users toward milk/juice
 
 **D-24 — Drink database: USDA FoodData Central + national tables as reference; generic names only** (2026-10-08)
 Consequence: `data/drinks.json` is a draft until verified (T-020).
+
+**D-25 — App identifiers: `app.onemoresip` (prod), `app.onemoresip.dev` (dev); Flutter pinned to 3.47.2 via FVM** (2026-10-11)
+Why: Matches the planned domain `onemoresip.app` (O-03); Play `applicationId` cannot change after the first upload. Dev flavor gets its own ID and the label `Sip! Dev` so both can be installed side by side. Dart package name is `onemoresip`.
