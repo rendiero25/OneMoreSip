@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:onemoresip/app/placeholder_screen.dart';
+import 'package:onemoresip/core/flags/feature_flag.dart';
+import 'package:onemoresip/core/flags/feature_flags.dart';
 
 /// Route paths, one per screen group in docs/claude-design-prompts.md.
 ///
@@ -70,43 +72,61 @@ abstract final class Routes {
 }
 
 /// App router. Every screen is a placeholder until its task replaces it.
+/// Routes of switched-off features redirect to Home (F-33).
 final routerProvider = Provider<GoRouter>((ref) {
+  final flagsChanged = ValueNotifier(0);
+  ref
+    ..listen(featureFlagsProvider, (_, _) => flagsChanged.value++)
+    ..onDispose(flagsChanged.dispose);
+
+  GoRoute placeholder(String path, String id, [FeatureFlag? flag]) => GoRoute(
+    path: path,
+    redirect: flag == null
+        ? null
+        : (context, state) => ref.read(featureFlagsProvider).contains(flag)
+              ? Routes.home
+              : null,
+    builder: (context, state) => PlaceholderScreen(key: ValueKey(id), id: id),
+  );
+
   final router = GoRouter(
     initialLocation: Routes.home,
+    refreshListenable: flagsChanged,
     routes: [
-      _placeholder(Routes.splash, 'UI-01-splash'),
-      _placeholder(Routes.welcome, 'UI-01-welcome'),
-      _placeholder(Routes.onboarding, 'UI-02'),
+      placeholder(Routes.splash, 'UI-01-splash'),
+      placeholder(Routes.welcome, 'UI-01-welcome'),
+      placeholder(Routes.onboarding, 'UI-02'),
       StatefulShellRoute.indexedStack(
         // FloatingNavBar (DS-5) replaces this bare shell in T-011.
         builder: (context, state, navigationShell) => navigationShell,
         branches: [
-          StatefulShellBranch(routes: [_placeholder(Routes.home, 'UI-03')]),
-          StatefulShellBranch(routes: [_placeholder(Routes.stats, 'UI-09')]),
-          StatefulShellBranch(routes: [_placeholder(Routes.family, 'UI-12')]),
-          StatefulShellBranch(routes: [_placeholder(Routes.me, 'UI-15')]),
+          StatefulShellBranch(routes: [placeholder(Routes.home, 'UI-03')]),
+          StatefulShellBranch(routes: [placeholder(Routes.stats, 'UI-09')]),
+          StatefulShellBranch(
+            routes: [placeholder(Routes.family, 'UI-12', FeatureFlag.family)],
+          ),
+          StatefulShellBranch(routes: [placeholder(Routes.me, 'UI-15')]),
         ],
       ),
-      _placeholder(Routes.simple, 'UI-03b'),
-      _placeholder(Routes.log, 'UI-04'),
-      _placeholder(Routes.drinks, 'UI-05'),
-      _placeholder(Routes.aiPhoto, 'UI-06'),
-      _placeholder(Routes.aiChat, 'UI-07'),
-      _placeholder(Routes.insight, 'UI-08'),
-      _placeholder(Routes.paywall, 'UI-10'),
-      _placeholder(Routes.challenges, 'UI-11'),
-      _placeholder(Routes.fasting, 'UI-13'),
-      _placeholder(Routes.reminders, 'UI-14'),
-      _placeholder(Routes.streaks, 'UI-16'),
-      _placeholder(Routes.familyInvite, 'invite'),
-      _placeholder(Routes.challengeJoin, 'challenge-join'),
+      placeholder(Routes.simple, 'UI-03b'),
+      placeholder(Routes.log, 'UI-04'),
+      placeholder(Routes.drinks, 'UI-05'),
+      placeholder(Routes.aiPhoto, 'UI-06', FeatureFlag.aiPhoto),
+      placeholder(Routes.aiChat, 'UI-07', FeatureFlag.aiChat),
+      placeholder(Routes.insight, 'UI-08', FeatureFlag.aiInsight),
+      placeholder(Routes.paywall, 'UI-10'),
+      placeholder(Routes.challenges, 'UI-11', FeatureFlag.challenges),
+      placeholder(Routes.fasting, 'UI-13', FeatureFlag.fasting),
+      placeholder(Routes.reminders, 'UI-14'),
+      placeholder(Routes.streaks, 'UI-16'),
+      placeholder(Routes.familyInvite, 'invite', FeatureFlag.family),
+      placeholder(
+        Routes.challengeJoin,
+        'challenge-join',
+        FeatureFlag.challenges,
+      ),
     ],
   );
   ref.onDispose(router.dispose);
   return router;
 });
-
-GoRoute _placeholder(String path, String id) => GoRoute(
-  path: path,
-  builder: (context, state) => PlaceholderScreen(key: ValueKey(id), id: id),
-);

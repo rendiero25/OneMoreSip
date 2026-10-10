@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:onemoresip/app/app.dart';
 import 'package:onemoresip/app/router.dart';
+
+import '../helpers/flags.dart';
 
 void main() {
   const screens = {
@@ -30,12 +31,8 @@ void main() {
   };
 
   Future<GoRouter> pumpApp(WidgetTester tester) async {
-    final container = ProviderContainer();
-    addTearDown(container.dispose);
+    final container = await pumpWithFlags(tester, child: const App());
     final router = container.read(routerProvider);
-    await tester.pumpWidget(
-      UncontrolledProviderScope(container: container, child: const App()),
-    );
     await tester.pumpAndSettle();
     return router;
   }
