@@ -12,6 +12,8 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>com.posthog.posthog.AUTO_INIT</key>
+	<false/>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>

@@ -1,7 +1,7 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:onemoresip/app/app.dart';
+import 'package:onemoresip/core/analytics/telemetry.dart';
 
-void main() {
-  runApp(const ProviderScope(child: App()));
+Future<void> main() async {
+  await runWithTelemetry(const ProviderScope(child: App()));
 }
