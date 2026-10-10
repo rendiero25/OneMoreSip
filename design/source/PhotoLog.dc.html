@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI photo logging</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums">
+
+<!-- 1 CONSENT -->
+<sc-if value="{{is.consent}}" hint-placeholder-val="{{ true }}">
+<div style="height: 100%; box-sizing: border-box; padding: 52px 20px 28px; display: flex; flex-direction: column">
+<button type="button" aria-label="Close" style="align-self: flex-start; width: 48px; height: 48px; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+<div style="margin-top: 12px; align-self: center; position: relative; width: 220px; height: 200px; border-radius: 999px; background: {{t.mint}}; display: flex; align-items: center; justify-content: center">
+<dc-import name="Sippy" state="happy" size="150" hint-size="150px,150px"></dc-import>
+<span aria-hidden="true" style="position: absolute; right: 10px; bottom: 18px; width: 64px; height: 64px; border-radius: 20px; background: #FFD27A; color: #3A2600; border: 4px solid {{t.bg}}; display: flex; align-items: center; justify-content: center; transform: rotate(-8deg)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="3.5"></circle></svg></span>
+</div>
+<h1 style="margin: 24px 0 10px; font-size: 30px; line-height: 36px; font-weight: 800; letter-spacing: -0.01em">Snap a drink, Sippy logs it</h1>
+<p style="margin: 0; font-size: 17px; line-height: 24px">Your photo is sent securely to our AI partner to recognize the drink. We don't keep the photo.</p>
+<ul style="list-style: none; margin: 18px 0 0; padding: 16px; border-radius: 24px; background: {{t.surface}}; display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 20px; font-weight: 600">
+<li style="display: flex; gap: 12px; align-items: center"><span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: {{t.accentTint}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>Sent over an encrypted connection</li>
+<li style="display: flex; gap: 12px; align-items: center"><span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: {{t.sunTint}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M10 11v6M14 11v6"></path><path d="M6 7l1 13h10l1-13"></path><path d="M9 7V4h6v3"></path></svg></span>Deleted as soon as the drink is recognized</li>
+<li style="display: flex; gap: 12px; align-items: center"><span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: {{t.coralTint}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg></span>Turn it off anytime in Privacy</li>
+</ul>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px">
+<button type="button" onClick="{{allow}}" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Allow</button>
+<button type="button" style="min-height: 48px; border: none; border-radius: 999px; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 17px; font-weight: 600; cursor: pointer">Not now</button>
+</div>
+</div>
+</sc-if>
+
+<!-- 2 CAMERA (+ low / empty quota) -->
+<sc-if value="{{is.camera}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; background: #000000">
+<dc-import name="DrinkPhoto" width="390" height="844" hint-size="390px,844px"></dc-import>
+</div>
+<div style="position: absolute; top: 52px; left: 20px; right: 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px">
+<button type="button" aria-label="Close camera" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: rgba(0,0,0,0.5); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+<div role="status" aria-label="{{quota.aria}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; background: {{quota.bg}}; color: {{quota.fg}}; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 800">
+<sc-if value="{{quota.isNormal}}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="3.5"></circle></svg></sc-if>
+<sc-if value="{{quota.isLow}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></sc-if>
+<sc-if value="{{quota.isEmpty}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M5.6 5.6l12.8 12.8"></path></svg></sc-if>
+{{quota.label}}
+</div>
+<span style="width: 48px; flex-shrink: 0"></span>
+</div>
+
+<div aria-hidden="true" style="position: absolute; left: 60px; right: 60px; top: 190px; height: 420px">
+<span style="position: absolute; top: 0; left: 0; width: 36px; height: 36px; border-top: 4px solid #FFFFFF; border-left: 4px solid #FFFFFF; border-radius: 16px 0 0 0; display: block"></span>
+<span style="position: absolute; top: 0; right: 0; width: 36px; height: 36px; border-top: 4px solid #FFFFFF; border-right: 4px solid #FFFFFF; border-radius: 0 16px 0 0; display: block"></span>
+<span style="position: absolute; bottom: 0; left: 0; width: 36px; height: 36px; border-bottom: 4px solid #FFFFFF; border-left: 4px solid #FFFFFF; border-radius: 0 0 0 16px; display: block"></span>
+<span style="position: absolute; bottom: 0; right: 0; width: 36px; height: 36px; border-bottom: 4px solid #FFFFFF; border-right: 4px solid #FFFFFF; border-radius: 0 0 16px 0; display: block"></span>
+</div>
+<div style="position: absolute; left: 0; right: 0; top: 630px; display: flex; justify-content: center"><span style="padding: 8px 14px; border-radius: 999px; background: rgba(0,0,0,0.55); color: #FFFFFF; font-size: 15px; font-weight: 700">Fit the whole glass in the frame</span></div>
+
+<sc-if value="{{toast}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: absolute; left: 20px; right: 20px; top: 112px; min-height: 56px; border-radius: 20px; background: #FFFFFF; color: #111312; display: flex; align-items: center; gap: 10px; padding: 8px 16px; box-sizing: border-box; box-shadow: 0 12px 32px rgba(0,0,0,0.3); font-size: 15px; font-weight: 700"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B7F75" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12 3 3 6-6"></path></svg>Added {{counted}} ml · Iced coffee</div>
+</sc-if>
+
+<div style="position: absolute; left: 0; right: 0; bottom: 0; height: 168px; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: space-between; padding: 0 36px 24px; box-sizing: border-box">
+<button type="button" aria-label="Choose from gallery" style="width: 56px; height: 56px; border: 2px solid rgba(255,255,255,0.8); border-radius: 16px; background: rgba(255,255,255,0.12); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg></button>
+<button type="button" aria-label="Take photo" onClick="{{capture}}" style="width: 84px; height: 84px; border: 5px solid #FFFFFF; border-radius: 999px; background: transparent; padding: 5px; box-sizing: border-box; cursor: pointer; opacity: {{shutterOpacity}}"><span style="display: block; width: 100%; height: 100%; border-radius: 999px; background: #FFFFFF"></span></button>
+<button type="button" aria-label="Switch camera" style="width: 56px; height: 56px; border: none; border-radius: 999px; background: rgba(255,255,255,0.12); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"></path><path d="M4 4v4h4"></path><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"></path><path d="M20 20v-4h-4"></path></svg></button>
+</div>
+
+<sc-if value="{{emptySheet}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45)"></div>
+<div role="dialog" aria-modal="true" aria-labelledby="empty-h" style="position: absolute; left: 0; right: 0; bottom: 0; background: {{t.surface}}; color: {{t.ink}}; border-radius: 28px 28px 0 0; padding: 10px 20px 34px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 -8px 32px rgba(0,0,0,0.3)">
+<div style="width: 40px; height: 5px; border-radius: 999px; background: {{t.handle}}; align-self: center"></div>
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="flex-shrink: 0"><dc-import name="Sippy" state="tired" size="80" hint-size="80px,80px"></dc-import></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 id="empty-h" style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">You've used this month's photos.</h2><span style="font-size: 17px; line-height: 24px; color: {{t.muted}}; font-weight: 600">Resets Nov 1.</span></div>
+</div>
+<div style="border-radius: 20px; background: {{t.surfaceAlt}}; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 700"><span>AI photos</span><span style="color: {{t.badFg}}">0 left</span></div>
+<div style="height: 10px; border-radius: 999px; background: {{t.track}}"></div>
+</div>
+<button type="button" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Add manually</button>
+<button type="button" style="min-height: 56px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer">Get 50 more photos<span style="padding: 2px 8px; border-radius: 999px; background: #FFD27A; color: #3A2600; font-size: 14px; font-weight: 800">$1.99</span></button>
+</div>
+</sc-if>
+</sc-if>
+
+<!-- 3 ANALYZING -->
+<sc-if value="{{is.analyzing}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; background: #000000">
+<dc-import name="DrinkPhoto" width="390" height="844" blur="14" hint-size="390px,844px"></dc-import>
+</div>
+<div style="position: absolute; left: 20px; right: 20px; top: 50%; transform: translateY(-50%); border-radius: 28px; background: {{t.surface}}; padding: 28px 20px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; box-shadow: 0 20px 48px rgba(0,0,0,0.35)">
+<div style="position: relative; width: 170px; height: 150px; display: flex; align-items: center; justify-content: center">
+<dc-import name="Sippy" state="fresh" size="130" hint-size="130px,130px"></dc-import>
+<svg width="96" height="96" viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; right: -6px; bottom: -4px; transform: rotate(-10deg)"><circle cx="26" cy="26" r="17" fill="#FFFFFF" fill-opacity="0.35" stroke="#111312" stroke-width="5"></circle><path d="M38 38 L56 56" stroke="#111312" stroke-width="8" stroke-linecap="round"></path><path d="M18 20 Q22 14 28 14" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></path></svg>
+</div>
+<h1 role="status" style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Sippy is taking a close look…</h1>
+<p style="margin: 0; font-size: 15px; line-height: 20px; color: {{t.muted}}; font-weight: 600">Usually takes a few seconds</p>
+<div aria-hidden="true" style="display: flex; gap: 8px; padding: 4px 0"><span style="width: 10px; height: 10px; border-radius: 999px; background: {{t.accent}}; display: block"></span><span style="width: 10px; height: 10px; border-radius: 999px; background: {{t.accent}}; opacity: 0.55; display: block"></span><span style="width: 10px; height: 10px; border-radius: 999px; background: {{t.accent}}; opacity: 0.25; display: block"></span></div>
+<button type="button" onClick="{{toCamera}}" style="min-height: 48px; padding: 0 20px; border: none; border-radius: 999px; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Cancel</button>
+</div>
+</sc-if>
+
+<!-- 4 RESULT / 5 DEMO -->
+<sc-if value="{{is.result}}" hint-placeholder-val="{{ false }}">
+<div style="height: 100%; box-sizing: border-box; padding: 52px 20px 28px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back to camera" onClick="{{toCamera}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">{{resultTitle}}</h1>
+</div>
+
+<section aria-label="Recognized drink" style="border-radius: 28px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 14px; border: {{demoBorder}}">
+<div style="display: flex; gap: 14px; align-items: stretch">
+<div style="position: relative; width: 96px; height: 128px; flex-shrink: 0; border-radius: 20px; overflow: hidden">
+<dc-import name="DrinkPhoto" width="96" height="128" hint-size="96px,128px"></dc-import>
+<sc-if value="{{demo}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; left: 6px; top: 6px; padding: 2px 8px; border-radius: 8px; background: #FFD27A; color: #3A2600; font-size: 14px; font-weight: 800">Example</span></sc-if>
+</div>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 800">Iced coffee with milk &amp; palm sugar</h2>
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: {{t.warnBg}}; color: {{t.warnFg}}; font-size: 14px; line-height: 20px; font-weight: 800"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="14" width="4" height="7" rx="1" fill="currentColor"></rect><rect x="10" y="9" width="4" height="12" rx="1" fill="currentColor"></rect><rect x="17" y="4" width="4" height="17" rx="1" fill="none" stroke="currentColor" stroke-width="2"></rect></svg>Confidence: Medium</span>
+</div>
+</div>
+
+<div style="border-radius: 20px; background: {{t.accentTint}}; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<button type="button" aria-label="Less" onClick="{{volMinus}}" style="width: 48px; height: 48px; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+<div aria-live="polite" style="display: flex; flex-direction: column; align-items: center"><span style="font-size: 14px; font-weight: 700; color: {{t.muted}}">Amount</span><span style="font-size: 32px; line-height: 36px; font-weight: 800">≈ {{vol}} ml</span></div>
+<button type="button" aria-label="More" onClick="{{volPlus}}" style="width: 48px; height: 48px; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="border-radius: 20px; background: {{t.sunTint}}; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 700; color: {{t.mutedOnTint}}">Sugar</span><span style="font-size: 24px; line-height: 30px; font-weight: 800">≈ {{sugar}} g</span></div>
+<div style="border-radius: 20px; background: {{t.coralTint}}; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 700; color: {{t.mutedOnTint}}">Caffeine</span><span style="font-size: 24px; line-height: 30px; font-weight: 800">≈ {{caf}} mg</span></div>
+</div>
+<div style="font-size: 15px; line-height: 20px; font-weight: 600; color: {{t.muted}}">Counts as ≈ {{counted}} ml toward your goal. AI estimates can be off — edit if something looks wrong.</div>
+
+<sc-if value="{{notDemo}}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 10px">
+<button type="button" onClick="{{addIt}}" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Looks right — add</button>
+<button type="button" style="min-height: 56px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Edit</button>
+</div>
+</sc-if>
+</section>
+
+<sc-if value="{{demo}}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="teaser-h" style="border-radius: 28px; background: {{t.accent}}; color: {{t.onAccent}}; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="flex-shrink: 0; width: 64px; height: 64px; border-radius: 999px; background: {{t.onAccentSoftBg}}; display: flex; align-items: center; justify-content: center"><dc-import name="Sippy" state="celebrating" size="56" hint-size="56px,56px"></dc-import></div>
+<h2 id="teaser-h" style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 800">Snap any drink with Premium — try 7 days free</h2>
+</div>
+<button type="button" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.teaserBtn}}; color: {{t.teaserBtnInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Try 7 days free</button>
+<button type="button" onClick="{{toCamera}}" style="min-height: 48px; border: none; border-radius: 999px; background: transparent; color: {{t.onAccent}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Maybe later</button>
+</section>
+</sc-if>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"screen":{"editor":"enum","options":["consent","camera","analyzing","result","demo","low","empty"],"default":"consent"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  componentWillUnmount() { if (this._tm) clearTimeout(this._tm); }
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const init = this.props.screen ?? 'consent';
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', mutedOnTint: '#C3CAC8', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', warnBg: 'rgba(242,184,92,0.18)', warnFg: '#F2B85C', badFg: '#FF8F7A', track: '#3A3F3D', handle: '#3A3F3D', onAccentSoftBg: 'rgba(10,31,29,0.12)', teaserBtn: '#0A1F1D', teaserBtnInk: '#ECEEEC' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', mutedOnTint: '#4A504F', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', warnBg: '#FFE9C2', warnFg: '#8A4F00', badFg: '#A8321F', track: '#E2DDD3', handle: '#D6D1C7', onAccentSoftBg: 'rgba(255,255,255,0.18)', teaserBtn: '#FFFFFF', teaserBtnInk: '#111312' };
+
+    const map = { consent: 'consent', camera: 'camera', low: 'camera', empty: 'camera', analyzing: 'analyzing', result: 'result', demo: 'result' };
+    const screen = st.screen ?? map[init];
+    const demo = init === 'demo';
+    const used = st.used ?? (init === 'low' ? 142 : init === 'empty' ? 150 : 128);
+    const left = 150 - used;
+    const qKind = left <= 0 ? 'empty' : left <= 10 ? 'low' : 'normal';
+    const Q = {
+      normal: { bg: 'rgba(0,0,0,0.55)', fg: '#FFFFFF', label: used + ' / 150 photos this month' },
+      low: { bg: '#FFE9C2', fg: '#8A4F00', label: left + ' left · resets Nov 1' },
+      empty: { bg: '#FFE0D9', fg: '#A8321F', label: '0 left · resets Nov 1' }
+    }[qKind];
+
+    const vol = st.vol ?? 300;
+    const clamp = (n) => Math.max(50, Math.min(1000, n));
+    const go = (s) => () => { if (this._tm) clearTimeout(this._tm); this.setState({ screen: s, toast: false }); };
+
+    return {
+      t, demo, notDemo: !demo,
+      is: { consent: screen === 'consent', camera: screen === 'camera', analyzing: screen === 'analyzing', result: screen === 'result' },
+      quota: { ...Q, aria: 'AI photos: ' + Q.label, isNormal: qKind === 'normal', isLow: qKind === 'low', isEmpty: qKind === 'empty' },
+      emptySheet: qKind === 'empty',
+      shutterOpacity: qKind === 'empty' ? '0.4' : '1',
+      toast: !!st.toast,
+      allow: go('camera'),
+      toCamera: go('camera'),
+      capture: () => {
+        if (qKind === 'empty') return;
+        this.setState({ screen: 'analyzing', toast: false });
+        this._tm = setTimeout(() => this.setState({ screen: 'result' }), 1800);
+      },
+      addIt: () => this.setState({ screen: 'camera', toast: true, used: used + 1 }),
+      resultTitle: demo ? 'See how it works' : 'Check your drink',
+      demoBorder: demo ? '2px dashed #F2B85C' : 'none',
+      vol,
+      volMinus: () => this.setState({ vol: clamp(vol - 10) }),
+      volPlus: () => this.setState({ vol: clamp(vol + 10) }),
+      sugar: Math.round(vol * 0.1),
+      caf: Math.round(vol * 0.3),
+      counted: Math.round(vol * 0.9)
+    };
+  }
+}
+</script>
+</body>
+</html>

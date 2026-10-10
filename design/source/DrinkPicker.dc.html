@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Drink picker</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; box-sizing: border-box; padding-top: 52px; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; overflow: hidden">
+
+<!-- PICKER -->
+<sc-if value="{{is.picker}}" hint-placeholder-val="{{ true }}">
+<div style="padding: 0 20px; display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Choose a drink</h1>
+</div>
+
+<div style="padding: 16px 20px 0">
+<div style="position: relative">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{t.muted}}" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="position: absolute; left: 18px; top: 17px"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+<input type="search" aria-label="Search drinks" placeholder="Search drinks" value="{{query}}" onChange="{{onQuery}}" style="width: 100%; min-height: 56px; box-sizing: border-box; border-radius: 20px; border: 2px solid {{t.fieldBorder}}; background: {{t.surface}}; color: {{t.ink}}; padding: 0 16px 0 50px; font-family: inherit; font-size: 17px; outline: none">
+</div>
+</div>
+
+<div role="radiogroup" aria-label="Category" style="padding: 12px 20px 4px; display: flex; gap: 8px; overflow-x: auto; flex-shrink: 0">
+<sc-for list="{{cats}}" as="ct" hint-placeholder-count="10">
+<button type="button" role="radio" aria-checked="{{ct.sel}}" onClick="{{ct.pick}}" style="flex-shrink: 0; min-height: 48px; padding: 0 16px; border: none; border-radius: 12px; background: {{ct.bg}}; color: {{ct.fg}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">{{ct.label}}</button>
+</sc-for>
+</div>
+
+<div style="flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 12px 20px 112px; display: flex; flex-direction: column; gap: 16px">
+
+<sc-if value="{{showAlcoholNote}}" hint-placeholder-val="{{ false }}">
+<div style="border-radius: 20px; background: {{t.surfaceAlt}}; padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 20px; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><path d="M12 8h.01"></path></svg><span>Alcohol is logged for your records but never counts toward your water goal.</span></div>
+</sc-if>
+
+<sc-if value="{{showPopular}}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="pop-h" style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 id="pop-h" style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 800">Popular in Indonesia</h2><span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">per 250 ml glass</span></div>
+<div style="border-radius: 28px; background: {{t.sunTint}}; padding: 6px; display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{popular}}" as="d" hint-placeholder-count="5">
+<button type="button" style="min-height: 72px; border: none; border-radius: 22px; background: {{t.surface}}; color: {{t.ink}}; font-family: inherit; padding: 10px 12px; display: flex; align-items: center; gap: 12px; text-align: start; cursor: pointer">
+<span style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 16px; background: {{d.well}}; display: flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{d.icon}}"></path></svg></span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 17px; line-height: 22px; font-weight: 800">{{d.local}}</span>
+<span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{d.name}}</span>
+<span style="display: flex; flex-wrap: wrap; gap: 6px; padding-top: 2px">
+<sc-if value="{{d.showSugar}}" hint-placeholder-val="{{ true }}"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; background: {{t.sunTint}}; font-size: 14px; line-height: 20px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg>{{d.sugarLabel}}</span></sc-if>
+<sc-if value="{{d.showCaf}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; background: {{t.coralTint}}; font-size: 14px; line-height: 20px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg>{{d.cafLabel}}</span></sc-if>
+</span>
+</span>
+<span aria-hidden="true" style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+</button>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<section aria-labelledby="list-h" style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 id="list-h" style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 800">{{listTitle}}</h2><span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">{{listCount}}</span></div>
+<sc-if value="{{noResults}}" hint-placeholder-val="{{ false }}">
+<div style="border-radius: 28px; background: {{t.surface}}; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+<dc-import name="Sippy" state="thirsty" size="72" hint-size="72px,72px"></dc-import>
+<span style="font-size: 17px; line-height: 24px; font-weight: 700">No drink called “{{query}}” yet.</span>
+<button type="button" onClick="{{toCustom}}" style="min-height: 48px; padding: 0 18px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Create it as a custom drink</button>
+</div>
+</sc-if>
+<div style="border-radius: 28px; background: {{t.surface}}; padding: 6px; display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{list}}" as="d" hint-placeholder-count="6">
+<button type="button" style="min-height: 72px; border: none; border-radius: 22px; background: transparent; color: {{t.ink}}; font-family: inherit; padding: 10px 12px; display: flex; align-items: center; gap: 12px; text-align: start; cursor: pointer; opacity: {{d.opacity}}">
+<span style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 16px; background: {{d.well}}; display: flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{d.icon}}"></path></svg></span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 17px; line-height: 22px; font-weight: 800">{{d.name}}</span>
+<span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{d.local}}</span>
+<span style="display: flex; flex-wrap: wrap; gap: 6px; padding-top: 2px">
+<sc-if value="{{d.showSugar}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; background: {{t.sunTint}}; font-size: 14px; line-height: 20px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg>{{d.sugarLabel}}</span></sc-if>
+<sc-if value="{{d.showCaf}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; background: {{t.coralTint}}; font-size: 14px; line-height: 20px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg>{{d.cafLabel}}</span></sc-if>
+<sc-if value="{{d.alcohol}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 8px; background: {{t.surfaceAlt}}; font-size: 14px; line-height: 20px; font-weight: 700"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M5.6 5.6l12.8 12.8"></path></svg>Logged, not counted</span></sc-if>
+</span>
+</span>
+<span aria-hidden="true" style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 999px; background: {{d.addBg}}; color: {{d.addFg}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+</button>
+</sc-for>
+</div>
+</section>
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 6px; font-size: 14px; color: {{t.muted}}; font-weight: 600">Values are estimates ·<button type="button" onClick="{{toSources}}" style="min-height: 48px; padding: 0 4px; border: none; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer">Data sources</button></div>
+</div>
+
+<div style="position: absolute; left: 20px; right: 20px; bottom: 28px">
+<button type="button" onClick="{{toCustom}}" style="width: 100%; min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; box-shadow: 0 12px 28px rgba(17,19,18,0.22)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>Create custom drink</button>
+</div>
+</sc-if>
+
+<!-- CUSTOM DRINK -->
+<sc-if value="{{is.custom}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 0 20px; display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toPicker}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Create custom drink</h1>
+</div>
+<div style="flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 18px">
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="{{ids.name}}" style="font-size: 15px; font-weight: 700">Name</label>
+<input id="{{ids.name}}" type="text" value="{{form.name}}" onChange="{{onName}}" style="min-height: 56px; box-sizing: border-box; border-radius: 20px; border: 2px solid {{t.ink}}; background: {{t.surface}}; color: {{t.ink}}; padding: 0 18px; font-family: inherit; font-size: 17px; font-weight: 600; outline: none">
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div id="icon-l" style="font-size: 15px; font-weight: 700">Icon</div>
+<div role="radiogroup" aria-labelledby="icon-l" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{icons}}" as="ic" hint-placeholder-count="8">
+<button type="button" role="radio" aria-checked="{{ic.sel}}" aria-label="{{ic.label}}" onClick="{{ic.pick}}" style="min-height: 60px; border-radius: 20px; border: 2px solid {{ic.border}}; background: {{ic.bg}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ic.icon}}"></path></svg></button>
+</sc-for>
+</div>
+</div>
+
+<div style="border-radius: 20px; background: {{t.accentTint}}; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><label for="{{ids.water}}" style="font-size: 15px; font-weight: 700">Water content</label><span style="font-size: 28px; line-height: 32px; font-weight: 800">{{form.water}}%</span></div>
+<input id="{{ids.water}}" type="range" min="0" max="100" step="5" value="{{form.water}}" onChange="{{onWater}}" style="width: 100%; height: 32px; margin: 0; accent-color: {{t.accent}}">
+<div style="display: flex; justify-content: space-between; font-size: 14px; color: {{t.muted}}; font-weight: 600"><span>0%</span><span>Plain water is 100%</span></div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="{{ids.sugar}}" style="font-size: 15px; font-weight: 700">Sugar per 100 ml</label>
+<div style="position: relative"><input id="{{ids.sugar}}" type="number" inputmode="decimal" min="0" value="{{form.sugar}}" onChange="{{onSugar}}" style="width: 100%; min-height: 56px; box-sizing: border-box; border-radius: 20px; border: 2px solid {{t.fieldBorder}}; background: {{t.surface}}; color: {{t.ink}}; padding: 0 44px 0 16px; font-family: inherit; font-size: 20px; font-weight: 700; outline: none"><span aria-hidden="true" style="position: absolute; right: 16px; top: 16px; font-size: 17px; font-weight: 600; color: {{t.muted}}">g</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="{{ids.caf}}" style="font-size: 15px; font-weight: 700">Caffeine per 100 ml</label>
+<div style="position: relative"><input id="{{ids.caf}}" type="number" inputmode="decimal" min="0" value="{{form.caf}}" onChange="{{onCaf}}" style="width: 100%; min-height: 56px; box-sizing: border-box; border-radius: 20px; border: 2px solid {{t.fieldBorder}}; background: {{t.surface}}; color: {{t.ink}}; padding: 0 52px 0 16px; font-family: inherit; font-size: 20px; font-weight: 700; outline: none"><span aria-hidden="true" style="position: absolute; right: 16px; top: 16px; font-size: 17px; font-weight: 600; color: {{t.muted}}">mg</span></div>
+</div>
+</div>
+
+<div aria-live="polite" style="border-radius: 20px; background: {{t.sunTint}}; padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 21px; font-weight: 700">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><path d="M12 8h.01"></path></svg>
+<span>{{preview}}</span>
+</div>
+
+<button type="button" onClick="{{toPicker}}" style="margin-top: auto; min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Save drink</button>
+</div>
+</sc-if>
+
+<!-- DATA SOURCES -->
+<sc-if value="{{is.sources}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 0 20px; display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toPicker}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Data sources</h1>
+</div>
+<div style="flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: flex-end; gap: 10px"><div style="flex-shrink: 0"><dc-import name="Sippy" state="happy" size="60" hint-size="60px,60px"></dc-import></div><div style="background: {{t.accentTint}}; border-radius: 20px 20px 20px 6px; padding: 10px 14px; font-size: 17px; line-height: 24px">Here's where my drink numbers come from.</div></div>
+
+<div style="border-radius: 28px; background: {{t.surface}}; padding: 20px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; gap: 12px"><span style="width: 44px; height: 44px; border-radius: 14px; background: {{t.mint}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"></ellipse><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"></path><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"></path></svg></span><h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 800">USDA FoodData Central</h2></div>
+<p style="margin: 0; font-size: 17px; line-height: 24px">Water, sugar and caffeine values for most drinks come from the U.S. Department of Agriculture's FoodData Central database.</p>
+<a href="https://fdc.nal.usda.gov" style="align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center; gap: 6px; color: {{t.accentInk}}; font-size: 17px; font-weight: 700">fdc.nal.usda.gov<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg></a>
+</div>
+
+<div style="border-radius: 28px; background: {{t.surface}}; padding: 20px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 800">Local drinks</h2>
+<p style="margin: 0; font-size: 17px; line-height: 24px">Drinks like es teh manis or wedang jahe are estimated from typical recipes using USDA ingredient values.</p>
+</div>
+
+<div role="note" style="border-radius: 20px; background: {{t.sunTint}}; padding: 14px 16px; display: flex; gap: 10px; align-items: flex-start">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><path d="M12 8h.01"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; line-height: 24px; font-weight: 800">Values are estimates</span><span style="font-size: 15px; line-height: 21px; font-weight: 600">Recipes, brands and glass sizes vary. Check the label when you can.</span></div>
+</div>
+<div style="font-size: 14px; color: {{t.muted}}; font-weight: 600; text-align: center">Last updated [DATE]</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"screen":{"editor":"enum","options":["picker","search","alcohol","custom","sources"],"default":"picker"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const init = this.props.screen ?? 'picker';
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', fieldBorder: '#3A3F3D' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', fieldBorder: '#D6D1C7' };
+
+    const I = {
+      drop: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z',
+      mug: 'M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h2a2.5 2.5 0 0 1 0 5h-2M8 2v3M12 2v3',
+      iced: 'M6 3h12l-1.5 17a1.5 1.5 0 0 1-1.5 1.4H9a1.5 1.5 0 0 1-1.5-1.4zM6.5 8h11M9.5 11h2.5v2.5H9.5zM13 14h2.5v2.5H13z',
+      leaf: 'M5 19C5 11 11 5 19 5c0 8-6 14-14 14zM5 19l7-7',
+      bottle: 'M10 2h4v4l2 3v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9l2-3zM8 13h8',
+      can: 'M7 4h10v16H7zM7 8h10M7 16h10',
+      coconut: 'M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM15 9l4-7M9 13a3 3 0 0 0 3 3',
+      steam: 'M5 10h12v5a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5zM17 12h1.5a2 2 0 0 1 0 4H17M9 3c0 1.5 1.5 1.5 1.5 3M13 3c0 1.5 1.5 1.5 1.5 3',
+      carton: 'M8 2h8v4l2 3v13H6V9l2-3zM6 9h12',
+      glass: 'M6 3h12l-1.5 17a1.5 1.5 0 0 1-1.5 1.4H9a1.5 1.5 0 0 1-1.5-1.4zM6.6 10h10.8',
+      wine: 'M8 2h8l-1 7a3 3 0 0 1-6 0zM12 12v8M8 22h8'
+    };
+    const wellFor = { water: t.accentTint, tea: t.sunTint, coffee: t.coralTint, milk: t.surfaceAlt, juice: t.sunTint, soda: t.coralTint, sports: t.mint, traditional: t.sunTint, alcohol: t.surfaceAlt };
+    const DR = [
+      { name: 'Water', local: 'Air putih', cats: ['water'], icon: 'drop', sugar: 0, caf: 0 },
+      { name: 'Sparkling water', local: 'Air soda', cats: ['water'], icon: 'bottle', sugar: 0, caf: 0 },
+      { name: 'Iced sweet tea', local: 'Es teh manis', cats: ['tea', 'traditional'], icon: 'iced', sugar: 20, caf: 30, popular: true },
+      { name: 'Iced palm-sugar milk coffee', local: 'Es kopi susu gula aren', cats: ['coffee', 'milk'], icon: 'iced', sugar: 25, caf: 90, popular: true },
+      { name: 'Javanese ground coffee', local: 'Kopi tubruk', cats: ['coffee', 'traditional'], icon: 'mug', sugar: 10, caf: 100, popular: true },
+      { name: 'Young coconut water', local: 'Es kelapa muda', cats: ['juice', 'traditional'], icon: 'coconut', sugar: 12, caf: 0, popular: true },
+      { name: 'Ginger drink', local: 'Wedang jahe', cats: ['traditional'], icon: 'steam', sugar: 15, caf: 0, popular: true },
+      { name: 'Green tea', local: 'Teh hijau', cats: ['tea'], icon: 'leaf', sugar: 0, caf: 30 },
+      { name: 'Coffee with milk', local: 'Kopi susu', cats: ['coffee', 'milk'], icon: 'mug', sugar: 5, caf: 80 },
+      { name: 'Milk', local: 'Susu', cats: ['milk'], icon: 'carton', sugar: 12, caf: 0 },
+      { name: 'Orange juice', local: 'Jus jeruk', cats: ['juice'], icon: 'glass', sugar: 21, caf: 0 },
+      { name: 'Cola', local: 'Kola', cats: ['soda'], icon: 'can', sugar: 27, caf: 25 },
+      { name: 'Isotonic drink', local: 'Minuman isotonik', cats: ['sports'], icon: 'bottle', sugar: 15, caf: 0 },
+      { name: 'Beer', local: 'Bir', cats: ['alcohol'], icon: 'glass', sugar: 0, caf: 0, alcohol: true },
+      { name: 'Wine', local: 'Anggur', cats: ['alcohol'], icon: 'wine', sugar: 0, caf: 0, alcohol: true }
+    ].map((d) => ({
+      ...d,
+      icon: I[d.icon],
+      well: wellFor[d.cats[0]],
+      showSugar: d.sugar > 0, sugarLabel: d.sugar + ' g sugar',
+      showCaf: d.caf > 0, cafLabel: d.caf + ' mg caffeine',
+      alcohol: !!d.alcohol,
+      opacity: d.alcohol ? '0.9' : '1',
+      addBg: d.alcohol ? t.surfaceAlt : t.accent, addFg: d.alcohol ? t.ink : t.onAccent
+    }));
+
+    const screen = st.screen ?? (init === 'custom' || init === 'sources' ? init : 'picker');
+    const cat = st.cat ?? (init === 'alcohol' ? 'alcohol' : 'all');
+    const query = st.query ?? (init === 'search' ? 'kopi' : '');
+    const q = query.trim().toLowerCase();
+
+    const catDefs = [['all', 'All'], ['water', 'Water'], ['coffee', 'Coffee'], ['tea', 'Tea'], ['milk', 'Milk'], ['juice', 'Juice'], ['soda', 'Soda'], ['sports', 'Sports'], ['traditional', 'Traditional'], ['alcohol', 'Alcohol']];
+    const cats = catDefs.map(([id, label]) => ({ label, sel: cat === id, bg: cat === id ? t.ink : t.surface, fg: cat === id ? t.onInk : t.ink, pick: () => this.setState({ cat: id }) }));
+
+    const browsing = cat === 'all' && !q;
+    let list = DR.filter((d) => (cat === 'all' || d.cats.includes(cat)) && (!q || d.name.toLowerCase().includes(q) || d.local.toLowerCase().includes(q)));
+    if (browsing) list = list.filter((d) => !d.popular);
+    const catName = (catDefs.find((c) => c[0] === cat) || ['', 'All'])[1];
+
+    const f = Object.assign({ name: 'Teh tarik', icon: 'mug', water: 85, sugar: '8', caf: '20' }, st.form || {});
+    const setF = (patch) => this.setState({ form: Object.assign({}, f, patch) });
+    const iconKeys = ['drop', 'mug', 'iced', 'leaf', 'bottle', 'can', 'coconut', 'steam'];
+    const icons = iconKeys.map((k) => ({ label: k, icon: I[k], sel: f.icon === k, border: f.icon === k ? t.accent : 'transparent', bg: f.icon === k ? t.accentTint : t.surface, pick: () => setF({ icon: k }) }));
+    const sugar250 = Math.round(250 * (Number(f.sugar) || 0) / 100);
+    const caf250 = Math.round(250 * (Number(f.caf) || 0) / 100);
+    const counted = Math.round(250 * f.water / 100);
+    if (!this._u) this._u = Math.random().toString(36).slice(2, 7);
+
+    return {
+      t, cats, query, list,
+      popular: DR.filter((d) => d.popular),
+      showPopular: browsing,
+      showAlcoholNote: cat === 'alcohol',
+      noResults: list.length === 0,
+      listTitle: q ? 'Results' : (browsing ? 'All drinks' : catName),
+      listCount: list.length + (list.length === 1 ? ' drink' : ' drinks'),
+      is: { picker: screen === 'picker', custom: screen === 'custom', sources: screen === 'sources' },
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      toCustom: () => this.setState({ screen: 'custom', form: q ? Object.assign({}, f, { name: query }) : f }),
+      toSources: () => this.setState({ screen: 'sources' }),
+      toPicker: () => this.setState({ screen: 'picker' }),
+      form: f, icons,
+      ids: { name: 'cd-name-' + this._u, water: 'cd-water-' + this._u, sugar: 'cd-sugar-' + this._u, caf: 'cd-caf-' + this._u },
+      onName: (e) => setF({ name: e.target.value }),
+      onWater: (e) => setF({ water: Number(e.target.value) }),
+      onSugar: (e) => setF({ sugar: e.target.value }),
+      onCaf: (e) => setF({ caf: e.target.value }),
+      preview: 'A 250 ml glass counts as ' + counted + ' ml' + (sugar250 ? ' · ' + sugar250 + ' g sugar' : '') + (caf250 ? ' · ' + caf250 + ' mg caffeine' : '')
+    };
+  }
+}
+</script>
+</body>
+</html>

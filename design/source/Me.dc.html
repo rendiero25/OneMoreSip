@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Me, account and privacy</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: {{h}}; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; overflow: hidden">
+<div style="position: absolute; inset: 0; overflow-y: auto; box-sizing: border-box; padding: 52px 20px {{padBottom}}; display: flex; flex-direction: column; gap: 14px">
+
+<!-- ME -->
+<sc-if value="{{showMe}}" hint-placeholder-val="{{ true }}">
+<h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800">Me</h1>
+<section style="border-radius: 28px; background: {{t.accentTint}}; padding: 16px; display: flex; align-items: center; gap: 14px">
+<span style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 999px; background: #FFD27A; color: #111312; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 800">R</span>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 20px; line-height: 26px; font-weight: 800">Rendy</span><span style="font-size: 14px; line-height: 18px; color: {{t.mutedOnTint}}; font-weight: 700">Free plan · not backed up</span></div>
+<a href="#premium" style="min-height: 44px; padding: 0 14px; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; text-decoration: none; display: inline-flex; align-items: center; font-size: 14px; font-weight: 800">Upgrade</a>
+</section>
+
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
+<section style="display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 6px 4px 0; font-size: 15px; line-height: 20px; font-weight: 800; color: {{t.muted}}; text-transform: uppercase; letter-spacing: 0.06em">{{g.title}}</h2>
+<div style="border-radius: 28px; background: {{t.surface}}; padding: 4px 16px; display: flex; flex-direction: column">
+<sc-for list="{{g.rows}}" as="r" hint-placeholder-count="4">
+<div style="min-height: 60px; border-top: {{r.divider}}; display: flex; align-items: center; gap: 12px">
+<span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: {{r.well}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{r.icon}}"></path></svg></span>
+<span id="{{r.id}}" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 21px; font-weight: 700">{{r.label}}</span><sc-if value="{{r.hasSub}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{r.sub}}</span></sc-if></span>
+<sc-if value="{{r.isLink}}" hint-placeholder-val="{{ true }}"><button type="button" aria-labelledby="{{r.id}}" onClick="{{r.go}}" style="min-height: 48px; border: none; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 4px; padding: 0 0 0 8px; cursor: pointer"><span style="color: {{r.valueColor}}">{{r.value}}</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button></sc-if>
+<sc-if value="{{r.isSwitch}}" hint-placeholder-val="{{ false }}"><button type="button" role="switch" aria-checked="{{r.on}}" aria-labelledby="{{r.id}}" onClick="{{r.toggle}}" style="width: 56px; height: 34px; flex-shrink: 0; border: none; border-radius: 999px; background: {{r.track}}; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{r.justify}}; cursor: pointer"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{r.knob}}; display: block"></span></button></sc-if>
+<sc-if value="{{r.isTheme}}" hint-placeholder-val="{{ false }}"><div role="radiogroup" aria-labelledby="{{r.id}}" style="display: flex; gap: 4px; background: {{t.surfaceAlt}}; border-radius: 999px; padding: 3px"><sc-for list="{{themes}}" as="th" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{th.sel}}" onClick="{{th.pick}}" style="min-height: 42px; padding: 0 10px; border: none; border-radius: 999px; background: {{th.bg}}; color: {{th.fg}}; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">{{th.label}}</button></sc-for></div></sc-if>
+<sc-if value="{{r.isBadge}}" hint-placeholder-val="{{ false }}"><span style="padding: 4px 10px; border-radius: 999px; background: {{r.badgeBg}}; color: {{r.badgeFg}}; font-size: 14px; font-weight: 800">{{r.value}}</span></sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+</sc-for>
+<p style="margin: 4px 0 0; font-size: 14px; color: {{t.muted}}; font-weight: 600; text-align: center">One More Sip 1.0 · not a medical device</p>
+</sc-if>
+
+<!-- EMAIL CODE -->
+<sc-if value="{{is.code}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toMe}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+</div>
+<div style="align-self: center; width: 120px; height: 120px; border-radius: 999px; background: {{t.mint}}; display: flex; align-items: center; justify-content: center"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m4 7 8 6 8-6"></path></svg></div>
+<h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800; text-align: center">Check your email</h1>
+<p style="margin: 0; font-size: 17px; line-height: 24px; text-align: center; color: {{t.muted}}; font-weight: 600">We sent a 6-digit code to r•••@gmail.com</p>
+<div role="group" aria-label="6-digit code" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
+<sc-for list="{{codeBoxes}}" as="b" hint-placeholder-count="6"><span style="height: 64px; border-radius: 16px; border: 2px solid {{b.border}}; background: {{t.surface}}; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; box-shadow: {{b.ring}}">{{b.d}}</span></sc-for>
+</div>
+<p style="margin: 0; font-size: 15px; text-align: center; color: {{t.muted}}; font-weight: 600">Resend code in 0:42</p>
+<button type="button" style="margin-top: auto; min-height: 56px; border: none; border-radius: 999px; background: {{t.surfaceAlt}}; color: {{t.muted}}; font-family: inherit; font-size: 17px; font-weight: 800" aria-disabled="true">Continue</button>
+<button type="button" style="min-height: 48px; border: none; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Use a different email</button>
+</sc-if>
+
+<!-- PRIVACY -->
+<sc-if value="{{showPrivacy}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toMe}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Privacy center</h1>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 10px"><div style="flex-shrink: 0"><dc-import name="Sippy" state="happy" size="60" hint-size="60px,60px"></dc-import></div><div style="background: {{t.accentTint}}; border-radius: 20px 20px 20px 6px; padding: 10px 14px; font-size: 17px; line-height: 24px">Your data, your choice.</div></div>
+<h2 style="margin: 4px 4px 0; font-size: 15px; font-weight: 800; color: {{t.muted}}; text-transform: uppercase; letter-spacing: 0.06em">What we store</h2>
+<ul style="list-style: none; margin: 0; padding: 4px 16px; border-radius: 28px; background: {{t.surface}}; display: flex; flex-direction: column">
+<sc-for list="{{stored}}" as="s" hint-placeholder-count="4">
+<li style="min-height: 64px; border-top: {{s.divider}}; display: flex; align-items: center; gap: 12px; padding: 8px 0">
+<span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: {{s.well}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{s.icon}}"></path></svg></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 21px; font-weight: 800">{{s.title}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{s.sub}}</span></span>
+</li>
+</sc-for>
+</ul>
+<h2 style="margin: 4px 4px 0; font-size: 15px; font-weight: 800; color: {{t.muted}}; text-transform: uppercase; letter-spacing: 0.06em">Your choices</h2>
+<div style="border-radius: 28px; background: {{t.surface}}; padding: 4px 16px; display: flex; flex-direction: column">
+<sc-for list="{{consents}}" as="c" hint-placeholder-count="3">
+<div style="min-height: 68px; border-top: {{c.divider}}; display: flex; align-items: center; gap: 12px">
+<span id="{{c.id}}" style="flex: 1 1 auto; display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 21px; font-weight: 800">{{c.label}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{c.sub}}</span></span>
+<button type="button" role="switch" aria-checked="{{c.on}}" aria-labelledby="{{c.id}}" onClick="{{c.toggle}}" style="width: 56px; height: 34px; flex-shrink: 0; border: none; border-radius: 999px; background: {{c.track}}; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{c.justify}}; cursor: pointer"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{c.knob}}; display: block"></span></button>
+</div>
+</sc-for>
+</div>
+<button type="button" style="min-height: 56px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>Download my data</button>
+<button type="button" onClick="{{openDelete}}" style="min-height: 56px; border: 2px solid {{t.badFg}}; border-radius: 999px; background: transparent; color: {{t.badFg}}; font-family: inherit; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M10 11v6M14 11v6"></path><path d="M6 7l1 13h10l1-13"></path><path d="M9 7V4h6v3"></path></svg>Delete account</button>
+</sc-if>
+</div>
+
+<!-- banner ad + navbar on Me -->
+<sc-if value="{{showMe}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Main" style="position: absolute; left: 20px; right: 20px; bottom: 80px; height: 72px; border-radius: 999px; background: {{t.nav}}; box-shadow: 0 12px 32px rgba(17,19,18,0.22); display: flex; align-items: center; justify-content: space-between; padding: 0 10px; box-sizing: border-box; z-index: 5">
+<a href="#home" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Home</a>
+<a href="#stats" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"></path><path d="M12 20V4"></path><path d="M19 20v-6"></path></svg>Stats</a>
+<button type="button" aria-label="Add a drink" style="width: 72px; height: 72px; margin-top: -40px; border: 5px solid {{t.bg}}; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+<a href="#family" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17.5" cy="9.5" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>Family</a>
+<a href="#me" aria-current="page" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOn}}; text-decoration: none; font-size: 14px; font-weight: 800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Me</a>
+</nav>
+<aside aria-label="Advertisement" style="position: absolute; left: 0; right: 0; bottom: 0; height: 64px; background: {{t.surface}}; border-top: 1px solid {{t.divider}}; display: flex; align-items: center; gap: 10px; padding: 0 12px; box-sizing: border-box; z-index: 6">
+<span style="padding: 2px 8px; border-radius: 6px; border: 1.5px solid {{t.muted}}; color: {{t.muted}}; font-size: 14px; font-weight: 800">Ad</span>
+<div style="flex: 1 1 auto; height: 50px; border-radius: 8px; background: {{t.surfaceAlt}}; display: flex; align-items: center; justify-content: center; font-size: 14px; color: {{t.muted}}; font-weight: 600">[Adaptive banner ad]</div>
+</aside>
+</sc-if>
+
+<!-- SIGN-IN SHEET -->
+<sc-if value="{{is.signin}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; inset: 0; background: {{t.scrim}}; z-index: 7"></div>
+<div role="dialog" aria-modal="true" aria-labelledby="si-h" style="position: absolute; left: 0; right: 0; bottom: 0; background: {{t.surface}}; border-radius: 28px 28px 0 0; padding: 10px 20px 34px; display: flex; flex-direction: column; gap: 12px; z-index: 8; box-shadow: 0 -8px 32px rgba(17,19,18,0.2)">
+<div style="width: 40px; height: 5px; border-radius: 999px; background: {{t.handle}}; align-self: center"></div>
+<div style="display: flex; align-items: center; gap: 12px"><div style="flex-shrink: 0"><dc-import name="Sippy" state="happy" size="64" hint-size="64px,64px"></dc-import></div><div style="display: flex; flex-direction: column; gap: 2px"><h2 id="si-h" style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Back up your sips</h2><span style="font-size: 15px; line-height: 20px; color: {{t.muted}}; font-weight: 600">Keep your history on a new phone.</span></div></div>
+<button type="button" style="min-height: 56px; border: none; border-radius: 999px; background: #000000; color: #FFFFFF; font-family: inherit; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer"><span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 6px; border: 1.5px dashed rgba(255,255,255,0.6); box-sizing: border-box"></span>Continue with Apple</button>
+<button type="button" style="min-height: 56px; border: 2px solid {{t.line}}; border-radius: 999px; background: #FFFFFF; color: #1F1F1F; font-family: inherit; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer"><span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 999px; border: 1.5px dashed #9BA3A1; box-sizing: border-box"></span>Continue with Google</button>
+<button type="button" onClick="{{toCode}}" style="min-height: 56px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><path d="m4 7 8 6 8-6"></path></svg>Continue with email</button>
+<p style="margin: 0; font-size: 14px; line-height: 19px; color: {{t.muted}}; font-weight: 600; text-align: center">Your drinks stay on this phone until you sign in. <a href="#terms" style="color: {{t.accentInk}}; font-weight: 700">Terms</a> · <a href="#privacy" style="color: {{t.accentInk}}; font-weight: 700">Privacy</a></p>
+</div>
+</sc-if>
+
+<!-- DELETE CONFIRM -->
+<sc-if value="{{is.del}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; inset: 0; background: {{t.scrim}}; z-index: 7"></div>
+<div role="alertdialog" aria-modal="true" aria-labelledby="del-h" aria-describedby="del-d" style="position: absolute; left: 20px; right: 20px; top: 50%; transform: translateY(-50%); background: {{t.surface}}; border-radius: 28px; padding: 20px; display: flex; flex-direction: column; gap: 12px; z-index: 8; box-shadow: 0 20px 48px rgba(0,0,0,0.3)">
+<div style="align-self: center"><dc-import name="Sippy" state="tired" size="72" hint-size="72px,72px"></dc-import></div>
+<h2 id="del-h" style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800; text-align: center">Delete your account?</h2>
+<p id="del-d" style="margin: 0; font-size: 15px; line-height: 21px; font-weight: 600; text-align: center">This permanently deletes your drinks, goals, family links and backups. It can't be undone.</p>
+<div style="border-radius: 16px; background: {{t.warnBg}}; color: {{t.warnFg}}; padding: 10px 12px; font-size: 14px; line-height: 19px; font-weight: 700">Subscriptions aren't cancelled automatically — cancel in your app store settings.</div>
+<label for="{{ids.del}}" style="font-size: 14px; font-weight: 700">Type DELETE to confirm</label>
+<input id="{{ids.del}}" type="text" autocapitalize="characters" value="{{delText}}" onChange="{{onDel}}" style="min-height: 52px; box-sizing: border-box; border-radius: 16px; border: 2px solid {{t.line}}; background: {{t.surfaceAlt}}; color: {{t.ink}}; padding: 0 14px; font-family: inherit; font-size: 17px; font-weight: 800; letter-spacing: 0.08em; outline: none">
+<button type="button" aria-disabled="{{delLocked}}" style="min-height: 56px; border: none; border-radius: 999px; background: {{delBg}}; color: {{delFg}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Delete forever</button>
+<button type="button" onClick="{{closeDelete}}" style="min-height: 48px; border: none; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Keep my account</button>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"screen":{"editor":"enum","options":["me","signin","code","privacy","delete"],"default":"me"},"height":{"editor":"int","min":640,"max":2400,"default":1600},"$preview":{"width":390,"height":1600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const screen = st.screen ?? (this.props.screen ?? 'me');
+    const H = Number(this.props.height ?? 1600) || 1600;
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', mutedOnTint: '#C3CAC8', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', nightTint: '#1F2A44', line: '#4A504E', divider: 'rgba(236,238,236,0.10)', okBg: 'rgba(79,209,193,0.16)', okFg: '#4FD1C1', warnBg: 'rgba(242,184,92,0.18)', warnFg: '#F2B85C', badBg: 'rgba(255,143,122,0.16)', badFg: '#FF8F7A', trackOff: '#4A504E', knobOn: '#0A1F1D', scrim: 'rgba(0,0,0,0.6)', handle: '#3A3F3D', nav: '#2B302E', navOn: '#ECEEEC', navOff: 'rgba(236,238,236,0.66)' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', mutedOnTint: '#4A504F', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', nightTint: '#DCE3F2', line: '#C9C4BA', divider: 'rgba(17,19,18,0.08)', okBg: '#D7F2EE', okFg: '#075E56', warnBg: '#FFE9C2', warnFg: '#8A4F00', badBg: '#FFE0D9', badFg: '#A8321F', trackOff: '#B9B4AB', knobOn: '#FFFFFF', scrim: 'rgba(17,19,18,0.45)', handle: '#D6D1C7', nav: '#111312', navOn: '#FFFFFF', navOff: 'rgba(255,255,255,0.68)' };
+    const go = (x) => () => this.setState({ screen: x });
+    const sw = (on, toggle) => ({ on, toggle, track: on ? t.accent : t.trackOff, knob: on ? t.knobOn : '#FFFFFF', justify: on ? 'flex-end' : 'flex-start' });
+    const I = {
+      goal: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z',
+      scale: 'M4 7h16l-2 13H6zM9 11a3 3 0 0 1 6 0M12 11l1-2',
+      run: 'M13 5.5a1.5 1.5 0 1 1 0-.01M10 21l2-5 3 2v3M8 12l3-3h3l3 3M11 9l-1 5',
+      moon: 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z',
+      simple: 'M4 4h16v16H4zM8 12h8',
+      globe: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',
+      ruler: 'M3 17 17 3l4 4L7 21zM7 13l2 2M10 10l2 2M13 7l2 2',
+      sun: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M2 12h2M20 12h2',
+      text: 'M4 7V5h16v2M9 19h6M12 5v14',
+      contrast: 'M12 3a9 9 0 1 0 0 18zM12 3a9 9 0 0 1 0 18',
+      vib: 'M8 4h8v16H8zM4 8v8M20 8v8',
+      heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
+      user: 'M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM4 21a8 8 0 0 1 16 0',
+      shield: 'M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z',
+      restore: 'M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4',
+      help: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.7M12 17h.01',
+      cam: 'M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM15.5 13a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z',
+      family: 'M9 4.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM2.5 20a6.5 6.5 0 0 1 13 0M17.5 7a2.5 2.5 0 1 0 0 5M16 14.2a5 5 0 0 1 6 4.8',
+      drop: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z',
+      mail: 'M3 5h18v14H3zM4 7l8 6 8-6'
+    };
+    const tg = st.tg || { simple: false, hc: false, haptics: true };
+    const flip = (k) => () => this.setState({ tg: Object.assign({}, tg, { [k]: !tg[k] }) });
+    const mk = (rows) => rows.map((r, k) => ({ ...r, id: 'me-' + r.key, divider: k === 0 ? 'none' : '1px solid ' + t.divider, hasSub: !!r.sub, isLink: r.kind === 'link', isSwitch: r.kind === 'switch', isTheme: r.kind === 'theme', isBadge: r.kind === 'badge', valueColor: r.valueColor || t.muted, ...(r.kind === 'switch' ? sw(!!tg[r.key], flip(r.key)) : {}) }));
+    const groups = [
+      { title: 'Goal & body', rows: mk([
+        { key: 'goal', icon: I.goal, well: t.accentTint, label: 'Daily goal', value: '2,300 ml', kind: 'link' },
+        { key: 'weight', icon: I.scale, well: t.sunTint, label: 'Weight', value: '68 kg', kind: 'link' },
+        { key: 'activity', icon: I.run, well: t.coralTint, label: 'Activity', value: 'Some', kind: 'link' },
+        { key: 'sleep', icon: I.moon, well: t.nightTint, label: 'Wake & sleep', value: '06:00–22:30', kind: 'link' }
+      ]) },
+      { title: 'Experience', rows: mk([
+        { key: 'simple', icon: I.simple, well: t.mint, label: 'Simple Mode', sub: 'One big button, larger text', kind: 'switch' },
+        { key: 'lang', icon: I.globe, well: t.accentTint, label: 'Language', value: 'English', kind: 'link' },
+        { key: 'units', icon: I.ruler, well: t.sunTint, label: 'Units', value: 'ml', kind: 'link' },
+        { key: 'theme', icon: I.sun, well: t.coralTint, label: 'Theme', kind: 'theme' },
+        { key: 'text', icon: I.text, well: t.surfaceAlt, label: 'Text size', value: 'Large', kind: 'link' },
+        { key: 'hc', icon: I.contrast, well: t.surfaceAlt, label: 'High contrast', kind: 'switch' },
+        { key: 'haptics', icon: I.vib, well: t.surfaceAlt, label: 'Haptics', kind: 'switch' }
+      ]) },
+      { title: 'Health apps', rows: mk([
+        { key: 'ah', icon: I.heart, well: t.coralTint, label: 'Apple Health', sub: 'iPhone · syncs water', value: 'Connected', kind: 'badge', badgeBg: t.okBg, badgeFg: t.okFg },
+        { key: 'hc2', icon: I.heart, well: t.mint, label: 'Health Connect', sub: 'Android', value: 'Connect', kind: 'link', valueColor: t.accentInk }
+      ]) },
+      { title: 'Account', rows: mk([
+        { key: 'signin', icon: I.user, well: t.accentTint, label: 'Sign in to back up', sub: 'Apple, Google or email', value: '', kind: 'link', go: go('signin') },
+        { key: 'privacy', icon: I.shield, well: t.mint, label: 'Privacy center', value: '', kind: 'link', go: go('privacy') },
+        { key: 'restore', icon: I.restore, well: t.surfaceAlt, label: 'Restore purchases', value: '', kind: 'link' },
+        { key: 'help', icon: I.help, well: t.surfaceAlt, label: 'Help & feedback', value: '', kind: 'link' }
+      ]) }
+    ];
+    const themeSel = st.themeSel ?? 'system';
+    const themes = [['system', 'Auto'], ['light', 'Light'], ['dark', 'Dark']].map(([id, label]) => ({ label, sel: themeSel === id, bg: themeSel === id ? t.surface : 'transparent', fg: themeSel === id ? t.ink : t.muted, pick: () => this.setState({ themeSel: id }) }));
+
+    const stored = [
+      { icon: I.drop, well: t.accentTint, title: 'Drinks, goals & reminders', sub: 'On this phone. Backed up only if you sign in.' },
+      { icon: I.family, well: t.mint, title: 'Family sharing', sub: 'Progress % only — never what you drink.' },
+      { icon: I.cam, well: t.sunTint, title: 'AI photos', sub: 'Sent securely for recognition, then deleted.' },
+      { icon: I.mail, well: t.coralTint, title: 'Account email', sub: 'Only if you sign in with email.' }
+    ].map((s, k) => ({ ...s, divider: k === 0 ? 'none' : '1px solid ' + t.divider }));
+    const cs = st.cs || { ads: false, analytics: true, ai: true };
+    const consents = [
+      ['ads', 'Personalized ads', 'Off: you still see ads, just not tailored'],
+      ['analytics', 'Usage analytics', 'Anonymous, helps us fix bugs'],
+      ['ai', 'AI features', 'Photo recognition and Ask Sippy']
+    ].map(([key, label, sub], k) => ({ id: 'pc-' + key, label, sub, divider: k === 0 ? 'none' : '1px solid ' + t.divider, ...sw(!!cs[key], () => this.setState({ cs: Object.assign({}, cs, { [key]: !cs[key] }) })) }));
+
+    const digits = ['4', '8', '2', '', '', ''];
+    const codeBoxes = digits.map((d, i) => ({ d, border: i === 3 ? t.accent : (d ? t.ink : t.line), ring: i === 3 ? '0 0 0 4px ' + t.accentTint : 'none' }));
+    const delText = st.delText ?? '';
+    const ok = delText.trim().toUpperCase() === 'DELETE';
+    if (!this._u) this._u = Math.random().toString(36).slice(2, 7);
+
+    return {
+      t, groups, themes, stored, consents, codeBoxes, delText,
+      is: { signin: screen === 'signin', code: screen === 'code', del: screen === 'delete' },
+      showMe: screen === 'me' || screen === 'signin',
+      showPrivacy: screen === 'privacy' || screen === 'delete',
+      toMe: go('me'), toCode: go('code'),
+      openDelete: go('delete'), closeDelete: go('privacy'),
+      onDel: (e) => this.setState({ delText: e.target.value }),
+      delLocked: !ok, delBg: ok ? t.badFg : t.surfaceAlt, delFg: ok ? (dark ? '#121413' : '#FFFFFF') : t.muted,
+      ids: { del: 'del-' + this._u },
+      padBottom: (screen === 'me' || screen === 'signin') ? '176px' : '32px',
+      h: H + 'px'
+    };
+  }
+}
+</script>
+</body>
+</html>

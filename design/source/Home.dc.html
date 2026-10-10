@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Arabic:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div dir="{{dir}}" lang="{{langAttr}}" style="position: relative; width: 390px; height: {{h}}; box-sizing: border-box; padding: 52px 20px 120px; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', 'Noto Sans Arabic', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="display: flex; align-items: center; gap: 12px">
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.muted}}; font-weight: 600">{{c.date}}</div>
+<h1 style="margin: 0; font-size: {{fs.h2}}; line-height: {{lh.h2}}; font-weight: 800; letter-spacing: -0.01em">{{c.greet}}</h1>
+</div>
+<a href="#me" aria-label="{{c.profile}}" style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 999px; background: {{t.sunTint}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; text-decoration: none">R</a>
+</header>
+
+<sc-if value="{{showBanner}}" hint-placeholder-val="{{ false }}">
+<aside aria-label="Ramadan" style="margin-top: 14px; border-radius: 28px; background: {{t.ramadanBg}}; color: {{t.ramadanFg}}; padding: 14px 10px 14px 16px; display: flex; align-items: center; gap: 12px">
+<span style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 999px; background: #FFD27A; display: flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="#3A2600" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: {{fs.body}}; line-height: {{lh.body}}; font-weight: 800">Ramadan Mubarak — Fasting Mode is ready</span>
+<a href="#fasting-setup" style="align-self: flex-start; min-height: 40px; padding: 0 14px; border-radius: 999px; background: #FFD27A; color: #3A2600; text-decoration: none; display: inline-flex; align-items: center; font-size: {{fs.label}}; font-weight: 800">Set it up</a>
+</span>
+<button type="button" aria-label="Dismiss" style="width: 44px; height: 48px; flex-shrink: 0; align-self: flex-start; border: none; background: transparent; color: {{t.ramadanFg}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+</aside>
+</sc-if>
+
+<section aria-label="{{c.today}}" style="margin-top: 16px; background: {{heroBg}}; border-radius: 28px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
+<div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-if value="{{badge.ok}}" hint-placeholder-val="{{ true }}">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: {{t.okBg}}; color: {{t.okFg}}; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>{{c.status}}</span>
+</sc-if>
+<sc-if value="{{badge.warn}}" hint-placeholder-val="{{ false }}">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: {{t.warnBg}}; color: {{t.warnFg}}; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{c.status}}</span>
+</sc-if>
+<sc-if value="{{badge.fast}}" hint-placeholder-val="{{ false }}">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: {{t.sunTint}}; color: {{t.ink}}; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>{{c.status}}</span>
+</sc-if>
+
+<sc-if value="{{notFasting}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap">
+<span style="font-size: {{fs.hero}}; line-height: {{lh.hero}}; font-weight: 700; letter-spacing: -0.02em">{{valueFmt}}</span>
+<span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 600; color: {{t.muted}}">{{c.ofGoal}}</span>
+</div>
+</sc-if>
+<sc-if value="{{fasting}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600; color: {{t.muted}}">{{c.iftarIn}}</span>
+<span style="font-size: {{fs.heroSm}}; line-height: {{lh.heroSm}}; font-weight: 700; letter-spacing: -0.02em">{{c.iftarTime}}</span>
+<span style="font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600; color: {{t.muted}}">{{c.maghrib}}</span>
+</div>
+</sc-if>
+</div>
+
+<div style="flex: 0 0 104px; border-radius: 20px; background: {{t.mint}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 12px 0">
+<sc-if value="{{notFasting}}" hint-placeholder-val="{{ true }}">
+<svg width="64" height="98" viewBox="0 0 80 124" role="img" aria-label="{{glassLabel}}">
+<defs><clipPath id="{{cid}}"><path d="M8 6 L72 6 L65 112 Q64 120 56 120 L24 120 Q16 120 15 112 Z"></path></clipPath></defs>
+<rect x="0" y="0" width="80" height="124" fill="{{t.glassBg}}" clip-path="{{cref}}"></rect>
+<rect x="0" y="{{glassY}}" width="80" height="130" fill="{{t.accent}}" clip-path="{{cref}}"></rect>
+<path d="M0 0 Q10 -6 20 0 T40 0 T60 0 T80 0 L80 7 L0 7 Z" transform="{{waveT}}" fill="{{t.waterSoft}}" clip-path="{{cref}}"></path>
+<path d="M8 6 L72 6 L65 112 Q64 120 56 120 L24 120 Q16 120 15 112 Z" fill="none" stroke="{{t.ink}}" stroke-width="3.5" stroke-linejoin="round"></path>
+</svg>
+<span style="font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 800">{{pctLabel}}</span>
+</sc-if>
+<sc-if value="{{fasting}}" hint-placeholder-val="{{ false }}">
+<svg width="52" height="52" viewBox="0 0 24 24" fill="#F2B85C" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>
+<span style="font-size: {{fs.caption}}; line-height: {{lh.caption}}; font-weight: 700; text-align: center; padding: 0 8px">{{c.paused}}</span>
+</sc-if>
+</div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 10px; background: {{t.surface}}; border-radius: 20px; padding-block: 8px; padding-inline: 8px 14px">
+<div style="flex-shrink: 0"><dc-import name="Sippy" state="{{c.sippy}}" size="44" hint-size="44px,44px"></dc-import></div>
+<span style="font-size: {{fs.body}}; line-height: {{lh.body}}; font-weight: 600">{{c.line}}</span>
+</div>
+</section>
+
+<sc-if value="{{notFasting}}" hint-placeholder-val="{{ true }}">
+<div role="group" aria-label="{{c.quickAdd}}" style="margin-top: 12px; display: grid; grid-template-columns: {{chipCols}}; gap: 8px">
+<sc-for list="{{chips}}" as="ch" hint-placeholder-count="4">
+<button type="button" onClick="{{ch.add}}" style="min-height: 56px; padding: 6px 4px; border: none; border-radius: 12px; background: {{t.surface}}; color: {{t.ink}}; font-family: inherit; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="3.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>{{ch.label}}</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{fasting}}" hint-placeholder-val="{{ false }}">
+<div style="margin-top: 12px; background: {{t.surface}}; border-radius: 28px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 800">{{c.planTitle}}</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{plan}}" as="p" hint-placeholder-count="3">
+<div style="border-radius: 16px; background: {{p.bg}}; padding: 10px 8px; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center"><span style="font-size: {{fs.h2}}; line-height: {{lh.h2}}; font-weight: 800">{{p.n}}</span><span style="font-size: {{fs.caption}}; line-height: {{lh.caption}}; font-weight: 600">{{p.when}}</span></div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<div style="margin-top: 12px; display: grid; grid-template-columns: {{cardCols}}; gap: 12px">
+<div style="min-height: 112px; border-radius: 28px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 4px">
+<span style="width: 32px; height: 32px; border-radius: 999px; background: {{t.accentTint}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg></span>
+<span style="margin-top: auto; font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.muted}}; font-weight: 600">{{c.nextLabel}}</span>
+<span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 800">{{c.next}}</span>
+</div>
+<div style="min-height: 112px; border-radius: 28px; background: {{t.coralTint}}; padding: 16px; display: flex; flex-direction: column; gap: 4px">
+<span style="width: 32px; height: 32px; border-radius: 999px; background: {{t.surface}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span>
+<span style="margin-top: auto; font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.mutedOnTint}}; font-weight: 600">{{c.heatLabel}}</span>
+<span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 800">{{c.heatValue}}</span>
+<span style="font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.mutedOnTint}}">{{c.heatSub}}</span>
+<span style="font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.mutedOnTint}}; opacity: 0.9"><a href="#weather-attribution" style="color: inherit">{{c.attribution}}</a></span>
+</div>
+<div style="min-height: 112px; border-radius: 28px; background: {{t.sunTint}}; padding: 16px; display: flex; flex-direction: column; gap: 4px">
+<span style="width: 32px; height: 32px; border-radius: 999px; background: {{t.surface}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4 0 7-2.7 7-6.5 0-3.5-2.5-5.5-4-8-.6 2-1.6 3-3 3.5C12.5 8 11.5 4.5 9 2c0 4-4 6.5-4 13.5C5 19.3 8 22 12 22z"></path></svg></span>
+<span style="margin-top: auto; font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.mutedOnTint}}; font-weight: 600">{{c.streakLabel}}</span>
+<span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 800">{{c.streak}}</span>
+</div>
+<div style="min-height: 112px; border-radius: 28px; background: {{t.mint}}; padding: 16px; display: flex; flex-direction: column; gap: 4px">
+<span style="width: 32px; height: 32px; border-radius: 999px; background: {{t.surface}}; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"></path></svg></span>
+<span style="margin-top: auto; font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.mutedOnTint}}; font-weight: 600">{{c.tipLabel}}</span>
+<span style="font-size: {{fs.body}}; line-height: {{lh.body}}; font-weight: 800">{{c.tip}}</span>
+</div>
+</div>
+
+<sc-if value="{{snackOn}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: absolute; left: 20px; right: 20px; bottom: 112px; min-height: 60px; border-radius: 20px; background: {{t.snack}}; color: {{t.onSnack}}; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 6px; padding-inline: 18px 6px; box-sizing: border-box; box-shadow: 0 12px 32px rgba(17,19,18,0.25)">
+<span style="font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600">{{snackText}}</span>
+<button type="button" onClick="{{undo}}" style="min-height: 48px; padding: 0 16px; border: none; border-radius: 999px; background: transparent; color: {{t.snackAction}}; font-family: inherit; font-size: {{fs.label}}; font-weight: 800; cursor: pointer">{{c.undo}}</button>
+</div>
+</sc-if>
+
+<nav aria-label="{{c.navMain}}" style="position: absolute; left: 20px; right: 20px; bottom: 24px; height: 72px; border-radius: 999px; background: {{t.nav}}; box-shadow: 0 12px 32px rgba(17,19,18,0.22), 0 2px 6px rgba(17,19,18,0.10); display: flex; align-items: center; justify-content: space-between; padding: 0 10px; box-sizing: border-box">
+<a href="#home" aria-current="page" aria-label="{{c.nHome}}" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOn}}; text-decoration: none; font-size: 14px; font-weight: 700"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg><sc-if value="{{showLabels}}" hint-placeholder-val="{{ true }}"><span>{{c.nHome}}</span></sc-if></a>
+<a href="#stats" aria-label="{{c.nStats}}" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"></path><path d="M12 20V4"></path><path d="M19 20v-6"></path></svg><sc-if value="{{showLabels}}" hint-placeholder-val="{{ true }}"><span>{{c.nStats}}</span></sc-if></a>
+<button type="button" aria-label="{{c.nAdd}}" onClick="{{fab}}" style="width: 72px; height: 72px; margin-top: -40px; border: 5px solid {{t.bg}}; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; box-shadow: 0 10px 24px {{t.fabShadow}}; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+<a href="#family" aria-label="{{c.nFamily}}" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17.5" cy="9.5" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg><sc-if value="{{showLabels}}" hint-placeholder-val="{{ true }}"><span>{{c.nFamily}}</span></sc-if></a>
+<a href="#me" aria-label="{{c.nMe}}" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg><sc-if value="{{showLabels}}" hint-placeholder-val="{{ true }}"><span>{{c.nMe}}</span></sc-if></a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"state":{"editor":"enum","options":["base","a","b","c","d","e"],"default":"base"},"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"textScale":{"editor":"enum","options":["1","2"],"default":"1"},"lang":{"editor":"enum","options":["en","ar"],"default":"en"},"height":{"editor":"int","min":640,"max":3000,"default":844},"added":{"editor":"int","min":0,"max":3000,"default":0},"snack":{"editor":"int","min":0,"max":2000,"default":0},"banner":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const ar = this.props.lang === 'ar';
+    const s = Number(this.props.textScale ?? 1) || 1;
+    const big = s > 1.5;
+    const hs = Math.min(s, 1.5);
+    const H = Number(this.props.height ?? 844) || 844;
+    const key = ar ? 'a' : (this.props.state ?? 'base');
+    const px = (n) => Math.round(n) + 'px';
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', mutedOnTint: '#C3CAC8', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', okBg: 'rgba(79,209,193,0.16)', okFg: '#4FD1C1', warnBg: 'rgba(242,184,92,0.18)', warnFg: '#F2B85C', nav: '#2B302E', navOn: '#ECEEEC', navOff: 'rgba(236,238,236,0.66)', fabShadow: 'rgba(0,0,0,0.5)', snack: '#ECEEEC', onSnack: '#121413', snackAction: '#0A6E66', glassBg: '#121413', waterSoft: '#9BE8DE' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', mutedOnTint: '#4A504F', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', okBg: '#D7F2EE', okFg: '#075E56', warnBg: '#FFE9C2', warnFg: '#8A4F00', nav: '#111312', navOn: '#FFFFFF', navOff: 'rgba(255,255,255,0.68)', fabShadow: 'rgba(11,127,117,0.35)', snack: '#111312', onSnack: '#FFFFFF', snackAction: '#4FD1C1', glassBg: '#FFFFFF', waterSoft: '#4FD1C1' };
+
+    const en = {
+      date: 'Fri, 9 Oct', profile: 'Profile', today: 'Today', ofGoal: '/ 2,300 ml', quickAdd: 'Quick add',
+      nextLabel: 'Next reminder', heatLabel: 'Today', heatValue: '+300 ml', heatSub: 'for heat · 34°C', attribution: 'Apple Weather',
+      streakLabel: 'Streak', streak: '6 days', tipLabel: 'Daily tip', tip: 'Coffee counts too',
+      undo: 'Undo', unit: 'ml', added: 'Added', water: 'ml water',
+      navMain: 'Main', nHome: 'Home', nStats: 'Stats', nFamily: 'Family', nMe: 'Me', nAdd: 'Add a drink',
+      status: 'Hydrated', iftarIn: 'Iftar in', iftarTime: '3h 12m', maghrib: 'Maghrib 17:54', paused: 'Reminders paused',
+      planTitle: "Tonight's plan", plan: ['at iftar', 'before sleep', 'at suhoor']
+    };
+    const states = {
+      base: { greet: 'Good afternoon, Rendy', value: 1250, sippy: 'happy', badge: 'ok', line: 'Nice pace! Keep sipping this afternoon.', next: '14:30', hero: 'accentTint' },
+      a: { greet: 'Good morning, Rendy', value: 230, sippy: 'fresh', badge: 'ok', line: 'Fresh start! A glass with breakfast?', next: '08:00', hero: 'accentTint' },
+      b: { greet: 'Good morning, Rendy', value: 450, sippy: 'thirsty', badge: 'warn', status: 'Getting thirsty', line: 'Two glasses before lunch keeps you on track.', next: '11:15', hero: 'sunTint' },
+      c: { greet: 'Good evening, Rendy', value: 2350, sippy: 'celebrating', badge: 'ok', status: 'Goal reached', line: "Goal reached! You're a hydration hero today.", next: 'Done for today', streak: '7 days', hero: 'mint' },
+      d: { greet: 'Good afternoon, Rendy', value: 0, sippy: 'waiting', badge: 'fast', status: 'Fasting', line: 'Rest easy — no reminders until iftar.', next: 'Paused until 17:54', heatLabel: 'Tonight', heatSub: 'for heat · 34°C today', tipLabel: 'Suhoor tip', tip: 'Water-rich fruit helps', hero: 'surfaceAlt', fasting: true },
+      e: { greet: 'Good night, Rendy', value: 2100, sippy: 'sleeping', badge: 'ok', line: 'Sleep well — reminders resume at 06:00.', next: 'Tomorrow 06:30', hero: 'accentTint' }
+    };
+    const arCopy = {
+      date: 'الجمعة، 9 أكتوبر', profile: 'الملف الشخصي', today: 'اليوم', ofGoal: '/ 2,300 مل', quickAdd: 'إضافة سريعة',
+      nextLabel: 'التذكير التالي', heatLabel: 'اليوم', heatValue: '+300 مل', heatSub: 'بسبب الحر · 34°', attribution: 'Apple Weather',
+      streakLabel: 'السلسلة', streak: '6 أيام', tipLabel: 'نصيحة اليوم', tip: 'القهوة تُحتسب أيضًا',
+      undo: 'تراجع', unit: 'مل', added: 'تمت إضافة', water: 'مل ماء',
+      navMain: 'الرئيسية', nHome: 'الرئيسية', nStats: 'الإحصاءات', nFamily: 'العائلة', nMe: 'أنا', nAdd: 'أضف مشروبًا',
+      status: 'مرتوٍ', greet: 'صباح الخير، رندي', line: 'بداية منعشة! كوب مع الفطور؟', next: '08:00'
+    };
+    const c = Object.assign({}, en, states[key] || states.base, ar ? arCopy : {});
+    const fasting = !!c.fasting;
+
+    const goal = 2300;
+    const added = st.added ?? (Number(this.props.added ?? 0) || 0);
+    const snackMl = st.snack !== undefined ? st.snack : (Number(this.props.snack ?? 0) || null);
+    const value = Math.max(0, c.value + added);
+    const pct = Math.min(1, value / goal);
+    const glassY = 6 + (1 - pct) * 114;
+    if (!this._cid) this._cid = 'glass-' + Math.random().toString(36).slice(2, 10);
+
+    const add = (ml) => () => this.setState({ added: added + ml, snack: ml });
+    const chips = [150, 250, 350, 500].map((ml) => ({ label: ml + ' ' + c.unit, add: add(ml) }));
+    const plan = [
+      { n: '2', when: c.plan[0], bg: t.sunTint },
+      { n: '4', when: c.plan[1], bg: t.accentTint },
+      { n: '2', when: c.plan[2], bg: t.mint }
+    ];
+
+    return {
+      t: Object.assign({}, t, dark ? { ramadanBg: '#1F2A44', ramadanFg: '#ECEEEC' } : { ramadanBg: '#1F2A44', ramadanFg: '#FFFFFF' }),
+      showBanner: this.props.banner === true || this.props.banner === 'true',
+      c, chips, plan, fasting, notFasting: !fasting,
+      badge: { ok: c.badge === 'ok', warn: c.badge === 'warn', fast: c.badge === 'fast' },
+      heroBg: t[c.hero] || t.accentTint,
+      valueFmt: value.toLocaleString('en-US'),
+      pctLabel: Math.round(pct * 100) + '%',
+      glassLabel: 'Glass ' + Math.round(pct * 100) + '% full',
+      glassY: glassY.toFixed(1),
+      waveT: 'translate(0 ' + glassY.toFixed(1) + ')',
+      cid: this._cid, cref: 'url(#' + this._cid + ')',
+      snackOn: !!snackMl,
+      snackText: c.added + ' ' + (snackMl || 0) + ' ' + c.water,
+      undo: () => this.setState({ added: added - (snackMl || 0), snack: null }),
+      fab: add(250),
+      dir: ar ? 'rtl' : 'ltr', langAttr: ar ? 'ar' : 'en',
+      showLabels: !big,
+      chipCols: big ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))',
+      cardCols: big ? 'minmax(0, 1fr)' : 'repeat(2, minmax(0, 1fr))',
+      h: px(H),
+      fs: { hero: px(64 * hs), heroSm: px(48 * hs), h2: px(24 * s), title: px(20 * s), body: px(17 * s), label: px(15 * s), caption: px(14 * s) },
+      lh: { hero: px(68 * hs), heroSm: px(52 * hs), h2: px(30 * s), title: px(26 * s), body: px(22 * s), label: px(20 * s), caption: px(18 * s) }
+    };
+  }
+}
+</script>
+</body>
+</html>

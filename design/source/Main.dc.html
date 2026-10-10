@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>One More Sip — Foundations</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A6E66}a:hover{color:#075E56}
+</style>
+</helmet>
+<div style="width: 1440px; height: 2900px; box-sizing: border-box; padding: 72px; background: #F7F4EE; color: #111312; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; gap: 56px">
+
+<header style="display: flex; align-items: center; gap: 28px">
+<dc-import name="Sippy" state="happy" size="112" hint-size="112px,112px"></dc-import>
+<div style="display: flex; flex-direction: column; gap: 6px; flex-grow: 1">
+<div style="font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5B6160">UI-00 · Design system · v1</div>
+<h1 style="margin: 0; font-size: 64px; line-height: 68px; font-weight: 800; letter-spacing: -0.02em">One More Sip</h1>
+<div style="font-size: 17px; line-height: 24px; color: #5B6160">Home-screen label “Sip!” · Warm, friendly, bento. Built for kids to grandparents on iOS &amp; Android.</div>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 420px">
+<span style="padding: 10px 16px; border-radius: 999px; background: #FFFFFF; font-size: 15px; font-weight: 600">Plus Jakarta Sans</span>
+<span style="padding: 10px 16px; border-radius: 999px; background: #FFFFFF; font-size: 15px; font-weight: 600">4pt grid · gutter 20</span>
+<span style="padding: 10px 16px; border-radius: 999px; background: #111312; color: #FFFFFF; font-size: 15px; font-weight: 600">Light + Dark</span>
+</div>
+</header>
+
+<section style="background: #FFFFFF; border-radius: 28px; padding: 40px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 700">Color — Light</h2>
+<div style="font-size: 15px; color: #5B6160">Accent fills, never accent text. Use accentInk for links.</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #F7F4EE; border: 1px solid rgba(17,19,18,0.10)"></div><div style="font-size: 15px; font-weight: 700">background</div><div style="font-size: 14px; color: #5B6160">#F7F4EE · warm off-white page</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #FFFFFF; border: 1px solid rgba(17,19,18,0.10)"></div><div style="font-size: 15px; font-weight: 700">surface</div><div style="font-size: 14px; color: #5B6160">#FFFFFF · cards, sheets</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #EFEBE3"></div><div style="font-size: 15px; font-weight: 700">surfaceAlt</div><div style="font-size: 14px; color: #5B6160">#EFEBE3 · chips, inputs, wells</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #111312"></div><div style="font-size: 15px; font-weight: 700">ink</div><div style="font-size: 14px; color: #5B6160">#111312 · text, hero numbers, navbar, primary button</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #5B6160"></div><div style="font-size: 15px; font-weight: 700">inkMuted</div><div style="font-size: 14px; color: #5B6160">#5B6160 · secondary text</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #0B7F75"></div><div style="font-size: 15px; font-weight: 700">accent</div><div style="font-size: 14px; color: #5B6160">#0B7F75 · progress, FAB, toggles — never text</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #0A6E66; display: flex; align-items: flex-end; padding: 14px; box-sizing: border-box; color: #FFFFFF; font-size: 15px; font-weight: 600">Aa</div><div style="font-size: 15px; font-weight: 700">accentInk</div><div style="font-size: 14px; color: #5B6160">#0A6E66 · accent text &amp; links</div></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-radius: 20px; background: #F7F4EE">
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #D7F2EE; color: #075E56; font-size: 15px; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Hydrated</span>
+<span style="font-size: 14px; color: #5B6160">bg #D7F2EE · text #075E56</span>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-radius: 20px; background: #F7F4EE">
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #FFE9C2; color: #8A4F00; font-size: 15px; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Getting thirsty</span>
+<span style="font-size: 14px; color: #5B6160">bg #FFE9C2 · text #8A4F00</span>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-radius: 20px; background: #F7F4EE">
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #FFE0D9; color: #A8321F; font-size: 15px; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>Behind</span>
+<span style="font-size: 14px; color: #5B6160">bg #FFE0D9 · text #A8321F</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; padding-top: 4px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-size: 20px; line-height: 26px; font-weight: 600">Playful tints</div>
+<div style="font-size: 14px; color: #5B6160">Backgrounds, halos, selected states and illustration only — ink text on top, never colored text.</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 64px; border-radius: 20px; background: #E3F5F1"></div><div style="font-size: 15px; font-weight: 700">accentTint</div><div style="font-size: 14px; color: #5B6160">#E3F5F1 · selected, bubbles</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 64px; border-radius: 20px; background: #BFEAE3"></div><div style="font-size: 15px; font-weight: 700">mint</div><div style="font-size: 14px; color: #5B6160">#BFEAE3 · halos, hero wells</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 64px; border-radius: 20px; background: #FFEFC7"></div><div style="font-size: 15px; font-weight: 700">sunTint</div><div style="font-size: 14px; color: #5B6160">#FFEFC7 · morning, streaks</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 64px; border-radius: 20px; background: #FFD27A"></div><div style="font-size: 15px; font-weight: 700">sun</div><div style="font-size: 14px; color: #5B6160">#FFD27A · accents, badges</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 64px; border-radius: 20px; background: #FFE1D8"></div><div style="font-size: 15px; font-weight: 700">coralTint</div><div style="font-size: 14px; color: #5B6160">#FFE1D8 · heat, energy</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 64px; border-radius: 20px; background: #FF9E87"></div><div style="font-size: 15px; font-weight: 700">coral</div><div style="font-size: 14px; color: #5B6160">#FF9E87 · decoration only</div></div>
+</div>
+</div>
+</section>
+
+<section style="background: #121413; color: #ECEEEC; border-radius: 28px; padding: 40px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 700">Color — Dark</h2>
+<div style="font-size: 15px; color: #9BA3A1; text-align: right">Text on accent #0A1F1D · status fills = hue at 16%<br>Tints: accentTint #163330 · mint #1F4A45 · sunTint #3A3019 · coralTint #3D251F</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #121413; border: 1px solid rgba(236,238,236,0.14)"></div><div style="font-size: 15px; font-weight: 700">background</div><div style="font-size: 14px; color: #9BA3A1">#121413</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #1C1F1E; border: 1px solid rgba(236,238,236,0.14)"></div><div style="font-size: 15px; font-weight: 700">surface</div><div style="font-size: 14px; color: #9BA3A1">#1C1F1E · surfaceAlt #262A29</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #ECEEEC"></div><div style="font-size: 15px; font-weight: 700">ink</div><div style="font-size: 14px; color: #9BA3A1">#ECEEEC · text, primary button</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #9BA3A1"></div><div style="font-size: 15px; font-weight: 700">inkMuted</div><div style="font-size: 14px; color: #9BA3A1">#9BA3A1</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #4FD1C1; display: flex; align-items: flex-end; padding: 14px; box-sizing: border-box; color: #0A1F1D; font-size: 15px; font-weight: 700">Aa on accent</div><div style="font-size: 15px; font-weight: 700">accent</div><div style="font-size: 14px; color: #9BA3A1">#4FD1C1 · on-accent #0A1F1D</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #F2B85C"></div><div style="font-size: 15px; font-weight: 700">warn</div><div style="font-size: 14px; color: #9BA3A1">#F2B85C · getting thirsty</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #FF8F7A"></div><div style="font-size: 15px; font-weight: 700">danger</div><div style="font-size: 14px; color: #9BA3A1">#FF8F7A · behind, destructive</div></div>
+</div>
+</section>
+
+<section style="display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px">
+<div style="background: #FFFFFF; border-radius: 28px; padding: 40px; display: flex; flex-direction: column">
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px">
+<h2 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 700">Type — Normal</h2>
+<div style="font-size: 15px; color: #5B6160">Plus Jakarta Sans · tabular numbers · caption 14 is the floor</div>
+</div>
+<div style="display: flex; align-items: center; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(17,19,18,0.08)"><div style="width: 170px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 700">hero</div><div style="font-size: 14px; color: #5B6160">64 / 68 · Bold</div></div><div style="font-size: 64px; line-height: 68px; font-weight: 700; letter-spacing: -0.02em">1,250 <span style="font-size: 24px; font-weight: 600; color: #5B6160; letter-spacing: 0">ml</span></div></div>
+<div style="display: flex; align-items: center; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(17,19,18,0.08)"><div style="width: 170px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 700">display</div><div style="font-size: 14px; color: #5B6160">40 / 46 · Bold</div></div><div style="font-size: 40px; line-height: 46px; font-weight: 700; letter-spacing: -0.01em">Goal reached!</div></div>
+<div style="display: flex; align-items: center; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(17,19,18,0.08)"><div style="width: 170px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 700">h1</div><div style="font-size: 14px; color: #5B6160">30 / 36 · Bold</div></div><div style="font-size: 30px; line-height: 36px; font-weight: 700">Good morning, Rendy</div></div>
+<div style="display: flex; align-items: center; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(17,19,18,0.08)"><div style="width: 170px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 700">h2</div><div style="font-size: 14px; color: #5B6160">24 / 30 · Bold</div></div><div style="font-size: 24px; line-height: 30px; font-weight: 700">Your week</div></div>
+<div style="display: flex; align-items: center; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(17,19,18,0.08)"><div style="width: 170px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 700">title</div><div style="font-size: 14px; color: #5B6160">20 / 26 · Semibold</div></div><div style="font-size: 20px; line-height: 26px; font-weight: 600">Next reminder 10:30</div></div>
+<div style="display: flex; align-items: center; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(17,19,18,0.08)"><div style="width: 170px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 700">body</div><div style="font-size: 14px; color: #5B6160">17 / 24 · Regular</div></div><div style="font-size: 17px; line-height: 24px">Gentle reminders. One tap to log. For the whole family.</div></div>
+<div style="display: flex; align-items: center; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(17,19,18,0.08)"><div style="width: 170px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 700">label</div><div style="font-size: 14px; color: #5B6160">15 / 20 · Semibold</div></div><div style="font-size: 15px; line-height: 20px; font-weight: 600">250 ml · Coffee with milk</div></div>
+<div style="display: flex; align-items: center; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(17,19,18,0.08)"><div style="width: 170px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 700">caption</div><div style="font-size: 14px; color: #5B6160">14 / 20 · minimum</div></div><div style="font-size: 14px; line-height: 20px; color: #5B6160">Resets Nov 1 · One More Sip is not a medical device.</div></div>
+</div>
+<div style="background: #111312; color: #FFFFFF; border-radius: 28px; padding: 40px; display: flex; flex-direction: column; gap: 24px">
+<div>
+<h2 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 700">Type — Simple Mode</h2>
+<div style="font-size: 15px; line-height: 20px; color: rgba(255,255,255,0.7); padding-top: 6px">For parents &amp; grandparents. No small text anywhere.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-size: 14px; color: rgba(255,255,255,0.7)">hero · 88 / 92 · Bold</div>
+<div style="font-size: 88px; line-height: 92px; font-weight: 700; letter-spacing: -0.02em">3 of 8</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-size: 14px; color: rgba(255,255,255,0.7)">body · 22 / 30 · Regular</div>
+<div style="font-size: 22px; line-height: 30px">Good morning, Grandma!</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="font-size: 14px; color: rgba(255,255,255,0.7)">button · 26 / 32 · Bold · min 120dp tall</div>
+<button type="button" style="height: 120px; border: none; border-radius: 999px; background: #4FD1C1; color: #0A1F1D; font-family: inherit; font-size: 26px; line-height: 32px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 14px; cursor: pointer">
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14l-1.6 16.2A2 2 0 0 1 15.4 21H8.6a2 2 0 0 1-2-1.8L5 3z"></path><path d="M6 9h12"></path></svg>
+I drank 1 glass</button>
+</div>
+</div>
+</section>
+
+<section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<div style="background: #FFFFFF; border-radius: 28px; padding: 36px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0 0 6px; font-size: 24px; line-height: 30px; font-weight: 700">Spacing · 4pt</h2>
+<div style="display: flex; align-items: center; gap: 16px"><div style="width: 4px; height: 20px; border-radius: 4px; background: #0B7F75"></div><span style="font-size: 15px; font-weight: 600">4</span><span style="font-size: 14px; color: #5B6160">icon ↔ label</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><div style="width: 8px; height: 20px; border-radius: 4px; background: #0B7F75"></div><span style="font-size: 15px; font-weight: 600">8</span><span style="font-size: 14px; color: #5B6160">chip gaps</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><div style="width: 12px; height: 20px; border-radius: 4px; background: #0B7F75"></div><span style="font-size: 15px; font-weight: 600">12</span><span style="font-size: 14px; color: #5B6160">bento gap</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><div style="width: 16px; height: 20px; border-radius: 4px; background: #0B7F75"></div><span style="font-size: 15px; font-weight: 600">16</span><span style="font-size: 14px; color: #5B6160">stack inside cards</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><div style="width: 20px; height: 20px; border-radius: 4px; background: #111312"></div><span style="font-size: 15px; font-weight: 600">20</span><span style="font-size: 14px; color: #5B6160">side gutter · card padding</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><div style="width: 24px; height: 20px; border-radius: 4px; background: #0B7F75"></div><span style="font-size: 15px; font-weight: 600">24</span><span style="font-size: 14px; color: #5B6160">section gap</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><div style="width: 32px; height: 20px; border-radius: 4px; background: #0B7F75"></div><span style="font-size: 15px; font-weight: 600">32</span><span style="font-size: 14px; color: #5B6160">hero breathing room</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><div style="width: 48px; height: 20px; border-radius: 4px; background: #0B7F75"></div><span style="font-size: 15px; font-weight: 600">48</span><span style="font-size: 14px; color: #5B6160">min touch target</span></div>
+</div>
+<div style="background: #FFFFFF; border-radius: 28px; padding: 36px; display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 700">Radius</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 12px; background: #EFEBE3"></div><div style="font-size: 15px; font-weight: 600">12 · chips</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 20px; background: #EFEBE3"></div><div style="font-size: 15px; font-weight: 600">20 · inputs</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 28px; background: #EFEBE3"></div><div style="font-size: 15px; font-weight: 600">28 · cards, sheets</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="height: 88px; border-radius: 999px; background: #111312"></div><div style="font-size: 15px; font-weight: 600">full · buttons, navbar</div></div>
+</div>
+</div>
+<div style="background: #FFFFFF; border-radius: 28px; padding: 36px; display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 700">Elevation</h2>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="height: 88px; border-radius: 28px; background: #F7F4EE; display: flex; align-items: center; padding: 0 24px; font-size: 15px; font-weight: 600">Cards are flat — no shadow</div>
+<div style="font-size: 14px; color: #5B6160">Separation comes from surface vs background.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 8px">
+<div style="height: 72px; border-radius: 999px; background: #111312; color: #FFFFFF; box-shadow: 0 12px 32px rgba(17,19,18,0.22), 0 2px 6px rgba(17,19,18,0.10); display: flex; align-items: center; padding: 0 28px; font-size: 15px; font-weight: 600">Floating · shadow</div>
+<div style="font-size: 14px; color: #5B6160">Only navbar, FAB and bottom sheets.<br>0 12 32 / 22% + 0 2 6 / 10%</div>
+</div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 700">Accessibility, baked in</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<div style="background: #FFFFFF; border-radius: 28px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 16px">
+<div style="width: 48px; height: 48px; border-radius: 12px; border: 2px dashed #0B7F75; box-sizing: border-box; display: flex; align-items: center; justify-content: center"><div style="width: 20px; height: 20px; border-radius: 999px; background: #111312"></div></div>
+<div style="font-size: 20px; line-height: 26px; font-weight: 600">Touch targets ≥ 48dp</div>
+</div>
+<div style="font-size: 17px; line-height: 24px; color: #5B6160">Icons can be small; their hit area never is. Simple Mode primary action is 120dp tall.</div>
+</div>
+<div style="background: #FFFFFF; border-radius: 28px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #D7F2EE; color: #075E56; font-size: 14px; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Hydrated</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #FFE0D9; color: #A8321F; font-size: 14px; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>Behind</span>
+</div>
+<div style="font-size: 20px; line-height: 26px; font-weight: 600">Status = icon + text + color</div>
+<div style="font-size: 17px; line-height: 24px; color: #5B6160">Never color alone. Each status has its own icon shape so it reads in grayscale.</div>
+</div>
+<div style="background: #FFFFFF; border-radius: 28px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: baseline; gap: 16px"><span style="font-size: 17px; font-weight: 600">Aa</span><span style="font-size: 34px; font-weight: 600">Aa</span><span style="font-size: 14px; color: #5B6160">100% → 200%</span></div>
+<div style="font-size: 20px; line-height: 26px; font-weight: 600">Reflows at 200% text</div>
+<div style="font-size: 17px; line-height: 24px; color: #5B6160">Rows wrap, cards stack, buttons grow taller. No fixed-height text containers, no truncated labels.</div>
+</div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+id,name_en,name_id,local_name,category,countries,default_serving_ml,water_pct,hydration_factor,counts_toward_goal,is_alcoholic,sugar_g_per_100ml,caffeine_mg_per_100ml,confidence,source_basis,fdc_search_query,note_id,verified
+water_plain,Water,Air putih,,water,GLOBAL,250,100,1.0,True,False,0,0,high,fdc_generic,water tap,,False
+water_sparkling,Sparkling water,Air soda tawar,,water,GLOBAL,330,100,1.0,True,False,0,0,high,fdc_generic,water carbonated unsweetened,,False
+water_mineral_bottled,Bottled mineral water,Air mineral kemasan,,water,GLOBAL,600,100,1.0,True,False,0,0,high,fdc_generic,water bottled,,False
+water_lemon,Lemon water (unsweetened),Air lemon tanpa gula,,water,GLOBAL,250,99.5,0.99,True,False,0.3,0,high,recipe_estimate,,Air dengan perasan lemon tanpa gula,False
+water_infused,Fruit-infused water,Infused water,,water,GLOBAL,500,99.6,1.0,True,False,0.2,0,medium,recipe_estimate,,,False
+water_flavored_zero,Flavored water (zero sugar),Air berperisa tanpa gula,,water,GLOBAL,500,99.8,1.0,True,False,0,0,medium,label_typical,water flavored,,False
+water_vitamin,Vitamin water (sweetened),Air vitamin manis,,water,US|GB|GLOBAL,500,95,0.95,True,False,5,0,medium,label_typical,,"Nama generik, bukan merek",False
+coconut_water,Coconut water,Air kelapa,,coconut,GLOBAL,330,95,0.95,True,False,2.6,0,high,fdc_generic,coconut water,,False
+young_coconut_ice,Young coconut with ice,Es kelapa muda,,coconut,ID|MY,300,94,0.94,True,False,4,0,medium,recipe_estimate,,Tanpa sirup; tambah gula jika memakai sirup,False
+young_coconut_syrup,Young coconut with syrup,Es kelapa muda sirup,,coconut,ID|MY,300,88,0.88,True,False,10,0,low,recipe_estimate,,,False
+coffee_black,Black coffee (brewed),Kopi hitam tanpa gula,,coffee,GLOBAL,240,99.4,0.99,True,False,0,40,high,fdc_generic,coffee brewed,,False
+coffee_espresso,Espresso,Espresso,,coffee,GLOBAL,30,97.8,0.98,True,False,0,212,high,fdc_generic,coffee espresso,,False
+coffee_americano,Americano,Americano,,coffee,GLOBAL,240,99.2,0.99,True,False,0,40,medium,recipe_estimate,,Asumsi 1–2 shot espresso,False
+coffee_cold_brew,Cold brew coffee,Kopi cold brew,,coffee,GLOBAL,350,99.2,0.99,True,False,0,50,medium,label_typical,,Kafein sangat bervariasi antar resep,False
+coffee_latte,Latte (whole milk),Kafe latte,,coffee,GLOBAL,350,88.5,0.89,True,False,4.5,26,high,fdc_generic,coffee latte whole milk,Gula = laktosa alami susu,False
+coffee_latte_iced_sweet,Iced latte with syrup,Es kopi latte manis,,coffee,GLOBAL,400,84,0.84,True,False,9,22,medium,recipe_estimate,,,False
+coffee_cappuccino,Cappuccino,Cappuccino,,coffee,GLOBAL,240,88,0.88,True,False,4,35,high,fdc_generic,coffee cappuccino,,False
+coffee_flat_white,Flat white,Flat white,,coffee,GLOBAL,180,87.5,0.88,True,False,4.5,55,medium,recipe_estimate,,,False
+coffee_mocha,Caffè mocha,Kafe moka,,coffee,GLOBAL,350,82,0.82,True,False,10,25,medium,fdc_generic,coffee mocha,,False
+coffee_blended_frappe,Blended iced coffee (frappé),Kopi blended / frappe,,coffee,GLOBAL,400,78,0.78,True,False,14,20,medium,label_typical,,Termasuk krim kocok,False
+coffee_instant_3in1,Instant coffee 3-in-1,Kopi sachet 3-in-1,,coffee,ID|MY|GLOBAL,200,88,0.88,True,False,8,25,medium,label_typical,,,False
+coffee_iced_palm_sugar,Iced coffee with milk and palm sugar,Es kopi susu gula aren,,coffee,ID,300,82,0.82,True,False,10,30,medium,recipe_estimate,,,False
+coffee_tubruk,Kopi tubruk (with sugar),Kopi tubruk,Kopi tubruk,coffee,ID,150,95,0.95,True,False,6,45,medium,recipe_estimate,,,False
+coffee_kopi_o,Kopi O (black coffee with sugar),Kopi O,Kopi O,coffee,MY|ID,250,92,0.92,True,False,8,45,medium,recipe_estimate,,,False
+coffee_kopi_c,Kopi C (evaporated milk & sugar),Kopi C,Kopi C,coffee,MY,250,88,0.88,True,False,8,40,medium,recipe_estimate,,,False
+coffee_turkish,Turkish coffee,Kopi Turki,Türk kahvesi,coffee,TR|SA|AE,60,95,0.95,True,False,0,100,medium,recipe_estimate,,Gula opsional; tambah sekitar 5 g/cangkir jika manis,False
+coffee_arabic,Arabic coffee (gahwa),Kopi Arab (gahwa),قهوة عربية,coffee,SA|AE,60,99,0.99,True,False,0,60,low,recipe_estimate,,Sangrai ringan dengan kapulaga; kafein bervariasi,False
+coffee_south_indian_filter,South Indian filter coffee,Kopi filter India,Filter kaapi,coffee,IN,150,87,0.87,True,False,7,35,medium,recipe_estimate,,,False
+coffee_cafezinho,Cafezinho (sweet strong coffee),Cafezinho,Cafezinho,coffee,BR,50,92,0.92,True,False,8,60,medium,recipe_estimate,,,False
+coffee_cafe_com_leite,Café com leite,Kopi susu ala Brasil,Café com leite,coffee,BR,200,90,0.9,True,False,4,25,medium,recipe_estimate,,,False
+coffee_cafe_de_olla,Café de olla,Kopi rempah Meksiko,Café de olla,coffee,MX,240,92,0.92,True,False,7,35,medium,recipe_estimate,,,False
+coffee_decaf,Decaf coffee,Kopi dekafein,,coffee,GLOBAL,240,99.4,0.99,True,False,0,2,high,fdc_generic,coffee brewed decaffeinated,,False
+tea_black,Black tea (unsweetened),Teh tawar,,tea,GLOBAL,240,99.7,1.0,True,False,0,20,high,fdc_generic,tea black brewed,,False
+tea_green,Green tea (unsweetened),Teh hijau tawar,,tea,GLOBAL,240,99.9,1.0,True,False,0,12,high,fdc_generic,tea green brewed,,False
+tea_herbal,"Herbal tea (chamomile, peppermint)",Teh herbal,,tea,GLOBAL,240,99.7,1.0,True,False,0,0,high,fdc_generic,tea herb chamomile brewed,,False
+tea_sweet_hot,Sweet tea (hot),Teh manis panas,,tea,ID|MY|GLOBAL,240,92,0.92,True,False,8,15,medium,recipe_estimate,,,False
+tea_sweet_iced,Iced sweet tea,Es teh manis,,tea,ID|MY,400,92,0.92,True,False,8,12,medium,recipe_estimate,,Es mengencerkan; kafein per 100 ml lebih rendah,False
+tea_iced_unsweetened,Iced tea (unsweetened),Es teh tawar,,tea,ID|GLOBAL,400,99.7,1.0,True,False,0,12,high,recipe_estimate,,,False
+tea_bottled_sweet,Bottled sweet tea,Teh manis kemasan,,tea,ID|MY|GLOBAL,350,92,0.92,True,False,7,10,medium,label_typical,,"Nama generik, bukan merek",False
+tea_us_sweet_tea,Southern sweet tea,Teh manis ala AS,Sweet tea,tea,US,350,91,0.91,True,False,9,15,medium,recipe_estimate,,,False
+tea_with_milk,Tea with milk (no sugar),Teh susu tanpa gula,Builder's tea,tea,GB|GLOBAL,250,98,0.98,True,False,0.4,18,high,recipe_estimate,,,False
+tea_with_milk_sugar,Tea with milk and sugar,Teh susu manis,,tea,GB|GLOBAL,250,95,0.95,True,False,4,18,medium,recipe_estimate,,,False
+tea_tarik,Teh tarik,Teh tarik,Teh tarik,tea,MY|ID,250,85,0.85,True,False,10,15,medium,recipe_estimate,,Susu kental manis,False
+tea_thai_iced,Thai iced tea,Thai tea,Cha yen,tea,GLOBAL|ID|MY,400,82,0.82,True,False,13,15,medium,recipe_estimate,,,False
+tea_masala_chai,Masala chai,Teh masala,Masala chai,tea,IN|GLOBAL,150,88,0.88,True,False,7,15,medium,recipe_estimate,,,False
+tea_karak,Karak chai,Teh karak,شاي كرك,tea,AE|SA,150,85,0.85,True,False,9,15,medium,recipe_estimate,,,False
+tea_moroccan_mint,Moroccan mint tea (sweet),Teh mint Maroko,Atay,tea,SA|AE|GLOBAL,100,92,0.92,True,False,8,12,medium,recipe_estimate,,,False
+tea_turkish,Turkish tea (çay),Teh Turki,Çay,tea,TR,100,99.7,1.0,True,False,0,20,medium,recipe_estimate,,Gula biasanya ditambahkan terpisah,False
+tea_sencha,Sencha green tea,Teh sencha,煎茶,tea,JP,150,99.6,1.0,True,False,0,20,high,fdc_generic,tea green brewed,,False
+tea_hojicha,Hojicha,Teh hojicha,ほうじ茶,tea,JP,150,99.8,1.0,True,False,0,20,medium,recipe_estimate,,,False
+tea_genmaicha,Genmaicha,Teh genmaicha,玄米茶,tea,JP,150,99.8,1.0,True,False,0,10,medium,recipe_estimate,,,False
+tea_mugicha,Barley tea (mugicha),Teh jelai (mugicha),麦茶,tea,JP,250,99.8,1.0,True,False,0,0,high,recipe_estimate,,,False
+tea_matcha,Matcha (usucha),Matcha,抹茶,tea,JP|GLOBAL,100,99,0.99,True,False,0,40,medium,recipe_estimate,,Kafein bervariasi menurut takaran bubuk,False
+tea_matcha_latte,Matcha latte,Matcha latte,,tea,GLOBAL,350,88,0.88,True,False,6,25,medium,recipe_estimate,,,False
+tea_bubble_milk,Bubble milk tea,Boba milk tea,,tea,GLOBAL,500,78,0.78,True,False,11,10,low,label_typical,,Termasuk topping tapioka; sangat bervariasi,False
+tea_yerba_mate,Yerba mate (brewed),Yerba mate,Mate / chimarrão,tea,BR,250,99,0.99,True,False,0,33,medium,fdc_generic,beverages tea yerba mate,,False
+tea_terere,Tereré (cold mate),Tereré,Tereré,tea,BR,250,99,0.99,True,False,0,30,low,recipe_estimate,,,False
+tea_kombucha,Kombucha,Kombucha,,tea,GLOBAL,330,97,0.97,True,False,2.5,3,medium,label_typical,,"Mengandung sisa alkohol <0,5% secara alami",False
+tea_lemon_iced,Iced lemon tea (sweet),Es lemon tea,,tea,GLOBAL|ID|MY,400,91,0.91,True,False,9,10,medium,recipe_estimate,,,False
+milk_whole,Whole milk,Susu full cream,,dairy,GLOBAL,250,88,0.88,True,False,5,0,high,fdc_generic,milk whole 3.25%,Gula = laktosa alami,False
+milk_lowfat,Low-fat milk,Susu rendah lemak,,dairy,GLOBAL,250,89.9,0.9,True,False,5,0,high,fdc_generic,milk lowfat 1%,,False
+milk_skim,Skim milk,Susu skim,,dairy,GLOBAL,250,91,0.91,True,False,5,0,high,fdc_generic,milk nonfat skim,,False
+milk_chocolate,Chocolate milk,Susu cokelat,,dairy,GLOBAL,250,82,0.82,True,False,10,2,high,fdc_generic,milk chocolate lowfat,,False
+milk_strawberry,Strawberry milk,Susu stroberi,,dairy,GLOBAL,250,82,0.82,True,False,11,0,medium,label_typical,,,False
+milk_banana,Banana milk,Susu pisang,바나나 우유,dairy,GLOBAL,240,84,0.84,True,False,10,0,medium,label_typical,,,False
+milk_uht_sweet,Sweetened UHT milk,Susu UHT manis,,dairy,ID|MY|GLOBAL,200,84,0.84,True,False,8,0,medium,label_typical,,,False
+milk_hot_chocolate,Hot chocolate (with milk),Cokelat panas,,dairy,GLOBAL,250,80,0.8,True,False,10,2,medium,fdc_generic,hot chocolate prepared with milk,,False
+milk_malted_choc,Malted chocolate drink,Minuman cokelat malt,Milo ais (generik),dairy,MY|ID|GLOBAL,250,85,0.85,True,False,9,2,medium,label_typical,,"Nama generik, bukan merek",False
+milk_kefir,Kefir,Kefir,,dairy,GLOBAL,250,88,0.88,True,False,4,0,medium,fdc_generic,kefir lowfat plain,,False
+milk_yogurt_drink,Drinking yogurt (sweet),Yoghurt minum,,dairy,GLOBAL,200,82,0.82,True,False,10,0,medium,label_typical,,,False
+milk_fermented_small,Fermented milk drink (small bottle),Susu fermentasi botol kecil,,dairy,ID|JP|GLOBAL,65,82,0.82,True,False,14,0,medium,label_typical,,"Nama generik, bukan merek",False
+milk_ayran,Ayran,Ayran,Ayran,dairy,TR|SA|AE,250,92,0.92,True,False,2,0,medium,recipe_estimate,,Yoghurt + air + garam,False
+milk_doogh,Doogh,Doogh,دوغ,dairy,AE|GLOBAL,250,92,0.92,True,False,2,0,medium,recipe_estimate,,,False
+milk_laban,Laban,Laban,لبن,dairy,SA|AE,250,90,0.9,True,False,4,0,medium,label_typical,,,False
+milk_lassi_sweet,Sweet lassi,Lassi manis,Lassi,dairy,IN|GLOBAL,250,80,0.8,True,False,12,0,medium,recipe_estimate,,,False
+milk_lassi_salted,Salted lassi,Lassi asin,Namkeen lassi,dairy,IN,250,89,0.89,True,False,3,0,medium,recipe_estimate,,,False
+milk_chaas,Buttermilk (chaas),Chaas,Chaas,dairy,IN,250,93,0.93,True,False,2,0,medium,recipe_estimate,,,False
+milk_badam,Badam milk (almond-saffron milk),Susu badam,Badam milk,dairy,IN,200,82,0.82,True,False,10,0,low,recipe_estimate,,,False
+milk_amazake,Amazake,Amazake,甘酒,dairy,JP,150,80,0.8,True,False,16,0,low,label_typical,,Minuman beras koji tanpa alkohol,False
+milk_calpis_type,Diluted lactic acid drink,Minuman asam laktat encer,カルピス系 (generik),dairy,JP|GLOBAL,250,88,0.88,True,False,10,0,medium,label_typical,,"Nama generik, bukan merek",False
+plant_soy_unsweet,Soy milk (unsweetened),Susu kedelai tawar,,plant_milk,GLOBAL,250,94,0.94,True,False,1,0,high,fdc_generic,soymilk unsweetened,,False
+plant_soy_sweet,Soy milk (sweetened),Susu kedelai manis,,plant_milk,ID|MY|GLOBAL,250,89,0.89,True,False,5,0,medium,fdc_generic,soymilk original,,False
+plant_almond,Almond milk (unsweetened),Susu almond tawar,,plant_milk,GLOBAL,250,97.5,0.97,True,False,0,0,high,fdc_generic,almond milk unsweetened,,False
+plant_oat,Oat milk,Susu oat,,plant_milk,GLOBAL,250,90,0.9,True,False,4,0,medium,label_typical,,Gula dari maltosa proses,False
+plant_coconut_drink,Coconut milk drink (carton),Minuman susu kelapa kemasan,,plant_milk,GLOBAL,250,93,0.93,True,False,3,0,medium,label_typical,,,False
+plant_mung_bean,Mung bean drink,Sari kacang hijau,,plant_milk,ID|MY,250,85,0.85,True,False,8,0,low,label_typical,,,False
+juice_orange,Orange juice (100%),Jus jeruk 100%,,juice,GLOBAL,250,88,0.88,True,False,8.4,0,high,fdc_generic,orange juice raw,,False
+juice_orange_iced_sweet,Sweet iced orange,Es jeruk manis,,juice,ID|MY,300,88,0.88,True,False,10,0,medium,recipe_estimate,,,False
+juice_apple,Apple juice (100%),Jus apel 100%,,juice,GLOBAL,250,88,0.88,True,False,9.6,0,high,fdc_generic,apple juice unsweetened,,False
+juice_grape,Grape juice (100%),Jus anggur 100%,,juice,GLOBAL,250,84,0.84,True,False,15,0,high,fdc_generic,grape juice unsweetened,,False
+juice_pineapple,Pineapple juice,Jus nanas,,juice,GLOBAL,250,86,0.86,True,False,10,0,high,fdc_generic,pineapple juice unsweetened,,False
+juice_tomato,Tomato juice,Jus tomat,,juice,GLOBAL,250,94,0.94,True,False,2.6,0,high,fdc_generic,tomato juice canned,,False
+juice_watermelon,Watermelon juice,Jus semangka,,juice,GLOBAL|ID,300,92,0.92,True,False,7,0,medium,recipe_estimate,,Tanpa tambahan gula,False
+juice_mango,Mango juice,Jus mangga,,juice,GLOBAL|ID|IN,300,84,0.84,True,False,13,0,medium,recipe_estimate,,,False
+juice_guava,Guava juice,Jus jambu,,juice,ID|MY|GLOBAL,300,85,0.85,True,False,11,0,medium,label_typical,,,False
+juice_avocado,Avocado juice with condensed milk,Jus alpukat,Jus alpukat,juice,ID,350,72,0.72,True,False,14,0,low,recipe_estimate,,Kental; kadar air rendah,False
+juice_soursop,Soursop juice,Jus sirsak,,juice,ID|MY,300,86,0.86,True,False,11,0,low,recipe_estimate,,,False
+juice_carrot,Carrot juice,Jus wortel,,juice,GLOBAL,250,89,0.89,True,False,4,0,high,fdc_generic,carrot juice canned,,False
+juice_green,Green juice (vegetable blend),Jus hijau,,juice,GLOBAL,300,92,0.92,True,False,4,0,low,recipe_estimate,,,False
+juice_cranberry_cocktail,Cranberry juice cocktail,Minuman cranberry,,juice,US|GLOBAL,250,86,0.86,True,False,12,0,high,fdc_generic,cranberry juice cocktail,,False
+juice_lemonade,Lemonade,Limun,,juice,GLOBAL,250,90,0.9,True,False,9.5,0,high,fdc_generic,lemonade frozen concentrate prepared,,False
+juice_lime_iced,Iced lime drink,Es jeruk nipis,Limau ais,juice,ID|MY,300,91,0.91,True,False,8,0,medium,recipe_estimate,,,False
+juice_mint_lemonade,Mint lemonade,Lemonade mint,ليمون بالنعناع,juice,SA|AE|TR,300,90,0.9,True,False,9,0,medium,recipe_estimate,,,False
+juice_sugarcane,Sugarcane juice,Es tebu,Caldo de cana / ganne ka ras,juice,ID|IN|BR|MY,300,84,0.84,True,False,14,0,medium,recipe_estimate,,,False
+juice_nimbu_pani,Nimbu pani,Nimbu pani,Nimbu pani,juice,IN,250,94,0.94,True,False,5,0,medium,recipe_estimate,,Air lemon dengan gula dan garam,False
+juice_aam_panna,Aam panna,Aam panna,Aam panna,juice,IN,250,88,0.88,True,False,10,0,low,recipe_estimate,,,False
+juice_jaljeera,Jaljeera,Jaljeera,Jaljeera,juice,IN,250,97,0.97,True,False,2,0,low,recipe_estimate,,,False
+smoothie_fruit,Fruit smoothie,Smoothie buah,,smoothie,GLOBAL,350,82,0.82,True,False,10,0,medium,recipe_estimate,,,False
+smoothie_vitamina,Vitamina (fruit & milk smoothie),Vitamina,Vitamina,smoothie,BR,300,82,0.82,True,False,9,0,low,recipe_estimate,,,False
+smoothie_milkshake,Milkshake,Milkshake,,smoothie,GLOBAL,350,72,0.72,True,False,15,0,medium,fdc_generic,milkshake vanilla,,False
+smoothie_protein_rtd,Protein shake (ready to drink),Minuman protein siap minum,,smoothie,GLOBAL,330,84,0.84,True,False,2,0,low,label_typical,,,False
+soda_cola,Cola,Minuman cola,,soda,GLOBAL,330,89.4,0.89,True,False,10.6,10,high,fdc_generic,cola carbonated,,False
+soda_cola_zero,Cola (zero sugar),Cola tanpa gula,,soda,GLOBAL,330,99.6,1.0,True,False,0,13,high,fdc_generic,cola carbonated diet,,False
+soda_lemon_lime,Lemon-lime soda,Soda lemon-lime,,soda,GLOBAL,330,89.8,0.9,True,False,10,0,high,fdc_generic,lemon lime soda,,False
+soda_orange,Orange soda,Soda jeruk,,soda,GLOBAL,330,87.6,0.88,True,False,12,0,high,fdc_generic,orange soda,,False
+soda_root_beer,Root beer,Root beer,,soda,US,355,89,0.89,True,False,10.6,0,high,fdc_generic,root beer,,False
+soda_ginger_ale,Ginger ale,Ginger ale,,soda,GLOBAL,330,91,0.91,True,False,8.7,0,high,fdc_generic,ginger ale,,False
+soda_tonic,Tonic water,Air tonik,,soda,GLOBAL,200,91,0.91,True,False,8.6,0,high,fdc_generic,tonic water,,False
+soda_guarana,Guaraná soda,Soda guarana,Guaraná,soda,BR,350,89,0.89,True,False,10,2,medium,label_typical,,,False
+soda_ramune,Ramune (Japanese soda),Soda Jepang (ramune),ラムネ,soda,JP,200,90,0.9,True,False,10,0,medium,label_typical,,,False
+soda_sarsaparilla,Sarsaparilla,Sarsaparila,,soda,ID|MY,330,89,0.89,True,False,10,0,medium,label_typical,,,False
+soda_syrup_drink,Syrup drink (diluted),Es sirup,,soda,ID|MY|GLOBAL,250,88,0.88,True,False,11,0,medium,recipe_estimate,,,False
+soda_rose_milk,Rose syrup milk (bandung),Sirup bandung,Air bandung,soda,MY|ID,250,82,0.82,True,False,14,0,medium,recipe_estimate,,,False
+soda_rose_syrup_drink,Rose syrup drink,Minuman sirup mawar,Rooh afza (generik),soda,IN,250,90,0.9,True,False,10,0,low,recipe_estimate,,"Nama generik, bukan merek",False
+soda_squash_regular,Fruit squash (diluted),Squash encer,Squash,soda,GB,250,96,0.96,True,False,3,0,medium,label_typical,,,False
+soda_squash_nas,No-added-sugar squash (diluted),Squash tanpa tambahan gula,Squash,soda,GB,250,99,0.99,True,False,0.5,0,medium,label_typical,,,False
+sport_isotonic,Sports / isotonic drink,Minuman isotonik,,sports,GLOBAL,500,94,0.94,True,False,6,0,high,fdc_generic,sports drink,,False
+sport_ors,Oral rehydration solution,Oralit,ORS,sports,GLOBAL,200,98,0.98,True,False,1.35,0,high,standard_formula,,"Formula WHO osmolaritas rendah (glukosa 13,5 g/L)",False
+sport_electrolyte_zero,Electrolyte drink (zero sugar),Minuman elektrolit tanpa gula,,sports,GLOBAL,500,99.5,0.99,True,False,0,0,medium,label_typical,,,False
+energy_drink,Energy drink,Minuman energi,,energy,GLOBAL,250,89,0.89,True,False,11,32,high,fdc_generic,energy drink,,False
+energy_drink_zero,Energy drink (sugar-free),Minuman energi tanpa gula,,energy,GLOBAL,250,99,0.99,True,False,0,32,high,fdc_generic,energy drink sugar free,,False
+energy_shot,Energy shot,Energy shot,,energy,GLOBAL,60,90,0.9,True,False,2,330,medium,label_typical,,Kafein sangat tinggi per sajian,False
+trad_jamu_kunyit,Turmeric-tamarind jamu,Jamu kunyit asam,Kunyit asam,traditional,ID,200,88,0.88,True,False,9,0,low,recipe_estimate,,,False
+trad_beras_kencur,Beras kencur,Beras kencur,Beras kencur,traditional,ID,200,85,0.85,True,False,11,0,low,recipe_estimate,,,False
+trad_wedang_jahe,Ginger drink,Wedang jahe,Wedang jahe,traditional,ID,200,92,0.92,True,False,7,0,medium,recipe_estimate,,,False
+trad_wedang_uwuh,Wedang uwuh,Wedang uwuh,Wedang uwuh,traditional,ID,200,95,0.95,True,False,4,0,low,recipe_estimate,,,False
+trad_bandrek,Bandrek,Bandrek,Bandrek,traditional,ID,200,90,0.9,True,False,8,0,low,recipe_estimate,,,False
+trad_bajigur,Bajigur,Bajigur,Bajigur,traditional,ID,200,80,0.8,True,False,10,5,low,recipe_estimate,,Mengandung santan; kadang dengan kopi,False
+trad_bir_pletok,Bir pletok (non-alcoholic),Bir pletok,Bir pletok,traditional,ID,200,92,0.92,True,False,7,0,low,recipe_estimate,,"Minuman rempah Betawi, tanpa alkohol",False
+trad_sekoteng,Sekoteng,Sekoteng,Sekoteng,traditional,ID,250,88,0.88,True,False,9,0,low,recipe_estimate,,,False
+trad_cendol,Cendol / dawet,Es cendol / dawet,Cendol,traditional,ID|MY,300,70,0.7,True,False,15,0,low,recipe_estimate,,Minuman pencuci mulut; kadar air rendah,False
+trad_es_campur,Mixed ice dessert drink,Es campur,Es campur,traditional,ID|MY,350,70,0.7,True,False,16,0,low,recipe_estimate,,,False
+trad_tamarind,Tamarind drink,Es asam jawa,Agua de tamarindo / tamar hindi,traditional,ID|MX|SA|AE,300,88,0.88,True,False,10,0,medium,recipe_estimate,,,False
+trad_horchata,Horchata,Horchata,Horchata,traditional,MX|US,350,85,0.85,True,False,11,0,medium,recipe_estimate,,,False
+trad_jamaica,Hibiscus drink (agua de jamaica),Minuman rosela,Agua de jamaica,traditional,MX|GLOBAL,350,92,0.92,True,False,8,0,medium,recipe_estimate,,,False
+trad_agua_fresca,Agua fresca (fruit),Agua fresca,Agua fresca,traditional,MX|US,350,92,0.92,True,False,7,0,medium,recipe_estimate,,,False
+trad_atole,Atole,Atole,Atole,traditional,MX,250,82,0.82,True,False,9,0,low,recipe_estimate,,Minuman kental berbasis jagung,False
+trad_champurrado,Champurrado,Champurrado,Champurrado,traditional,MX,250,80,0.8,True,False,11,2,low,recipe_estimate,,,False
+trad_tepache,Tepache,Tepache,Tepache,traditional,MX,300,90,0.9,True,False,8,0,low,recipe_estimate,,Fermentasi nanas; bisa mengandung sedikit alkohol,False
+trad_jallab,Jallab,Jallab,جلاب,traditional,SA|AE,250,88,0.88,True,False,12,0,low,recipe_estimate,,,False
+trad_qamar_al_din,Apricot drink (qamar al-din),Minuman aprikot,قمر الدين,traditional,SA|AE,250,85,0.85,True,False,14,0,low,recipe_estimate,,Populer saat Ramadan,False
+trad_sahlab,Sahlab / salep,Sahlab,سحلب / Salep,traditional,TR|SA|AE,200,80,0.8,True,False,10,0,low,recipe_estimate,,Minuman susu kental,False
+trad_salgam,Şalgam (fermented turnip juice),Jus lobak fermentasi,Şalgam,traditional,TR,250,97,0.97,True,False,1,0,low,label_typical,,,False
+trad_boza,Boza,Boza,Boza,traditional,TR,250,78,0.78,True,False,12,0,low,recipe_estimate,,Fermentasi; bisa mengandung jejak alkohol,False
+alc_beer,Beer,Bir,,alcohol,GLOBAL,330,92,0.0,False,True,0,0,high,fdc_generic,beer regular,Tidak dihitung ke target,False
+alc_beer_light,Light beer,Bir ringan,,alcohol,GLOBAL,330,95,0.0,False,True,0,0,high,fdc_generic,beer light,Tidak dihitung ke target,False
+alc_wine_red,Red wine,Anggur merah,,alcohol,GLOBAL,150,86,0.0,False,True,0.6,0,high,fdc_generic,wine table red,Tidak dihitung ke target,False
+alc_wine_white,White wine,Anggur putih,,alcohol,GLOBAL,150,87,0.0,False,True,1,0,high,fdc_generic,wine table white,Tidak dihitung ke target,False
+alc_cider,Hard cider,Sider beralkohol,,alcohol,GB|GLOBAL,330,90,0.0,False,True,4,0,medium,label_typical,,Tidak dihitung ke target,False
+alc_spirits,Spirits (40%),Minuman keras (40%),,alcohol,GLOBAL,40,67,0.0,False,True,0,0,high,fdc_generic,whiskey 80 proof,Tidak dihitung ke target,False
+alc_sake,Sake,Sake,日本酒,alcohol,JP,180,78,0.0,False,True,2.5,0,medium,fdc_generic,sake,Tidak dihitung ke target,False
+alc_soju,Soju,Soju,소주,alcohol,GLOBAL,50,80,0.0,False,True,1,0,low,label_typical,,Tidak dihitung ke target,False
+alc_beer_non_alc,Non-alcoholic beer (0.0%),"Bir tanpa alkohol (0,0%)",,soda,GLOBAL,330,93,0.93,True,False,2.5,0,medium,label_typical,,Dihitung ke target karena tanpa alkohol,False

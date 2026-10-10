@@ -1,0 +1,90 @@
+# Decision Log — One More Sip
+
+> Related: [CLAUDE.md](../CLAUDE.md) · [PRD](PRD.md) · [System Design](system-design.md) · [Design System](design-system.md) · [Store Compliance](store-compliance.md) · [Tasks](task.md)
+
+Highest-precedence document. Each entry is immutable: to change a decision, add a new entry that **supersedes** the old one and mark the old one `Superseded by D-xx`.
+
+Format: **ID — Decision** (date) · Why · Consequence.
+
+---
+
+**D-01 — Product name "One More Sip", home-screen label "Sip!", mascot "Sippy"** (2026-10-09)
+Why: Shorter descriptive names (Plip, Pluvi, Drinkminder, HydraMate, Siply, etc.) were already taken in the stores. "One more sip" doubles as slogan and reminder copy.
+Consequence: Store title `One More Sip: Water Reminder`; `CFBundleDisplayName` / `android:label` = `Sip!`. Trademark and domain checks still pending (owner task O-02).
+
+**D-02 — Flutter for iOS + Android** (2026-10-08)
+Why: Owner's existing skill; custom UI renders identically on both platforms.
+Consequence: Widgets, Live Activity, App Intents, watch apps need native Swift/Kotlin.
+
+**D-03 — Global market from day one** (2026-10-08)
+Why: Tier-1 markets are worth ~4–5× Indonesia per user; Ramadan feature is relevant across many countries.
+Consequence: i18n (EN, ID, AR, ES, PT) and RTL at launch; GDPR/CCPA/LGPD/UU PDP compliance; regional pricing.
+
+**D-04 — Backend: Supabase (Postgres + RLS + Auth + Edge Functions)** (2026-10-08)
+Why: Owner's existing stack; RLS gives per-row security; Edge Functions hide secrets.
+
+**D-05 — Monetization: freemium with ads + subscriptions via RevenueCat** (2026-10-08)
+Why: Ads are the largest revenue share in the model; RevenueCat unifies both stores.
+Consequence: Ad placement rules in PRD F-24; prices in PRD §7.
+
+**D-06 — Separate one-time "Remove Ads" purchase, permanent** (2026-10-08)
+Why: Competitors drew complaints when paid ad removal "expired". Permanent purchase is a differentiator.
+
+**D-07 — Premium plans 1 / 3 / 6 / 12 months + Family 12 months; no lifetime** (2026-10-08)
+Why: Lifetime conflicts with recurring AI and server cost.
+
+**D-08 — Final pricing** (2026-10-09)
+ID: Remove Ads Rp29.000 · 1M Rp15.000 · 3M Rp39.000 · 6M Rp69.000 · 12M Rp99.000 · Family 12M Rp149.000 · AI Top-up Rp10.000.
+Tier-1 (USD): $3.99 · $3.99 · $9.99 · $16.99 · $24.99 · $34.99 · $1.99.
+Other countries: nearest store price tier / regional pricing. Validate later with RevenueCat Experiments (owner task O-09).
+
+**D-09 — AI model: Claude Haiku 5.5 behind a provider abstraction** (2026-10-08)
+Why: $0.10 / $0.50 per MTok, vision support; abstraction allows swapping models without an app update.
+Consequence: Model ID lives in Edge Function config, not in the app.
+
+**D-10 — AI is for paying subscribers only** (2026-10-08)
+Why: Owner does not want to subsidize AI for free users.
+Consequence: Free users see a pre-computed demo; trial gets a small quota (10 photos, 10 chats).
+
+**D-11 — AI quotas** (2026-10-08)
+Premium: 150 photos + 60 chats / month; daily caps 15 photos + 10 chats. Trial: 10 + 10. Family: same quota per member. Weekly insight automatic for premium.
+
+**D-12 — Paid AI top-up pack, never expires** (2026-10-08, expiry rule corrected 2026-10-08)
++50 photos, +30 chats; premium only; consumed after the monthly quota; no expiry (Apple 3.1.1); balance stored server-side per account.
+
+**D-13 — 7-day free trial on the 12-month Premium plan** (2026-10-08)
+
+**D-14 — Ship all features at launch; feature flags are kill switches only** (2026-10-08, refined after review-guideline check)
+Why: Owner wants the full feature set to drive downloads. Apple 2.3.1 forbids dormant features.
+Consequence: Every shipped feature is visible to App Review. Flags may turn a feature off or ramp a reviewed feature; never enable unreviewed functionality.
+
+**D-15 — Fasting Mode is free and available year-round** (2026-10-08)
+Why: Hidden "turn on at Ramadan" violates 2.3.1; year-round fasting (Mon/Thu, Ayyamul Bidh, intermittent) is a real use case.
+Consequence: Ramadan is a marketing moment (in-app banner, App Store In-App Event), not a feature switch.
+
+**D-16 — Health integrations in v1: Apple Health, Health Connect, Samsung Health Data SDK; Fitbit on iOS deferred to v2** (2026-10-08 / 2026-10-09)
+Why: Fitbit Web API shut down (Oct 2026) and Google Health API isn't accepting new projects; Samsung SDK requires partner approval.
+Consequence: Samsung SDK code is built but compiled into a release only after Samsung approves (no hidden toggle). Fitbit-on-Android works through Health Connect when the user's Fitbit app syncs there.
+
+**D-17 — Release before Ramadan 2027 (expected ~8 Feb 2027)** (2026-10-08)
+Consequence: target release last week of January 2027; Google Play closed test (≥12 testers, 14 days) must start by ~4 January 2027.
+
+**D-18 — Developer accounts registered as an individual** (2026-10-09)
+Consequence: Play closed-testing requirement applies; seller name = owner's legal name.
+
+**D-19 — Auth: guest mode + email OTP (passwordless) + Sign in with Apple + Google Sign-In** (2026-10-09)
+Consequence: Custom SMTP (Resend) required for Supabase Auth emails.
+
+**D-20 — Launch languages: EN, ID, AR, ES, PT** (2026-10-09)
+
+**D-21 — Visual direction: hybrid modern UI + one mascot (Sippy, Rive animations)** (2026-10-08)
+Consequence: Bento cards, big hero numbers, floating dark pill navbar, warm off-white background, teal accent. See design-system.md.
+
+**D-22 — No AI for anything rule-based** (2026-10-08)
+Why: Cost, offline support and medical safety. Goal, reminders, catch-up, fasting windows are deterministic code.
+
+**D-23 — Hydration counting is conservative: volume × water fraction, max factor 1.0; alcohol counts 0** (2026-10-08)
+Why: Beverage Hydration Index multipliers >1 would nudge users toward milk/juice over water.
+
+**D-24 — Drink database: USDA FoodData Central + national tables as reference; generic names only** (2026-10-08)
+Consequence: `data/drinks.json` is a draft until verified (T-020).

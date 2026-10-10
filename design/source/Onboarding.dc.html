@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Onboarding</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Arabic:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div dir="{{dir}}" lang="{{langAttr}}" style="width: 390px; height: {{h}}; box-sizing: border-box; padding: 52px 20px 24px; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', 'Noto Sans Arabic', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; overflow: hidden">
+
+<div style="display: flex; align-items: center; gap: 12px; min-height: 48px">
+<button type="button" aria-label="{{L.back}}" onClick="{{back}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; visibility: {{backVis}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{flip}}"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 6px">
+<div role="progressbar" aria-label="{{L.stepOf}}" style="display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{segs}}" as="seg" hint-placeholder-count="11"><span style="height: 6px; border-radius: 999px; background: {{seg.c}}; display: block"></span></sc-for>
+</div>
+<div style="font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.muted}}; font-weight: 600">{{L.stepOf}}</div>
+</div>
+</div>
+
+<!-- 1 · Language -->
+<sc-if value="{{is.s1}}" hint-placeholder-val="{{ true }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="happy" wave="{{ true }}" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">Hi! I'm Sippy, your water buddy.</div></div>
+<h1 style="margin: 20px 0 20px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">Choose your language</h1>
+<div role="radiogroup" aria-label="Language" style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{langs}}" as="o" hint-placeholder-count="5">
+<button type="button" role="radio" aria-checked="{{o.sel}}" onClick="{{o.pick}}" style="min-height: 60px; padding: 12px 18px; border-radius: 20px; border: 2px solid {{o.border}}; background: {{o.bg}}; color: {{t.ink}}; font-family: inherit; font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: start; cursor: pointer">
+<span lang="{{o.id}}" dir="{{o.dir}}">{{o.label}}</span>
+<span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 999px; border: 2px solid {{o.ring}}; background: {{o.dot}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><sc-if value="{{o.sel}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+</button>
+</sc-for>
+</div>
+<div style="margin-top: auto; padding-top: 16px"><button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Continue</button></div>
+</div>
+</sc-if>
+
+<!-- 2 · Name -->
+<sc-if value="{{is.s2}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="happy" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">Nice to meet you!</div></div>
+<h1 style="margin: 20px 0 20px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">What should Sippy call you?</h1>
+<label for="onb-name" style="font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600; margin-bottom: 8px">Your name</label>
+<input id="onb-name" type="text" readonly value="Rendy" autocomplete="given-name" style="min-height: 64px; border-radius: 20px; border: 2px solid {{t.ink}}; background: {{t.surface}}; color: {{t.ink}}; padding: 12px 20px; font-family: inherit; font-size: {{fs.title}}; font-weight: 600; outline: none; box-sizing: border-box">
+<div style="font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.muted}}; margin-top: 8px">A first name or nickname is perfect. Only you and your family see it.</div>
+<div style="margin-top: auto; padding-top: 16px"><button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Continue</button></div>
+</div>
+</sc-if>
+
+<!-- 3 · Units -->
+<sc-if value="{{is.s3}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="fresh" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">Pick whatever feels familiar.</div></div>
+<h1 style="margin: 20px 0 20px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">Which units do you use?</h1>
+<div role="radiogroup" aria-label="Units" style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{units}}" as="o" hint-placeholder-count="2">
+<button type="button" role="radio" aria-checked="{{o.sel}}" onClick="{{o.pick}}" style="min-height: 96px; padding: 16px 20px; border-radius: 28px; border: 2px solid {{o.border}}; background: {{o.bg}}; color: {{t.ink}}; font-family: inherit; display: flex; align-items: center; gap: 16px; text-align: start; cursor: pointer">
+<span style="min-width: 72px; min-height: 56px; padding: 0 10px; box-sizing: border-box; border-radius: 16px; background: {{o.well}}; color: {{o.wellInk}}; display: flex; align-items: center; justify-content: center; font-size: {{fs.title}}; font-weight: 800">{{o.unit}}</span>
+<span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 700">{{o.title}}</span><span style="font-size: {{fs.label}}; line-height: {{lh.label}}; color: {{t.muted}}">{{o.sub}}</span></span>
+<span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 999px; border: 2px solid {{o.ring}}; background: {{o.dot}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><sc-if value="{{o.sel}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+</button>
+</sc-for>
+</div>
+<div style="margin-top: auto; padding-top: 16px"><button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Continue</button></div>
+</div>
+</sc-if>
+
+<!-- 4 · Weight -->
+<sc-if value="{{is.s4}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="fresh" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">This helps me suggest a goal.</div></div>
+<h1 style="margin: 20px 0 16px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">What's your weight?</h1>
+<div style="background: {{t.surface}}; border-radius: 28px; padding: 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<button type="button" aria-label="Decrease weight" onClick="{{dec}}" style="width: 64px; height: 64px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surfaceAlt}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+<div aria-live="polite" style="display: flex; align-items: baseline; justify-content: center; gap: 6px; flex-wrap: wrap; min-width: 0"><span style="font-size: {{fs.hero}}; line-height: {{lh.hero}}; font-weight: 700; letter-spacing: -0.02em">{{weight}}</span><span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 600; color: {{t.muted}}">kg</span></div>
+<button type="button" aria-label="Increase weight" onClick="{{inc}}" style="width: 64px; height: 64px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surfaceAlt}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px">
+<sc-for list="{{keys}}" as="k" hint-placeholder-count="12">
+<button type="button" aria-label="{{k.aria}}" onClick="{{k.press}}" style="min-height: 52px; border: none; border-radius: 20px; background: {{t.surface}}; color: {{t.ink}}; font-family: inherit; font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer"><sc-if value="{{k.isDel}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{flip}}"><path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1z"></path><path d="m16 9-5 6"></path><path d="m11 9 5 6"></path></svg></sc-if>{{k.label}}</button>
+</sc-for>
+</div>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
+<button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Continue</button>
+<button type="button" onClick="{{next}}" style="width: 100%; min-height: 48px; padding: {{btnPad}}; border: none; border-radius: 999px; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 600; cursor: pointer">Prefer not to say</button>
+</div>
+</div>
+</sc-if>
+
+<!-- 5 · Activity -->
+<sc-if value="{{is.s5}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="fresh" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">Moving more means sipping more.</div></div>
+<h1 style="margin: 20px 0 20px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">How active is a usual day?</h1>
+<div role="radiogroup" aria-label="Activity level" style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{acts}}" as="o" hint-placeholder-count="3">
+<button type="button" role="radio" aria-checked="{{o.sel}}" onClick="{{o.pick}}" style="min-height: 100px; padding: 16px 20px; border-radius: 28px; border: 2px solid {{o.border}}; background: {{o.bg}}; color: {{t.ink}}; font-family: inherit; display: flex; align-items: center; gap: 16px; text-align: start; cursor: pointer">
+<span style="width: 56px; height: 56px; flex-shrink: 0; border-radius: 16px; background: {{o.well}}; color: {{o.wellInk}}; display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{o.icon}}"></path></svg></span>
+<span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 700">{{o.title}}</span><span style="font-size: {{fs.label}}; line-height: {{lh.label}}; color: {{t.muted}}">{{o.sub}}</span></span>
+</button>
+</sc-for>
+</div>
+<div style="margin-top: auto; padding-top: 16px"><button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Continue</button></div>
+</div>
+</sc-if>
+
+<!-- 6 · Wake & bed -->
+<sc-if value="{{is.s6}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="sleeping" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">I'll stay quiet while you sleep.</div></div>
+<h1 style="margin: 20px 0 20px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">When does your day start and end?</h1>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="background: {{t.sunTint}}; border-radius: 28px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div style="display: flex; align-items: center; gap: 6px; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>Wake up</div>
+<div role="listbox" aria-label="Wake-up time" style="width: 100%; display: flex; flex-direction: column; align-items: center">
+<div style="font-size: {{fs.title}}; line-height: 40px; color: {{t.muted}}; opacity: 0.6">05:30</div>
+<div role="option" aria-selected="true" style="width: 100%; border-radius: 16px; background: {{t.surface}}; text-align: center; font-size: {{fs.h1}}; line-height: 60px; font-weight: 800">06:00</div>
+<div style="font-size: {{fs.title}}; line-height: 40px; color: {{t.muted}}; opacity: 0.6">06:30</div>
+</div>
+</div>
+<div style="background: {{t.mint}}; border-radius: 28px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div style="display: flex; align-items: center; gap: 6px; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg>Bedtime</div>
+<div role="listbox" aria-label="Bedtime" style="width: 100%; display: flex; flex-direction: column; align-items: center">
+<div style="font-size: {{fs.title}}; line-height: 40px; color: {{t.muted}}; opacity: 0.6">22:00</div>
+<div role="option" aria-selected="true" style="width: 100%; border-radius: 16px; background: {{t.surface}}; text-align: center; font-size: {{fs.h1}}; line-height: 60px; font-weight: 800">22:30</div>
+<div style="font-size: {{fs.title}}; line-height: 40px; color: {{t.muted}}; opacity: 0.6">23:00</div>
+</div>
+</div>
+</div>
+<div style="margin-top: 16px; padding: 14px 16px; border-radius: 20px; background: {{t.okBg}}; color: {{t.okFg}}; display: flex; gap: 10px; align-items: flex-start; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg>Reminders only between 06:00 and 22:30.</div>
+<div style="margin-top: auto; padding-top: 16px"><button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Continue</button></div>
+</div>
+</sc-if>
+
+<!-- 7 · Medical safety -->
+<sc-if value="{{is.s7}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="fresh" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">Your safety comes first.</div></div>
+<h1 style="margin: 20px 0 20px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">Has a doctor limited how much you can drink?</h1>
+<div role="radiogroup" aria-label="Doctor's fluid limit" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{yn}}" as="o" hint-placeholder-count="2">
+<button type="button" role="radio" aria-checked="{{o.sel}}" onClick="{{o.pick}}" style="min-height: 64px; padding: 12px 18px; border-radius: 20px; border: 2px solid {{o.border}}; background: {{o.bg}}; color: {{t.ink}}; font-family: inherit; font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 700; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer">
+<span>{{o.label}}</span>
+<span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 999px; border: 2px solid {{o.ring}}; background: {{o.dot}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><sc-if value="{{o.sel}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+</button>
+</sc-for>
+</div>
+<sc-if value="{{showLimit}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px; margin-top: 20px">
+<label for="onb-limit" style="font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600">Daily limit (ml)</label>
+<input id="onb-limit" type="text" inputmode="numeric" readonly value="1,500" style="min-height: 64px; border-radius: 20px; border: 2px solid {{t.ink}}; background: {{t.surface}}; color: {{t.ink}}; padding: 12px 20px; font-family: inherit; font-size: {{fs.title}}; font-weight: 700; outline: none; box-sizing: border-box">
+<div style="margin-top: 4px; padding: 14px 16px; border-radius: 20px; background: {{t.okBg}}; color: {{t.okFg}}; display: flex; gap: 10px; align-items: flex-start; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"></path><path d="m9 12 2 2 4-4"></path></svg>We'll never ask you to drink more than this.</div>
+</div>
+</sc-if>
+<div style="margin-top: auto; padding-top: 16px"><button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Continue</button></div>
+</div>
+</sc-if>
+
+<!-- 8 · Experience (bound copy: also used for the Arabic RTL frame) -->
+<sc-if value="{{is.s8}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="happy" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">{{L.s8line}}</div></div>
+<h1 style="margin: 20px 0 20px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">{{L.s8q}}</h1>
+<div role="radiogroup" aria-label="{{L.s8q}}" style="display: flex; flex-direction: column; gap: 12px">
+<button type="button" role="radio" aria-checked="{{mNormal.sel}}" onClick="{{mNormal.pick}}" style="padding: 14px; border-radius: 28px; border: 2px solid {{mNormal.border}}; background: {{mNormal.bg}}; color: {{t.ink}}; font-family: inherit; display: flex; align-items: center; gap: 14px; text-align: start; cursor: pointer">
+<span aria-hidden="true" style="width: 96px; height: 128px; flex-shrink: 0; box-sizing: border-box; border-radius: 18px; background: {{t.bg}}; padding: 8px; display: flex; flex-direction: column; gap: 5px">
+<span style="border-radius: 10px; background: {{t.surface}}; padding: 6px; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 14px; line-height: 16px; font-weight: 800" dir="ltr">1,250</span><span style="height: 5px; border-radius: 999px; background: {{t.surfaceAlt}}; display: block"><span style="width: 55%; height: 5px; border-radius: 999px; background: {{t.accent}}; display: block"></span></span></span>
+<span style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px"><span style="height: 22px; border-radius: 8px; background: {{t.surface}}; display: block"></span><span style="height: 22px; border-radius: 8px; background: {{t.surface}}; display: block"></span></span>
+<span style="margin-top: auto; height: 14px; border-radius: 999px; background: {{t.nav}}; display: block"></span>
+</span>
+<span style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px"><span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 800">{{L.normalT}}</span><span style="font-size: {{fs.label}}; line-height: {{lh.label}}; color: {{t.muted}}">{{L.normalD}}</span></span>
+<span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 999px; border: 2px solid {{mNormal.ring}}; background: {{mNormal.dot}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><sc-if value="{{mNormal.sel}}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+</button>
+<button type="button" role="radio" aria-checked="{{mSimple.sel}}" onClick="{{mSimple.pick}}" style="padding: 14px; border-radius: 28px; border: 2px solid {{mSimple.border}}; background: {{mSimple.bg}}; color: {{t.ink}}; font-family: inherit; display: flex; align-items: center; gap: 14px; text-align: start; cursor: pointer">
+<span aria-hidden="true" style="width: 96px; height: 128px; flex-shrink: 0; box-sizing: border-box; border-radius: 18px; background: {{t.bg}}; padding: 8px; display: flex; flex-direction: column; align-items: center; gap: 6px">
+<dc-import name="Sippy" state="happy" size="34" hint-size="34px,34px"></dc-import>
+<span style="font-size: 18px; line-height: 20px; font-weight: 800" dir="ltr">3 of 8</span>
+<span style="margin-top: auto; width: 100%; height: 34px; border-radius: 999px; background: {{t.accent}}; display: block"></span>
+</span>
+<span style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px"><span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 800">{{L.simpleT}}</span><span style="font-size: {{fs.label}}; line-height: {{lh.label}}; color: {{t.muted}}">{{L.simpleD}}</span></span>
+<span style="width: 28px; height: 28px; box-sizing: border-box; border-radius: 999px; border: 2px solid {{mSimple.ring}}; background: {{mSimple.dot}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><sc-if value="{{mSimple.sel}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+</button>
+</div>
+<div style="margin-top: auto; padding-top: 16px"><button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">{{L.cont}}</button></div>
+</div>
+</sc-if>
+
+<!-- 9 · Goal result -->
+<sc-if value="{{is.s9}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="celebrating" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">Here's your plan, Rendy!</div></div>
+<h1 style="margin: 20px 0 16px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">Your daily goal</h1>
+<div style="background: {{t.accent}}; color: {{t.onAccent}}; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap"><span style="font-size: {{fs.hero}}; line-height: {{lh.hero}}; font-weight: 700; letter-spacing: -0.02em">2,300</span><span style="font-size: {{fs.title}}; line-height: {{lh.title}}; font-weight: 600; color: {{t.onAccentSoft}}">ml</span></div>
+<div style="font-size: {{fs.body}}; line-height: {{lh.body}}; color: {{t.onAccentSoft}}">Based on your weight and activity.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="padding: 8px 12px; border-radius: 12px; background: {{t.chipOnAccent}}; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600">68 kg</span>
+<span style="padding: 8px 12px; border-radius: 12px; background: {{t.chipOnAccent}}; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600">Some movement</span>
+<span style="padding: 8px 12px; border-radius: 12px; background: {{t.chipOnAccent}}; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 600">06:00–22:30</span>
+</div>
+<a href="#edit-goal" style="align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center; gap: 6px; color: {{t.onAccent}}; font-size: {{fs.body}}; line-height: {{lh.body}}; font-weight: 700; text-decoration: underline; text-underline-offset: 3px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Edit</a>
+</div>
+<div style="margin-top: 14px; display: flex; gap: 10px; align-items: flex-start; font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.muted}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><path d="M12 8h.01"></path></svg><span>One More Sip is not a medical device.</span></div>
+<div style="margin-top: auto; padding-top: 16px"><button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Continue</button></div>
+</div>
+</sc-if>
+
+<!-- 10 · Notification primer -->
+<sc-if value="{{is.s10}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="margin-top: 20px; align-self: center; position: relative; width: 128px; height: 128px">
+<dc-import name="Sippy" state="fresh" size="120" hint-size="120px,120px"></dc-import>
+<span aria-hidden="true" style="position: absolute; right: -6px; bottom: 6px; width: 52px; height: 52px; border-radius: 999px; background: #FFD27A; color: #3A2600; border: 4px solid {{t.bg}}; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg></span>
+</div>
+<h1 style="margin: 16px 0 16px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em; text-align: center">Can Sippy send you gentle reminders?</h1>
+<div aria-label="Example reminder" style="background: {{t.surface}}; border-radius: 24px; padding: 14px; box-shadow: 0 8px 24px rgba(17,19,18,0.10); display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="width: 28px; height: 28px; border-radius: 8px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg></span>
+<span style="font-size: 14px; font-weight: 700; color: {{t.muted}}; flex-grow: 1">SIP!</span>
+<span style="font-size: 14px; color: {{t.muted}}">now</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 800">Sippy here — one more sip?</span><span style="font-size: {{fs.caption}}; line-height: {{lh.caption}}; color: {{t.muted}}">You're at 1,250 of 2,300 ml today.</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button type="button" style="min-height: 48px; border: none; border-radius: 14px; background: {{t.surfaceAlt}}; color: {{t.ink}}; font-family: inherit; font-size: {{fs.label}}; font-weight: 800; cursor: pointer">✓ 250 ml</button>
+<button type="button" style="min-height: 48px; border: none; border-radius: 14px; background: {{t.surfaceAlt}}; color: {{t.ink}}; font-family: inherit; font-size: {{fs.label}}; font-weight: 700; cursor: pointer">Later</button>
+</div>
+</div>
+<ul style="list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: {{fs.label}}; line-height: {{lh.label}}">
+<li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M20 6 9 17l-5-5"></path></svg>Only while you're awake</li>
+<li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M20 6 9 17l-5-5"></path></svg>Log a glass right from the reminder</li>
+<li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M20 6 9 17l-5-5"></path></svg>Change or pause anytime</li>
+</ul>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
+<button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Allow notifications</button>
+<button type="button" onClick="{{next}}" style="width: 100%; min-height: 48px; padding: {{btnPad}}; border: none; border-radius: 999px; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 600; cursor: pointer">Not now</button>
+</div>
+</div>
+</sc-if>
+
+<!-- 11 · Android battery guide -->
+<sc-if value="{{is.s11}}" hint-placeholder-val="{{ false }}">
+<div style="flex-grow: 1; display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 10px; margin-top: 20px"><dc-import name="Sippy" state="tired" size="{{sippySize}}" hint-size="60px,60px"></dc-import><div style="background: {{t.bubble}}; border-radius: {{bubbleR}}; padding: 10px 14px; font-size: {{fs.body}}; line-height: {{lh.body}}">Some phones put me to sleep to save battery. Let's fix that.</div></div>
+<div style="display: flex; align-items: center; gap: 8px; margin-top: 18px"><span style="padding: 4px 10px; border-radius: 8px; background: {{t.surfaceAlt}}; font-size: 14px; font-weight: 700; color: {{t.muted}}">Android only</span></div>
+<h1 style="margin: 8px 0 14px; font-size: {{fs.h1}}; line-height: {{lh.h1}}; font-weight: 800; letter-spacing: -0.01em">Keep reminders working</h1>
+<div role="radiogroup" aria-label="Your phone brand" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{brands}}" as="o" hint-placeholder-count="6">
+<button type="button" role="radio" aria-checked="{{o.sel}}" onClick="{{o.pick}}" style="min-height: 48px; border: none; border-radius: 12px; background: {{o.bg}}; color: {{o.fg}}; font-family: inherit; font-size: {{fs.label}}; line-height: {{lh.label}}; font-weight: 700; cursor: pointer">{{o.label}}</button>
+</sc-for>
+</div>
+<ol style="list-style: none; margin: 14px 0 0; padding: 16px; border-radius: 28px; background: {{t.accentTint}}; display: flex; flex-direction: column; gap: 12px">
+<li style="display: flex; gap: 12px; align-items: flex-start"><span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800">1</span><span style="font-size: {{fs.label}}; line-height: {{lh.label}}; padding-top: 6px">Open <b>Settings › Apps › Sip!</b></span></li>
+<li style="display: flex; gap: 12px; align-items: flex-start"><span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800">2</span><span style="font-size: {{fs.label}}; line-height: {{lh.label}}; padding-top: 6px">Tap <b>Battery saver</b> and choose <b>No restrictions</b></span></li>
+<li style="display: flex; gap: 12px; align-items: flex-start"><span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800">3</span><span style="font-size: {{fs.label}}; line-height: {{lh.label}}; padding-top: 6px">Turn on <b>Autostart</b> for {{brandName}}</span></li>
+</ol>
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 4px">
+<button type="button" onClick="{{next}}" style="width: 100%; min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Open Settings</button>
+<button type="button" onClick="{{next}}" style="width: 100%; min-height: 48px; padding: {{btnPad}}; border: none; border-radius: 999px; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 600; cursor: pointer">Skip for now</button>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"step":{"editor":"int","min":1,"max":11,"default":1},"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"textScale":{"editor":"enum","options":["1","2"],"default":"1"},"lang":{"editor":"enum","options":["en","ar"],"default":"en"},"height":{"editor":"int","min":640,"max":2000,"default":844},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const ar = this.props.lang === 'ar';
+    const s = Number(this.props.textScale ?? 1) || 1;
+    const hs = Math.min(s, 1.5);
+    const H = Number(this.props.height ?? 844) || 844;
+    const step = st.step ?? (Number(this.props.step ?? 1) || 1);
+    const px = (n) => Math.round(n) + 'px';
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', okBg: 'rgba(79,209,193,0.16)', okFg: '#4FD1C1', line: '#4A504E', segOff: '#2E3331', nav: '#ECEEEC', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', bubble: '#163330', onAccentSoft: 'rgba(10,31,29,0.8)', chipOnAccent: 'rgba(10,31,29,0.12)' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', okBg: '#D7F2EE', okFg: '#075E56', line: '#C9C4BA', segOff: '#E2DDD3', nav: '#111312', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', bubble: '#E3F5F1', onAccentSoft: 'rgba(255,255,255,0.92)', chipOnAccent: 'rgba(255,255,255,0.18)' };
+    const set = (k, v) => () => this.setState({ [k]: v });
+    const sel = (on) => ({ sel: on, border: on ? t.accent : 'transparent', bg: on ? t.accentTint : t.surface, ring: on ? t.accent : t.line, dot: on ? t.accent : 'transparent' });
+
+    const lang = st.lang ?? 'en';
+    const langs = [['en', 'English', 'ltr'], ['id', 'Bahasa Indonesia', 'ltr'], ['ar', 'العربية', 'rtl'], ['es', 'Español', 'ltr'], ['pt', 'Português', 'ltr']]
+      .map(([id, label, d]) => ({ id, label, dir: d, ...sel(lang === id), pick: set('lang', id) }));
+
+    const unit = st.unit ?? 'ml';
+    const units = [
+      { id: 'ml', unit: 'ml', title: 'Millilitres', sub: 'A glass is about 250 ml' },
+      { id: 'oz', unit: 'fl oz', title: 'Fluid ounces', sub: 'A glass is about 8 fl oz' }
+    ].map((u) => ({ ...u, ...sel(unit === u.id), well: unit === u.id ? t.accent : t.mint, wellInk: unit === u.id ? t.onAccent : t.ink, pick: set('unit', u.id) }));
+
+    const w = st.w ?? '68';
+    const setW = (v) => this.setState({ w: v });
+    const inc = () => setW(String(Math.min(300, (Number(w) || 0) + 1)));
+    const dec = () => setW(String(Math.max(20, (Number(w) || 0) - 1)));
+    const press = (d) => () => { const base = w === '0' ? '' : w; if (base.length < 3) setW(base + d); };
+    const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((d) => ({ label: d, aria: d, isDel: false, press: press(d) }));
+    keys.push({ label: '00', aria: 'Double zero', isDel: false, press: press('00') });
+    keys.push({ label: '0', aria: '0', isDel: false, press: press('0') });
+    keys.push({ label: '', aria: 'Delete', isDel: true, press: () => setW(w.length > 1 ? w.slice(0, -1) : '0') });
+
+    const act = st.act ?? 'some';
+    const acts = [
+      { id: 'sit', title: 'Mostly sitting', sub: 'Desk work, not much walking', icon: 'M7 3v9h10v9M7 12v9M17 3v9M5 12h14' },
+      { id: 'some', title: 'Some movement', sub: 'On my feet part of the day', icon: 'M13 5.5a1.5 1.5 0 1 1 0-.01M10 21l2-5 3 2v3M8 12l3-3h3l3 3M11 9l-1 5' },
+      { id: 'very', title: 'Very active', sub: 'Sport or physical work most days', icon: 'M13 2 4 14h7l-1 8 9-12h-7z' }
+    ].map((a) => { const on = act === a.id; const tint = { sit: t.sunTint, some: t.mint, very: t.coralTint }[a.id]; return { ...a, ...sel(on), well: on ? t.accent : tint, wellInk: on ? t.onAccent : t.ink, pick: set('act', a.id) }; });
+
+    const limit = st.limit ?? 'yes';
+    const yn = [{ id: 'yes', label: 'Yes' }, { id: 'no', label: 'No' }].map((o) => ({ ...o, ...sel(limit === o.id), pick: set('limit', o.id) }));
+
+    const mode = st.mode ?? 'normal';
+    const mNormal = { ...sel(mode === 'normal'), pick: set('mode', 'normal') };
+    const mSimple = { ...sel(mode === 'simple'), pick: set('mode', 'simple') };
+
+    const brand = st.brand ?? 'Xiaomi';
+    const brands = ['Xiaomi', 'Oppo', 'Vivo', 'Samsung', 'Realme', 'Other'].map((b) => ({ label: b, sel: brand === b, bg: brand === b ? t.ink : t.surfaceAlt, fg: brand === b ? t.onInk : t.ink, pick: set('brand', b) }));
+
+    const segs = Array.from({ length: 11 }, (_, i) => ({ c: i < step ? t.accent : t.segOff }));
+    const is = {};
+    for (let i = 1; i <= 11; i++) is['s' + i] = step === i;
+
+    const L = ar
+      ? { back: 'رجوع', stepOf: 'الخطوة ' + step + ' من 11', cont: 'متابعة', s8line: 'يمكنك التغيير في أي وقت من صفحة «أنا».', s8q: 'كيف تريد استخدام Sip!؟', normalT: 'عادي', normalD: 'التطبيق الكامل — الإحصاءات والعائلة والتحديات.', simpleT: 'بسيط', simpleD: 'زر واحد كبير ونص أكبر. مثالي للوالدين والأجداد.' }
+      : { back: 'Back', stepOf: 'Step ' + step + ' of 11', cont: 'Continue', s8line: 'You can switch anytime in Me.', s8q: 'How do you want to use Sip!?', normalT: 'Normal', normalD: 'The full app — stats, family and challenges.', simpleT: 'Simple', simpleD: 'One big button and larger text. Great for parents and grandparents.' };
+
+    return {
+      t, is, segs, L, langs, units, keys, acts, yn, mNormal, mSimple, brands,
+      weight: w, inc, dec,
+      showLimit: limit === 'yes',
+      brandName: brand === 'Other' ? 'Sip!' : brand,
+      dir: ar ? 'rtl' : 'ltr',
+      langAttr: ar ? 'ar' : 'en',
+      flip: ar ? 'scaleX(-1)' : 'none',
+      bubbleR: ar ? '20px 20px 6px 20px' : '20px 20px 20px 6px',
+      backVis: step === 1 ? 'hidden' : 'visible',
+      h: px(H),
+      sippySize: 60,
+      fs: { hero: px(64 * hs), h1: px(30 * s), title: px(20 * s), body: px(17 * s), label: px(15 * s), caption: px(14 * s), btn: px(17 * s) },
+      lh: { hero: px(68 * hs), h1: px(36 * s), title: px(26 * s), body: px(24 * s), label: px(20 * s), caption: px(20 * s), btn: px(22 * s) },
+      btnPad: px(10 * s) + ' 20px',
+      next: () => this.setState({ step: step >= 11 ? 1 : step + 1 }),
+      back: () => this.setState({ step: Math.max(1, step - 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

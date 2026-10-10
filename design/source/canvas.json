@@ -1,0 +1,759 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "AskSippy-Dark.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-07 · Ask Sippy — Dark",
+      "w": 1250,
+      "x": 1800,
+      "y": 17460
+    },
+    "AskSippy-Light.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-07 · Ask Sippy — Light",
+      "w": 1250,
+      "x": 470,
+      "y": 17460
+    },
+    "AskSippy.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-07 · Ask Sippy prototype (tap a chip)",
+      "w": 390,
+      "x": 0,
+      "y": 17460
+    },
+    "Components-Dark.dc.html": {
+      "h": 2000,
+      "title": "UI-00 · Components — Dark",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "Components.dc.html": {
+      "h": 2000,
+      "title": "UI-00 · Components — Light",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "DrinkPhoto.dc.html": {
+      "h": 400,
+      "title": "Drink photo placeholder (component)",
+      "w": 300,
+      "x": 3520,
+      "y": 15120
+    },
+    "DrinkPicker-Dark.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-05 · Picker, search, alcohol, custom, sources — Dark",
+      "w": 2110,
+      "x": 2660,
+      "y": 13800
+    },
+    "DrinkPicker-Light.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-05 · Picker, search, alcohol, custom, sources — Light",
+      "w": 2110,
+      "x": 470,
+      "y": 13800
+    },
+    "DrinkPicker.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-05 · Drink picker prototype",
+      "w": 390,
+      "x": 0,
+      "y": 13800
+    },
+    "Home-200.dc.html": {
+      "h": 1800,
+      "is_interactive": true,
+      "title": "UI-03 · Home (a) — 200% text",
+      "w": 390,
+      "x": 3130,
+      "y": 9060
+    },
+    "Home-Dark.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-03 · Home states a–e — Dark",
+      "w": 2110,
+      "x": 470,
+      "y": 10080
+    },
+    "Home-Light.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-03 · Home states a–e — Light",
+      "w": 2110,
+      "x": 470,
+      "y": 9060
+    },
+    "Home-RTL.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-03 · Home (a) — Arabic RTL",
+      "w": 390,
+      "x": 2660,
+      "y": 9060
+    },
+    "Home.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-03 · Home prototype (tap chips / +)",
+      "w": 390,
+      "x": 0,
+      "y": 9060
+    },
+    "LogSheet-Dark.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-04 · Log drink — Dark",
+      "w": 1680,
+      "x": 2230,
+      "y": 12480
+    },
+    "LogSheet-Light.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-04 · Log drink — Light",
+      "w": 1680,
+      "x": 470,
+      "y": 12480
+    },
+    "LogSheet.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-04 · Add a drink prototype",
+      "w": 390,
+      "x": 0,
+      "y": 12480
+    },
+    "Main.dc.html": {
+      "h": 2900,
+      "title": "UI-00 · Foundations (tokens, type, shape, a11y)",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Onboarding-04-200.dc.html": {
+      "h": 1400,
+      "is_interactive": true,
+      "title": "UI-02 · Step 4 Weight — 200% text",
+      "w": 390,
+      "x": 0,
+      "y": 7140
+    },
+    "Onboarding-08-RTL.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-02 · Step 8 Experience — Arabic RTL",
+      "w": 390,
+      "x": 940,
+      "y": 7140
+    },
+    "Onboarding-09-200.dc.html": {
+      "h": 1440,
+      "is_interactive": true,
+      "title": "UI-02 · Step 9 Goal — 200% text",
+      "w": 390,
+      "x": 470,
+      "y": 7140
+    },
+    "Onboarding-Dark.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-02 · Steps 1–11 — Dark",
+      "w": 4690,
+      "x": 470,
+      "y": 6120
+    },
+    "Onboarding-Light.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-02 · Steps 1–11 — Light",
+      "w": 4690,
+      "x": 470,
+      "y": 5100
+    },
+    "Onboarding.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-02 · Clickable prototype (all 11 steps)",
+      "w": 390,
+      "x": 0,
+      "y": 5100
+    },
+    "PhotoLog-Dark.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-06 · AI photo flow — Dark",
+      "w": 2970,
+      "x": 470,
+      "y": 16140
+    },
+    "PhotoLog-Light.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-06 · AI photo flow — Light",
+      "w": 2970,
+      "x": 470,
+      "y": 15120
+    },
+    "PhotoLog.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-06 · AI photo prototype (Allow → shutter)",
+      "w": 390,
+      "x": 0,
+      "y": 15120
+    },
+    "Simple-Variants.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-03b · Simple Mode — before / after, light, dark, high contrast",
+      "w": 2540,
+      "x": 470,
+      "y": 11100
+    },
+    "SimpleHome.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-03b · Simple Mode prototype",
+      "w": 390,
+      "x": 0,
+      "y": 11100
+    },
+    "Sippy-States.dc.html": {
+      "h": 1000,
+      "title": "UI-00 · Sippy — 7 states",
+      "w": 1600,
+      "x": 4560,
+      "y": 0
+    },
+    "Sippy.dc.html": {
+      "h": 240,
+      "title": "Sippy (component)",
+      "w": 240,
+      "x": 6240,
+      "y": 0
+    },
+    "Splash-Dark.dc.html": {
+      "h": 844,
+      "title": "UI-01 · Splash — Dark",
+      "w": 390,
+      "x": 470,
+      "y": 3400
+    },
+    "Splash.dc.html": {
+      "h": 844,
+      "title": "UI-01 · Splash — Light",
+      "w": 390,
+      "x": 0,
+      "y": 3400
+    },
+    "Paywall.dc.html": {
+      "h": 1400,
+      "is_interactive": true,
+      "title": "UI-10 · Paywall prototype (pick a plan)",
+      "w": 390,
+      "x": 0,
+      "y": 22180
+    },
+    "Paywall-Light.dc.html": {
+      "h": 1460,
+      "is_interactive": true,
+      "title": "UI-10 · Paywall, Remove ads, top-up, status — Light",
+      "w": 2110,
+      "x": 470,
+      "y": 22180
+    },
+    "Paywall-Dark.dc.html": {
+      "h": 1460,
+      "is_interactive": true,
+      "title": "UI-10 · Paywall, Remove ads, top-up, status — Dark",
+      "w": 2110,
+      "x": 2660,
+      "y": 22180
+    },
+    "Challenges.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-11 · Challenges prototype",
+      "w": 390,
+      "x": 0,
+      "y": 24060
+    },
+    "Challenges-Light.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-11 · Challenges — Light",
+      "w": 1680,
+      "x": 470,
+      "y": 24060
+    },
+    "Challenges-Dark.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-11 · Challenges — Dark",
+      "w": 1680,
+      "x": 2230,
+      "y": 24060
+    },
+    "Family.dc.html": {
+      "h": 844,
+      "is_interactive": true,
+      "title": "UI-12 · Family prototype (tap Mom, Invite, Add kid)",
+      "w": 390,
+      "x": 0,
+      "y": 25380
+    },
+    "Family-Light.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-12 · Family & caregiver — Light",
+      "w": 2110,
+      "x": 470,
+      "y": 25380
+    },
+    "Family-Dark.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-12 · Family & caregiver — Dark",
+      "w": 2110,
+      "x": 470,
+      "y": 26400
+    },
+    "Family-Consent-200.dc.html": {
+      "h": 2000,
+      "is_interactive": true,
+      "title": "UI-12 · Consent — 200% text",
+      "w": 390,
+      "x": 2660,
+      "y": 25380
+    },
+    "Fasting.dc.html": {
+      "h": 1100,
+      "is_interactive": true,
+      "title": "UI-13 · Fasting setup prototype (pick a type)",
+      "w": 390,
+      "x": 0,
+      "y": 27800
+    },
+    "Fasting-Light.dc.html": {
+      "h": 1160,
+      "is_interactive": true,
+      "title": "UI-13 · Fasting Mode — Light",
+      "w": 1680,
+      "x": 470,
+      "y": 27800
+    },
+    "Fasting-Dark.dc.html": {
+      "h": 1160,
+      "is_interactive": true,
+      "title": "UI-13 · Fasting Mode — Dark",
+      "w": 1680,
+      "x": 2230,
+      "y": 27800
+    },
+    "Reminders.dc.html": {
+      "h": 1780,
+      "is_interactive": true,
+      "title": "UI-14 · Reminders prototype (settings → health check → guide)",
+      "w": 390,
+      "x": 0,
+      "y": 29380
+    },
+    "Reminders-Light.dc.html": {
+      "h": 1840,
+      "is_interactive": true,
+      "title": "UI-14 · Reminders & health check — Light",
+      "w": 1250,
+      "x": 470,
+      "y": 29380
+    },
+    "Reminders-Dark.dc.html": {
+      "h": 1840,
+      "is_interactive": true,
+      "title": "UI-14 · Reminders & health check — Dark",
+      "w": 1250,
+      "x": 1800,
+      "y": 29380
+    },
+    "Me.dc.html": {
+      "h": 1660,
+      "is_interactive": true,
+      "title": "UI-15 · Me prototype (Sign in, Privacy, Delete)",
+      "w": 390,
+      "x": 0,
+      "y": 31640
+    },
+    "Me-Light.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "UI-15 · Me, account & privacy — Light",
+      "w": 2110,
+      "x": 470,
+      "y": 31640
+    },
+    "Me-Dark.dc.html": {
+      "h": 1720,
+      "is_interactive": true,
+      "title": "UI-15 · Me, account & privacy — Dark",
+      "w": 2110,
+      "x": 2660,
+      "y": 31640
+    },
+    "Streaks.dc.html": {
+      "h": 900,
+      "is_interactive": true,
+      "title": "UI-16 · Streak / Badges / Tip prototype",
+      "w": 390,
+      "x": 0,
+      "y": 33780
+    },
+    "Streaks-Light.dc.html": {
+      "h": 960,
+      "is_interactive": true,
+      "title": "UI-16 · Streaks, achievements, daily tip — Light",
+      "w": 1250,
+      "x": 470,
+      "y": 33780
+    },
+    "Streaks-Dark.dc.html": {
+      "h": 960,
+      "is_interactive": true,
+      "title": "UI-16 · Streaks, achievements, daily tip — Dark",
+      "w": 1250,
+      "x": 1800,
+      "y": 33780
+    },
+    "Surfaces.dc.html": {
+      "h": 1820,
+      "title": "UI-17 · System surfaces — Light",
+      "w": 1600,
+      "x": 0,
+      "y": 35160
+    },
+    "Surfaces-Dark.dc.html": {
+      "h": 1820,
+      "title": "UI-17 · System surfaces — Dark",
+      "w": 1600,
+      "x": 1680,
+      "y": 35160
+    },
+    "States.dc.html": {
+      "h": 844,
+      "title": "UI-18 · States component",
+      "w": 390,
+      "x": 0,
+      "y": 37400
+    },
+    "States-Light.dc.html": {
+      "h": 900,
+      "title": "UI-18 · System states — Light",
+      "w": 2110,
+      "x": 470,
+      "y": 37400
+    },
+    "States-Dark.dc.html": {
+      "h": 900,
+      "title": "UI-18 · System states — Dark",
+      "w": 2110,
+      "x": 2660,
+      "y": 37400
+    },
+    "Stats-Dark.dc.html": {
+      "h": 1300,
+      "is_interactive": true,
+      "title": "UI-09 · Statistics & history — Dark",
+      "w": 1680,
+      "x": 2230,
+      "y": 20460
+    },
+    "Stats-Light.dc.html": {
+      "h": 1300,
+      "is_interactive": true,
+      "title": "UI-09 · Statistics & history — Light",
+      "w": 1680,
+      "x": 470,
+      "y": 20460
+    },
+    "Stats.dc.html": {
+      "h": 1240,
+      "is_interactive": true,
+      "title": "UI-09 · Stats prototype (Day/Week/Month, History tab)",
+      "w": 390,
+      "x": 0,
+      "y": 20460
+    },
+    "WeeklyInsight-Dark.dc.html": {
+      "h": 1260,
+      "is_interactive": true,
+      "title": "UI-08 · Weekly insight — Dark",
+      "w": 390,
+      "x": 470,
+      "y": 18780
+    },
+    "WeeklyInsight.dc.html": {
+      "h": 1260,
+      "is_interactive": true,
+      "title": "UI-08 · Weekly insight — Light (tap a bar)",
+      "w": 390,
+      "x": 0,
+      "y": 18780
+    },
+    "Welcome-200.dc.html": {
+      "h": 1240,
+      "title": "UI-01 · Welcome — 200% text",
+      "w": 390,
+      "x": 1880,
+      "y": 3400
+    },
+    "Welcome-Dark.dc.html": {
+      "h": 844,
+      "title": "UI-01 · Welcome — Dark",
+      "w": 390,
+      "x": 1410,
+      "y": 3400
+    },
+    "Welcome.dc.html": {
+      "h": 844,
+      "title": "UI-01 · Welcome — Light",
+      "w": 390,
+      "x": 940,
+      "y": 3400
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-09T03:25:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "ui00": {
+      "kind": "title1",
+      "maxW": 6480,
+      "text": "UI-00 — Design system",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "ui01": {
+      "kind": "title1",
+      "maxW": 2270,
+      "text": "UI-01 — Splash & welcome",
+      "w": 240,
+      "x": 0,
+      "y": 3100
+    },
+    "ui02": {
+      "kind": "title1",
+      "maxW": 5160,
+      "text": "UI-02 — Onboarding (11 steps)",
+      "w": 240,
+      "x": 0,
+      "y": 4800
+    },
+    "ui03": {
+      "kind": "title1",
+      "maxW": 3520,
+      "text": "UI-03 — Home, Normal + Simple Mode",
+      "w": 240,
+      "x": 0,
+      "y": 8760
+    },
+    "ui04": {
+      "kind": "title1",
+      "maxW": 3910,
+      "text": "UI-04 — Log drink sheet",
+      "w": 240,
+      "x": 0,
+      "y": 12180
+    },
+    "ui05": {
+      "kind": "title1",
+      "maxW": 4770,
+      "text": "UI-05 — Drink picker & custom drink",
+      "w": 240,
+      "x": 0,
+      "y": 13500
+    },
+    "ui06": {
+      "kind": "title1",
+      "maxW": 3820,
+      "text": "UI-06 — AI photo logging",
+      "w": 240,
+      "x": 0,
+      "y": 14820
+    },
+    "ui07": {
+      "kind": "title1",
+      "maxW": 3050,
+      "text": "UI-07 — Ask Sippy chat",
+      "w": 240,
+      "x": 0,
+      "y": 17160
+    },
+    "ui08": {
+      "kind": "title1",
+      "maxW": 860,
+      "text": "UI-08 — Weekly insight",
+      "w": 240,
+      "x": 0,
+      "y": 18480
+    },
+    "ui09": {
+      "kind": "title1",
+      "maxW": 3910,
+      "text": "UI-09 — Statistics & history",
+      "w": 240,
+      "x": 0,
+      "y": 20160
+    },
+    "ui10": {
+      "kind": "title1",
+      "maxW": 4770,
+      "text": "UI-10 — Paywall, Remove Ads, top-up",
+      "x": 0,
+      "y": 21880
+    },
+    "ui11": {
+      "kind": "title1",
+      "maxW": 3910,
+      "text": "UI-11 — Challenges",
+      "x": 0,
+      "y": 23760
+    },
+    "ui12": {
+      "kind": "title1",
+      "maxW": 3050,
+      "text": "UI-12 — Family & caregiver",
+      "x": 0,
+      "y": 25080
+    },
+    "ui13": {
+      "kind": "title1",
+      "maxW": 3910,
+      "text": "UI-13 — Fasting Mode",
+      "x": 0,
+      "y": 27500
+    },
+    "ui14": {
+      "kind": "title1",
+      "maxW": 3050,
+      "text": "UI-14 — Reminders & notification health",
+      "x": 0,
+      "y": 29080
+    },
+    "ui15": {
+      "kind": "title1",
+      "maxW": 4770,
+      "text": "UI-15 — Me, settings, account & privacy",
+      "x": 0,
+      "y": 31340
+    },
+    "ui16": {
+      "kind": "title1",
+      "maxW": 3050,
+      "text": "UI-16 — Streaks, achievements, daily tip",
+      "x": 0,
+      "y": 33480
+    },
+    "ui17": {
+      "kind": "title1",
+      "maxW": 3280,
+      "text": "UI-17 — Notifications, widgets, Live Activity, watch",
+      "x": 0,
+      "y": 34860
+    },
+    "ui18": {
+      "kind": "title1",
+      "maxW": 4770,
+      "text": "UI-18 — System states",
+      "x": 0,
+      "y": 37100
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Components.dc.html",
+    "Components-Dark.dc.html",
+    "Sippy-States.dc.html",
+    "Sippy.dc.html",
+    "Splash.dc.html",
+    "Splash-Dark.dc.html",
+    "Welcome.dc.html",
+    "Welcome-Dark.dc.html",
+    "Welcome-200.dc.html",
+    "Onboarding.dc.html",
+    "Onboarding-Light.dc.html",
+    "Onboarding-Dark.dc.html",
+    "Onboarding-04-200.dc.html",
+    "Onboarding-09-200.dc.html",
+    "Onboarding-08-RTL.dc.html",
+    "Home.dc.html",
+    "Home-Light.dc.html",
+    "Home-Dark.dc.html",
+    "Home-RTL.dc.html",
+    "Home-200.dc.html",
+    "SimpleHome.dc.html",
+    "Simple-Variants.dc.html",
+    "LogSheet.dc.html",
+    "LogSheet-Light.dc.html",
+    "LogSheet-Dark.dc.html",
+    "DrinkPicker.dc.html",
+    "DrinkPicker-Light.dc.html",
+    "DrinkPicker-Dark.dc.html",
+    "PhotoLog.dc.html",
+    "PhotoLog-Light.dc.html",
+    "PhotoLog-Dark.dc.html",
+    "DrinkPhoto.dc.html",
+    "AskSippy.dc.html",
+    "AskSippy-Light.dc.html",
+    "AskSippy-Dark.dc.html",
+    "WeeklyInsight.dc.html",
+    "WeeklyInsight-Dark.dc.html",
+    "Stats.dc.html",
+    "Stats-Light.dc.html",
+    "Stats-Dark.dc.html",
+    "Paywall.dc.html",
+    "Paywall-Light.dc.html",
+    "Paywall-Dark.dc.html",
+    "Challenges.dc.html",
+    "Challenges-Light.dc.html",
+    "Challenges-Dark.dc.html",
+    "Family.dc.html",
+    "Family-Light.dc.html",
+    "Family-Dark.dc.html",
+    "Family-Consent-200.dc.html",
+    "Fasting.dc.html",
+    "Fasting-Light.dc.html",
+    "Fasting-Dark.dc.html",
+    "Reminders.dc.html",
+    "Reminders-Light.dc.html",
+    "Reminders-Dark.dc.html",
+    "Me.dc.html",
+    "Me-Light.dc.html",
+    "Me-Dark.dc.html",
+    "Streaks.dc.html",
+    "Streaks-Light.dc.html",
+    "Streaks-Dark.dc.html",
+    "Surfaces.dc.html",
+    "Surfaces-Dark.dc.html",
+    "States.dc.html",
+    "States-Light.dc.html",
+    "States-Dark.dc.html"
+  ],
+  "pages": [],
+  "title": "One More Sip — UI-00 & UI-01"
+}

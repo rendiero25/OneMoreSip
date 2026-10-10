@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Me and privacy — dark</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 2110px; height: 1720px; display: flex; gap: 40px; align-items: flex-start; background: #0B0D0C; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #ECEEEC">
+<sc-for list="{{frames}}" as="f" hint-placeholder-count="5">
+<div style="width: 390px; flex-shrink: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="height: 40px; display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700"><span style="min-width: 32px; height: 32px; padding: 0 8px; box-sizing: border-box; border-radius: 999px; background: #ECEEEC; color: #121413; display: flex; align-items: center; justify-content: center; font-size: 15px">{{f.n}}</span>{{f.name}}</div>
+<div style="width: 390px; height: {{f.hpx}}; border-radius: 28px; overflow: hidden; box-shadow: 0 0 0 1px rgba(236,238,236,0.12)">
+<dc-import name="Me" theme="dark" screen="{{f.screen}}" height="{{f.h}}" hint-size="390px,844px"></dc-import>
+</div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2110,"height":1720}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const f = [
+      { n: 1, name: 'Me · free user', screen: 'me', h: 1660 },
+      { n: 2, name: 'Sign-in sheet', screen: 'signin', h: 844 },
+      { n: 3, name: 'Email code', screen: 'code', h: 844 },
+      { n: 4, name: 'Privacy center', screen: 'privacy', h: 1040 },
+      { n: 5, name: 'Delete account', screen: 'delete', h: 844 }
+    ];
+    return { frames: f.map((x) => ({ ...x, hpx: x.h + 'px' })) };
+  }
+}
+</script>
+</body>
+</html>

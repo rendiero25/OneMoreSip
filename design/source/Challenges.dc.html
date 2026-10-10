@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Challenges</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; overflow: hidden">
+<div style="position: absolute; inset: 0; overflow-y: auto; box-sizing: border-box; padding: 52px 20px 28px; display: flex; flex-direction: column; gap: 14px">
+
+<!-- LIST -->
+<sc-if value="{{is.list}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800">Challenges</h1>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<button type="button" onClick="{{toCreate}}" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>New challenge</button>
+<button type="button" onClick="{{toJoin}}" style="min-height: 56px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Join with code</button>
+</div>
+
+<h2 style="margin: 6px 0 0; font-size: 20px; line-height: 26px; font-weight: 800">Active</h2>
+<sc-for list="{{active}}" as="c" hint-placeholder-count="2">
+<button type="button" onClick="{{toDetail}}" style="border: none; border-radius: 28px; background: {{c.bg}}; color: {{t.ink}}; font-family: inherit; padding: 16px; display: flex; flex-direction: column; gap: 12px; text-align: start; cursor: pointer">
+<span style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; width: 100%">
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 20px; line-height: 26px; font-weight: 800">{{c.name}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.mutedOnTint}}; font-weight: 700">{{c.meta}}</span></span>
+<span style="flex-shrink: 0; padding: 4px 10px; border-radius: 999px; background: {{t.surface}}; font-size: 14px; font-weight: 800">{{c.rank}}</span>
+</span>
+<span role="img" aria-label="{{c.progressAria}}" style="width: 100%; height: 10px; border-radius: 999px; background: {{t.track}}; display: block"><span style="width: {{c.pct}}; height: 10px; border-radius: 999px; background: {{t.accent}}; display: block"></span></span>
+<span style="display: flex; align-items: center; justify-content: space-between; width: 100%">
+<span style="display: flex">
+<sc-for list="{{c.people}}" as="p" hint-placeholder-count="4"><span style="width: 32px; height: 32px; margin-inline-end: -8px; box-sizing: border-box; border-radius: 999px; border: 2px solid {{c.bg}}; background: {{p.bg}}; color: #111312; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800">{{p.i}}</span></sc-for>
+</span>
+<span style="font-size: 14px; font-weight: 700; color: {{t.mutedOnTint}}">{{c.people.length}} people</span>
+</span>
+</button>
+</sc-for>
+
+<h2 style="margin: 6px 0 0; font-size: 20px; line-height: 26px; font-weight: 800">Past</h2>
+<div style="border-radius: 28px; background: {{t.surface}}; padding: 6px; display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{past}}" as="c" hint-placeholder-count="2">
+<div style="min-height: 64px; padding: 10px 12px; display: flex; align-items: center; gap: 12px">
+<span style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 14px; background: {{c.well}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"></path></svg></span>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 21px; font-weight: 800">{{c.name}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{c.meta}}</span></span>
+<span style="font-size: 15px; font-weight: 800">{{c.result}}</span>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<!-- CREATE -->
+<sc-if value="{{is.create}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toList}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">New challenge</h1>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 10px"><div style="flex-shrink: 0"><dc-import name="Sippy" state="celebrating" size="60" hint-size="60px,60px"></dc-import></div><div style="background: {{t.accentTint}}; border-radius: 20px 20px 20px 6px; padding: 10px 14px; font-size: 17px; line-height: 24px">Friendly competition makes every sip count!</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="{{ids.name}}" style="font-size: 15px; font-weight: 700">Challenge name</label>
+<input id="{{ids.name}}" type="text" value="{{cname}}" onChange="{{onName}}" style="min-height: 56px; box-sizing: border-box; border-radius: 20px; border: 2px solid {{t.ink}}; background: {{t.surface}}; color: {{t.ink}}; padding: 0 18px; font-family: inherit; font-size: 17px; font-weight: 600; outline: none">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div id="len-l" style="font-size: 15px; font-weight: 700">How long?</div>
+<div role="radiogroup" aria-labelledby="len-l" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{lengths}}" as="l" hint-placeholder-count="3">
+<button type="button" role="radio" aria-checked="{{l.sel}}" onClick="{{l.pick}}" style="min-height: 76px; border: 2px solid {{l.border}}; border-radius: 20px; background: {{l.bg}}; color: {{t.ink}}; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer"><span style="font-size: 28px; line-height: 32px; font-weight: 800">{{l.n}}</span><span style="font-size: 14px; font-weight: 700">days</span></button>
+</sc-for>
+</div>
+</div>
+<div style="border-radius: 24px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 700">Invite code</span>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+<span style="font-size: 32px; line-height: 36px; font-weight: 800; letter-spacing: 0.08em">SIP-4K7Q</span>
+<button type="button" aria-label="Copy invite code" style="width: 48px; height: 48px; border: none; border-radius: 999px; background: {{t.surfaceAlt}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg></button>
+</div>
+<button type="button" style="min-height: 48px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"></path><path d="m16 6-4-4-4 4"></path><path d="M12 2v13"></path></svg>Share invite</button>
+<span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">Friends join with this code. Only your progress % is shared — never what or how much you drink.</span>
+</div>
+<button type="button" onClick="{{toDetail}}" style="margin-top: auto; min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Start {{lenSel}}-day challenge</button>
+</sc-if>
+
+<!-- JOIN -->
+<sc-if value="{{is.join}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toList}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Join a challenge</h1>
+</div>
+<div style="align-self: center; width: 150px; height: 150px; border-radius: 999px; background: {{t.mint}}; display: flex; align-items: center; justify-content: center; margin-top: 8px"><dc-import name="Sippy" state="happy" wave="{{ true }}" size="118" hint-size="118px,118px"></dc-import></div>
+<p style="margin: 0; font-size: 17px; line-height: 24px; text-align: center; font-weight: 600">Enter the code a friend shared with you.</p>
+<label for="{{ids.code}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Invite code</label>
+<input id="{{ids.code}}" type="text" autocapitalize="characters" autocomplete="off" maxlength="8" placeholder="SIP-XXXX" value="{{code}}" onChange="{{onCode}}" style="min-height: 72px; box-sizing: border-box; border-radius: 24px; border: 3px solid {{codeBorder}}; background: {{t.surface}}; color: {{t.ink}}; padding: 0 18px; font-family: inherit; font-size: 32px; font-weight: 800; letter-spacing: 0.12em; text-align: center; text-transform: uppercase; outline: none">
+<sc-if value="{{codeFound}}" hint-placeholder-val="{{ true }}">
+<div style="border-radius: 24px; background: {{t.accentTint}}; padding: 14px 16px; display: flex; align-items: center; gap: 12px">
+<span style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 14px; background: {{t.surface}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"></path></svg></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 17px; line-height: 22px; font-weight: 800">Office Sip-Off</span><span style="font-size: 14px; line-height: 18px; color: {{t.mutedOnTint}}; font-weight: 700">14 days · 5 people · started by Dina</span></span>
+</div>
+</sc-if>
+<p style="margin: 0; font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600; text-align: center">You'll share your daily progress % with this group. You can leave anytime.</p>
+<button type="button" onClick="{{joinIt}}" style="margin-top: auto; min-height: 56px; border: none; border-radius: 999px; background: {{joinBg}}; color: {{joinFg}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Join challenge</button>
+</sc-if>
+
+<!-- DETAIL -->
+<sc-if value="{{is.detail}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toList}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div style="flex: 1 1 auto; display: flex; flex-direction: column"><h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Office Sip-Off</h1><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">Day 9 of 14 · code SIP-4K7Q</span></div>
+<button type="button" aria-label="Share invite" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"></path><path d="m16 6-4-4-4 4"></path><path d="M12 2v13"></path></svg></button>
+</div>
+
+<section style="border-radius: 28px; background: {{t.accent}}; color: {{t.onAccent}}; padding: 16px; display: flex; align-items: center; gap: 14px">
+<span style="width: 64px; height: 64px; flex-shrink: 0; border-radius: 999px; background: {{t.onAccentSoftBg}}; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800">#2</span>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 20px; line-height: 26px; font-weight: 800">You're in 2nd place</span><span style="font-size: 15px; line-height: 20px; font-weight: 700; color: {{t.onAccentSoft}}">98% of your goal on average · 5 days left</span></div>
+</section>
+
+<div role="radiogroup" aria-label="Leaderboard period" style="height: 48px; border-radius: 999px; background: {{t.surfaceAlt}}; padding: 4px; box-sizing: border-box; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{periods}}" as="p" hint-placeholder-count="2">
+<button type="button" role="radio" aria-checked="{{p.sel}}" onClick="{{p.pick}}" style="border: none; border-radius: 999px; background: {{p.bg}}; color: {{p.fg}}; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">{{p.label}}</button>
+</sc-for>
+</div>
+
+<ol aria-label="Leaderboard, ranked by percent of personal goal" style="list-style: none; margin: 0; padding: 6px; border-radius: 28px; background: {{t.surface}}; display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{board}}" as="r" hint-placeholder-count="5">
+<li style="min-height: 64px; padding: 8px 10px; border-radius: 22px; background: {{r.rowBg}}; display: flex; align-items: center; gap: 10px">
+<span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 999px; background: {{r.rankBg}}; color: {{r.rankFg}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800">{{r.rank}}</span>
+<span style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 999px; background: {{r.avBg}}; color: #111312; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800">{{r.i}}</span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 16px; line-height: 20px; font-weight: 800">{{r.name}}</span>
+<span style="height: 8px; border-radius: 999px; background: {{t.track}}; display: block"><span style="width: {{r.bar}}; height: 8px; border-radius: 999px; background: {{t.accent}}; display: block"></span></span>
+</span>
+<span style="width: 58px; flex-shrink: 0; text-align: end; display: flex; flex-direction: column"><span style="font-size: 18px; line-height: 22px; font-weight: 800">{{r.pct}}</span><span style="font-size: 14px; line-height: 16px; color: {{t.muted}}; font-weight: 600">of goal</span></span>
+</li>
+</sc-for>
+</ol>
+
+<div style="border-radius: 24px; background: {{t.sunTint}}; padding: 12px 14px; display: flex; align-items: center; gap: 12px">
+<div style="flex-shrink: 0"><dc-import name="Sippy" state="happy" size="52" hint-size="52px,52px"></dc-import></div>
+<p style="margin: 0; font-size: 15px; line-height: 21px; font-weight: 700">Everyone's goal is different — we compare progress, not liters.</p>
+</div>
+</sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"screen":{"editor":"enum","options":["list","create","join","detail"],"default":"list"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const init = this.props.screen ?? 'list';
+    const screen = st.screen ?? init;
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', mutedOnTint: '#C3CAC8', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', onAccentSoft: 'rgba(10,31,29,0.8)', onAccentSoftBg: 'rgba(10,31,29,0.12)', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', track: '#3A3F3D', line: '#3A3F3D' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', mutedOnTint: '#4A504F', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', onAccentSoft: 'rgba(255,255,255,0.92)', onAccentSoftBg: 'rgba(255,255,255,0.18)', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', track: '#E2DDD3', line: '#D6D1C7' };
+    const av = ['#BFEAE3', '#FFD27A', '#FF9E87', '#D7F2EE', '#FFE9C2', '#E3F5F1'];
+    const go = (s) => () => this.setState({ screen: s });
+
+    const active = [
+      { name: 'Office Sip-Off', meta: 'Day 9 of 14', rank: "You're #2", pct: '64%', progressAria: '9 of 14 days done', bg: t.mint, people: [{ i: 'D' }, { i: 'R' }, { i: 'B' }, { i: 'S' }, { i: 'A' }] },
+      { name: 'Family Ramadan Prep', meta: 'Day 3 of 30', rank: "You're #1", pct: '10%', progressAria: '3 of 30 days done', bg: t.sunTint, people: [{ i: 'R' }, { i: 'M' }, { i: 'D' }, { i: 'A' }] }
+    ].map((c) => ({ ...c, people: c.people.map((p, k) => ({ ...p, bg: av[k % av.length] })) }));
+    const past = [
+      { name: 'Weekend Warriors', meta: '7 days · ended Sep 28', result: '#3 of 5', well: t.surfaceAlt },
+      { name: 'September Splash', meta: '30 days · ended Sep 30', result: '#1 of 4', well: '#FFD27A' }
+    ];
+
+    const lenSel = st.len ?? 14;
+    const lengths = [7, 14, 30].map((n) => ({ n, sel: lenSel === n, border: lenSel === n ? t.accent : 'transparent', bg: lenSel === n ? t.accentTint : t.surface, pick: () => this.setState({ len: n }) }));
+    const cname = st.cname ?? 'Office Sip-Off';
+
+    const code = (st.code ?? (init === 'join' ? 'SIP-4K7Q' : '')).toUpperCase();
+    const codeFound = code.replace(/[^A-Z0-9]/g, '').length >= 7;
+
+    const period = st.period ?? 'overall';
+    const periods = [['overall', 'Whole challenge'], ['today', 'Today']].map(([id, label]) => ({ label, sel: period === id, bg: period === id ? t.surface : 'transparent', fg: period === id ? t.ink : t.muted, pick: () => this.setState({ period: id }) }));
+    const P = period === 'today'
+      ? [['Rendy (you)', 'R', 112, true], ['Dina', 'D', 105], ['Sari', 'S', 96], ['Budi', 'B', 80], ['Arif', 'A', 54]]
+      : [['Dina', 'D', 104], ['Rendy (you)', 'R', 98, true], ['Budi', 'B', 91], ['Sari', 'S', 87], ['Arif', 'A', 62]];
+    const medal = ['#FFD27A', dark ? '#3A3F3D' : '#E2DDD3', '#FF9E87'];
+    const board = P.map(([name, i, pct, me], k) => ({
+      rank: k + 1, name, i, pct: pct + '%', bar: Math.min(100, pct) + '%',
+      rankBg: k < 3 ? medal[k] : 'transparent', rankFg: k < 3 ? '#111312' : t.muted,
+      avBg: av[(k + 1) % av.length],
+      rowBg: me ? t.accentTint : 'transparent'
+    }));
+    if (!this._u) this._u = Math.random().toString(36).slice(2, 7);
+
+    return {
+      t, active, past, lengths, lenSel, cname, code, codeFound, periods, board,
+      is: { list: screen === 'list', create: screen === 'create', join: screen === 'join', detail: screen === 'detail' },
+      ids: { name: 'ch-name-' + this._u, code: 'ch-code-' + this._u },
+      toList: go('list'), toCreate: go('create'), toJoin: go('join'), toDetail: go('detail'),
+      onName: (e) => this.setState({ cname: e.target.value }),
+      onCode: (e) => this.setState({ code: e.target.value }),
+      codeBorder: codeFound ? t.accent : t.line,
+      joinBg: codeFound ? t.ink : t.surfaceAlt, joinFg: codeFound ? t.onInk : t.muted,
+      joinIt: () => { if (codeFound) this.setState({ screen: 'detail' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Drink photo placeholder</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: {{w}}; height: {{h}}; overflow: hidden; filter: {{filter}}">
+<svg width="100%" height="100%" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Photo of an iced coffee with milk and palm sugar">
+<defs>
+<linearGradient id="{{ids.bg}}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E211A"></stop><stop offset="1" stop-color="#5E4130"></stop></linearGradient>
+<linearGradient id="{{ids.table}}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B98A5F"></stop><stop offset="1" stop-color="#8E6544"></stop></linearGradient>
+<clipPath id="{{ids.clip}}"><path d="M92 92 L208 92 L194 328 Q193 338 183 338 L117 338 Q107 338 106 328 Z"></path></clipPath>
+</defs>
+<rect x="0" y="0" width="300" height="400" fill="{{refs.bg}}"></rect>
+<circle cx="48" cy="70" r="34" fill="#F2B85C" opacity="0.18"></circle>
+<circle cx="250" cy="48" r="22" fill="#FFE9C2" opacity="0.16"></circle>
+<circle cx="230" cy="150" r="40" fill="#F2B85C" opacity="0.10"></circle>
+<rect x="0" y="300" width="300" height="100" fill="{{refs.table}}"></rect>
+<rect x="0" y="300" width="300" height="4" fill="#D9AE85"></rect>
+<ellipse cx="150" cy="342" rx="70" ry="9" fill="#000000" opacity="0.25"></ellipse>
+<g clip-path="{{refs.clip}}">
+<rect x="80" y="80" width="140" height="270" fill="#E9D8C2" opacity="0.25"></rect>
+<rect x="80" y="282" width="140" height="70" fill="#5A2E12"></rect>
+<path d="M80 205 Q110 196 140 206 T200 204 L220 204 L220 284 L80 284 Z" fill="#8B5A3C"></path>
+<path d="M80 130 Q115 122 150 132 T220 128 L220 210 Q190 200 160 210 T80 206 Z" fill="#E8D3B8"></path>
+<path d="M120 160 Q150 175 135 195 Q160 185 175 200" fill="none" stroke="#B7865E" stroke-width="5" stroke-linecap="round" opacity="0.7"></path>
+<rect x="104" y="100" width="34" height="30" rx="7" fill="#FFFFFF" opacity="0.55" transform="rotate(-12 121 115)"></rect>
+<rect x="148" y="96" width="36" height="32" rx="7" fill="#FFFFFF" opacity="0.5" transform="rotate(10 166 112)"></rect>
+<rect x="126" y="128" width="30" height="26" rx="6" fill="#FFFFFF" opacity="0.45"></rect>
+</g>
+<rect x="170" y="20" width="10" height="150" rx="5" fill="#0B7F75" transform="rotate(14 175 95)"></rect>
+<path d="M92 92 L208 92 L194 328 Q193 338 183 338 L117 338 Q107 338 106 328 Z" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.7"></path>
+<path d="M104 104 L114 318" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.35"></path>
+</svg>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"width":{"editor":"int","default":300},"height":{"editor":"int","default":400},"blur":{"editor":"int","min":0,"max":30,"default":0},"$preview":{"width":300,"height":400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    if (!this._u) this._u = Math.random().toString(36).slice(2, 8);
+    const u = this._u;
+    const ids = { bg: 'dp-bg-' + u, table: 'dp-tb-' + u, clip: 'dp-cl-' + u };
+    const b = Number(this.props.blur ?? 0) || 0;
+    return {
+      w: (Number(this.props.width ?? 300) || 300) + 'px',
+      h: (Number(this.props.height ?? 400) || 400) + 'px',
+      filter: b ? 'blur(' + b + 'px) brightness(0.8)' : 'none',
+      ids,
+      refs: { bg: 'url(#' + ids.bg + ')', table: 'url(#' + ids.table + ')', clip: 'url(#' + ids.clip + ')' }
+    };
+  }
+}
+</script>
+</body>
+</html>

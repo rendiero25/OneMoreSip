@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sippy mascot</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: {{box}}; height: {{box}}; display: flex; align-items: center; justify-content: center">
+<svg width="{{size}}" height="{{size}}" viewBox="-4 0 134 134" role="img" aria-label="{{label}}">
+<defs>
+<linearGradient id="{{gid}}" x1="0.35" y1="0" x2="0.65" y2="1">
+<stop offset="0" stop-color="#0B7F75"></stop>
+<stop offset="1" stop-color="#4FD1C1"></stop>
+</linearGradient>
+</defs>
+<sc-if value="{{is.wave}}" hint-placeholder-val="{{ false }}">
+<path d="M98 92 Q112 84 114 70" fill="none" stroke="{{gfill}}" stroke-width="9" stroke-linecap="round"></path>
+<circle cx="115" cy="64" r="8" fill="{{gfill}}"></circle>
+<path d="M104 46 Q108 40 114 41" fill="none" stroke="#4FD1C1" stroke-width="3" stroke-linecap="round"></path>
+<path d="M121 48 Q126 52 125 58" fill="none" stroke="#4FD1C1" stroke-width="3" stroke-linecap="round"></path>
+</sc-if>
+<path d="M60 8 C72 26 104 58 104 86 A44 44 0 0 1 16 86 C16 58 48 26 60 8 Z" fill="{{gfill}}"></path>
+<ellipse cx="36" cy="72" rx="6" ry="12" transform="rotate(25 36 72)" fill="#FFFFFF" opacity="0.75"></ellipse>
+<circle cx="43" cy="52" r="3" fill="#FFFFFF" opacity="0.75"></circle>
+
+<sc-if value="{{is.fresh}}" hint-placeholder-val="{{ true }}">
+<circle cx="47" cy="86" r="4.5" fill="#0E2A27"></circle>
+<circle cx="73" cy="86" r="4.5" fill="#0E2A27"></circle>
+<path d="M52 99 Q60 106 68 99" fill="none" stroke="#0E2A27" stroke-width="3.2" stroke-linecap="round"></path>
+<path d="M100 20 L102 27 L109 29 L102 31 L100 38 L98 31 L91 29 L98 27 Z" fill="#4FD1C1"></path>
+</sc-if>
+
+<sc-if value="{{is.happy}}" hint-placeholder-val="{{ false }}">
+<path d="M42 88 Q47 81 52 88" fill="none" stroke="#0E2A27" stroke-width="3.2" stroke-linecap="round"></path>
+<path d="M68 88 Q73 81 78 88" fill="none" stroke="#0E2A27" stroke-width="3.2" stroke-linecap="round"></path>
+<path d="M50 98 Q60 110 70 98" fill="none" stroke="#0E2A27" stroke-width="3.4" stroke-linecap="round"></path>
+<circle cx="36" cy="98" r="5" fill="#FF8F7A" opacity="0.5"></circle>
+<circle cx="84" cy="98" r="5" fill="#FF8F7A" opacity="0.5"></circle>
+</sc-if>
+
+<sc-if value="{{is.thirsty}}" hint-placeholder-val="{{ false }}">
+<path d="M40 77 L51 80" fill="none" stroke="#0E2A27" stroke-width="3" stroke-linecap="round"></path>
+<path d="M80 77 L69 80" fill="none" stroke="#0E2A27" stroke-width="3" stroke-linecap="round"></path>
+<circle cx="47" cy="88" r="4" fill="#0E2A27"></circle>
+<circle cx="73" cy="88" r="4" fill="#0E2A27"></circle>
+<ellipse cx="60" cy="103" rx="4.5" ry="3.5" fill="#0E2A27"></ellipse>
+<path d="M98 34 C98 34 92 42 92 46 A6 6 0 0 0 104 46 C104 42 98 34 98 34 Z" fill="none" stroke="#4FD1C1" stroke-width="2.5"></path>
+</sc-if>
+
+<sc-if value="{{is.tired}}" hint-placeholder-val="{{ false }}">
+<path d="M42 87 L52 87 A5 5 0 0 1 42 87 Z" fill="#0E2A27"></path>
+<path d="M68 87 L78 87 A5 5 0 0 1 68 87 Z" fill="#0E2A27"></path>
+<path d="M41 86 L53 86" stroke="#0E2A27" stroke-width="2.5" stroke-linecap="round"></path>
+<path d="M67 86 L79 86" stroke="#0E2A27" stroke-width="2.5" stroke-linecap="round"></path>
+<path d="M54 102 L66 102" stroke="#0E2A27" stroke-width="3" stroke-linecap="round"></path>
+</sc-if>
+
+<sc-if value="{{is.sleeping}}" hint-placeholder-val="{{ false }}">
+<path d="M42 86 Q47 91 52 86" fill="none" stroke="#0E2A27" stroke-width="3" stroke-linecap="round"></path>
+<path d="M68 86 Q73 91 78 86" fill="none" stroke="#0E2A27" stroke-width="3" stroke-linecap="round"></path>
+<circle cx="60" cy="102" r="2.8" fill="#0E2A27"></circle>
+<path d="M92 22 L102 22 L92 32 L102 32" fill="none" stroke="#4FD1C1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M108 8 L115 8 L108 15 L115 15" fill="none" stroke="#4FD1C1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</sc-if>
+
+<sc-if value="{{is.celebrating}}" hint-placeholder-val="{{ false }}">
+<path d="M42 87 Q47 80 52 87" fill="none" stroke="#0E2A27" stroke-width="3.2" stroke-linecap="round"></path>
+<path d="M68 87 Q73 80 78 87" fill="none" stroke="#0E2A27" stroke-width="3.2" stroke-linecap="round"></path>
+<path d="M49 96 Q60 114 71 96 Z" fill="#0E2A27"></path>
+<rect x="10" y="22" width="7" height="12" rx="2" transform="rotate(-25 13 28)" fill="#F2B85C"></rect>
+<rect x="98" y="16" width="7" height="12" rx="2" transform="rotate(30 101 22)" fill="#FF8F7A"></rect>
+<circle cx="24" cy="46" r="3.5" fill="#4FD1C1"></circle>
+<circle cx="112" cy="44" r="3.5" fill="#F2B85C"></circle>
+<rect x="84" y="2" width="6" height="10" rx="2" transform="rotate(-15 87 7)" fill="#0B7F75"></rect>
+</sc-if>
+
+<sc-if value="{{is.waiting}}" hint-placeholder-val="{{ false }}">
+<circle cx="48" cy="84" r="4" fill="#0E2A27"></circle>
+<circle cx="74" cy="84" r="4" fill="#0E2A27"></circle>
+<path d="M54 101 Q60 104 66 101" fill="none" stroke="#0E2A27" stroke-width="3" stroke-linecap="round"></path>
+<path d="M104 14 A13 13 0 1 0 114 36 A10 10 0 1 1 104 14 Z" fill="#F2B85C"></path>
+</sc-if>
+</svg>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"state":{"editor":"enum","options":["fresh","happy","thirsty","tired","sleeping","celebrating","waiting"],"default":"fresh"},"size":{"editor":"int","min":24,"max":400,"default":200},"wave":{"editor":"boolean","default":false},"$preview":{"width":240,"height":240}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.props.state ?? 'fresh';
+    const size = Number(this.props.size ?? 200);
+    const wave = this.props.wave === true || this.props.wave === 'true';
+    const names = ['fresh','happy','thirsty','tired','sleeping','celebrating','waiting'];
+    const is = { wave };
+    names.forEach((n) => { is[n] = s === n; });
+    const box = this.props.size ? size + 'px' : '240px';
+    if (!this._gid) this._gid = 'sippy-' + Math.random().toString(36).slice(2, 10);
+    return { is, size, box, label: 'Sippy, ' + s, gid: this._gid, gfill: 'url(#' + this._gid + ')' };
+  }
+}
+</script>
+</body>
+</html>

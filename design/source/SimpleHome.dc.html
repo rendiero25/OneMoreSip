@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Simple Mode home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 52px 20px 32px; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; overflow: hidden">
+
+<div style="display: flex; justify-content: flex-end">
+<a href="#settings" style="min-height: 48px; padding: 0 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; color: {{t.ink}}; font-size: 20px; font-weight: 700; text-decoration: none"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>Settings</a>
+</div>
+
+<div style="margin-top: 8px; display: flex; align-items: center; gap: 12px; min-height: 104px">
+<div style="flex-shrink: 0"><dc-import name="Sippy" state="{{sippy}}" size="104" hint-size="104px,104px"></dc-import></div>
+<sc-if value="{{notSaved}}" hint-placeholder-val="{{ true }}">
+<h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800">Good morning, Grandma!</h1>
+</sc-if>
+<sc-if value="{{saved}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="flex-grow: 1; border-radius: 24px; background: {{t.okBg}}; color: {{t.okFg}}; border: {{t.cardBorder}}; padding: 14px 16px; display: flex; align-items: center; gap: 10px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12 3 3 6-6"></path></svg>
+<span style="font-size: 26px; line-height: 32px; font-weight: 800">Saved! {{count}} of 8 glasses</span>
+</div>
+</sc-if>
+</div>
+
+<section aria-label="Today" style="margin-top: 16px; border-radius: 28px; background: {{t.mint}}; border: {{t.cardBorder}}; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<svg width="84" height="128" viewBox="0 0 80 124" role="img" aria-label="{{glassLabel}}">
+<defs><clipPath id="{{cid}}"><path d="M8 6 L72 6 L65 112 Q64 120 56 120 L24 120 Q16 120 15 112 Z"></path></clipPath></defs>
+<rect x="0" y="0" width="80" height="124" fill="{{t.glassBg}}" clip-path="{{cref}}"></rect>
+<rect x="0" y="{{glassY}}" width="80" height="130" fill="{{t.water}}" clip-path="{{cref}}"></rect>
+<path d="M0 0 Q10 -6 20 0 T40 0 T60 0 T80 0 L80 7 L0 7 Z" transform="{{waveT}}" fill="{{t.waterSoft}}" clip-path="{{cref}}"></path>
+<path d="M8 6 L72 6 L65 112 Q64 120 56 120 L24 120 Q16 120 15 112 Z" fill="none" stroke="{{t.ink}}" stroke-width="4" stroke-linejoin="round"></path>
+</svg>
+<div aria-live="polite" style="display: flex; flex-direction: column; align-items: center">
+<span style="font-size: 88px; line-height: 92px; font-weight: 800; letter-spacing: -0.02em">{{count}} of 8</span>
+<span style="font-size: 26px; line-height: 32px; font-weight: 700">glasses</span>
+</div>
+</section>
+
+<div style="margin-top: auto; padding-top: 16px; display: flex; flex-direction: column; gap: 12px">
+<button type="button" onClick="{{drink}}" style="min-height: 128px; border: {{t.btnBorder}}; border-radius: 999px; background: {{t.btn}}; color: {{t.onBtn}}; font-family: inherit; font-size: 26px; line-height: 32px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 14px; cursor: pointer; box-shadow: 0 12px 28px {{t.btnShadow}}">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14l-1.6 16.2A2 2 0 0 1 15.4 21H8.6a2 2 0 0 1-2-1.8L5 3z"></path><path d="M6 9h12"></path></svg>
+I drank 1 glass</button>
+<button type="button" onClick="{{undo}}" style="min-height: 80px; border: 3px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 26px; line-height: 32px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"></path><path d="M4 9h11a5 5 0 0 1 0 10h-3"></path></svg>
+Undo</button>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"contrast":{"editor":"enum","options":["normal","high"],"default":"normal"},"count":{"editor":"int","min":0,"max":12,"default":3},"saved":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const hc = this.props.contrast === 'high';
+    const propSaved = this.props.saved === true || this.props.saved === 'true';
+    const count = st.count ?? (Number(this.props.count ?? 3));
+    const saved = st.saved ?? propSaved;
+    const T = {
+      light: { bg: '#F7F4EE', ink: '#111312', mint: '#BFEAE3', okBg: '#D7F2EE', okFg: '#075E56', btn: '#0B7F75', onBtn: '#FFFFFF', btnShadow: 'rgba(11,127,117,0.35)', btnBorder: 'none', cardBorder: 'none', glassBg: '#FFFFFF', water: '#0B7F75', waterSoft: '#4FD1C1' },
+      dark: { bg: '#121413', ink: '#ECEEEC', mint: '#1F4A45', okBg: 'rgba(79,209,193,0.16)', okFg: '#4FD1C1', btn: '#4FD1C1', onBtn: '#0A1F1D', btnShadow: 'rgba(0,0,0,0.5)', btnBorder: 'none', cardBorder: 'none', glassBg: '#121413', water: '#4FD1C1', waterSoft: '#9BE8DE' },
+      hcLight: { bg: '#FFFFFF', ink: '#000000', mint: '#FFFFFF', okBg: '#FFFFFF', okFg: '#000000', btn: '#00524B', onBtn: '#FFFFFF', btnShadow: 'transparent', btnBorder: '3px solid #000000', cardBorder: '3px solid #000000', glassBg: '#FFFFFF', water: '#00524B', waterSoft: '#00524B' },
+      hcDark: { bg: '#000000', ink: '#FFFFFF', mint: '#000000', okBg: '#000000', okFg: '#FFFFFF', btn: '#7FF0E2', onBtn: '#000000', btnShadow: 'transparent', btnBorder: '3px solid #FFFFFF', cardBorder: '3px solid #FFFFFF', glassBg: '#000000', water: '#7FF0E2', waterSoft: '#7FF0E2' }
+    };
+    const t = hc ? (dark ? T.hcDark : T.hcLight) : (dark ? T.dark : T.light);
+    const pct = Math.max(0, Math.min(1, count / 8));
+    const glassY = 6 + (1 - pct) * 114;
+    if (!this._cid) this._cid = 'sglass-' + Math.random().toString(36).slice(2, 10);
+    return {
+      t, count, saved, notSaved: !saved,
+      sippy: saved ? 'happy' : 'fresh',
+      glassY: glassY.toFixed(1),
+      waveT: 'translate(0 ' + glassY.toFixed(1) + ')',
+      glassLabel: count + ' of 8 glasses',
+      cid: this._cid, cref: 'url(#' + this._cid + ')',
+      drink: () => this.setState({ count: Math.min(12, count + 1), saved: true }),
+      undo: () => this.setState({ count: Math.max(0, count - 1), saved: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

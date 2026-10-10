@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Weekly insight</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 1260px; box-sizing: border-box; padding: 52px 20px 32px; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; gap: 14px; overflow: hidden">
+
+<header style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div style="display: flex; flex-direction: column">
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Weekly insight</h1>
+<span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">3–9 Oct</span>
+</div>
+</header>
+
+<section aria-labelledby="week-h" style="border-radius: 28px; background: {{t.accent}}; color: {{t.onAccent}}; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="width: 76px; height: 76px; flex-shrink: 0; border-radius: 999px; background: {{t.onAccentSoftBg}}; display: flex; align-items: center; justify-content: center"><dc-import name="Sippy" state="celebrating" size="66" hint-size="66px,66px"></dc-import></span>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; line-height: 20px; font-weight: 700; color: {{t.onAccentSoft}}">Your week</span>
+<h2 id="week-h" style="margin: 0; font-size: 30px; line-height: 34px; font-weight: 800; letter-spacing: -0.01em">5 of 7 days on target</h2>
+</div>
+</div>
+<div role="list" aria-label="Days on target" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+<div role="listitem" aria-label="{{d.aria}}" style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+<span style="width: 34px; height: 34px; box-sizing: border-box; border-radius: 999px; background: {{d.dotBg}}; border: 2px solid {{d.dotBorder}}; color: {{d.dotFg}}; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{d.met}}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+<sc-if value="{{d.missed}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg></sc-if>
+</span>
+<span style="font-size: 14px; line-height: 18px; font-weight: 700">{{d.short}}</span>
+</div>
+</sc-for>
+</div>
+<div style="font-size: 15px; line-height: 20px; font-weight: 700; color: {{t.onAccentSoft}}">Average 2,236 ml a day · goal 2,300 ml</div>
+</section>
+
+<section aria-labelledby="chart-h" style="border-radius: 28px; background: {{t.surface}}; padding: 18px 18px 14px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 id="chart-h" style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 800">Daily intake</h2>
+<div style="display: flex; gap: 10px; font-size: 14px; font-weight: 600; color: {{t.muted}}">
+<span style="display: inline-flex; align-items: center; gap: 4px"><span style="width: 12px; height: 12px; border-radius: 4px; background: {{t.accent}}; display: block"></span>On target</span>
+<span style="display: inline-flex; align-items: center; gap: 4px"><span style="width: 12px; height: 12px; box-sizing: border-box; border-radius: 4px; background: {{t.missFill}}; border: 2px dashed {{t.missLine}}; display: block"></span>Below</span>
+</div>
+</div>
+<div aria-live="polite" style="min-height: 44px; border-radius: 16px; background: {{t.surfaceAlt}}; padding: 8px 12px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; font-size: 15px; line-height: 20px; font-weight: 700">{{readout}}</div>
+<div style="position: relative; height: 150px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; align-items: end">
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: {{goalY}}; border-top: 2px dashed {{t.goalLine}}; z-index: 1"></div>
+<span aria-hidden="true" style="position: absolute; right: 0; bottom: {{goalLabelY}}; padding: 1px 6px; border-radius: 6px; background: {{t.surface}}; font-size: 14px; font-weight: 700; color: {{t.muted}}; z-index: 2">Goal</span>
+<sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+<button type="button" aria-label="{{d.aria}}" aria-pressed="{{d.sel}}" onClick="{{d.pick}}" style="height: 150px; border: none; background: transparent; padding: 0; display: flex; align-items: flex-end; justify-content: center; cursor: pointer">
+<span style="width: 100%; max-width: 32px; height: {{d.h}}; box-sizing: border-box; border-radius: 10px 10px 4px 4px; background: {{d.barBg}}; border: {{d.barBorder}}; outline: {{d.outline}}; outline-offset: 2px; display: block"></span>
+</button>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="7"><span style="text-align: center; font-size: 14px; font-weight: {{d.labelWeight}}; color: {{d.labelColor}}">{{d.short}}</span></sc-for>
+</div>
+</section>
+
+<h2 style="margin: 6px 0 0; font-size: 20px; line-height: 26px; font-weight: 800">What Sippy noticed</h2>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<article style="border-radius: 24px; background: {{t.surface}}; padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start">
+<span style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 14px; background: {{t.sunTint}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 2px"><h3 style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">You often forget between 1–3 pm</h3><p style="margin: 0; font-size: 15px; line-height: 20px; color: {{t.muted}}">Your longest gaps were right after lunch.</p></div>
+</article>
+<article style="border-radius: 24px; background: {{t.surface}}; padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start">
+<span style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 14px; background: {{t.coralTint}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M4 8l8-4 8 4v8l-8 4-8-4z"></path><path d="M4 8l8 4 8-4M12 12v8"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 2px"><h3 style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">Most of your sugar came from iced tea</h3><p style="margin: 0; font-size: 15px; line-height: 20px; color: {{t.muted}}">Es teh manis was your sweetest habit this week.</p></div>
+</article>
+<article style="border-radius: 24px; background: {{t.surface}}; padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start">
+<span style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 14px; background: {{t.mint}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path><path d="m9 15 2 2 4-4"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 2px"><h3 style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">Weekends are your best days</h3><p style="margin: 0; font-size: 15px; line-height: 20px; color: {{t.muted}}">You beat your goal on both Saturday and Sunday.</p></div>
+</article>
+</div>
+
+<section aria-labelledby="tip-h" style="border-radius: 28px; background: {{t.accentTint}}; padding: 16px; display: flex; align-items: flex-end; gap: 12px">
+<div style="flex-shrink: 0"><dc-import name="Sippy" state="happy" size="64" hint-size="64px,64px"></dc-import></div>
+<div style="border-radius: 20px 20px 20px 6px; background: {{t.surface}}; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px">
+<h2 id="tip-h" style="margin: 0; font-size: 15px; line-height: 20px; font-weight: 800; color: {{t.accentInk}}">Tip for next week</h2>
+<p style="margin: 0; font-size: 17px; line-height: 24px">Keep a bottle on your desk from 1 pm — seeing it is the easiest reminder.</p>
+</div>
+</section>
+
+<p style="margin: 2px 0 0; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600; text-align: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Shared with no one. Made only from your own logs.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":390,"height":1260}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', accent: '#4FD1C1', onAccent: '#0A1F1D', onAccentSoft: 'rgba(10,31,29,0.8)', onAccentSoftBg: 'rgba(10,31,29,0.12)', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', missFill: 'rgba(242,184,92,0.18)', missLine: '#F2B85C', goalLine: '#ECEEEC' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', accent: '#0B7F75', onAccent: '#FFFFFF', onAccentSoft: 'rgba(255,255,255,0.92)', onAccentSoftBg: 'rgba(255,255,255,0.18)', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', missFill: '#FFE9C2', missLine: '#C77700', goalLine: '#111312' };
+    const goal = 2300, max = 2800, H = 150;
+    const raw = [['Mon', 'M', 2300], ['Tue', 'T', 2450], ['Wed', 'W', 1600], ['Thu', 'T', 2350], ['Fri', 'F', 1850], ['Sat', 'S', 2600], ['Sun', 'S', 2500]];
+    const sel = st.sel ?? 2;
+    const fmt = (n) => n.toLocaleString('en-US');
+    const days = raw.map(([name, short, ml], i) => {
+      const met = ml >= goal;
+      const isSel = sel === i;
+      return {
+        short, met, missed: !met, sel: isSel,
+        aria: name + ': ' + fmt(ml) + ' ml, ' + (met ? 'on target' : 'below goal'),
+        h: Math.round(ml / max * H) + 'px',
+        barBg: met ? t.accent : t.missFill,
+        barBorder: met ? 'none' : '2px dashed ' + t.missLine,
+        outline: isSel ? '3px solid ' + t.ink : 'none',
+        labelWeight: isSel ? '800' : '600',
+        labelColor: isSel ? t.ink : t.muted,
+        dotBg: met ? t.onAccent : 'transparent',
+        dotBorder: t.onAccent,
+        dotFg: met ? t.accent : t.onAccent,
+        pick: () => this.setState({ sel: i })
+      };
+    });
+    const [dn, , dml] = raw[sel];
+    const diff = dml - goal;
+    return {
+      t, days,
+      readout: dn + ' · ' + fmt(dml) + ' ml · ' + (diff >= 0 ? 'on target (+' + fmt(diff) + ')' : fmt(-diff) + ' ml below goal'),
+      goalY: Math.round(goal / max * H) + 'px',
+      goalLabelY: (Math.round(goal / max * H) + 4) + 'px'
+    };
+  }
+}
+</script>
+</body>
+</html>

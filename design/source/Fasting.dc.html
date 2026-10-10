@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fasting Mode</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: {{h}}; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; overflow: hidden">
+<div style="position: absolute; inset: 0; overflow-y: auto; box-sizing: border-box; padding: 52px 20px {{padBottom}}; display: flex; flex-direction: column; gap: 14px">
+
+<!-- SETUP -->
+<sc-if value="{{is.setup}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Fasting Mode</h1>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 10px"><div style="flex-shrink: 0"><dc-import name="Sippy" state="waiting" size="64" hint-size="64px,64px"></dc-import></div><div style="background: {{t.accentTint}}; border-radius: 20px 20px 20px 6px; padding: 10px 14px; font-size: 17px; line-height: 24px">I'll stay quiet while you fast and help you catch up after.</div></div>
+
+<div id="type-l" style="font-size: 15px; font-weight: 800; margin-top: 4px">What kind of fast?</div>
+<div role="radiogroup" aria-labelledby="type-l" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{types}}" as="ty" hint-placeholder-count="5">
+<button type="button" role="radio" aria-checked="{{ty.sel}}" onClick="{{ty.pick}}" style="grid-column: {{ty.span}}; min-height: 92px; padding: 12px; border-radius: 24px; border: 2px solid {{ty.border}}; background: {{ty.bg}}; color: {{t.ink}}; font-family: inherit; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: start; cursor: pointer">
+<span style="width: 36px; height: 36px; border-radius: 12px; background: {{ty.well}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ty.icon}}"></path></svg></span>
+<span style="font-size: 16px; line-height: 20px; font-weight: 800">{{ty.name}}</span>
+<span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{ty.sub}}</span>
+</button>
+</sc-for>
+</div>
+
+<div style="border-radius: 24px; background: {{t.surface}}; padding: 6px 16px; display: flex; flex-direction: column">
+<div style="min-height: 64px; display: flex; align-items: center; gap: 12px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column"><span style="font-size: 14px; color: {{t.muted}}; font-weight: 700">Location</span><span style="font-size: 16px; font-weight: 800">Jakarta, Indonesia</span></span>
+<button type="button" style="min-height: 48px; padding: 0 8px; border: none; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Change</button>
+</div>
+<div style="border-top: 1px solid {{t.divider}}; padding: 12px 0; display: flex; flex-direction: column; gap: 8px">
+<label for="{{ids.method}}" style="font-size: 14px; color: {{t.muted}}; font-weight: 700">Prayer time calculation</label>
+<div style="position: relative">
+<select id="{{ids.method}}" style="width: 100%; min-height: 52px; appearance: none; -webkit-appearance: none; border-radius: 16px; border: 2px solid {{t.fieldBorder}}; background: {{t.surfaceAlt}}; color: {{t.ink}}; padding: 0 44px 0 14px; font-family: inherit; font-size: 15px; font-weight: 700">
+<option>Auto · Kemenag RI (Indonesia)</option>
+<option>Muslim World League</option>
+<option>Umm al-Qura (Makkah)</option>
+<option>Egyptian General Authority</option>
+<option>ISNA (North America)</option>
+</select>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; right: 14px; top: 17px; pointer-events: none"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+</div>
+
+<sc-if value="{{showSplit}}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="split-h" style="border-radius: 28px; background: {{t.nightBg}}; color: {{t.nightFg}}; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 id="split-h" style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">Your 2-4-2 plan</h2><span style="font-size: 14px; font-weight: 700; opacity: 0.85">8 glasses tonight</span></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{split}}" as="sp" hint-placeholder-count="3">
+<div style="border-radius: 18px; background: {{sp.bg}}; color: #111312; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center">
+<span style="font-size: 28px; line-height: 30px; font-weight: 800">{{sp.n}}</span>
+<span style="display: flex; gap: 2px" aria-hidden="true"><sc-for list="{{sp.cups}}" as="cu" hint-placeholder-count="2"><svg width="12" height="14" viewBox="0 0 24 28" fill="#0B7F75"><path d="M3 2h18l-2 22a3 3 0 0 1-3 2.7H8A3 3 0 0 1 5 24z"></path></svg></sc-for></span>
+<span style="font-size: 14px; line-height: 17px; font-weight: 700">{{sp.when}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+</sc-if>
+<sc-if value="{{showIF}}" hint-placeholder-val="{{ false }}">
+<section style="border-radius: 28px; background: {{t.mint}}; padding: 16px; display: flex; gap: 12px; align-items: flex-start">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; line-height: 22px; font-weight: 800">Water is fine during 16:8</span><span style="font-size: 15px; line-height: 20px; font-weight: 600; color: {{t.mutedOnTint}}">Reminders keep running. Eating window 12:00–20:00.</span></div>
+</section>
+</sc-if>
+
+<button type="button" style="margin-top: auto; min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Turn on Fasting Mode</button>
+</sc-if>
+
+<!-- ACTIVE (fasting hours) / IFTAR -->
+<sc-if value="{{is.home}}" hint-placeholder-val="{{ false }}">
+<header style="display: flex; align-items: center; gap: 12px">
+<div style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">Ramadan · day 12</span><h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">{{greet}}</h1></div>
+<span style="width: 48px; height: 48px; border-radius: 999px; background: {{t.sunTint}}; display: flex; align-items: center; justify-content: center; font-weight: 800">R</span>
+</header>
+
+<sc-if value="{{isActive}}" hint-placeholder-val="{{ true }}">
+<section style="border-radius: 28px; background: {{t.nightBg}}; color: {{t.nightFg}}; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="width: 92px; height: 92px; flex-shrink: 0; border-radius: 999px; background: rgba(255,255,255,0.10); display: flex; align-items: center; justify-content: center"><dc-import name="Sippy" state="waiting" size="80" hint-size="80px,80px"></dc-import></span>
+<div style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 700; opacity: 0.85">Iftar in</span><span style="font-size: 48px; line-height: 52px; font-weight: 800; letter-spacing: -0.02em">3h 12m</span><span style="font-size: 15px; font-weight: 700; opacity: 0.85">Maghrib 17:54</span></div>
+</div>
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,0.12); font-size: 15px; font-weight: 800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.7 3A6 6 0 0 1 18 8c0 3 .5 5 1.2 6.4M17 17H3s3-2 3-9c0-.6.1-1.2.3-1.8"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path><path d="M2 2l20 20"></path></svg>Reminders paused while you fast</span>
+</section>
+</sc-if>
+
+<sc-if value="{{isIftar}}" hint-placeholder-val="{{ false }}">
+<section role="status" style="border-radius: 28px; background: #FFD27A; color: #111312; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="width: 92px; height: 92px; flex-shrink: 0; border-radius: 999px; background: rgba(255,255,255,0.45); display: flex; align-items: center; justify-content: center"><dc-import name="Sippy" state="celebrating" size="80" hint-size="80px,80px"></dc-import></span>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 24px; line-height: 30px; font-weight: 800">Time to break your fast!</span><span style="font-size: 17px; line-height: 22px; font-weight: 700">Start with 2 glasses.</span></div>
+</div>
+<button type="button" onClick="{{drinkTwo}}" style="min-height: 64px; border: none; border-radius: 999px; background: #111312; color: #FFFFFF; font-family: inherit; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14l-1.6 16.2A2 2 0 0 1 15.4 21H8.6a2 2 0 0 1-2-1.8L5 3z"></path><path d="M6 9h12"></path></svg>{{iftarBtn}}</button>
+</section>
+</sc-if>
+
+<section aria-labelledby="tl-h" style="border-radius: 28px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 6px"><h2 id="tl-h" style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">Tonight's window</h2><span style="font-size: 14px; color: {{t.muted}}; font-weight: 700">17:54 → 04:05</span></div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+<sc-for list="{{timeline}}" as="s" hint-placeholder-count="4">
+<li style="display: flex; gap: 12px; min-height: 60px">
+<span style="width: 24px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center">
+<span style="width: 20px; height: 20px; box-sizing: border-box; border-radius: 999px; background: {{s.dotBg}}; border: 3px solid {{s.dotBorder}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; margin-top: 2px"><sc-if value="{{s.done}}" hint-placeholder-val="{{ false }}"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+<span style="flex: 1 1 auto; width: 3px; background: {{s.lineBg}}; display: {{s.lineDisplay}}; margin: 2px 0"></span>
+</span>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; padding-bottom: 10px">
+<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px"><span style="font-size: 16px; line-height: 21px; font-weight: 800">{{s.title}}</span><span style="font-size: 15px; font-weight: 800">{{s.time}}</span></span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{s.sub}}<sc-if value="{{s.now}}" hint-placeholder-val="{{ false }}"><span style="padding: 1px 8px; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; font-size: 14px; font-weight: 800">Now</span></sc-if></span>
+</span>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="min-height: 100px; border-radius: 28px; background: {{t.sunTint}}; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: {{t.mutedOnTint}}; font-weight: 700">Last night</span><span style="margin-top: auto; font-size: 22px; line-height: 26px; font-weight: 800">8 of 8</span><span style="font-size: 14px; color: {{t.mutedOnTint}}; font-weight: 600">glasses</span></div>
+<div style="min-height: 100px; border-radius: 28px; background: {{t.mint}}; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; color: {{t.mutedOnTint}}; font-weight: 700">Suhoor tip</span><span style="margin-top: auto; font-size: 16px; line-height: 21px; font-weight: 800">Water-rich fruit helps</span></div>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{is.home}}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Main" style="position: absolute; left: 20px; right: 20px; bottom: 24px; height: 72px; border-radius: 999px; background: {{t.nav}}; box-shadow: 0 12px 32px rgba(17,19,18,0.22), 0 2px 6px rgba(17,19,18,0.10); display: flex; align-items: center; justify-content: space-between; padding: 0 10px; box-sizing: border-box; z-index: 5">
+<a href="#home" aria-current="page" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOn}}; text-decoration: none; font-size: 14px; font-weight: 800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Home</a>
+<a href="#stats" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"></path><path d="M12 20V4"></path><path d="M19 20v-6"></path></svg>Stats</a>
+<button type="button" aria-label="Add a drink" style="width: 72px; height: 72px; margin-top: -40px; border: 5px solid {{t.bg}}; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; box-shadow: 0 10px 24px {{t.fabShadow}}; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+<a href="#family" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17.5" cy="9.5" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>Family</a>
+<a href="#me" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Me</a>
+</nav>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"screen":{"editor":"enum","options":["setup","active","iftar"],"default":"setup"},"height":{"editor":"int","min":640,"max":2000,"default":1100},"$preview":{"width":390,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const screen = this.props.screen ?? 'setup';
+    const H = Number(this.props.height ?? (screen === 'setup' ? 1100 : 844)) || 844;
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', mutedOnTint: '#C3CAC8', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', line: '#4A504E', divider: 'rgba(236,238,236,0.10)', fieldBorder: '#3A3F3D', track: '#3A3F3D', nightBg: '#1F2A44', nightFg: '#ECEEEC', nav: '#2B302E', navOn: '#ECEEEC', navOff: 'rgba(236,238,236,0.66)', fabShadow: 'rgba(0,0,0,0.5)' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', mutedOnTint: '#4A504F', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', line: '#C9C4BA', divider: 'rgba(17,19,18,0.08)', fieldBorder: '#D6D1C7', track: '#E2DDD3', nightBg: '#1F2A44', nightFg: '#FFFFFF', nav: '#111312', navOn: '#FFFFFF', navOff: 'rgba(255,255,255,0.68)', fabShadow: 'rgba(11,127,117,0.35)' };
+
+    const moon = 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z';
+    const cal = 'M3 5h18v16H3zM3 10h18M8 3v4M16 3v4';
+    const T = [
+      { id: 'ramadan', name: 'Ramadan', sub: 'Every day this month', icon: moon, well: '#FFD27A' },
+      { id: 'monthu', name: 'Monday & Thursday', sub: 'Weekly sunnah fast', icon: cal, well: t.mint },
+      { id: 'bidh', name: 'Ayyamul Bidh', sub: '13–15 of each Hijri month', icon: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', well: t.sunTint },
+      { id: 'custom', name: 'Custom days', sub: 'Pick your own dates', icon: 'M3 5h18v16H3zM3 10h18M8 3v4M16 3v4M9 15l2 2 4-4', well: t.coralTint },
+      { id: 'if', name: 'Intermittent 16:8', sub: 'Water is fine while fasting', icon: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2', well: t.accentTint, span: 'span 2' }
+    ];
+    const typeId = st.type ?? 'ramadan';
+    const types = T.map((x) => ({ ...x, span: x.span || 'auto', sel: typeId === x.id, border: typeId === x.id ? t.accent : 'transparent', bg: typeId === x.id ? t.accentTint : t.surface, pick: () => this.setState({ type: x.id }) }));
+    const split = [
+      { n: 2, when: 'at iftar', bg: '#FFD27A' },
+      { n: 4, when: 'iftar → sleep', bg: '#BFEAE3' },
+      { n: 2, when: 'at suhoor', bg: '#FFE1D8' }
+    ].map((x) => ({ ...x, cups: Array.from({ length: x.n }, () => ({})) }));
+
+    const iftarDone = !!st.iftarDone;
+    const isIftar = screen === 'iftar';
+    const timeline = [
+      { title: 'Iftar', time: '17:54', sub: '2 glasses', done: isIftar && iftarDone, now: isIftar && !iftarDone },
+      { title: 'Evening', time: '18:30–22:30', sub: '4 glasses, one every hour', done: false, now: false },
+      { title: 'Suhoor', time: '03:30', sub: '2 glasses', done: false, now: false },
+      { title: 'Imsak — fast begins', time: '04:05', sub: 'Reminders pause until Maghrib', done: false, now: false, last: true }
+    ].map((s, k, arr) => ({
+      ...s,
+      dotBg: s.done ? t.accent : (s.now ? t.accent : t.surface),
+      dotBorder: s.done || s.now ? t.accent : t.line,
+      lineBg: s.done ? t.accent : t.track,
+      lineDisplay: k === arr.length - 1 ? 'none' : 'block'
+    }));
+    if (!this._u) this._u = Math.random().toString(36).slice(2, 7);
+
+    return {
+      t, types, split, timeline,
+      showSplit: typeId !== 'if', showIF: typeId === 'if',
+      is: { setup: screen === 'setup', home: screen === 'active' || screen === 'iftar' },
+      isActive: screen === 'active', isIftar,
+      greet: isIftar ? 'Selamat berbuka, Rendy' : 'Good afternoon, Rendy',
+      iftarBtn: iftarDone ? 'Logged 2 glasses' : 'I drank 2 glasses',
+      drinkTwo: () => this.setState({ iftarDone: true }),
+      ids: { method: 'fm-method-' + this._u },
+      padBottom: screen === 'setup' ? '28px' : '120px',
+      h: H + 'px'
+    };
+  }
+}
+</script>
+</body>
+</html>

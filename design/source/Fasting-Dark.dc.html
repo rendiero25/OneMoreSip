@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fasting Mode — dark</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Arabic:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1680px; height: 1160px; display: flex; gap: 40px; align-items: flex-start; background: #0B0D0C; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #ECEEEC">
+<sc-for list="{{frames}}" as="f" hint-placeholder-count="4">
+<div style="width: 390px; flex-shrink: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="height: 40px; display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700"><span style="min-width: 32px; height: 32px; padding: 0 8px; box-sizing: border-box; border-radius: 999px; background: #ECEEEC; color: #121413; display: flex; align-items: center; justify-content: center; font-size: 15px">{{f.n}}</span>{{f.name}}</div>
+<div style="width: 390px; height: {{f.hpx}}; border-radius: 28px; overflow: hidden; box-shadow: 0 0 0 1px rgba(236,238,236,0.12)">
+<sc-if value="{{f.isHome}}" hint-placeholder-val="{{ false }}"><dc-import name="Home" state="base" theme="dark" banner="{{ true }}" hint-size="390px,844px"></dc-import></sc-if>
+<sc-if value="{{f.isFasting}}" hint-placeholder-val="{{ true }}"><dc-import name="Fasting" theme="dark" screen="{{f.screen}}" height="{{f.h}}" hint-size="390px,844px"></dc-import></sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1680,"height":1160}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const f = [
+      { n: 1, name: 'Fasting setup · 2-4-2', screen: 'setup', h: 1100 },
+      { n: 2, name: 'Home · fasting hours', screen: 'active', h: 844 },
+      { n: 3, name: 'Home · at iftar', screen: 'iftar', h: 844 },
+      { n: 4, name: 'Home · Ramadan banner', screen: 'banner', h: 844, home: true }
+    ];
+    return { frames: f.map((x) => ({ ...x, hpx: x.h + 'px', isHome: !!x.home, isFasting: !x.home })) };
+  }
+}
+</script>
+</body>
+</html>

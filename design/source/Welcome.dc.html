@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Welcome</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: {{h}}; box-sizing: border-box; padding: 56px 20px 32px; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; gap: 28px; overflow: hidden">
+
+<div style="position: relative; height: {{cardH}}; border-radius: 28px; background: {{t.mint}}; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+<span aria-hidden="true" style="position: absolute; top: -44px; right: -44px; width: 150px; height: 150px; border-radius: 999px; background: {{t.sun}}; display: block"></span>
+<span aria-hidden="true" style="position: absolute; top: 96px; left: -22px; width: 60px; height: 60px; border-radius: 999px; background: {{t.coral}}; display: block"></span>
+<span aria-hidden="true" style="position: absolute; top: 50%; left: 50%; width: 240px; height: 240px; margin: -120px 0 0 -120px; border-radius: 999px; background: {{t.halo}}; display: block"></span>
+<div style="position: relative; z-index: 1"><dc-import name="Sippy" state="happy" wave="{{ true }}" size="{{sippySize}}" hint-size="200px,200px"></dc-import></div>
+<sc-if value="{{showDeco}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; top: 28px; left: 20px; padding: 10px 14px; border-radius: 999px; background: {{t.surface}}; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700">
+<span style="width: 24px; height: 24px; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>250 ml</div>
+<div style="position: absolute; bottom: 28px; right: 20px; padding: 10px 14px; border-radius: 999px; background: {{t.okBg}}; color: {{t.okFg}}; display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 700"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Hydrated</div>
+<div style="position: absolute; bottom: 28px; left: 20px; padding: 10px 14px; border-radius: 999px; background: {{t.surface}}; font-size: 15px; font-weight: 600; color: {{t.muted}}">Next sip 10:30</div>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h1 style="margin: 0; font-size: {{fs.head}}; line-height: {{lh.head}}; font-weight: 800; letter-spacing: -0.02em">Your friendly water buddy</h1>
+<p style="margin: 0; font-size: {{fs.body}}; line-height: {{lh.body}}; color: {{t.muted}}">Gentle reminders. One tap to log. For the whole family.</p>
+</div>
+
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px">
+<button type="button" style="min-height: 56px; padding: {{btnPad}}; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 700; cursor: pointer">Get started</button>
+<button type="button" style="min-height: 48px; padding: {{btnPad}}; border: none; border-radius: 999px; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: {{fs.btn}}; line-height: {{lh.btn}}; font-weight: 600; cursor: pointer">I already have an account</button>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"textScale":{"editor":"enum","options":["1","2"],"default":"1"},"height":{"editor":"int","min":640,"max":2000,"default":844},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'dark';
+    const s = Number(this.props.textScale ?? 1) || 1;
+    const h = Number(this.props.height ?? 844) || 844;
+    const big = s > 1.5;
+    const px = (n) => Math.round(n) + 'px';
+    return {
+      h: px(h),
+      cardH: big ? '200px' : '380px',
+      sippySize: big ? 150 : 210,
+      showDeco: !big,
+      fs: { head: px(36 * s), body: px(17 * s), btn: px(17 * s) },
+      lh: { head: px(40 * s), body: px(24 * s), btn: px(22 * s) },
+      btnPad: px(10 * s) + ' ' + px(20),
+      t: dark
+        ? { mint: '#1F4A45', halo: '#26574F', sun: 'rgba(242,184,92,0.45)', coral: 'rgba(255,143,122,0.45)', bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#1C1F1E', ink: '#ECEEEC', muted: '#9BA3A1', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', okBg: 'rgba(79,209,193,0.16)', okFg: '#4FD1C1' }
+        : { mint: '#BFEAE3', halo: '#E3F5F1', sun: '#FFD27A', coral: '#FF9E87', bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', okBg: '#D7F2EE', okFg: '#075E56' }
+    };
+  }
+}
+</script>
+</body>
+</html>

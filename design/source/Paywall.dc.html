@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Paywall and purchases</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: {{h}}; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; overflow: hidden">
+
+<!-- PAYWALL -->
+<sc-if value="{{is.paywall}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; inset: 0; overflow-y: auto; box-sizing: border-box; padding: 52px 20px 28px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<button type="button" aria-label="Close" style="width: 48px; height: 48px; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+<button type="button" style="min-height: 48px; padding: 0 12px; border: none; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Restore</button>
+</div>
+
+<div style="align-self: center; position: relative; width: 156px; height: 156px; border-radius: 999px; background: {{t.mint}}; display: flex; align-items: center; justify-content: center">
+<dc-import name="Sippy" state="celebrating" size="124" hint-size="124px,124px"></dc-import>
+<span aria-hidden="true" style="position: absolute; top: 6px; right: -6px; width: 30px; height: 30px; border-radius: 999px; background: #FFD27A; display: block"></span>
+<span aria-hidden="true" style="position: absolute; bottom: 14px; left: -10px; width: 18px; height: 18px; border-radius: 999px; background: #FF9E87; display: block"></span>
+</div>
+<h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800; letter-spacing: -0.01em; text-align: center">Get more from every sip</h1>
+
+<ul style="list-style: none; margin: 0; padding: 14px 16px; border-radius: 28px; background: {{t.surface}}; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{benefits}}" as="b" hint-placeholder-count="6">
+<li style="display: flex; align-items: center; gap: 12px; min-height: 36px">
+<span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: {{b.bg}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{b.icon}}"></path></svg></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 21px; font-weight: 800">{{b.title}}</span><sc-if value="{{b.hasSub}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{b.sub}}</span></sc-if></span>
+</li>
+</sc-for>
+</ul>
+
+<div role="radiogroup" aria-label="Choose a plan" style="display: flex; flex-direction: column; gap: 10px; padding-top: 6px">
+<sc-for list="{{plans}}" as="p" hint-placeholder-count="5">
+<button type="button" role="radio" aria-checked="{{p.sel}}" onClick="{{p.pick}}" style="position: relative; min-height: 72px; padding: 12px 16px; border-radius: 24px; border: 2px solid {{p.border}}; background: {{p.bg}}; color: {{t.ink}}; font-family: inherit; display: flex; align-items: center; gap: 12px; text-align: start; cursor: pointer; margin-top: {{p.mt}}">
+<sc-if value="{{p.badge}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: -13px; right: 14px; padding: 3px 10px; border-radius: 999px; background: #FFD27A; color: #3A2600; font-size: 14px; line-height: 18px; font-weight: 800">7-day free trial · Best value</span></sc-if>
+<span style="width: 26px; height: 26px; flex-shrink: 0; box-sizing: border-box; border-radius: 999px; border: 2px solid {{p.ring}}; background: {{p.dot}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center"><sc-if value="{{p.sel}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+<sc-if value="{{p.family}}" hint-placeholder-val="{{ false }}"><span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: {{t.sunTint}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17.5" cy="9.5" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg></span></sc-if>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 17px; line-height: 22px; font-weight: 800">{{p.name}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{p.sub}}</span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-end"><span style="font-size: 18px; line-height: 22px; font-weight: 800; white-space: nowrap">{{p.price}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{p.per}}</span></span>
+</button>
+</sc-for>
+</div>
+
+<button type="button" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">{{cta}}</button>
+<p aria-live="polite" style="margin: -6px 0 0; font-size: 14px; line-height: 20px; color: {{t.muted}}; font-weight: 600; text-align: center">{{terms}}</p>
+<div style="display: flex; justify-content: center; align-items: center; gap: 2px; font-size: 14px; color: {{t.muted}}">
+<button type="button" style="min-height: 48px; padding: 0 8px; border: none; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Restore purchases</button><span aria-hidden="true">·</span>
+<a href="#terms" style="min-height: 48px; padding: 0 8px; display: inline-flex; align-items: center; color: {{t.accentInk}}; font-weight: 700">Terms</a><span aria-hidden="true">·</span>
+<a href="#privacy" style="min-height: 48px; padding: 0 8px; display: inline-flex; align-items: center; color: {{t.accentInk}}; font-weight: 700">Privacy</a>
+</div>
+</div>
+</sc-if>
+
+<!-- SHEETS over Home -->
+<sc-if value="{{is.sheet}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; inset: 0"><dc-import name="Home" state="base" theme="{{theme}}" hint-size="390px,844px"></dc-import></div>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: {{t.scrim}}"></div>
+
+<sc-if value="{{is.removeAds}}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-labelledby="ra-h" style="position: absolute; left: 0; right: 0; bottom: 0; background: {{t.surface}}; border-radius: 28px 28px 0 0; padding: 10px 20px 34px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 -8px 32px rgba(17,19,18,0.20)">
+<div style="width: 40px; height: 5px; border-radius: 999px; background: {{t.handle}}; align-self: center"></div>
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="width: 84px; height: 84px; flex-shrink: 0; border-radius: 999px; background: {{t.mint}}; display: flex; align-items: center; justify-content: center"><dc-import name="Sippy" state="happy" size="70" hint-size="70px,70px"></dc-import></span>
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 id="ra-h" style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Remove ads forever</h2><span style="align-self: flex-start; padding: 2px 10px; border-radius: 999px; background: {{t.sunTint}}; font-size: 14px; font-weight: 800">One-time · $3.99</span></div>
+</div>
+<p style="margin: 0; font-size: 17px; line-height: 24px; font-weight: 600">Pay once. Ads gone for good — even on a new phone.</p>
+<ul style="list-style: none; margin: 0; padding: 14px 16px; border-radius: 20px; background: {{t.surfaceAlt}}; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 20px; font-weight: 600">
+<li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M20 6 9 17l-5-5"></path></svg>No banner or in-list ads, anywhere</li>
+<li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M20 6 9 17l-5-5"></path></svg>Restore it on a new phone with the same store account</li>
+<li style="display: flex; gap: 10px; align-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0"><path d="M20 6 9 17l-5-5"></path></svg>No subscription — nothing to cancel</li>
+</ul>
+<button type="button" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Remove ads · $3.99</button>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">AI photos and chats still need Premium.</span>
+<button type="button" style="min-height: 48px; padding: 0 4px; border: none; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap">Restore purchase</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.topup}}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-labelledby="tu-h" style="position: absolute; left: 0; right: 0; bottom: 0; background: {{t.surface}}; border-radius: 28px 28px 0 0; padding: 10px 20px 34px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 -8px 32px rgba(17,19,18,0.20)">
+<div style="width: 40px; height: 5px; border-radius: 999px; background: {{t.handle}}; align-self: center"></div>
+<h2 id="tu-h" style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Get more AI</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="border-radius: 24px; background: {{t.sunTint}}; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="width: 44px; height: 44px; border-radius: 14px; background: {{t.surface}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path><circle cx="12" cy="13" r="3.5"></circle></svg></span>
+<span style="font-size: 30px; line-height: 34px; font-weight: 800">+50</span><span style="font-size: 15px; font-weight: 700">AI photos</span>
+</div>
+<div style="border-radius: 24px; background: {{t.mint}}; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="width: 44px; height: 44px; border-radius: 14px; background: {{t.surface}}; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg></span>
+<span style="font-size: 30px; line-height: 34px; font-weight: 800">+30</span><span style="font-size: 15px; font-weight: 700">Ask Sippy chats</span>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; border-radius: 20px; background: {{t.surfaceAlt}}; padding: 12px 16px">
+<div style="display: flex; flex-direction: column"><span style="font-size: 28px; line-height: 32px; font-weight: 800">$1.99</span><span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">One-time</span></div>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: {{t.okBg}}; color: {{t.okFg}}; font-size: 14px; font-weight: 800"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>Never expires</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 20px; color: {{t.muted}}; font-weight: 600">Extras are used only after your monthly quota runs out.</p>
+<button type="button" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Buy for $1.99</button>
+</div>
+</sc-if>
+</sc-if>
+
+<!-- PREMIUM STATUS -->
+<sc-if value="{{is.status}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; overflow-y: auto; box-sizing: border-box; padding: 52px 20px 28px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Premium</h1>
+</div>
+<section style="border-radius: 28px; background: {{t.accent}}; color: {{t.onAccent}}; padding: 18px; display: flex; align-items: center; gap: 14px">
+<span style="width: 76px; height: 76px; flex-shrink: 0; border-radius: 999px; background: {{t.onAccentSoftBg}}; display: flex; align-items: center; justify-content: center"><dc-import name="Sippy" state="celebrating" size="64" hint-size="64px,64px"></dc-import></span>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 24px; line-height: 30px; font-weight: 800">You're Premium</span>
+<span style="font-size: 15px; line-height: 20px; font-weight: 700; color: {{t.onAccentSoft}}">12 months · $24.99/year</span>
+<span style="font-size: 15px; line-height: 20px; font-weight: 700; color: {{t.onAccentSoft}}">Renews Oct 16, 2027</span>
+</div>
+</section>
+
+<h2 style="margin: 6px 0 0; font-size: 20px; line-height: 26px; font-weight: 800">AI this month</h2>
+<sc-for list="{{quotas}}" as="q" hint-placeholder-count="2">
+<section style="border-radius: 28px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: {{q.well}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{q.icon}}"></path></svg></span>
+<span style="flex: 1 1 auto; font-size: 17px; font-weight: 800">{{q.title}}</span>
+<sc-if value="{{q.isOut}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; background: {{t.warnBg}}; color: {{t.warnFg}}; font-size: 14px; font-weight: 800"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Using extras</span></sc-if>
+</div>
+<div role="img" aria-label="{{q.aria}}" style="display: flex; gap: 4px; height: 12px">
+<span style="flex: {{q.monthFlex}} 1 0; border-radius: 999px; background: {{t.track}}; overflow: hidden; display: block"><span style="width: {{q.monthPct}}; height: 12px; background: {{t.accent}}; display: block"></span></span>
+<span style="flex: {{q.extraFlex}} 1 0; border-radius: 999px; background: #FFD27A; display: block"></span>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 8px; font-size: 15px; font-weight: 700"><span>Monthly: {{q.month}}</span><span>Extra: {{q.extra}}</span></div>
+<span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">Monthly quota resets Nov 1 · extras never expire</span>
+</section>
+</sc-for>
+
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px">
+<button type="button" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Get more AI · $1.99</button>
+<button type="button" style="min-height: 56px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Manage subscription</button>
+<button type="button" style="min-height: 48px; border: none; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Restore purchases</button>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"view":{"editor":"enum","options":["paywall","removeAds","topup","status"],"default":"paywall"},"currency":{"editor":"enum","options":["usd","idr"],"default":"usd"},"height":{"editor":"int","min":640,"max":2000,"default":1400},"$preview":{"width":390,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const theme = this.props.theme === 'dark' ? 'dark' : 'light';
+    const dark = theme === 'dark';
+    const view = this.props.view ?? 'paywall';
+    const idr = this.props.currency === 'idr';
+    const H = Number(this.props.height ?? (view === 'paywall' ? 1400 : 844)) || 844;
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', onAccentSoft: 'rgba(10,31,29,0.8)', onAccentSoftBg: 'rgba(10,31,29,0.12)', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', line: '#3A3F3D', okBg: 'rgba(79,209,193,0.16)', okFg: '#4FD1C1', warnBg: 'rgba(242,184,92,0.18)', warnFg: '#F2B85C', track: '#3A3F3D', scrim: 'rgba(0,0,0,0.6)', handle: '#3A3F3D' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', onAccentSoft: 'rgba(255,255,255,0.92)', onAccentSoftBg: 'rgba(255,255,255,0.18)', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', line: '#D6D1C7', okBg: '#D7F2EE', okFg: '#075E56', warnBg: '#FFE9C2', warnFg: '#8A4F00', track: '#E2DDD3', scrim: 'rgba(17,19,18,0.45)', handle: '#D6D1C7' };
+
+    const I = {
+      cam: 'M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM15.5 13a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z',
+      chat: 'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z',
+      sun: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4',
+      hist: 'M5 20V11M12 20V4M19 20v-6M3 21h18',
+      trophy: 'M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3',
+      noad: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM5.6 5.6l12.8 12.8'
+    };
+    const benefits = [
+      { icon: I.cam, bg: t.sunTint, title: 'Snap drinks with AI', sub: '150 photos a month' },
+      { icon: I.chat, bg: t.mint, title: 'Ask Sippy', sub: '60 chats a month' },
+      { icon: I.sun, bg: t.coralTint, title: 'Weather & activity smart goal', sub: '' },
+      { icon: I.hist, bg: t.accentTint, title: 'Full history & export', sub: '' },
+      { icon: I.trophy, bg: t.sunTint, title: 'Challenges', sub: '' },
+      { icon: I.noad, bg: t.surfaceAlt, title: 'No ads', sub: '' }
+    ].map((b) => ({ ...b, hasSub: !!b.sub }));
+
+    const P = idr
+      ? [
+          { id: 'm1', name: '1 month', price: 'Rp15.000', per: 'per month', sub: 'Billed monthly' },
+          { id: 'm3', name: '3 months', price: 'Rp39.000', per: 'Rp13.000/mo', sub: 'Save 13%' },
+          { id: 'm6', name: '6 months', price: 'Rp69.000', per: 'Rp11.500/mo', sub: 'Save 23%' },
+          { id: 'm12', name: '12 months', price: 'Rp99.000', per: 'Rp8.250/mo', sub: 'Save 45%', badge: true },
+          { id: 'fam', name: 'Family — up to 5 people', price: 'Rp149.000', per: 'per year', sub: 'Everyone gets Premium', family: true }
+        ]
+      : [
+          { id: 'm1', name: '1 month', price: '$3.99', per: 'per month', sub: 'Billed monthly' },
+          { id: 'm3', name: '3 months', price: '$9.99', per: '$3.33/mo', sub: 'Save 17%' },
+          { id: 'm6', name: '6 months', price: '$16.99', per: '$2.83/mo', sub: 'Save 29%' },
+          { id: 'm12', name: '12 months', price: '$24.99', per: '$2.08/mo', sub: 'Save 48%', badge: true },
+          { id: 'fam', name: 'Family — up to 5 people', price: '$34.99', per: 'per year', sub: 'Everyone gets Premium', family: true }
+        ];
+    const selId = st.plan ?? 'm12';
+    const plans = P.map((p) => {
+      const on = selId === p.id;
+      return { ...p, badge: !!p.badge, family: !!p.family, sel: on, border: on ? t.accent : 'transparent', bg: on ? t.accentTint : t.surface, ring: on ? t.accent : t.line, dot: on ? t.accent : 'transparent', mt: p.badge ? '10px' : (p.family ? '8px' : '0'), pick: () => this.setState({ plan: p.id }) };
+    });
+    const sp = P.find((p) => p.id === selId);
+    const every = { m1: 'every month', m3: 'every 3 months', m6: 'every 6 months', fam: 'per year' }[selId];
+    const cta = selId === 'm12' ? 'Start free trial' : selId === 'fam' ? 'Start Family plan' : 'Subscribe for ' + sp.price;
+    const terms = selId === 'm12'
+      ? 'Free for 7 days, then ' + sp.price + '/year. Cancel anytime in your store settings. Trial ends Oct 16.'
+      : sp.price + ' ' + every + '. Renews automatically. Cancel anytime in your store settings.';
+
+    const quotas = [
+      { title: 'AI photos', icon: I.cam, well: t.sunTint, month: '0 / 150 left', extra: '42', monthPct: '0%', monthFlex: 150, extraFlex: 42, isOut: true, aria: 'AI photos: 0 of 150 monthly left, 42 extra' },
+      { title: 'Ask Sippy chats', icon: I.chat, well: t.mint, month: '18 / 60 left', extra: '30', monthPct: '30%', monthFlex: 60, extraFlex: 30, isOut: false, aria: 'Chats: 18 of 60 monthly left, 30 extra' }
+    ];
+
+    return {
+      t, theme, benefits, plans, cta, terms, quotas,
+      is: { paywall: view === 'paywall', sheet: view === 'removeAds' || view === 'topup', removeAds: view === 'removeAds', topup: view === 'topup', status: view === 'status' },
+      h: H + 'px'
+    };
+  }
+}
+</script>
+</body>
+</html>

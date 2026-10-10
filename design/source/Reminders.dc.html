@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reminders and health check</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: {{h}}; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; overflow: hidden">
+<div style="position: absolute; inset: 0; overflow-y: auto; box-sizing: border-box; padding: 52px 20px 32px; display: flex; flex-direction: column; gap: 14px">
+
+<!-- SETTINGS -->
+<sc-if value="{{is.settings}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Reminders</h1>
+</div>
+
+<button type="button" onClick="{{toHealth}}" style="border: none; border-radius: 24px; background: {{issueBg}}; color: {{t.ink}}; font-family: inherit; padding: 12px 14px; display: flex; align-items: center; gap: 12px; text-align: start; cursor: pointer">
+<span style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: {{t.surface}}; color: {{issueFg}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"></path><path d="M12 9v4"></path><path d="M12 16h.01"></path></svg></span>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 21px; font-weight: 800">{{issueTitle}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.mutedOnTint}}; font-weight: 600">Run the reminder health check</span></span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg>
+</button>
+
+<section aria-labelledby="when-h" style="border-radius: 28px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+<h2 id="when-h" style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">When to remind</h2>
+<div role="radiogroup" aria-label="Reminder mode" style="height: 48px; border-radius: 999px; background: {{t.surfaceAlt}}; padding: 4px; box-sizing: border-box; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{modes}}" as="m" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{m.sel}}" onClick="{{m.pick}}" style="border: none; border-radius: 999px; background: {{m.bg}}; color: {{m.fg}}; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">{{m.label}}</button></sc-for>
+</div>
+<sc-if value="{{isInterval}}" hint-placeholder-val="{{ true }}">
+<div role="radiogroup" aria-label="Every" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{intervals}}" as="iv" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{iv.sel}}" onClick="{{iv.pick}}" style="min-height: 56px; border: none; border-radius: 12px; background: {{iv.bg}}; color: {{iv.fg}}; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer"><span style="font-size: 18px; line-height: 22px; font-weight: 800">{{iv.n}}</span><span style="font-size: 14px; font-weight: 600">min</span></button></sc-for>
+</div>
+</sc-if>
+<sc-if value="{{isFixed}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{fixedTimes}}" as="ft" hint-placeholder-count="8"><span style="min-height: 48px; padding: 0 14px; border-radius: 12px; background: {{t.accentTint}}; display: inline-flex; align-items: center; font-size: 15px; font-weight: 800">{{ft}}</span></sc-for>
+<button type="button" style="min-height: 48px; padding: 0 14px; border: 2px dashed {{t.line}}; border-radius: 12px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">+ Add time</button>
+</div>
+</sc-if>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span id="days-l" style="font-size: 14px; color: {{t.muted}}; font-weight: 700">Days</span>
+<div role="group" aria-labelledby="days-l" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="7"><button type="button" aria-pressed="{{d.on}}" aria-label="{{d.name}}" onClick="{{d.toggle}}" style="min-height: 48px; border: none; border-radius: 14px; background: {{d.bg}}; color: {{d.fg}}; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer; padding: 0">{{d.short}}</button></sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<a href="#wake" style="min-height: 64px; border-radius: 20px; background: {{t.sunTint}}; color: {{t.ink}}; text-decoration: none; padding: 10px 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center"><span style="font-size: 14px; color: {{t.mutedOnTint}}; font-weight: 700">Wake up</span><span style="font-size: 22px; line-height: 26px; font-weight: 800">06:00</span></a>
+<a href="#sleep" style="min-height: 64px; border-radius: 20px; background: {{t.nightTint}}; color: {{t.ink}}; text-decoration: none; padding: 10px 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center"><span style="font-size: 14px; color: {{t.mutedOnTint}}; font-weight: 700">Bedtime</span><span style="font-size: 22px; line-height: 26px; font-weight: 800">22:30</span></a>
+</div>
+</section>
+
+<section style="border-radius: 28px; background: {{t.surface}}; padding: 4px 16px; display: flex; flex-direction: column">
+<div style="min-height: 68px; display: flex; align-items: center; gap: 12px">
+<span style="flex: 1 1 auto; display: flex; flex-direction: column"><span id="qh-l" style="font-size: 16px; font-weight: 800">Quiet hours</span><span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">12:30–13:30 · plus during Fasting Mode</span></span>
+<button type="button" role="switch" aria-checked="{{quiet.on}}" aria-labelledby="qh-l" onClick="{{quiet.toggle}}" style="width: 56px; height: 34px; flex-shrink: 0; border: none; border-radius: 999px; background: {{quiet.track}}; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{quiet.justify}}; cursor: pointer"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{quiet.knob}}; display: block"></span></button>
+</div>
+<div style="min-height: 68px; border-top: 1px solid {{t.divider}}; display: flex; align-items: center; gap: 12px">
+<span id="sk-l" style="flex: 1 1 auto; font-size: 16px; line-height: 21px; font-weight: 800">Skip if I drank in the last 30 min</span>
+<button type="button" role="switch" aria-checked="{{skip.on}}" aria-labelledby="sk-l" onClick="{{skip.toggle}}" style="width: 56px; height: 34px; flex-shrink: 0; border: none; border-radius: 999px; background: {{skip.track}}; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{skip.justify}}; cursor: pointer"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{skip.knob}}; display: block"></span></button>
+</div>
+</section>
+
+<section aria-labelledby="style-h" style="border-radius: 28px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="style-h" style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">Reminder style</h2>
+<div role="radiogroup" aria-labelledby="style-h" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{styles}}" as="s" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{s.sel}}" onClick="{{s.pick}}" style="min-height: 48px; border: 2px solid {{s.border}}; border-radius: 14px; background: {{s.bg}}; color: {{t.ink}}; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">{{s.label}}</button></sc-for>
+</div>
+<div aria-live="polite" aria-label="Notification preview" style="border-radius: 22px; background: {{t.previewBg}}; padding: 12px; display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 0 0 1px {{t.divider}}">
+<div style="display: flex; align-items: center; gap: 8px"><span style="width: 24px; height: 24px; border-radius: 7px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg></span><span style="flex: 1 1 auto; font-size: 14px; font-weight: 800; color: {{t.muted}}">SIP!</span><span style="font-size: 14px; color: {{t.muted}}">now</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; line-height: 20px; font-weight: 800">{{preview.title}}</span><span style="font-size: 14px; line-height: 19px; color: {{t.muted}}; font-weight: 600">{{preview.body}}</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px"><span style="min-height: 40px; border-radius: 12px; background: {{t.surfaceAlt}}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800">✓ 250 ml</span><span style="min-height: 40px; border-radius: 12px; background: {{t.surfaceAlt}}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700">Later</span></div>
+</div>
+</section>
+
+<section aria-labelledby="vib-h" style="border-radius: 28px; background: {{t.surface}}; padding: 12px 16px; display: flex; flex-direction: column">
+<h2 id="vib-h" style="margin: 4px 0 6px; font-size: 17px; line-height: 22px; font-weight: 800">Vibration</h2>
+<div role="radiogroup" aria-labelledby="vib-h" style="display: flex; flex-direction: column">
+<sc-for list="{{vibes}}" as="v" hint-placeholder-count="4">
+<button type="button" role="radio" aria-checked="{{v.sel}}" onClick="{{v.pick}}" style="min-height: 56px; border: none; border-top: {{v.divider}}; background: transparent; color: {{t.ink}}; font-family: inherit; display: flex; align-items: center; gap: 12px; text-align: start; cursor: pointer; padding: 0">
+<span style="width: 24px; height: 24px; flex-shrink: 0; box-sizing: border-box; border-radius: 999px; border: 2px solid {{v.ring}}; background: {{v.dot}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center"><sc-if value="{{v.sel}}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+<span style="flex: 1 1 auto; font-size: 16px; font-weight: 700">{{v.label}}</span>
+<span aria-hidden="true" style="display: flex; align-items: center; gap: 3px"><sc-for list="{{v.bars}}" as="b" hint-placeholder-count="3"><span style="width: {{b.w}}; height: 10px; border-radius: 999px; background: {{b.c}}; display: block"></span></sc-for></span>
+</button>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="cat-h" style="border-radius: 28px; background: {{t.surface}}; padding: 12px 16px; display: flex; flex-direction: column">
+<h2 id="cat-h" style="margin: 4px 0 6px; font-size: 17px; line-height: 22px; font-weight: 800">Notification types</h2>
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="6">
+<div style="min-height: 60px; border-top: {{c.divider}}; display: flex; align-items: center; gap: 12px">
+<span style="flex: 1 1 auto; display: flex; flex-direction: column"><span id="{{c.id}}" style="font-size: 16px; font-weight: 700">{{c.label}}</span><sc-if value="{{c.hasSub}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">{{c.sub}}</span></sc-if></span>
+<button type="button" role="switch" aria-checked="{{c.on}}" aria-labelledby="{{c.id}}" onClick="{{c.toggle}}" style="width: 56px; height: 34px; flex-shrink: 0; border: none; border-radius: 999px; background: {{c.track}}; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{c.justify}}; cursor: pointer"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{c.knob}}; display: block"></span></button>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<!-- HEALTH CHECK -->
+<sc-if value="{{is.health}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toSettings}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">Reminder health check</h1>
+</div>
+<section style="border-radius: 28px; background: {{summaryBg}}; padding: 16px; display: flex; align-items: center; gap: 14px">
+<div style="flex-shrink: 0"><dc-import name="Sippy" state="{{summarySippy}}" size="76" hint-size="76px,76px"></dc-import></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span role="status" style="font-size: 20px; line-height: 26px; font-weight: 800">{{summaryTitle}}</span><span style="font-size: 14px; line-height: 18px; font-weight: 700; color: {{t.mutedOnTint}}">Xiaomi · Android 14</span></div>
+</section>
+<ul style="list-style: none; margin: 0; padding: 6px 16px; border-radius: 28px; background: {{t.surface}}; display: flex; flex-direction: column">
+<sc-for list="{{checks}}" as="c" hint-placeholder-count="4">
+<li style="min-height: 76px; border-top: {{c.divider}}; display: flex; align-items: center; gap: 12px; padding: 10px 0">
+<span style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 999px; background: {{c.iconBg}}; color: {{c.iconFg}}; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{c.ok}}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+<sc-if value="{{c.bad}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></sc-if>
+<sc-if value="{{c.opt}}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></sc-if>
+</span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; line-height: 21px; font-weight: 800">{{c.title}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{c.sub}}</span></span>
+<sc-if value="{{c.hasAction}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{c.act}}" style="flex-shrink: 0; min-height: 48px; padding: 0 14px; border: {{c.btnBorder}}; border-radius: 999px; background: {{c.btnBg}}; color: {{c.btnFg}}; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap">{{c.action}}</button></sc-if>
+</li>
+</sc-for>
+</ul>
+<button type="button" style="min-height: 56px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg>Send a test reminder</button>
+<p style="margin: 0; font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600; text-align: center">Phone updates can switch these off. Sippy re-checks every week.</p>
+</sc-if>
+
+<!-- GUIDE -->
+<sc-if value="{{is.guide}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" onClick="{{toHealth}}" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div style="display: flex; flex-direction: column"><h1 style="margin: 0; font-size: 24px; line-height: 30px; font-weight: 800">{{guide.title}}</h1><span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">3 steps · about 30 seconds</span></div>
+</div>
+<div role="radiogroup" aria-label="Phone brand" style="display: flex; gap: 8px; overflow-x: auto; flex-shrink: 0">
+<sc-for list="{{brands}}" as="b" hint-placeholder-count="6"><button type="button" role="radio" aria-checked="{{b.sel}}" onClick="{{b.pick}}" style="flex-shrink: 0; min-height: 48px; padding: 0 16px; border: none; border-radius: 12px; background: {{b.bg}}; color: {{b.fg}}; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">{{b.label}}</button></sc-for>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{guide.steps}}" as="s" hint-placeholder-count="3">
+<li style="border-radius: 28px; background: {{t.surface}}; padding: 14px; display: flex; gap: 14px; align-items: center">
+<div style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 8px">
+<span style="width: 36px; height: 36px; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800">{{s.n}}</span>
+<span style="font-size: 17px; line-height: 23px; font-weight: 800">{{s.text}}</span>
+</div>
+<div aria-hidden="true" style="width: 112px; height: 176px; flex-shrink: 0; box-sizing: border-box; border-radius: 22px; border: 4px solid {{t.ink}}; background: {{t.phoneBg}}; padding: 14px 6px 8px; display: flex; flex-direction: column; gap: 5px; overflow: hidden">
+<span style="font-size: 10px; line-height: 12px; font-weight: 800; color: {{t.muted}}; padding: 0 4px">{{s.screen}}</span>
+<sc-for list="{{s.rows}}" as="r" hint-placeholder-count="4">
+<span style="min-height: 24px; border-radius: 8px; background: {{r.bg}}; border: {{r.border}}; padding: 0 5px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 4px; font-size: 10px; line-height: 12px; font-weight: {{r.weight}}; color: {{t.ink}}"><span>{{r.label}}</span><sc-if value="{{r.toggle}}" hint-placeholder-val="{{ false }}"><span style="width: 20px; height: 12px; border-radius: 999px; background: {{t.accent}}; padding: 2px; box-sizing: border-box; display: flex; justify-content: flex-end"><span style="width: 8px; height: 8px; border-radius: 999px; background: #FFFFFF; display: block"></span></span></sc-if></span>
+</sc-for>
+</div>
+</li>
+</sc-for>
+</ol>
+<button type="button" onClick="{{doneGuide}}" style="margin-top: auto; min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Open Settings</button>
+<button type="button" onClick="{{doneGuide}}" style="min-height: 48px; border: none; background: transparent; color: {{t.accentInk}}; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">I've done this</button>
+</sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"screen":{"editor":"enum","options":["settings","health","guide"],"default":"settings"},"height":{"editor":"int","min":640,"max":2400,"default":2000},"$preview":{"width":390,"height":2000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const screen = st.screen ?? (this.props.screen ?? 'settings');
+    const H = Number(this.props.height ?? 2000) || 2000;
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', mutedOnTint: '#C3CAC8', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', nightTint: '#1F2A44', line: '#4A504E', divider: 'rgba(236,238,236,0.10)', okBg: 'rgba(79,209,193,0.16)', okFg: '#4FD1C1', warnBg: 'rgba(242,184,92,0.18)', warnFg: '#F2B85C', badBg: 'rgba(255,143,122,0.16)', badFg: '#FF8F7A', trackOff: '#4A504E', knobOn: '#0A1F1D', previewBg: '#262A29', phoneBg: '#121413', vibOff: '#3A3F3D' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', mutedOnTint: '#4A504F', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', nightTint: '#DCE3F2', line: '#C9C4BA', divider: 'rgba(17,19,18,0.08)', okBg: '#D7F2EE', okFg: '#075E56', warnBg: '#FFE9C2', warnFg: '#8A4F00', badBg: '#FFE0D9', badFg: '#A8321F', trackOff: '#B9B4AB', knobOn: '#FFFFFF', previewBg: '#F7F4EE', phoneBg: '#F7F4EE', vibOff: '#E2DDD3' };
+    const go = (x) => () => this.setState({ screen: x });
+    const sw = (on, toggle) => ({ on, toggle, track: on ? t.accent : t.trackOff, knob: on ? t.knobOn : '#FFFFFF', justify: on ? 'flex-end' : 'flex-start' });
+
+    const mode = st.mode ?? 'interval';
+    const modes = [['interval', 'Interval'], ['fixed', 'Fixed times']].map(([id, label]) => ({ label, sel: mode === id, bg: mode === id ? t.surface : 'transparent', fg: mode === id ? t.ink : t.muted, pick: () => this.setState({ mode: id }) }));
+    const every = st.every ?? 60;
+    const intervals = [30, 45, 60, 90].map((n) => ({ n, sel: every === n, bg: every === n ? t.ink : t.surfaceAlt, fg: every === n ? t.onInk : t.ink, pick: () => this.setState({ every: n }) }));
+    const dayOn = st.days || [true, true, true, true, true, true, true];
+    const dn = [['Mon', 'M'], ['Tue', 'T'], ['Wed', 'W'], ['Thu', 'T'], ['Fri', 'F'], ['Sat', 'S'], ['Sun', 'S']];
+    const days = dn.map(([name, short], i) => ({ name: name + (dayOn[i] ? ', on' : ', off'), short, on: dayOn[i], bg: dayOn[i] ? t.accent : t.surfaceAlt, fg: dayOn[i] ? t.onAccent : t.muted, toggle: () => { const d = dayOn.slice(); d[i] = !d[i]; this.setState({ days: d }); } }));
+    const quietOn = st.quiet ?? true, skipOn = st.skip ?? true;
+
+    const styleId = st.style ?? 'friendly';
+    const P = {
+      friendly: { title: 'Sippy here — one more sip?', body: "You're at 1,250 of 2,300 ml. A glass now keeps you on track." },
+      short: { title: 'Time to drink', body: '250 ml · 1,250 / 2,300 ml today' },
+      funny: { title: "Your cells called. They're thirsty.", body: 'Sippy is doing the puppy eyes. One glass?' }
+    };
+    const styles = [['friendly', 'Friendly'], ['short', 'Short'], ['funny', 'Funny']].map(([id, label]) => ({ label, sel: styleId === id, border: styleId === id ? t.accent : 'transparent', bg: styleId === id ? t.accentTint : t.surfaceAlt, pick: () => this.setState({ style: id }) }));
+
+    const vib = st.vib ?? 'gentle';
+    const V = [['gentle', 'Gentle', [16]], ['double', 'Double tap', [10, 10]], ['heart', 'Heartbeat', [8, 16, 8]], ['none', 'None', []]];
+    const vibes = V.map(([id, label, bars], k) => ({ label, sel: vib === id, ring: vib === id ? t.accent : t.line, dot: vib === id ? t.accent : 'transparent', divider: k === 0 ? 'none' : '1px solid ' + t.divider, bars: (bars.length ? bars : [6, 6, 6]).map((w) => ({ w: w + 'px', c: bars.length ? t.ink : t.vibOff })), pick: () => this.setState({ vib: id }) }));
+
+    const catOn = st.cats || { drink: true, progress: true, family: true, weather: true, insights: true, promo: false };
+    const cats = [
+      ['drink', 'Drink reminders', ''], ['progress', 'Progress', 'Goal reached, halfway there'], ['family', 'Family alerts', 'When someone you care for needs a nudge'],
+      ['weather', 'Weather', 'Hot-day goal changes'], ['insights', 'Insights & achievements', ''], ['promo', 'Promotions', 'Off by default']
+    ].map(([key, label, sub], k) => ({ id: 'cat-' + key, label, sub, hasSub: !!sub, divider: k === 0 ? 'none' : '1px solid ' + t.divider, ...sw(!!catOn[key], () => this.setState({ cats: Object.assign({}, catOn, { [key]: !catOn[key] }) })) }));
+
+    const fix = st.fix || { battery: false, autostart: false, exact: false };
+    const C = [
+      { key: 'notif', title: 'Notifications allowed', sub: 'Sip! can show reminders', state: 'ok' },
+      { key: 'battery', title: 'Battery optimization', sub: fix.battery ? 'Sip! can run in the background' : 'Android may stop Sip! in the background', state: fix.battery ? 'ok' : 'bad', action: 'Fix' },
+      { key: 'autostart', title: 'Auto-start (Xiaomi)', sub: fix.autostart ? 'Reminders survive a restart' : 'Needed so reminders survive a restart', state: fix.autostart ? 'ok' : 'bad', action: 'Show me how' },
+      { key: 'exact', title: 'Exact timing (optional)', sub: fix.exact ? 'Reminders arrive right on time' : 'Without it, reminders may come a few minutes late', state: fix.exact ? 'ok' : 'opt', action: 'Allow' }
+    ];
+    const checks = C.map((c, k) => ({
+      ...c, ok: c.state === 'ok', bad: c.state === 'bad', opt: c.state === 'opt',
+      hasAction: c.state !== 'ok' && !!c.action,
+      divider: k === 0 ? 'none' : '1px solid ' + t.divider,
+      iconBg: c.state === 'ok' ? t.okBg : c.state === 'bad' ? t.badBg : t.surfaceAlt,
+      iconFg: c.state === 'ok' ? t.okFg : c.state === 'bad' ? t.badFg : t.muted,
+      btnBg: c.state === 'bad' ? t.ink : 'transparent', btnFg: c.state === 'bad' ? t.onInk : t.ink, btnBorder: c.state === 'bad' ? 'none' : '2px solid ' + t.ink,
+      act: c.key === 'autostart' ? go('guide') : () => this.setState({ fix: Object.assign({}, fix, { [c.key]: true }) })
+    }));
+    const issues = C.filter((c) => c.state === 'bad').length;
+
+    const brand = st.brand ?? 'Xiaomi';
+    const G = {
+      Xiaomi: { title: 'Turn on Auto-start', steps: [
+        { screen: 'Settings', text: 'Open Settings › Apps › Manage apps', rows: ['Display', 'Apps', 'Battery', 'Privacy'], hi: 1 },
+        { screen: 'Manage apps', text: 'Find and tap Sip!', rows: ['Calculator', 'Camera', 'Sip!', 'Weather'], hi: 2 },
+        { screen: 'Sip!', text: 'Turn on Autostart', rows: ['Notifications', 'Autostart', 'Battery saver', 'Permissions'], hi: 1, toggle: true } ] },
+      Oppo: { title: 'Allow Auto launch', steps: [
+        { screen: 'Settings', text: 'Open Settings › Apps › App management', rows: ['Display', 'Apps', 'Battery', 'Security'], hi: 1 },
+        { screen: 'App management', text: 'Find and tap Sip!', rows: ['Clock', 'Notes', 'Sip!', 'Phone'], hi: 2 },
+        { screen: 'Sip!', text: 'Turn on Auto launch', rows: ['Notifications', 'Auto launch', 'Battery usage', 'Storage'], hi: 1, toggle: true } ] },
+      Vivo: { title: 'Allow background running', steps: [
+        { screen: 'Settings', text: 'Open Settings › Battery', rows: ['Sound', 'Battery', 'Apps', 'Security'], hi: 1 },
+        { screen: 'Battery', text: 'Tap Background power consumption', rows: ['Power saving', 'Background power', 'Usage', 'Health'], hi: 1 },
+        { screen: 'Background power', text: 'Allow Sip! to run in the background', rows: ['Camera', 'Sip!', 'Music', 'Maps'], hi: 1, toggle: true } ] },
+      Samsung: { title: 'Keep Sip! awake', steps: [
+        { screen: 'Settings', text: 'Open Settings › Battery', rows: ['Display', 'Battery', 'Apps', 'Security'], hi: 1 },
+        { screen: 'Battery', text: 'Tap Background usage limits', rows: ['Power saving', 'Background limits', 'Usage', 'More'], hi: 1 },
+        { screen: 'Never sleeping apps', text: 'Add Sip! to Never sleeping apps', rows: ['Calendar', 'Sip!', 'Messages', 'Phone'], hi: 1, toggle: true } ] },
+      Realme: { title: 'Allow Auto launch', steps: [
+        { screen: 'Settings', text: 'Open Settings › Apps › App management', rows: ['Display', 'Apps', 'Battery', 'Security'], hi: 1 },
+        { screen: 'App management', text: 'Find and tap Sip!', rows: ['Clock', 'Gallery', 'Sip!', 'Phone'], hi: 2 },
+        { screen: 'Sip!', text: 'Turn on Auto launch', rows: ['Notifications', 'Auto launch', 'Battery usage', 'Storage'], hi: 1, toggle: true } ] },
+      Other: { title: 'Let Sip! run in the background', steps: [
+        { screen: 'App info', text: 'Long-press the Sip! icon › App info', rows: ['Open', 'App info', 'Widgets', 'Remove'], hi: 1 },
+        { screen: 'App info', text: 'Tap Battery', rows: ['Notifications', 'Battery', 'Storage', 'Permissions'], hi: 1 },
+        { screen: 'Battery', text: 'Choose Unrestricted', rows: ['Unrestricted', 'Optimized', 'Restricted', ''], hi: 0, toggle: true } ] }
+    };
+    const g = G[brand];
+    const guide = { title: g.title, steps: g.steps.map((s, k) => ({ n: k + 1, text: s.text, screen: s.screen, rows: s.rows.filter((r) => r).map((label, ri) => ({ label, toggle: !!s.toggle && ri === s.hi, bg: ri === s.hi ? t.accentTint : t.surface, border: ri === s.hi ? '2px solid ' + t.accent : '2px solid transparent', weight: ri === s.hi ? '800' : '600' })) })) };
+    const brands = Object.keys(G).map((b) => ({ label: b, sel: brand === b, bg: brand === b ? t.ink : t.surface, fg: brand === b ? t.onInk : t.ink, pick: () => this.setState({ brand: b }) }));
+
+    return {
+      t, modes, intervals, days, styles, vibes, cats, checks, guide, brands,
+      isInterval: mode === 'interval', isFixed: mode === 'fixed',
+      fixedTimes: ['07:00', '09:00', '11:00', '13:00', '15:00', '17:00', '19:00', '21:00'],
+      quiet: sw(quietOn, () => this.setState({ quiet: !quietOn })),
+      skip: sw(skipOn, () => this.setState({ skip: !skipOn })),
+      preview: P[styleId],
+      is: { settings: screen === 'settings', health: screen === 'health', guide: screen === 'guide' },
+      toHealth: go('health'), toSettings: go('settings'),
+      doneGuide: () => this.setState({ screen: 'health', fix: Object.assign({}, fix, { autostart: true }) }),
+      issueTitle: issues ? issues + (issues === 1 ? ' thing may stop reminders' : ' things may stop reminders') : 'Reminders are healthy',
+      issueBg: issues ? t.badBg : t.okBg, issueFg: issues ? t.badFg : t.okFg,
+      summaryBg: issues ? t.badBg : t.okBg,
+      summarySippy: issues ? 'tired' : 'happy',
+      summaryTitle: issues ? issues + (issues === 1 ? ' thing needs fixing' : ' things need fixing') : 'All set — reminders will arrive',
+      h: H + 'px'
+    };
+  }
+}
+</script>
+</body>
+</html>

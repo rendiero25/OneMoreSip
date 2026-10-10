@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Streaks, achievements and tips</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 900px; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; overflow: hidden">
+<div style="position: absolute; inset: 0; overflow-y: auto; box-sizing: border-box; padding: 52px 20px 28px; display: flex; flex-direction: column; gap: 14px">
+
+<div style="display: flex; align-items: center; gap: 12px">
+<button type="button" aria-label="Back" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div role="tablist" aria-label="Section" style="flex: 1 1 auto; height: 48px; border-radius: 999px; background: {{t.surfaceAlt}}; padding: 4px; box-sizing: border-box; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{tabs}}" as="tb" hint-placeholder-count="3"><button type="button" role="tab" aria-selected="{{tb.sel}}" onClick="{{tb.pick}}" style="border: none; border-radius: 999px; background: {{tb.bg}}; color: {{tb.fg}}; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; padding: 0">{{tb.label}}</button></sc-for>
+</div>
+</div>
+
+<!-- STREAK -->
+<sc-if value="{{is.streak}}" hint-placeholder-val="{{ true }}">
+<section style="border-radius: 28px; background: #FFD27A; color: #111312; padding: 18px; display: flex; align-items: center; gap: 16px">
+<span style="width: 84px; height: 84px; flex-shrink: 0; border-radius: 999px; background: rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center"><svg width="48" height="48" viewBox="0 0 24 24" fill="#E8590C" aria-hidden="true"><path d="M12 22c4 0 7-2.7 7-6.5 0-3.5-2.5-5.5-4-8-.6 2-1.6 3-3 3.5C12.5 8 11.5 4.5 9 2c0 4-4 6.5-4 13.5C5 19.3 8 22 12 22z"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 2px"><h1 style="margin: 0; font-size: 34px; line-height: 38px; font-weight: 800; letter-spacing: -0.01em">6-day streak</h1><span style="font-size: 15px; font-weight: 700">Best ever: 14 days</span></div>
+</section>
+
+<section aria-labelledby="cal-h" style="border-radius: 28px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; justify-content: space-between"><h2 id="cal-h" style="margin: 0; font-size: 17px; font-weight: 800">October 2026</h2><span style="font-size: 14px; color: {{t.muted}}; font-weight: 700">8 of 9 days</span></div>
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; font-size: 14px; font-weight: 700; color: {{t.muted}}; text-align: center"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+<div role="grid" aria-label="Goal days in October" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{cal}}" as="d" hint-placeholder-count="35">
+<span role="gridcell" aria-label="{{d.aria}}" style="height: 40px; border-radius: 12px; background: {{d.bg}}; color: {{d.fg}}; border: {{d.border}}; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: {{d.weight}}">
+<sc-if value="{{d.isFreeze}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4 6l16 12M20 6 4 18"></path></svg></sc-if>
+<sc-if value="{{d.isNum}}" hint-placeholder-val="{{ true }}">{{d.n}}</sc-if>
+</span>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; font-size: 14px; font-weight: 700; color: {{t.muted}}">
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 4px; background: {{t.accent}}; display: block"></span>Goal met</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 4px; background: {{t.nightTint}}; display: block"></span>Freeze used</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; box-sizing: border-box; border-radius: 4px; border: 2px solid {{t.ink}}; display: block"></span>Today</span>
+</div>
+</section>
+
+<section style="border-radius: 28px; background: {{t.nightTint}}; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="display: flex; gap: 6px" aria-hidden="true">
+<span style="width: 40px; height: 40px; border-radius: 12px; background: {{t.surface}}; display: flex; align-items: center; justify-content: center; color: #3B6FD8"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v20M4 6l16 12M20 6 4 18"></path></svg></span>
+<span style="width: 40px; height: 40px; box-sizing: border-box; border-radius: 12px; border: 2px dashed {{t.line}}; display: block"></span>
+</div>
+<div style="display: flex; flex-direction: column"><span style="font-size: 17px; font-weight: 800">1 streak freeze left</span><span style="font-size: 14px; line-height: 18px; color: {{t.mutedOnTint}}; font-weight: 600">Saves your streak on a day you miss.</span></div>
+</div>
+<button type="button" onClick="{{earnFreeze}}" style="min-height: 52px; border: 2px solid {{t.ink}}; border-radius: 999px; background: {{t.surface}}; color: {{t.ink}}; font-family: inherit; font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"></path></svg>{{freezeBtn}}</button>
+<span style="font-size: 14px; color: {{t.mutedOnTint}}; font-weight: 600; text-align: center">Free plan · Premium gets freezes without ads</span>
+</section>
+</sc-if>
+
+<!-- ACHIEVEMENTS -->
+<sc-if value="{{is.badges}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800">Achievements</h1><span style="font-size: 15px; color: {{t.muted}}; font-weight: 700">3 of 5</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{badges}}" as="b" hint-placeholder-count="5">
+<article aria-label="{{b.aria}}" style="grid-column: {{b.span}}; border-radius: 28px; background: {{b.cardBg}}; padding: 16px; display: flex; flex-direction: {{b.dir}}; align-items: center; gap: 12px; text-align: {{b.align}}">
+<span style="position: relative; width: 80px; height: 80px; flex-shrink: 0; border-radius: 999px; background: {{b.medal}}; box-shadow: inset 0 0 0 5px {{b.ring}}; display: flex; align-items: center; justify-content: center; color: {{b.iconColor}}">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{b.icon}}"></path></svg>
+<sc-if value="{{b.locked}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; right: -2px; bottom: -2px; width: 28px; height: 28px; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; display: flex; align-items: center; justify-content: center; border: 3px solid {{b.cardBg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span></sc-if>
+</span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; align-items: {{b.itemsAlign}}">
+<span style="font-size: 16px; line-height: 21px; font-weight: 800">{{b.name}}</span>
+<span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{b.sub}}</span>
+<sc-if value="{{b.locked}}" hint-placeholder-val="{{ false }}"><span style="width: 100%; height: 8px; border-radius: 999px; background: {{t.track}}; display: block"><span style="width: {{b.pct}}; height: 8px; border-radius: 999px; background: {{t.accent}}; display: block"></span></span></sc-if>
+</span>
+</article>
+</sc-for>
+</div>
+</sc-if>
+
+<!-- TIP -->
+<sc-if value="{{is.tip}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="height: 190px; border-radius: 28px; background: {{t.mint}}; position: relative; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; gap: 22px; padding-bottom: 22px; box-sizing: border-box">
+<span style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 999px; background: #FFD27A; display: block; opacity: 0.8"></span>
+<span style="width: 58px; height: 92px; border-radius: 6px 6px 16px 16px; border: 4px solid #111312; background: linear-gradient(#F7F4EE 0 30%, #C98B4A 30%); box-sizing: border-box; display: block; opacity: 0.55"></span>
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#111312" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 30px"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+<span style="position: relative; width: 58px; height: 92px; border-radius: 6px 6px 16px 16px; border: 4px solid #111312; background: linear-gradient(#FFFFFF 0 20%, #4FD1C1 20%); box-sizing: border-box; display: block"></span>
+<span style="position: absolute; left: 20px; bottom: 16px"><dc-import name="Sippy" state="happy" size="70" hint-size="70px,70px"></dc-import></span>
+</div>
+<span style="align-self: flex-start; padding: 4px 12px; border-radius: 999px; background: {{t.sunTint}}; font-size: 14px; font-weight: 800">Daily tip · Fri 9 Oct</span>
+<h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800; letter-spacing: -0.01em">Swap one sweet drink for water</h1>
+<p style="margin: 0; font-size: 17px; line-height: 26px">Sweet drinks like es teh manis or soda add up fast. Swapping just one a day for water is an easy win.</p>
+<p style="margin: 0; font-size: 17px; line-height: 26px">Water hydrates you with no sugar. If plain water feels boring, add lemon, mint or a few slices of cucumber.</p>
+<p style="margin: 0; font-size: 17px; line-height: 26px">WHO recommends keeping free sugars below 10% of your daily energy, and says going under 5% brings extra benefits.</p>
+<a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" style="align-self: flex-start; min-height: 48px; display: inline-flex; align-items: center; gap: 6px; color: {{t.accentInk}}; font-size: 15px; font-weight: 800">Source: WHO — Healthy diet fact sheet<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg></a>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 56px; gap: 10px; margin-top: auto">
+<button type="button" style="min-height: 56px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Got it</button>
+<button type="button" aria-label="Share tip" style="width: 56px; height: 56px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"></path><path d="m16 6-4-4-4 4"></path><path d="M12 2v13"></path></svg></button>
+</div>
+</sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"screen":{"editor":"enum","options":["streak","badges","tip"],"default":"streak"},"$preview":{"width":390,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const screen = st.screen ?? (this.props.screen ?? 'streak');
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', mutedOnTint: '#C3CAC8', onInk: '#121413', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', nightTint: '#1F2A44', line: '#4A504E', track: '#3A3F3D', lockedCard: '#1C1F1E', lockedMedal: '#262A29' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', mutedOnTint: '#4A504F', onInk: '#FFFFFF', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', nightTint: '#DCE3F2', line: '#9BA3C0', track: '#E2DDD3', lockedCard: '#FFFFFF', lockedMedal: '#EFEBE3' };
+    const tabs = [['streak', 'Streak'], ['badges', 'Badges'], ['tip', 'Tip']].map(([id, label]) => ({ label, sel: screen === id, bg: screen === id ? t.surface : 'transparent', fg: screen === id ? t.ink : t.muted, pick: () => this.setState({ screen: id }) }));
+
+    const met = { 1: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1 };
+    const cal = [];
+    for (let i = 0; i < 3; i++) cal.push({ n: '', isNum: true, isFreeze: false, bg: 'transparent', fg: t.muted, border: 'none', weight: '600', aria: '' });
+    for (let d = 1; d <= 31; d++) {
+      const isMet = !!met[d], freeze = d === 2, today = d === 9, future = d > 9;
+      cal.push({
+        n: d, isNum: !freeze, isFreeze: freeze,
+        bg: isMet ? t.accent : freeze ? t.nightTint : 'transparent',
+        fg: isMet ? t.onAccent : future ? t.muted : t.ink,
+        border: today ? '2px solid ' + t.ink : 'none',
+        weight: isMet || today ? '800' : '600',
+        aria: 'October ' + d + (isMet ? ', goal met' : freeze ? ', streak freeze used' : today ? ', today' : future ? '' : ', missed')
+      });
+    }
+    while (cal.length % 7) cal.push({ n: '', isNum: true, isFreeze: false, bg: 'transparent', fg: t.muted, border: 'none', weight: '600', aria: '' });
+
+    const B = [
+      { name: 'First sip', sub: 'Unlocked Sep 1', icon: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z', medal: t.mint, ring: '#0B7F75' },
+      { name: '7-day streak', sub: '6 of 7 days', icon: 'M12 22c4 0 7-2.7 7-6.5 0-3.5-2.5-5.5-4-8-.6 2-1.6 3-3 3.5C12.5 8 11.5 4.5 9 2c0 4-4 6.5-4 13.5C5 19.3 8 22 12 22z', locked: true, pct: '86%' },
+      { name: 'Early bird', sub: 'A glass before 7:00', icon: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4', medal: '#FFD27A', ring: '#C77700' },
+      { name: 'Ramadan complete', sub: 'Day 12 of 30', icon: 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z', locked: true, pct: '40%' },
+      { name: 'Heatwave hero', sub: 'Hit your goal on a 34°C day', icon: 'M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0zM12 9v7', medal: '#FFE1D8', ring: '#E8590C', wide: true }
+    ];
+    const badges = B.map((b) => ({
+      ...b, locked: !!b.locked, pct: b.pct || '0%',
+      cardBg: b.locked ? t.lockedCard : t.surface,
+      medal: b.locked ? t.lockedMedal : b.medal, ring: b.locked ? t.track : b.ring,
+      iconColor: b.locked ? t.muted : '#111312',
+      span: b.wide ? 'span 2' : 'auto', dir: b.wide ? 'row' : 'column', align: b.wide ? 'start' : 'center', itemsAlign: b.wide ? 'flex-start' : 'center',
+      aria: b.name + (b.locked ? ', locked, ' : ', unlocked, ') + b.sub
+    }));
+
+    return {
+      t, tabs, cal, badges,
+      is: { streak: screen === 'streak', badges: screen === 'badges', tip: screen === 'tip' },
+      freezeBtn: st.freeze ? 'Freeze added — thanks!' : 'Watch a short ad for 1 freeze',
+      earnFreeze: () => this.setState({ freeze: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

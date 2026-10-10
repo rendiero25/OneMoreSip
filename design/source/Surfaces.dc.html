@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>System surfaces</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1600px; height: 1820px; box-sizing: border-box; padding: 48px; background: {{t.board}}; color: {{t.boardInk}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; gap: 32px">
+
+<header style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7">UI-17 · {{themeLabel}}</span><h1 style="margin: 0; font-size: 40px; line-height: 46px; font-weight: 800">Notifications, widgets, Live Activity, watch</h1></div>
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: {{t.chipBg}}; font-size: 15px; font-weight: 800"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M5.6 5.6l12.8 12.8"></path></svg>No ads on any system surface</span>
+</header>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px">
+
+<!-- iOS notifications -->
+<section aria-label="iOS notifications" style="height: 560px; border-radius: 32px; background: {{t.wallIOS}}; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; align-items: center">
+<div style="align-self: stretch; display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; color: {{t.wallInk}}"><span>iOS · Notifications</span><span style="opacity: 0.75">Lock screen</span></div>
+<div style="width: 380px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{notifs}}" as="n" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="border-radius: 22px; background: {{t.iosCard}}; color: {{t.iosInk}}; padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start; box-shadow: 0 6px 20px rgba(0,0,0,0.12)">
+<span style="width: 38px; height: 38px; flex-shrink: 0; border-radius: 10px; background: #0B7F75; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg></span>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 1px"><span style="display: flex; justify-content: space-between; font-size: 14px"><b style="font-weight: 800">Sip!</b><span style="opacity: 0.6">{{n.time}}</span></span><span style="font-size: 15px; line-height: 20px; font-weight: 800">{{n.title}}</span><span style="font-size: 15px; line-height: 20px">{{n.body}}</span></span>
+</div>
+<sc-if value="{{n.hasActions}}" hint-placeholder-val="{{ false }}">
+<div style="border-radius: 18px; background: {{t.iosCard}}; color: {{t.iosInk}}; overflow: hidden; display: flex; flex-direction: column">
+<sc-for list="{{n.actions}}" as="a" hint-placeholder-count="2"><span style="min-height: 44px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; font-size: 16px; font-weight: 700; border-top: {{a.divider}}; color: {{a.color}}">{{a.label}}</span></sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- Android notifications -->
+<section aria-label="Android notifications" style="height: 560px; border-radius: 32px; background: {{t.wallAnd}}; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; align-items: center">
+<div style="align-self: stretch; display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; color: {{t.wallInk}}"><span>Android · Notifications</span><span style="opacity: 0.75">Shade</span></div>
+<div style="width: 380px; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{notifs}}" as="n" hint-placeholder-count="3">
+<div style="border-radius: 24px; background: {{t.andCard}}; color: {{t.andInk}}; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="display: flex; align-items: center; gap: 6px; font-size: 14px; opacity: 0.8"><span style="width: 20px; height: 20px; border-radius: 999px; background: #0B7F75; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg></span><b style="font-weight: 700">Sip!</b> · {{n.time}}</span>
+<span style="font-size: 16px; line-height: 21px; font-weight: 800">{{n.title}}</span>
+<span style="font-size: 15px; line-height: 20px; opacity: 0.85">{{n.body}}</span>
+<sc-if value="{{n.hasActions}}" hint-placeholder-val="{{ false }}">
+<span style="display: flex; gap: 8px; padding-top: 4px"><sc-for list="{{n.actions}}" as="a" hint-placeholder-count="2"><span style="min-height: 40px; padding: 0 16px; border-radius: 999px; background: {{t.andChip}}; color: {{t.andChipInk}}; display: inline-flex; align-items: center; font-size: 14px; font-weight: 800">{{a.label}}</span></sc-for></span>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- iOS widgets -->
+<section aria-label="iOS widgets" style="height: 520px; border-radius: 32px; background: {{t.wallIOS}}; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; color: {{t.wallInk}}"><span>iOS · Widgets</span><span style="opacity: 0.75">Home &amp; lock screen</span></div>
+<div style="display: flex; gap: 20px; align-items: flex-start">
+<div style="width: 170px; height: 170px; border-radius: 24px; background: {{t.widget}}; color: {{t.widgetInk}}; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+<span style="position: relative; width: 84px; height: 84px"><svg width="84" height="84" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="{{t.track}}" stroke-width="9"></circle><circle cx="32" cy="32" r="26" fill="none" stroke="{{t.accent}}" stroke-width="9" stroke-linecap="round" stroke-dasharray="88 164" transform="rotate(-90 32 32)"></circle></svg><span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800">54%</span></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: 20px; line-height: 24px; font-weight: 800">1,250 ml</span><span style="font-size: 14px; opacity: 0.7; font-weight: 600">of 2,300 ml</span></span>
+</div>
+<div style="width: 364px; height: 170px; border-radius: 24px; background: {{t.widget}}; color: {{t.widgetInk}}; padding: 14px; box-sizing: border-box; display: flex; gap: 14px; align-items: stretch">
+<div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between">
+<span style="display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 800; opacity: 0.75"><svg width="14" height="14" viewBox="0 0 24 24" fill="#0B7F75" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg>Sip!</span>
+<span style="font-size: 30px; line-height: 34px; font-weight: 800">1,250</span>
+<span style="font-size: 14px; font-weight: 600; opacity: 0.7">of 2,300 ml · Hydrated</span>
+<span style="height: 8px; border-radius: 999px; background: {{t.track}}; display: block"><span style="width: 54%; height: 8px; border-radius: 999px; background: {{t.accent}}; display: block"></span></span>
+</div>
+<div style="width: 120px; display: flex; flex-direction: column; gap: 8px">
+<span style="flex: 1 1 0; border-radius: 16px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800">+250 ml</span>
+<span style="flex: 1 1 0; border-radius: 16px; background: {{t.track}}; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800">+500 ml</span>
+</div>
+</div>
+</div>
+<div style="border-radius: 24px; background: {{t.lockBand}}; padding: 18px; display: flex; gap: 20px; align-items: center">
+<span style="font-size: 14px; font-weight: 800; color: #FFFFFF; opacity: 0.8; width: 80px">Lock screen</span>
+<div style="position: relative; width: 76px; height: 76px; border-radius: 999px; background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; color: #FFFFFF">
+<svg width="76" height="76" viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; inset: 0"><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="5"></circle><circle cx="32" cy="32" r="27" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-dasharray="92 170" transform="rotate(-90 32 32)"></circle></svg>
+<span style="display: flex; flex-direction: column; align-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg><span style="font-size: 15px; font-weight: 800">54%</span></span>
+</div>
+<div style="width: 172px; height: 76px; border-radius: 18px; background: rgba(255,255,255,0.18); color: #FFFFFF; padding: 10px 12px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 700; opacity: 0.85">Sip! · next 10:30</span>
+<span style="font-size: 17px; font-weight: 800">1,250 / 2,300 ml</span>
+<span style="height: 6px; border-radius: 999px; background: rgba(255,255,255,0.3); display: block"><span style="width: 54%; height: 6px; border-radius: 999px; background: #FFFFFF; display: block"></span></span>
+</div>
+</div>
+</section>
+
+<!-- Live Activity + Dynamic Island -->
+<section aria-label="Live Activity and Dynamic Island" style="height: 520px; border-radius: 32px; background: {{t.wallIOS}}; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; align-items: center">
+<div style="align-self: stretch; display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; color: {{t.wallInk}}"><span>iOS · Live Activity &amp; Dynamic Island</span></div>
+<div style="width: 250px; height: 37px; border-radius: 999px; background: #000000; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; box-sizing: border-box">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="#4FD1C1" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg>
+<span style="font-size: 14px; font-weight: 800; color: #4FD1C1">54%</span>
+</div>
+<div style="width: 370px; border-radius: 44px; background: #000000; color: #FFFFFF; padding: 18px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<dc-import name="Sippy" state="happy" size="44" hint-size="44px,44px"></dc-import>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column"><span style="font-size: 14px; opacity: 0.7; font-weight: 700">Today</span><span style="font-size: 22px; line-height: 26px; font-weight: 800">1,250 / 2,300 ml</span></span>
+<span style="min-height: 44px; padding: 0 16px; border-radius: 999px; background: #4FD1C1; color: #0A1F1D; display: inline-flex; align-items: center; font-size: 16px; font-weight: 800">+250</span>
+</div>
+<span style="height: 8px; border-radius: 999px; background: rgba(255,255,255,0.2); display: block"><span style="width: 54%; height: 8px; border-radius: 999px; background: #4FD1C1; display: block"></span></span>
+</div>
+<div style="width: 370px; border-radius: 24px; background: {{t.liveLock}}; color: {{t.liveLockInk}}; padding: 16px 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 14px; font-weight: 800; opacity: 0.7">Lock screen Live Activity</span>
+<div style="display: flex; align-items: center; gap: 12px">
+<dc-import name="Sippy" state="happy" size="40" hint-size="40px,40px"></dc-import>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column"><span style="font-size: 20px; line-height: 24px; font-weight: 800">1,250 / 2,300 ml</span><span style="font-size: 14px; opacity: 0.75; font-weight: 600">Next reminder 10:30</span></span>
+<span style="min-height: 44px; padding: 0 16px; border-radius: 999px; background: #0B7F75; color: #FFFFFF; display: inline-flex; align-items: center; font-size: 16px; font-weight: 800">+250</span>
+</div>
+<span style="height: 8px; border-radius: 999px; background: {{t.liveTrack}}; display: block"><span style="width: 54%; height: 8px; border-radius: 999px; background: #0B7F75; display: block"></span></span>
+</div>
+</section>
+
+<!-- Android widgets -->
+<section aria-label="Android widgets" style="height: 420px; border-radius: 32px; background: {{t.wallAnd}}; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; color: {{t.wallInk}}"><span>Android · Widgets</span><span style="opacity: 0.75">2×2 · 4×2</span></div>
+<div style="display: flex; gap: 20px; align-items: flex-start">
+<div style="width: 180px; height: 180px; border-radius: 28px; background: {{t.andWidget}}; color: {{t.andWidgetInk}}; padding: 14px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: space-between">
+<span style="position: relative; width: 92px; height: 92px"><svg width="92" height="92" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="{{t.andTrack}}" stroke-width="9"></circle><circle cx="32" cy="32" r="26" fill="none" stroke="{{t.accent}}" stroke-width="9" stroke-linecap="round" stroke-dasharray="88 164" transform="rotate(-90 32 32)"></circle></svg><span style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center"><span style="font-size: 17px; font-weight: 800">1,250</span><span style="font-size: 14px; font-weight: 600; opacity: 0.75">ml</span></span></span>
+<span style="align-self: stretch; min-height: 44px; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800">+250 ml</span>
+</div>
+<div style="width: 380px; height: 180px; border-radius: 28px; background: {{t.andWidget}}; color: {{t.andWidgetInk}}; padding: 16px; box-sizing: border-box; display: flex; gap: 16px; align-items: stretch">
+<div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between">
+<span style="display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 800; opacity: 0.8"><svg width="14" height="14" viewBox="0 0 24 24" fill="{{t.accent}}" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg>Sip!</span>
+<span style="font-size: 32px; line-height: 36px; font-weight: 800">1,250 ml</span>
+<span style="font-size: 14px; font-weight: 600; opacity: 0.8">of 2,300 ml · next 10:30</span>
+<span style="height: 10px; border-radius: 999px; background: {{t.andTrack}}; display: block"><span style="width: 54%; height: 10px; border-radius: 999px; background: {{t.accent}}; display: block"></span></span>
+</div>
+<div style="width: 128px; display: flex; flex-direction: column; gap: 8px">
+<span style="flex: 1 1 0; border-radius: 20px; background: {{t.accent}}; color: {{t.onAccent}}; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800">+250 ml</span>
+<span style="flex: 1 1 0; border-radius: 20px; background: {{t.andTrack}}; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800">+500 ml</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Watch -->
+<section aria-label="Apple Watch and Wear OS" style="height: 420px; border-radius: 32px; background: {{t.wallWatch}}; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; color: {{t.wallInk}}"><span>Apple Watch · Wear OS</span><span style="opacity: 0.75">App · complication · tile</span></div>
+<div style="display: flex; gap: 22px; align-items: center">
+<div style="position: relative; width: 196px; height: 240px; border-radius: 56px; background: #000000; border: 6px solid #2B302E; box-sizing: border-box; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 12px">
+<span aria-hidden="true" style="position: absolute; right: -12px; top: 60px; width: 8px; height: 40px; border-radius: 4px; background: #3A3F3D; display: block"></span>
+<span style="position: relative; width: 104px; height: 104px"><svg width="104" height="104" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="#1F4A45" stroke-width="8"></circle><circle cx="32" cy="32" r="27" fill="none" stroke="#4FD1C1" stroke-width="8" stroke-linecap="round" stroke-dasharray="92 170" transform="rotate(-90 32 32)"></circle></svg><span style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center"><span style="font-size: 20px; font-weight: 800">1,250</span><span style="font-size: 14px; opacity: 0.7">/ 2,300</span></span></span>
+<span style="align-self: stretch; min-height: 44px; border-radius: 999px; background: #4FD1C1; color: #0A1F1D; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800">+250 ml</span>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div style="position: relative; width: 64px; height: 64px; border-radius: 999px; background: #000000; display: flex; align-items: center; justify-content: center">
+<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; inset: 0"><circle cx="32" cy="32" r="26" fill="none" stroke="#1F4A45" stroke-width="6"></circle><circle cx="32" cy="32" r="26" fill="none" stroke="#4FD1C1" stroke-width="6" stroke-linecap="round" stroke-dasharray="88 164" transform="rotate(-90 32 32)"></circle></svg>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="#4FD1C1" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"></path></svg>
+</div>
+<span style="font-size: 14px; font-weight: 700; color: {{t.wallInk}}">Complication</span>
+</div>
+<div style="width: 236px; height: 236px; border-radius: 999px; background: #000000; border: 6px solid #2B302E; box-sizing: border-box; color: #FFFFFF; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px">
+<svg width="224" height="224" viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; inset: 0"><circle cx="32" cy="32" r="29" fill="none" stroke="#1F4A45" stroke-width="2.6"></circle><circle cx="32" cy="32" r="29" fill="none" stroke="#4FD1C1" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="98 183" transform="rotate(-90 32 32)"></circle></svg>
+<span style="font-size: 14px; opacity: 0.7; font-weight: 700">Wear OS tile</span>
+<span style="font-size: 26px; font-weight: 800">1,250 ml</span>
+<span style="display: flex; gap: 6px"><span style="min-height: 44px; padding: 0 14px; border-radius: 999px; background: #4FD1C1; color: #0A1F1D; display: inline-flex; align-items: center; font-size: 15px; font-weight: 800">+250</span><span style="min-height: 44px; padding: 0 14px; border-radius: 999px; background: #262A29; display: inline-flex; align-items: center; font-size: 15px; font-weight: 800">+500</span></span>
+</div>
+</div>
+</section>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"$preview":{"width":1600,"height":1820}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'dark';
+    const t = dark
+      ? { board: '#0B0D0C', boardInk: '#ECEEEC', chipBg: '#1C1F1E', wallIOS: '#1F2A44', wallAnd: '#1A2B29', wallWatch: '#1C1F1E', wallInk: '#ECEEEC', iosCard: 'rgba(44,48,47,0.92)', iosInk: '#ECEEEC', andCard: '#2B302E', andInk: '#ECEEEC', andChip: '#1F4A45', andChipInk: '#BFEAE3', widget: '#1C1F1E', widgetInk: '#ECEEEC', track: '#3A3F3D', accent: '#4FD1C1', onAccent: '#0A1F1D', lockBand: '#111827', liveLock: 'rgba(44,48,47,0.92)', liveLockInk: '#ECEEEC', liveTrack: '#3A3F3D', andWidget: '#1F4A45', andWidgetInk: '#ECEEEC', andTrack: '#163330' }
+      : { board: '#F7F4EE', boardInk: '#111312', chipBg: '#FFFFFF', wallIOS: '#DCE3F2', wallAnd: '#D7F2EE', wallWatch: '#EFEBE3', wallInk: '#111312', iosCard: 'rgba(255,255,255,0.88)', iosInk: '#111312', andCard: '#FFFFFF', andInk: '#111312', andChip: '#D7F2EE', andChipInk: '#075E56', widget: '#FFFFFF', widgetInk: '#111312', track: '#EFEBE3', accent: '#0B7F75', onAccent: '#FFFFFF', lockBand: '#1F2A44', liveLock: 'rgba(255,255,255,0.88)', liveLockInk: '#111312', liveTrack: '#E2DDD3', andWidget: '#BFEAE3', andWidgetInk: '#111312', andTrack: '#E3F5F1' };
+    const act = (labels) => labels.map((l, k) => ({ label: l, divider: k === 0 ? 'none' : '1px solid ' + (dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'), color: k === 0 ? (dark ? '#4FD1C1' : '#0A6E66') : 'inherit' }));
+    const notifs = [
+      { time: 'now', title: 'Sippy here 💧', body: 'One more sip?', actions: act(['✓ 250 ml', 'Later']) },
+      { time: '13:40', title: 'Check on Mom', body: 'No drink logged since 10:00.', actions: act(['Call', 'Send a nudge']) },
+      { time: '07:02', title: 'Hot day today', body: 'Your goal is +500 ml today.', actions: [] }
+    ].map((n) => ({ ...n, hasActions: n.actions.length > 0 }));
+    return { t, notifs, themeLabel: dark ? 'Dark' : 'Light' };
+  }
+}
+</script>
+</body>
+</html>

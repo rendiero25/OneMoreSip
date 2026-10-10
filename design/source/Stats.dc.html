@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Statistics and history</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: {{h}}; background: {{t.bg}}; color: {{t.ink}}; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-variant-numeric: tabular-nums; overflow: hidden">
+<div style="position: absolute; inset: 0; overflow-y: auto; box-sizing: border-box; padding: 52px 20px {{padBottom}}; display: flex; flex-direction: column; gap: 12px">
+
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<h1 style="margin: 0; font-size: 30px; line-height: 36px; font-weight: 800">Stats</h1>
+<sc-if value="{{premium}}" hint-placeholder-val="{{ false }}"><span style="padding: 4px 12px; border-radius: 999px; background: #FFD27A; color: #3A2600; font-size: 14px; font-weight: 800">Premium</span></sc-if>
+</header>
+
+<div role="tablist" aria-label="View" style="height: 52px; border-radius: 999px; background: {{t.surfaceAlt}}; padding: 4px; box-sizing: border-box; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{tabs}}" as="tb" hint-placeholder-count="2">
+<button type="button" role="tab" aria-selected="{{tb.sel}}" onClick="{{tb.pick}}" style="border: none; border-radius: 999px; background: {{tb.bg}}; color: {{tb.fg}}; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">{{tb.label}}</button>
+</sc-for>
+</div>
+
+<!-- STATISTICS -->
+<sc-if value="{{isStats}}" hint-placeholder-val="{{ true }}">
+<div role="radiogroup" aria-label="Range" style="height: 48px; border-radius: 999px; border: 2px solid {{t.line}}; padding: 3px; box-sizing: border-box; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px">
+<sc-for list="{{ranges}}" as="r" hint-placeholder-count="3">
+<button type="button" role="radio" aria-checked="{{r.sel}}" onClick="{{r.pick}}" style="border: none; border-radius: 999px; background: {{r.bg}}; color: {{r.fg}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">{{r.label}}</button>
+</sc-for>
+</div>
+
+<section aria-labelledby="chart-h" style="border-radius: 28px; background: {{t.surface}}; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 id="chart-h" style="margin: 0; font-size: 20px; line-height: 26px; font-weight: 800">{{chartTitle}}</h2>
+<span style="font-size: 14px; color: {{t.muted}}; font-weight: 600">{{chartSub}}</span>
+</div>
+<div aria-live="polite" style="min-height: 44px; border-radius: 16px; background: {{t.surfaceAlt}}; padding: 8px 12px; box-sizing: border-box; display: flex; align-items: center; font-size: 15px; line-height: 20px; font-weight: 700">{{readout}}</div>
+<div style="position: relative; height: 150px; display: grid; grid-template-columns: {{cols}}; gap: {{gap}}; align-items: end">
+<sc-if value="{{showGoal}}" hint-placeholder-val="{{ true }}">
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: {{goalY}}; border-top: 2px dashed {{t.goalLine}}; z-index: 1"></div>
+<span aria-hidden="true" style="position: absolute; right: 0; bottom: {{goalLabelY}}; padding: 1px 6px; border-radius: 6px; background: {{t.surface}}; font-size: 14px; font-weight: 700; color: {{t.muted}}; z-index: 2">Goal 2,300</span>
+</sc-if>
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="7">
+<button type="button" aria-label="{{b.aria}}" aria-pressed="{{b.sel}}" onClick="{{b.pick}}" style="height: 150px; min-width: 0; border: none; background: transparent; padding: 0; display: flex; align-items: flex-end; justify-content: center; cursor: pointer">
+<span style="width: 100%; max-width: 32px; height: {{b.h}}; box-sizing: border-box; border-radius: {{b.radius}}; background: {{b.bg}}; border: {{b.border}}; outline: {{b.outline}}; outline-offset: 1px; display: block"></span>
+</button>
+</sc-for>
+<sc-if value="{{monthLocked}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: -4px; top: -4px; bottom: -4px; width: 77%; border-radius: 20px; background: {{t.lockVeil}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 8px; box-sizing: border-box; text-align: center; z-index: 3">
+<span style="width: 40px; height: 40px; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>
+<span style="font-size: 15px; line-height: 20px; font-weight: 800">See your full history with Premium</span>
+<button type="button" style="min-height: 44px; padding: 0 16px; border: none; border-radius: 999px; background: {{t.ink}}; color: {{t.onInk}}; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Try 7 days free</button>
+</div>
+</sc-if>
+</div>
+<div aria-hidden="true" style="display: grid; grid-template-columns: {{cols}}; gap: {{gap}}">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="7"><span style="text-align: center; font-size: 14px; line-height: 18px; font-weight: {{b.lw}}; color: {{b.lc}}; white-space: nowrap; overflow: visible">{{b.label}}</span></sc-for>
+</div>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{kpis}}" as="k" hint-placeholder-count="5">
+<div style="grid-column: {{k.span}}; min-height: 104px; border-radius: 28px; background: {{k.bg}}; padding: 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 14px; line-height: 18px; color: {{t.mutedOnTint}}; font-weight: 700">{{k.label}}</span>
+<span style="margin-top: auto; font-size: {{k.size}}; line-height: 1.15; font-weight: 800; letter-spacing: -0.01em">{{k.value}}</span>
+<span style="font-size: 14px; line-height: 18px; color: {{t.mutedOnTint}}; font-weight: 600">{{k.sub}}</span>
+</div>
+</sc-for>
+</div>
+
+<sc-if value="{{showLockCard}}" hint-placeholder-val="{{ true }}">
+<section aria-labelledby="lock-h" style="border-radius: 28px; background: {{t.ink}}; color: {{t.onInk}}; padding: 16px; display: flex; align-items: center; gap: 14px">
+<span style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 999px; background: #FFD27A; color: #3A2600; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>
+<div style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px"><h2 id="lock-h" style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">See your full history with Premium</h2><span style="font-size: 14px; line-height: 18px; opacity: 0.8; font-weight: 600">Free keeps the last 7 days.</span></div>
+<button type="button" aria-label="See Premium" style="width: 48px; height: 48px; flex-shrink: 0; border: none; border-radius: 999px; background: {{t.onInkSoft}}; color: {{t.onInk}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button>
+</section>
+</sc-if>
+</sc-if>
+
+<!-- HISTORY -->
+<sc-if value="{{isHistory}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{entries}}" as="e" hint-placeholder-count="8">
+<sc-if value="{{e.isHeader}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: baseline; justify-content: space-between; padding: 8px 4px 0"><h2 style="margin: 0; font-size: 17px; line-height: 22px; font-weight: 800">{{e.title}}</h2><span style="font-size: 15px; font-weight: 800; color: {{t.accentInk}}">{{e.total}}</span></div>
+</sc-if>
+<sc-if value="{{e.isRow}}" hint-placeholder-val="{{ true }}">
+<div style="min-height: 68px; border-radius: 22px; background: {{t.surface}}; padding: 8px 6px 8px 12px; box-sizing: border-box; display: flex; align-items: center; gap: 10px">
+<span style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 14px; background: {{e.well}}; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{e.icon}}"></path></svg></span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span style="font-size: 16px; line-height: 21px; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{e.name}}</span><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">{{e.time}}</span></span>
+<span style="font-size: 16px; font-weight: 800; white-space: nowrap">{{e.ml}} ml</span>
+<button type="button" aria-label="{{e.editLabel}}" style="width: 44px; height: 48px; flex-shrink: 0; border: none; border-radius: 14px; background: transparent; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg></button>
+<button type="button" aria-label="{{e.delLabel}}" onClick="{{e.del}}" style="width: 44px; height: 48px; flex-shrink: 0; border: none; border-radius: 14px; background: transparent; color: {{t.danger}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M10 11v6M14 11v6"></path><path d="M6 7l1 13h10l1-13"></path><path d="M9 7V4h6v3"></path></svg></button>
+</div>
+</sc-if>
+<sc-if value="{{e.isAd}}" hint-placeholder-val="{{ false }}">
+<aside aria-label="Advertisement" style="position: relative; border-radius: 28px; background: {{t.surface}}; padding: 14px; display: flex; flex-direction: column; gap: 10px; margin: 4px 0">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="padding: 2px 10px; border-radius: 8px; border: 1.5px solid {{t.muted}}; color: {{t.muted}}; font-size: 14px; font-weight: 800">Ad</span>
+<button type="button" aria-label="Ad options" aria-expanded="{{adMenu}}" onClick="{{toggleAdMenu}}" style="width: 48px; height: 48px; border: none; border-radius: 999px; background: {{t.surfaceAlt}}; color: {{t.ink}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg></button>
+</div>
+<div style="display: flex; gap: 12px; align-items: center">
+<div style="width: 88px; height: 88px; flex-shrink: 0; border-radius: 20px; background: {{t.surfaceAlt}}; display: flex; align-items: center; justify-content: center; font-size: 14px; color: {{t.muted}}; text-align: center; font-weight: 600">[Image]</div>
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><span style="font-size: 17px; line-height: 22px; font-weight: 800">[Advertiser headline]</span><span style="font-size: 14px; line-height: 18px; color: {{t.muted}}; font-weight: 600">[Advertiser name] · Sponsored</span></div>
+</div>
+<button type="button" style="min-height: 48px; border: 2px solid {{t.ink}}; border-radius: 999px; background: transparent; color: {{t.ink}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">[Call to action]</button>
+<sc-if value="{{adMenu}}" hint-placeholder-val="{{ false }}">
+<div role="menu" style="position: absolute; top: 66px; right: 14px; width: 200px; border-radius: 20px; background: {{t.surface}}; box-shadow: 0 12px 32px rgba(17,19,18,0.22), 0 2px 6px rgba(17,19,18,0.10); padding: 6px; display: flex; flex-direction: column; z-index: 4">
+<button type="button" role="menuitem" style="min-height: 48px; border: none; border-radius: 14px; background: transparent; color: {{t.ink}}; text-align: left; padding: 0 14px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Report ad</button>
+<button type="button" role="menuitem" style="min-height: 48px; border: none; border-radius: 14px; background: transparent; color: {{t.ink}}; text-align: left; padding: 0 14px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">Why this ad?</button>
+<button type="button" role="menuitem" style="min-height: 48px; border: none; border-radius: 14px; background: transparent; color: {{t.accentInk}}; text-align: left; padding: 0 14px; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Remove ads</button>
+</div>
+</sc-if>
+</aside>
+</sc-if>
+</sc-for>
+</sc-if>
+</div>
+
+<nav aria-label="Main" style="position: absolute; left: 20px; right: 20px; bottom: {{navBottom}}; height: 72px; border-radius: 999px; background: {{t.nav}}; box-shadow: 0 12px 32px rgba(17,19,18,0.22), 0 2px 6px rgba(17,19,18,0.10); display: flex; align-items: center; justify-content: space-between; padding: 0 10px; box-sizing: border-box; z-index: 5">
+<a href="#home" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Home</a>
+<a href="#stats" aria-current="page" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOn}}; text-decoration: none; font-size: 14px; font-weight: 800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"></path><path d="M12 20V4"></path><path d="M19 20v-6"></path></svg>Stats</a>
+<button type="button" aria-label="Add a drink" style="width: 72px; height: 72px; margin-top: -40px; border: 5px solid {{t.bg}}; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; box-shadow: 0 10px 24px {{t.fabShadow}}; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+<a href="#family" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><circle cx="17.5" cy="9.5" r="2.5"></circle><path d="M16 14.2a5 5 0 0 1 6 4.8"></path></svg>Family</a>
+<a href="#me" style="width: 64px; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: {{t.navOff}}; text-decoration: none; font-size: 14px; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Me</a>
+</nav>
+
+<sc-if value="{{showBanner}}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Advertisement" style="position: absolute; left: 0; right: 0; bottom: 0; height: 64px; background: {{t.surface}}; border-top: 1px solid {{t.line}}; display: flex; align-items: center; gap: 10px; padding: 0 12px; box-sizing: border-box; z-index: 6">
+<span style="padding: 2px 8px; border-radius: 6px; border: 1.5px solid {{t.muted}}; color: {{t.muted}}; font-size: 14px; font-weight: 800; flex-shrink: 0">Ad</span>
+<div style="flex: 1 1 auto; height: 50px; border-radius: 8px; background: {{t.surfaceAlt}}; display: flex; align-items: center; justify-content: center; font-size: 14px; color: {{t.muted}}; font-weight: 600">[Adaptive banner ad]</div>
+</aside>
+</sc-if>
+<p style="margin: 0">UI-10 — Paywall, Remove Ads, top-up (P1)</p></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"tab":{"editor":"enum","options":["stats","history"],"default":"stats"},"premium":{"editor":"boolean","default":false},"range":{"editor":"enum","options":["day","week","month"],"default":"week"},"height":{"editor":"int","min":640,"max":2000,"default":1240},"$preview":{"width":390,"height":1240}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = this.state || {};
+    const dark = this.props.theme === 'dark';
+    const premium = this.props.premium === true || this.props.premium === 'true';
+    const tab = st.tab ?? (this.props.tab ?? 'stats');
+    const range = st.range ?? (this.props.range ?? 'week');
+    const H = Number(this.props.height ?? 1240) || 1240;
+    const t = dark
+      ? { bg: '#121413', surface: '#1C1F1E', surfaceAlt: '#262A29', ink: '#ECEEEC', muted: '#9BA3A1', mutedOnTint: '#C3CAC8', onInk: '#121413', onInkSoft: 'rgba(18,20,19,0.12)', accent: '#4FD1C1', onAccent: '#0A1F1D', accentInk: '#4FD1C1', accentTint: '#163330', mint: '#1F4A45', sunTint: '#3A3019', coralTint: '#3D251F', line: 'rgba(236,238,236,0.12)', goalLine: '#ECEEEC', missFill: 'rgba(242,184,92,0.18)', missLine: '#F2B85C', lockBar: '#262A29', lockVeil: 'rgba(28,31,30,0.92)', danger: '#FF8F7A', nav: '#2B302E', navOn: '#ECEEEC', navOff: 'rgba(236,238,236,0.66)', fabShadow: 'rgba(0,0,0,0.5)' }
+      : { bg: '#F7F4EE', surface: '#FFFFFF', surfaceAlt: '#EFEBE3', ink: '#111312', muted: '#5B6160', mutedOnTint: '#4A504F', onInk: '#FFFFFF', onInkSoft: 'rgba(255,255,255,0.14)', accent: '#0B7F75', onAccent: '#FFFFFF', accentInk: '#0A6E66', accentTint: '#E3F5F1', mint: '#BFEAE3', sunTint: '#FFEFC7', coralTint: '#FFE1D8', line: 'rgba(17,19,18,0.10)', goalLine: '#111312', missFill: '#FFE9C2', missLine: '#C77700', lockBar: '#E7E2D8', lockVeil: 'rgba(255,255,255,0.92)', danger: '#A8321F', nav: '#111312', navOn: '#FFFFFF', navOff: 'rgba(255,255,255,0.68)', fabShadow: 'rgba(11,127,117,0.35)' };
+    const fmt = (n) => n.toLocaleString('en-US');
+    const goal = 2300;
+
+    const tabs = [['stats', 'Statistics'], ['history', 'History']].map(([id, label]) => ({ label, sel: tab === id, bg: tab === id ? t.surface : 'transparent', fg: tab === id ? t.ink : t.muted, pick: () => this.setState({ tab: id }) }));
+    const ranges = [['day', 'Day'], ['week', 'Week'], ['month', 'Month']].map(([id, label]) => ({ label, sel: range === id, bg: range === id ? t.ink : 'transparent', fg: range === id ? t.onInk : t.ink, pick: () => this.setState({ range: id, sel: null }) }));
+
+    const week = [['Mon', 'M', 2300], ['Tue', 'T', 2450], ['Wed', 'W', 1600], ['Thu', 'T', 2350], ['Fri', 'F', 1850], ['Sat', 'S', 2600], ['Sun', 'S', 2500]];
+    const older = [2100, 2400, 1900, 2300, 2500, 2200, 1800, 2350, 2450, 2000, 2300, 2600, 2150, 1950, 2400, 2300, 2700, 2250, 2050, 2350, 2500, 2100, 2750];
+    const monthVals = older.concat(week.map((w) => w[2]));
+    const monthNames = monthVals.map((_, i) => { const d = new Date(2026, 8, 10 + i); return d.toLocaleString('en-US', { month: 'short' }) + ' ' + d.getDate(); });
+    const dayBlocks = [['6–9', 450], ['9–12', 250], ['12–15', 550], ['15–18', 0], ['18–21', 0], ['21–24', 0]];
+
+    let data, max, cols, gap, showGoal, chartTitle, chartSub, defSel, radius;
+    if (range === 'day') {
+      data = dayBlocks.map(([l, v]) => ({ name: l, label: l.split('–')[0], v }));
+      max = 800; cols = 'repeat(6, minmax(0, 1fr))'; gap = '10px'; showGoal = false; chartTitle = 'Today'; chartSub = '1,250 of 2,300 ml'; defSel = 2; radius = '10px 10px 4px 4px';
+    } else if (range === 'month') {
+      data = monthVals.map((v, i) => ({ name: monthNames[i], label: (i % 7 === 0) ? monthNames[i] : '', v }));
+      max = 2800; cols = 'repeat(30, minmax(0, 1fr))'; gap = '3px'; showGoal = true; chartTitle = 'Last 30 days'; chartSub = 'Sep 10 – Oct 9'; defSel = 29; radius = '4px 4px 2px 2px';
+    } else {
+      data = week.map(([n, s, v]) => ({ name: n, label: s, v }));
+      max = 2800; cols = 'repeat(7, minmax(0, 1fr))'; gap = '8px'; showGoal = true; chartTitle = 'This week'; chartSub = '3–9 Oct'; defSel = 6; radius = '10px 10px 4px 4px';
+    }
+    const monthLocked = range === 'month' && !premium;
+    const sel = st.sel ?? defSel;
+    const bars = data.map((d, i) => {
+      const locked = monthLocked && i < 23;
+      const met = range === 'day' ? true : d.v >= goal;
+      const isSel = sel === i && !locked;
+      return {
+        label: d.label, sel: isSel,
+        aria: locked ? d.name + ': locked' : d.name + ': ' + fmt(d.v) + ' ml' + (range === 'day' ? '' : met ? ', on target' : ', below goal'),
+        h: locked ? '28px' : Math.max(4, Math.round(d.v / max * 150)) + 'px',
+        bg: locked ? t.lockBar : (d.v === 0 ? t.surfaceAlt : met ? t.accent : t.missFill),
+        border: locked || met || d.v === 0 ? 'none' : (range === 'month' ? '1px dashed ' : '2px dashed ') + t.missLine,
+        outline: isSel ? '3px solid ' + t.ink : 'none',
+        radius,
+        lw: isSel ? '800' : '600', lc: isSel ? t.ink : t.muted,
+        pick: () => { if (!locked) this.setState({ sel: i }); }
+      };
+    });
+    const sd = data[sel] || data[defSel];
+    const diff = sd.v - goal;
+    const readout = range === 'day'
+      ? sd.name + ' · ' + fmt(sd.v) + ' ml'
+      : sd.name + ' · ' + fmt(sd.v) + ' ml · ' + (diff >= 0 ? 'on target' : fmt(-diff) + ' ml below goal');
+
+    const statsOf = (vals, names) => {
+      const avg = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+      let bi = 0; vals.forEach((v, i) => { if (v > vals[bi]) bi = i; });
+      return { avg, best: names[bi] + ' · ' + fmt(vals[bi]) + ' ml', on: vals.filter((v) => v >= goal).length + ' / ' + vals.length };
+    };
+    let k;
+    if (range === 'day') {
+      k = [
+        { label: 'So far today', value: '1,250 ml', sub: '54% of your 2,300 ml goal', bg: t.accentTint, span: 'span 2', size: '34px' },
+        { label: 'Best time', value: '12–15', sub: '550 ml', bg: t.sunTint, span: 'auto', size: '24px' },
+        { label: 'Drinks logged', value: '5', sub: 'Last at 14:05', bg: t.mint, span: 'auto', size: '24px' },
+        { label: 'Caffeine', value: '90 mg', sub: 'Today', bg: t.coralTint, span: 'auto', size: '24px' },
+        { label: 'Sugar', value: '25 g', sub: 'Today', bg: t.surface, span: 'auto', size: '24px' }
+      ];
+    } else {
+      const useMonth = range === 'month' && premium;
+      const s = useMonth ? statsOf(monthVals, monthNames) : statsOf(week.map((w) => w[2]), week.map((w) => w[0]));
+      const period = useMonth ? 'Last 30 days' : 'Last 7 days';
+      k = [
+        { label: 'Average per day', value: fmt(s.avg) + ' ml', sub: period + ' · goal 2,300 ml', bg: t.accentTint, span: 'span 2', size: '34px' },
+        { label: 'Best day', value: s.best.split(' · ')[1], sub: s.best.split(' · ')[0], bg: t.sunTint, span: 'auto', size: '24px' },
+        { label: 'Days on target', value: s.on, sub: period, bg: t.mint, span: 'auto', size: '24px' },
+        { label: 'Caffeine', value: (useMonth ? 170 : 180) + ' mg', sub: 'Average per day', bg: t.coralTint, span: 'auto', size: '24px' },
+        { label: 'Sugar', value: (useMonth ? 35 : 38) + ' g', sub: 'Average per day', bg: t.surface, span: 'auto', size: '24px' }
+      ];
+    }
+
+    const I = {
+      drop: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z',
+      mug: 'M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h2a2.5 2.5 0 0 1 0 5h-2M8 2v3M12 2v3',
+      iced: 'M6 3h12l-1.5 17a1.5 1.5 0 0 1-1.5 1.4H9a1.5 1.5 0 0 1-1.5-1.4zM6.5 8h11M9.5 11h2.5v2.5H9.5zM13 14h2.5v2.5H13z',
+      coconut: 'M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM15 9l4-7M9 13a3 3 0 0 0 3 3',
+      leaf: 'M5 19C5 11 11 5 19 5c0 8-6 14-14 14zM5 19l7-7'
+    };
+    const W = { drop: t.accentTint, mug: t.coralTint, iced: t.sunTint, coconut: t.mint, leaf: t.sunTint };
+    const groups = [
+      { title: 'Today · Fri 9 Oct', items: [['a1', 'Water', '14:05', 250, 'drop'], ['a2', 'Iced sweet tea', '12:30', 300, 'iced'], ['a3', 'Water', '10:15', 250, 'drop'], ['a4', 'Coffee with milk', '08:40', 200, 'mug'], ['a5', 'Water', '07:10', 250, 'drop']] },
+      { title: 'Yesterday · Thu 8 Oct', items: [['b1', 'Water', '21:00', 300, 'drop'], ['b2', 'Young coconut water', '18:30', 350, 'coconut'], ['b3', 'Water', '15:00', 500, 'drop'], ['b4', 'Water', '13:00', 400, 'drop'], ['b5', 'Green tea', '10:00', 300, 'leaf'], ['b6', 'Water', '08:30', 300, 'drop'], ['b7', 'Coffee with milk', '07:30', 200, 'mug']] },
+      { title: 'Wed 7 Oct', items: [['c1', 'Water', '20:15', 250, 'drop'], ['c2', 'Iced sweet tea', '16:40', 300, 'iced']] }
+    ];
+    const deleted = st.deleted || {};
+    const entries = [];
+    let rowCount = 0, adPlaced = premium;
+    groups.forEach((g) => {
+      const items = g.items.filter((it) => !deleted[it[0]]);
+      const total = items.reduce((a, it) => a + it[3], 0);
+      entries.push({ isHeader: true, title: g.title, total: fmt(total) + ' ml' });
+      items.forEach(([id, name, time, ml, icon]) => {
+        entries.push({ isRow: true, name, time, ml: fmt(ml), icon: I[icon], well: W[icon], editLabel: 'Edit ' + name + ' at ' + time, delLabel: 'Delete ' + name + ' at ' + time, del: () => this.setState({ deleted: Object.assign({}, deleted, { [id]: true }) }) });
+        rowCount++;
+        if (!adPlaced && rowCount === 10) { entries.push({ isAd: true }); adPlaced = true; }
+      });
+    });
+
+    return {
+      t, premium, tabs, ranges, bars, cols, gap, showGoal, chartTitle, chartSub, readout, monthLocked,
+      kpis: k, entries,
+      isStats: tab === 'stats', isHistory: tab === 'history',
+      showLockCard: !premium && range !== 'month',
+      showBanner: !premium,
+      adMenu: !!st.adMenu,
+      toggleAdMenu: () => this.setState({ adMenu: !st.adMenu }),
+      goalY: Math.round(goal / 2800 * 150) + 'px',
+      goalLabelY: (Math.round(goal / 2800 * 150) + 4) + 'px',
+      navBottom: premium ? '24px' : '80px',
+      padBottom: premium ? '120px' : '176px',
+      h: H + 'px'
+    };
+  }
+}
+</script>
+</body>
+</html>
