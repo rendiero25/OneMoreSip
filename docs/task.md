@@ -36,8 +36,9 @@
 - [x] **T-002 App skeleton** — folder layout, Riverpod, go_router with placeholder routes for UI-01…UI-18.
   Refs: SD-3.1–3.2 · Deps: T-001 · Verify: navigation smoke test passes.
   Note 2026-10-11: routes in `lib/app/router.dart`; UI-00/17/18 are not routes (design system, OS surfaces, states). Shell has no navbar until T-011. `core/` and `features/` folders are created by the first task that needs them. Riverpod codegen not added yet.
-- [ ] **T-003 CI** — GitHub Actions: format, analyze, test, secret scan, dependency audit.
+- [x] **T-003 CI** — GitHub Actions: format, analyze, test, secret scan, dependency audit.
   Refs: SD-11 · Verify: PR shows green checks; a planted fake secret fails the build.
+  Note 2026-10-11: gitleaks (+ `.gitleaks.toml` Supabase secret-key rule) and osv-scanner on `pubspec.lock`. PR #1 green; PR #2 with a fake `api_key` failed "Secret scan" (leak detected). pgTAP / deno jobs come with T-061 / T-063.
 - [ ] **T-004 Supabase projects** — `oms-dev`, `oms-prod`, CLI linked, `supabase/` folder, local stack.
   Refs: SD-11, Q-04 · Verify: `supabase start` + `db reset` work.
 - [ ] **T-005 Telemetry wrappers** — Sentry + PostHog behind an allowlist API (only SD-9 events/props compile).
