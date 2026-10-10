@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "navHome": "Home",
+  "@navHome": {
+    "description": "Bottom navbar tab label for the Home screen (UI-03)."
+  },
+  "navStats": "Stats",
+  "@navStats": {
+    "description": "Bottom navbar tab label for the Statistics & history screen (UI-09)."
+  },
+  "navFamily": "Family",
+  "@navFamily": {
+    "description": "Bottom navbar tab label for the Family & caregiver screen (UI-12)."
+  },
+  "navMe": "Me",
+  "@navMe": {
+    "description": "Bottom navbar tab label for the Me / settings screen (UI-15)."
+  }
+}

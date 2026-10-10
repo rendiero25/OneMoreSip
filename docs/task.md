@@ -43,8 +43,9 @@
   Refs: SD-11, Q-04 · Verify: `supabase start` + `db reset` work.
 - [ ] **T-005 Telemetry wrappers** — Sentry + PostHog behind an allowlist API (only SD-9 events/props compile).
   Refs: SD-9, SC-13 · Verify: unit test rejects forbidden property names.
-- [ ] **T-006 i18n** — ARB for EN, ID, AR, ES, PT; RTL smoke screen; string extraction rule in CI (no hard-coded strings in `presentation/`).
+- [x] **T-006 i18n** — ARB for EN, ID, AR, ES, PT; RTL smoke screen; string extraction rule in CI (no hard-coded strings in `presentation/`).
   Refs: F-27, D-20 · Verify: Arabic renders mirrored; lint flags a literal string.
+  Note 2026-10-11: ARB in `lib/l10n/`, generated code committed in `lib/l10n/gen/`. RTL smoke is a widget test (`test/l10n/`), not an app screen. Rule = `tool/check_hardcoded_strings.dart` in CI (`// i18n-ignore` escape). Only navbar keys so far; non-EN values are drafts for T-130 review. iOS `CFBundleLocalizations` added.
 - [ ] **T-007 Env config** — `env/dev.json`, `env/prod.json` with public values only; `.gitignore` for secrets.
   Refs: SD-3.3, SD-7 · Verify: build fails if a key name matches secret patterns.
 - [x] **T-008 Claude Design: design system + key screens** (owner runs prompts UI-00…UI-18).
