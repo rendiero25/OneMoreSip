@@ -46,8 +46,9 @@
 - [x] **T-006 i18n** — ARB for EN, ID, AR, ES, PT; RTL smoke screen; string extraction rule in CI (no hard-coded strings in `presentation/`).
   Refs: F-27, D-20 · Verify: Arabic renders mirrored; lint flags a literal string.
   Note 2026-10-11: ARB in `lib/l10n/`, generated code committed in `lib/l10n/gen/`. RTL smoke is a widget test (`test/l10n/`), not an app screen. Rule = `tool/check_hardcoded_strings.dart` in CI (`// i18n-ignore` escape). Only navbar keys so far; non-EN values are drafts for T-130 review. iOS `CFBundleLocalizations` added.
-- [ ] **T-007 Env config** — `env/dev.json`, `env/prod.json` with public values only; `.gitignore` for secrets.
+- [x] **T-007 Env config** — `env/dev.json`, `env/prod.json` with public values only; `.gitignore` for secrets.
   Refs: SD-3.3, SD-7 · Verify: build fails if a key name matches secret patterns.
+  Note 2026-10-11: values empty until T-004 / O-10. Read via `lib/core/config/env.dart`. `tool/check_env.dart` (CI) rejects secret-like key names and values (sb_secret_, sk-ant-, sk_, private keys, service_role JWT); planted `SUPABASE_SERVICE_ROLE_KEY` failed it. AdMob app ID goes in native manifests (T-090).
 - [x] **T-008 Claude Design: design system + key screens** (owner runs prompts UI-00…UI-18).
   Refs: claude-design-prompts.md, DS-1…DS-10 · Owner: Rendy · Verify: screens exported, reviewed against DS-6 checklist.
   Note 2026-10-09: all UI-00…UI-18 exported to `design/source/` and audited (`design/README.md`). Open: owner approval of DS-1b extended tokens (T-008a).

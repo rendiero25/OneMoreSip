@@ -49,3 +49,11 @@ app.*.map.json
 
 # FVM (pinned version lives in .fvmrc)
 .fvm/
+
+# Secrets never live in the repo (SD-7). env/*.json hold public values only.
+.env
+.env.*
+*.p8
+*.p12
+*.pem
+*.mobileprovision
