@@ -27,6 +27,8 @@ jobs:
       - run: flutter pub get
       - run: dart format --output=none --set-exit-if-changed lib test
       - run: flutter analyze
+      - name: No hard-coded strings in presentation/ (T-006)
+        run: dart run tool/check_hardcoded_strings.dart
       - run: flutter test
 
   secrets:
