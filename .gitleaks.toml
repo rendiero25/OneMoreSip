@@ -1,0 +1,9 @@
+# Gitleaks config (T-003, SD-7): default rules plus project-specific secrets.
+[extend]
+useDefault = true
+
+[[rules]]
+id = "supabase-secret-key"
+description = "Supabase secret (server) API key — Edge Function secrets only, never in the repo"
+regex = '''\bsb_secret_[A-Za-z0-9_-]{20,}'''
+keywords = ["sb_secret_"]
