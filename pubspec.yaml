@@ -64,6 +64,8 @@ flutter:
 
   assets:
     - assets/sippy/
+    # Drink database (F-03); single source in data/, see data/README.md.
+    - data/drinks.json
     # Font licenses, shown on the licenses page (T-010).
     - assets/fonts/plus_jakarta_sans/OFL.txt
     - assets/fonts/ibm_plex_sans_arabic/OFL.txt
