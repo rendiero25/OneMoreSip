@@ -1,12 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:onemoresip/app/router.dart';
 import 'package:onemoresip/app/theme/app_dimens.dart';
 import 'package:onemoresip/app/widgets/floating_nav_bar.dart';
 import 'package:onemoresip/core/flags/feature_flag.dart';
 import 'package:onemoresip/core/flags/feature_flags.dart';
+import 'package:onemoresip/features/logging/presentation/log_sheet.dart';
 import 'package:onemoresip/l10n/gen/app_localizations.dart';
 
 /// Navbar tabs: Home, Stats, Family, Me (DS-5) around the log button.
@@ -63,7 +65,7 @@ class AppShell extends ConsumerWidget {
                 initialLocation: branch == current,
               );
             },
-            onLog: () => context.push(Routes.log),
+            onLog: () => unawaited(showLogSheet(context)),
           ),
         ),
       ),

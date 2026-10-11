@@ -4,8 +4,10 @@ import 'package:onemoresip/app/app.dart';
 import 'package:onemoresip/app/widgets/fab_log.dart';
 import 'package:onemoresip/app/widgets/floating_nav_bar.dart';
 import 'package:onemoresip/core/flags/feature_flag.dart';
+import 'package:onemoresip/features/logging/presentation/log_sheet.dart';
 
 import '../helpers/flags.dart';
+import '../helpers/logging.dart';
 
 void main() {
   testWidgets('navbar shows Home, Stats, Family, Me; tabs switch', (
@@ -28,13 +30,19 @@ void main() {
     expect(find.byKey(const ValueKey('UI-15')), findsOneWidget);
   });
 
-  testWidgets('FAB opens the log sheet route', (tester) async {
-    await pumpWithFlags(tester, child: const App());
+  testWidgets('FAB opens the log sheet over the current tab', (tester) async {
+    await pumpWithFlags(
+      tester,
+      child: const App(),
+      overrides: loggingOverrides(memoryDatabase()),
+    );
     await tester.pumpAndSettle();
 
     await tester.tap(find.byType(FabLog));
     await tester.pumpAndSettle();
-    expect(find.byKey(const ValueKey('UI-04')), findsOneWidget);
+    expect(find.byType(LogSheet), findsOneWidget);
+    expect(find.text('Add a drink'), findsOneWidget);
+    expect(find.byKey(const ValueKey('UI-03')), findsOneWidget);
   });
 
   testWidgets('Family tab is hidden when the family flag is off', (

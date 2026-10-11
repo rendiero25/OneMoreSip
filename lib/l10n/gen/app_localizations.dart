@@ -319,6 +319,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Go easy for the rest of today. Talk to a doctor if you often feel very thirsty.'**
   String get overDrinkingDailyBody;
+
+  /// Title of the log-drink bottom sheet opened from the "+" button (UI-04). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a drink'**
+  String get logSheetTitle;
+
+  /// Label above the drink tiles in the log sheet: the user's most recently logged drinks, or common drinks when there is no history (UI-04, F-02). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent drinks'**
+  String get logRecentDrinks;
+
+  /// Button in the log sheet that opens the full drink picker with search (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'All drinks'**
+  String get logAllDrinks;
+
+  /// Label above the volume chips in the log sheet (UI-04). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get logAmount;
+
+  /// A drink volume in millilitres, e.g. "250 ml" on a volume chip or the custom amount (UI-04). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'{volume} ml'**
+  String logVolumeMl(int volume);
+
+  /// Volume chip that opens the custom amount stepper and slider (UI-04, F-02). Keep short. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get logCustom;
+
+  /// Screen-reader label of the custom volume slider in the log sheet (UI-04). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom amount'**
+  String get logCustomAmount;
+
+  /// Screen-reader label and tooltip of the minus button of the custom drink volume (UI-04). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease by {step} ml'**
+  String logDecrease(int step);
+
+  /// Screen-reader label and tooltip of the plus button of the custom drink volume (UI-04). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase by {step} ml'**
+  String logIncrease(int step);
+
+  /// Note in the log sheet: how much of the chosen drink counts toward the water goal (BR-03), e.g. "Counts as 230 ml". Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Counts as {counted} ml'**
+  String logCountsAs(int counted);
+
+  /// Note in the log sheet for a drink with sugar: counted amount (BR-03) and estimated sugar for the chosen volume, e.g. "Counts as 230 ml · 20 g sugar". Informational, not a judgement. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Counts as {counted} ml · {sugar} g sugar'**
+  String logCountsAsWithSugar(int counted, int sugar);
+
+  /// Shown for alcoholic drinks in the log sheet and drink picker: they are saved but never count toward the water goal (D-23). Neutral, never encouraging. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged, not counted'**
+  String get drinkNotCounted;
+
+  /// Main button of the log sheet that saves the drink (UI-04). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Add drink'**
+  String get logAddButton;
+
+  /// Undo snackbar message after a drink was logged, e.g. "Added 250 ml Water"; {drink} is the drink name as shown in the picker (DS-5 UndoSnackbar). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Added {volume} ml {drink}'**
+  String logAdded(int volume, String drink);
+
+  /// Shown in the log sheet if the local drink data cannot be read (UI-04, UI-18). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load your drinks. Close and try again.'**
+  String get logLoadError;
+
+  /// Title of the full-screen drink picker (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a drink'**
+  String get pickerTitle;
+
+  /// Hint text of the search field in the drink picker (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Search drinks'**
+  String get pickerSearch;
+
+  /// Category chip in the drink picker that shows drinks of every category (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get pickerCategoryAll;
+
+  /// Drink category chip: plain and flavoured water (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get drinkCategoryWater;
+
+  /// Drink category chip: coconut water (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Coconut'**
+  String get drinkCategoryCoconut;
+
+  /// Drink category chip: coffee drinks (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Coffee'**
+  String get drinkCategoryCoffee;
+
+  /// Drink category chip: tea drinks (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Tea'**
+  String get drinkCategoryTea;
+
+  /// Drink category chip: dairy milk drinks (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Milk'**
+  String get drinkCategoryDairy;
+
+  /// Drink category chip: soy, oat, almond and other plant-based milks (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Plant milk'**
+  String get drinkCategoryPlantMilk;
+
+  /// Drink category chip: fruit and vegetable juices (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Juice'**
+  String get drinkCategoryJuice;
+
+  /// Drink category chip: smoothies (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Smoothie'**
+  String get drinkCategorySmoothie;
+
+  /// Drink category chip: soft drinks (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Soda'**
+  String get drinkCategorySoda;
+
+  /// Drink category chip: sports and electrolyte drinks (UI-05). Keep short. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Sports'**
+  String get drinkCategorySports;
+
+  /// Drink category chip: energy drinks (UI-05). Keep short. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy'**
+  String get drinkCategoryEnergy;
+
+  /// Drink category chip: traditional drinks such as wedang jahe (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Traditional'**
+  String get drinkCategoryTraditional;
+
+  /// Drink category chip: alcoholic drinks, which are logged but never counted (UI-05, D-23). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Alcohol'**
+  String get drinkCategoryAlcohol;
+
+  /// Info note shown when the Alcohol category is selected in the drink picker (D-23). Neutral, never encouraging. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Alcohol is logged for your records but never counts toward your water goal.'**
+  String get pickerAlcoholNote;
+
+  /// Caption above the drink list explaining the badges and that values are estimates (F-03, UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Sugar and caffeine per {volume} ml glass · values are estimates'**
+  String pickerPerGlass(int volume);
+
+  /// Badge on a drink row: estimated sugar per glass (F-03, UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'{grams} g sugar'**
+  String drinkSugarBadge(int grams);
+
+  /// Badge on a drink row: estimated caffeine per glass (F-03, UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'{mg} mg caffeine'**
+  String drinkCaffeineBadge(int mg);
+
+  /// Shown in the drink picker when the search finds nothing; {query} is what the user typed (UI-05). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'No drink called “{query}” yet.'**
+  String pickerNoResults(String query);
 }
 
 class _AppLocalizationsDelegate

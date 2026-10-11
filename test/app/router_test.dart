@@ -3,8 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:onemoresip/app/app.dart';
 import 'package:onemoresip/app/router.dart';
+import 'package:onemoresip/features/drinks/presentation/drink_picker_screen.dart';
 
 import '../helpers/flags.dart';
+import '../helpers/logging.dart';
 
 void main() {
   const screens = {
@@ -13,8 +15,6 @@ void main() {
     Routes.onboarding: 'UI-02',
     Routes.home: 'UI-03',
     Routes.simple: 'UI-03b',
-    Routes.log: 'UI-04',
-    Routes.drinks: 'UI-05',
     Routes.aiPhoto: 'UI-06',
     Routes.aiChat: 'UI-07',
     Routes.insight: 'UI-08',
@@ -57,5 +57,18 @@ void main() {
     router.go('/c/XYZ9');
     await tester.pumpAndSettle();
     expect(router.state.pathParameters['code'], 'XYZ9');
+  });
+
+  testWidgets('/drinks opens the drink picker (UI-05)', (tester) async {
+    final container = await pumpWithFlags(
+      tester,
+      child: const App(),
+      overrides: loggingOverrides(memoryDatabase()),
+    );
+    await tester.pumpAndSettle();
+
+    container.read(routerProvider).go(Routes.drinks);
+    await tester.pumpAndSettle();
+    expect(find.byType(DrinkPickerScreen), findsOneWidget);
   });
 }

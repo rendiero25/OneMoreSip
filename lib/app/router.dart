@@ -6,6 +6,7 @@ import 'package:onemoresip/app/debug/sippy_debug_screen.dart';
 import 'package:onemoresip/app/placeholder_screen.dart';
 import 'package:onemoresip/core/flags/feature_flag.dart';
 import 'package:onemoresip/core/flags/feature_flags.dart';
+import 'package:onemoresip/features/drinks/presentation/drink_picker_screen.dart';
 
 /// Route paths, one per screen group in docs/claude-design-prompts.md.
 ///
@@ -36,10 +37,8 @@ abstract final class Routes {
   /// UI-03b Simple Mode â€” separate route tree, no navbar (SD-3.2, F-11).
   static const simple = '/simple';
 
-  /// UI-04 log drink sheet.
-  static const log = '/log';
-
-  /// UI-05 drink picker & custom drink.
+  /// UI-05 drink picker (pops the chosen drink). UI-04, the log sheet, is
+  /// a bottom sheet over the current tab, not a route.
   static const drinks = '/drinks';
 
   /// UI-06 AI photo logging.
@@ -114,8 +113,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         ],
       ),
       placeholder(Routes.simple, 'UI-03b'),
-      placeholder(Routes.log, 'UI-04'),
-      placeholder(Routes.drinks, 'UI-05'),
+      GoRoute(
+        path: Routes.drinks,
+        builder: (context, state) => const DrinkPickerScreen(),
+      ),
       placeholder(Routes.aiPhoto, 'UI-06', FeatureFlag.aiPhoto),
       placeholder(Routes.aiChat, 'UI-07', FeatureFlag.aiChat),
       placeholder(Routes.insight, 'UI-08', FeatureFlag.aiInsight),
