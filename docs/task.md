@@ -91,8 +91,9 @@
 - [x] **T-026 Local DB** — Drift schema (SD-4.2) + SQLCipher + key in secure storage + migrations.
   Refs: SD-4.2, SD-7 · Verify: DB file unreadable without key; migration test.
   Note 2026-10-11: SQLite3MultipleCiphers via sqlite3 3.x hooks instead of SQLCipher (D-32); schema in `core/db/tables.drift`, 32-byte key in secure storage (`core/db/db_key_store.dart`), `PRAGMA key` + cipher/key check in drift setup. Tested: file round-trip (same key reads; other key / no key fail with NOTADB; no plaintext header or content), key store create/reuse, v1 schema vs `drift_schemas/` (`make-migrations` adds upgrade tests from v2).
-- [ ] **T-027 Repositories** — profiles, logs, settings, outbox writes in same transaction.
+- [x] **T-027 Repositories** — profiles, logs, settings, outbox writes in same transaction.
   Refs: SD-3.2, SD-5 · Verify: repository tests.
+  Note 2026-10-11: `ProfileRepository`, `DrinkLogRepository`, `ReminderSettingsRepository`, `FastingSettingsRepository` (feature `data/`) return Drift rows; each write and its outbox row (`core/db/outbox.dart`, payload = row JSON with UTC ISO times) share one transaction; UUIDv7 ids (`uuid`); soft deletes; "day" = local device day. Outbox payload keeps jsonb/time[] columns as JSON text, T-062 converts them. DB excluded from device backups (D-33).
 - [ ] **T-030 Onboarding** (UI-02).
   Refs: F-01, UF-01 · Deps: T-023, T-024 · Verify: completes ≤ 90 s; 200% text; skips work; widget test.
 - [ ] **T-031 Home** (UI-03) — hero number, progress, status badge, Sippy, quick-add, FAB, education card slot.
