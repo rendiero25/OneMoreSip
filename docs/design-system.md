@@ -10,79 +10,83 @@ Visual direction (D-21): bento cards, big hero numbers, floating dark pill navba
 
 ## DS-1 Color tokens
 
-All pairs below were contrast-checked (WCAG 2.2). "AA" = ≥ 4.5:1 for normal text.
+All pairs below were contrast-checked (WCAG 2.2): text ≥ 4.5:1, control boundaries and meaningful graphics ≥ 3:1 (1.4.11). rgba values were composited over their real background. Extended from the Claude Design export 2026-10-09 (formerly DS-1b, approved in D-28). `app/theme/` uses exactly these names.
 
-### Light
-| Token | Hex | Use | Contrast |
-|---|---|---|---|
-| `bg` | `#F7F4EE` | app background (warm off-white) | — |
-| `surface` | `#FFFFFF` | cards | — |
-| `surfaceAlt` | `#EFEBE3` | inset areas, chips | — |
-| `ink` | `#111312` | primary text, hero numbers, navbar, primary CTA fill | 16.99 on bg |
-| `inkMuted` | `#5B6160` | secondary text | 5.76 on bg · 6.32 on surface · 5.31 on surfaceAlt |
-| `onInk` | `#FFFFFF` | text on ink (navbar, CTA) | 18.65 |
-| `accent` | `#0B7F75` | progress fill, FAB, toggles, accent fills | white text on it 4.88 |
-| `accentInk` | `#0A6E66` | accent-colored **text/links** | 5.57 on bg · 6.11 on surface |
-| `accentTint` | `#D7F2EE` | "hydrated" status bg | text `#075E56` 6.49 · ink 15.83 |
-| `warnTint` / `warnInk` | `#FFE9C2` / `#8A4F00` | "getting thirsty" | 5.53 |
-| `dangerTint` / `dangerInk` | `#FFE0D9` / `#A8321F` | "behind / warning" | 5.39 |
+### Base
+| Token | Light | Dark | Use | Contrast (light / dark) |
+|---|---|---|---|---|
+| `bg` | `#F7F4EE` | `#121413` | app background | — |
+| `surface` | `#FFFFFF` | `#1C1F1E` | cards | — |
+| `surfaceAlt` | `#EFEBE3` | `#262A29` | inset areas, chips | ink 15.69 / 12.46 · inkMuted 5.31 / 5.64 |
+| `ink` | `#111312` | `#ECEEEC` | primary text, hero numbers, primary CTA fill, snackbar | 16.99 / 15.86 on bg |
+| `inkMuted` | `#5B6160` | `#9BA3A1` | secondary text on bg/surface/surfaceAlt (**not on tints**) | 5.76 / 7.18 on bg · 6.32 / 6.44 on surface |
+| `onInk` | `#FFFFFF` | `#121413` | text on ink (CTA, snackbar); dark CTA is a light pill with dark text | 18.65 / 15.86 |
+| `accent` | `#0B7F75` | `#4FD1C1` | progress fill, FAB, switch on, selected nav pill | — (light: never text, 4.44 on bg) |
+| `onAccent` | `#FFFFFF` | `#0A1F1D` | text/icons on accent (also switch knob when on) | 4.88 / 9.15 |
+| `accentInk` | `#0A6E66` | `#4FD1C1` | accent-colored text/links | 5.57 / 9.89 on bg · 6.11 / 8.88 on surface |
+| `line` | `#89867F` | `#6E7371` | control boundaries: inputs, radio rings, code boxes, secondary outlines, switch off-track, sheet handle | 3.63 / 3.44 on surface · 3.31 / 3.84 on bg · 3.06 / 3.01 on surfaceAlt |
+| `track` | `#E2DDD3` | `#3A3F3D` | progress bar/ring track, skeletons | accent fill on it 3.60 / 5.73 |
+| `divider` | `rgba(17,19,18,.08)` | `rgba(236,238,236,.10)` | list separators, chart grid (decorative only) | — |
+| `scrim` | `rgba(17,19,18,.45)` | `rgba(0,0,0,.6)` | behind sheets/dialogs | — |
+| `fabShadow` | `rgba(11,127,117,.35)` | `rgba(0,0,0,.5)` | FAB glow (exception to DS-4 shadow) | — |
 
-⚠️ `accent` (#0B7F75) as text on `bg` is only 4.44 — **never** use it for text; use `accentInk`.
+### Tints (cards, tiles, selected rows)
+Text on a tint is `ink`; secondary text on a tint is `mutedOnTint` (never `inkMuted`: 3.84 on dark mint).
 
-### Dark
-| Token | Hex | Contrast |
-|---|---|---|
-| `bg` | `#121413` | — |
-| `surface` | `#1C1F1E` | — |
-| `ink` | `#ECEEEC` | 15.86 on bg · 14.25 on surface |
-| `inkMuted` | `#9BA3A1` | 7.18 on bg · 6.44 on surface |
-| `accent` | `#4FD1C1` | 9.89 on bg; text on accent `#0A1F1D` 9.15 |
-| `warn` | `#F2B85C` | 10.38 on bg |
-| `danger` | `#FF8F7A` | 8.34 on bg |
-
-Navbar in dark mode: `surface` with a 1 px `#2A2E2D` border (stays a pill).
+| Token | Light | Dark | Use | ink / mutedOnTint (light; dark) |
+|---|---|---|---|---|
+| `accentTint` | `#E3F5F1` | `#163330` | soft accent backgrounds, selected rows, Sippy chat bubble | 16.52 / 7.29 ; 11.62 / 8.13 |
+| `mint` | `#BFEAE3` | `#1F4A45` | hero/illustration cards, Sippy avatar | 14.30 / 6.31 ; 8.48 / 5.93 |
+| `sunTint` | `#FFEFC7` | `#3A3019` | streak, weather, warm cards | 16.37 / 7.22 ; 11.14 / 7.80 |
+| `coralTint` | `#FFE1D8` | `#3D251F` | family alert, attention cards | 15.11 / 6.67 ; 12.14 / 8.50 |
+| `nightTint` | `#DCE3F2` | `#1F2A44` | night, quiet hours, fasting night, Ramadan banner (dark value, white text 14.26) | 14.49 / 6.39 ; 12.23 / 8.56 |
+| `mutedOnTint` | `#4A504F` | `#C3CAC8` | secondary text on any tint | ≥ 6.31 ; ≥ 5.93 |
 
 ### Status (always icon + text + color, never color alone)
-| State | When | Light | Icon |
+| State | When | Bg / Fg light | Bg / Fg dark | Contrast (light; dark on surface / bg) | Icon |
+|---|---|---|---|---|---|
+| Hydrated | ≥ pace | `okBg` `#D7F2EE` / `okFg` `#075E56` | `rgba(79,209,193,.16)` / `#4FD1C1` | 6.49 ; 6.38 / 7.26 | drop-check |
+| Getting thirsty | 10–30% behind pace | `warnBg` `#FFE9C2` / `warnFg` `#8A4F00` | `rgba(242,184,92,.18)` / `#F2B85C` | 5.53 ; 6.22 / 7.11 | drop-clock |
+| Behind | > 30% behind / warning | `badBg` `#FFE0D9` / `badFg` `#A8321F` | `rgba(255,143,122,.16)` / `#FF8F7A` | 5.39 ; 5.58 / 6.33 | drop-alert |
+
+`warnFg` / `badFg` are also the bar/ring colors for warning/empty states (e.g. QuotaMeter Low/Empty on `warnBg` / `badBg` tracks) and `badFg` is the destructive text color.
+
+### Navigation & snackbar
+| Token | Light | Dark | Use | Contrast |
+|---|---|---|---|---|
+| `nav` | `#111312` | `#2B302E` | floating navbar fill (no border) | — |
+| `navOn` | `#FFFFFF` | `#ECEEEC` | selected tab icon + label | 18.65 / 11.51 |
+| `navOff` | `rgba(255,255,255,.68)` | `rgba(236,238,236,.66)` | unselected tabs | 8.90 / 5.93 |
+| `snackAction` | `#4FD1C1` | `#0A6E66` | "Undo" on the snackbar (`ink` bg, `onInk` text) | 9.97 / 5.24 |
+
+Selected tab = `accent` pill behind the icon (DS-5) + `navOn`; never color/weight alone. Labels always visible.
+
+### High contrast (Simple Mode option)
+| Token | Light | Dark | Contrast |
 |---|---|---|---|
-| Hydrated | ≥ pace | accentTint / `#075E56` | drop-check |
-| Getting thirsty | 10–30% behind pace | warnTint / warnInk | drop-clock |
-| Behind | > 30% behind / warning | dangerTint / dangerInk | drop-alert |
+| `bg` / `ink` | `#FFFFFF` / `#000000` | `#000000` / `#FFFFFF` | 21.00 |
+| `button` / `onButton` | `#00524B` / `#FFFFFF` | `#7FF0E2` / `#000000` | 9.10 / 15.46 (button vs bg same) |
+| card border | 3 px `#000000` | 3 px `#FFFFFF` | — |
 
-## DS-1b Extended tokens (from the Claude Design export — **proposed, pending owner approval**)
+### Decorative only (blobs behind Sippy, medals; never text color, never the only signal)
+`sun #FFD27A`, `coral #FF9E87` (dark: translucent variants `rgba(242,184,92,.45–.6)`, `rgba(255,143,122,.45–.6)`), `waterSoft` `#4FD1C1` / `#9BE8DE` (second water tone in the glass). Exception: `sun` may fill a badge (e.g. "Premium") when its text is `ink` (13.10).
 
-Found in the theme objects of `design/source/*.dc.html` (export 2026-10-09). Contrast checked: every text pair below is ≥ 4.5:1. Once approved, these join DS-1 and `app/theme/` uses these names.
+### Rules
+- No text opacity: use `inkMuted` / `mutedOnTint` instead of faded text.
+- Hit areas ≥ 48dp even where the design draws a smaller control (switches 34px, small pills 40–44px): pad the tap target in Flutter.
+- Progress indicators always show their value as text.
+- Platform brand buttons (Google Sign-In text `#1F1F1F`, Sign in with Apple) follow the platform's own guidelines, not these tokens.
+- Colors not in this section (illustration fills, OS mock surfaces in the export) are never copied into `app/theme/`.
 
-| Token | Light | Dark | Use |
-|---|---|---|---|
-| `surfaceAlt` | `#EFEBE3` | `#262A29` | inset areas, chips (dark value is new) |
-| `accentTint` | `#E3F5F1` | `#163330` | soft accent backgrounds (cards, selected rows) |
-| `mint` | `#BFEAE3` | `#1F4A45` | hero/illustration cards behind Sippy |
-| `sunTint` | `#FFEFC7` | `#3A3019` | streak / weather / warm cards |
-| `coralTint` | `#FFE1D8` | `#3D251F` | family alert / attention cards |
-| `nightTint` | `#DCE3F2` | `#1F2A44` | night, quiet hours, fasting night window |
-| `mutedOnTint` | `#4A504F` | `#C3CAC8` | secondary text on tint cards (≥ 5.9:1 on all tints) |
-| `okBg` / `okFg` | `#D7F2EE` / `#075E56` | `rgba(79,209,193,.16)` / `#4FD1C1` | status "Hydrated" (same as DS-1 accentTint/status) |
-| `warnBg` / `warnFg` | `#FFE9C2` / `#8A4F00` | `rgba(242,184,92,.18)` / `#F2B85C` | status "Getting thirsty" |
-| `badBg` / `badFg` | `#FFE0D9` / `#A8321F` | `rgba(255,143,122,.16)` / `#FF8F7A` | status "Behind" |
-| `line` | `#C9C4BA` | `#4A504E` | outlines, secondary button border |
-| `fieldBorder`, `handle` | `#D6D1C7` | `#3A3F3D` | inputs, sheet drag handle |
-| `track` / `trackOff` | `#E2DDD3` / `#B9B4AB` | `#3A3F3D` / `#4A504E` | progress track / switch off |
-| `divider` | `rgba(17,19,18,.08)` | `rgba(236,238,236,.10)` | list separators |
-| `nav` / `navOn` / `navOff` | `#111312` / `#FFFFFF` / `rgba(255,255,255,.68)` | `#2B302E` / `#ECEEEC` / `rgba(236,238,236,.66)` | floating navbar |
-| `onInk` | `#FFFFFF` | `#121413` | in dark mode the primary CTA inverts: light pill, dark text |
-| `snack` / `onSnack` / `snackAction` | `#111312` / `#FFFFFF` / `#4FD1C1` | `#ECEEEC` / `#121413` / `#0A6E66` | undo snackbar |
-| `scrim` | `rgba(17,19,18,.45)` | `rgba(0,0,0,.6)` | behind sheets/dialogs |
-| `fabShadow` | `rgba(11,127,117,.35)` | `rgba(0,0,0,.5)` | FAB glow |
-| High-contrast set | bg `#FFFFFF`, ink `#000000`, button `#00524B` / on `#FFFFFF` | bg `#000000`, ink `#FFFFFF`, button `#7FF0E2` / on `#000000` | Simple Mode high-contrast option |
-| Decorative only | `sun #FFD27A`, `coral #FF9E87`, `halo #E3F5F1` | translucent variants | blobs behind Sippy; never for text |
+## DS-1b Extended tokens
 
-Rule: hit areas ≥ 48dp even where the design draws a smaller control (switches 34px, small pills 40–44px) — pad the tap target in Flutter.
+Merged into DS-1 on 2026-10-11 (D-28, T-008a). Removed names and their replacements: `fieldBorder`, `handle`, `trackOff` → `line`; `snack` / `onSnack` → `ink` / `onInk`; `halo` → `accentTint` / `mint`; `accentTint` as status bg, `warnTint` / `warnInk`, `dangerTint` / `dangerInk`, dark `warn` / `danger` → `okBg` / `okFg`, `warnBg` / `warnFg`, `badBg` / `badFg`.
 
 ## DS-2 Typography
 
 - Latin: **Plus Jakarta Sans** (400, 500, 600, 700, 800). Numbers use tabular figures (`fontFeatures: tnum`).
-- Arabic: **IBM Plex Sans Arabic** (or Noto Sans Arabic — pick one at T-010, check license and glyph coverage).
+- Arabic: **IBM Plex Sans Arabic** (D-28).
+- Both fonts ship as bundled `.ttf` assets (no runtime font fetching, e.g. no `google_fonts` downloads).
 - All sizes in logical px (pt/sp) and scale with system text size.
 
 | Style | Size / line | Weight | Use |
@@ -103,7 +107,7 @@ Rule: hit areas ≥ 48dp even where the design draws a smaller control (switches
 ## DS-4 Spacing, radius, elevation
 - 4 pt grid: 4, 8, 12, 16, 20, 24, 32, 40, 56. Screen side gutter 20.
 - Radius: `sm` 12 (chips), `md` 20 (inputs), `lg` 28 (bento cards), `pill` 999 (buttons, navbar).
-- Elevation: flat; cards separated by color. Only navbar, FAB and bottom sheets get a soft shadow (y 8, blur 24, 12% ink).
+- Elevation: flat; cards separated by color. Only navbar, FAB and bottom sheets get a soft shadow (y 8, blur 24, 12% ink). Exception: the FAB uses `fabShadow` (teal glow).
 
 ## DS-5 Components
 | Component | Spec |
@@ -111,14 +115,14 @@ Rule: hit areas ≥ 48dp even where the design draws a smaller control (switches
 | `BentoCard` | surface, radius lg, padding 20, optional header row (icon 24 + title + chevron) |
 | `HeroNumber` | value (hero) + unit (title, inkMuted) + caption line |
 | `ProgressGlass` | vertical glass fill with wave (Rive or CustomPainter), percent label inside |
-| `ProgressRing` | 12 px stroke, accent on surfaceAlt track |
-| `PillButton` | primary: ink bg / onInk text, height 56 (L) / 48 (M); secondary: surface + 1.5 px ink border; destructive: dangerInk text |
+| `ProgressRing` | 12 px stroke, accent on `track` |
+| `PillButton` | primary: ink bg / onInk text, height 56 (L) / 48 (M); secondary: surface + 1.5 px ink border; destructive: `badFg` text |
 | `FabLog` | 72 dp circle, accent, "+" 32 icon, label "Log drink" for screen readers |
 | `QuickAddChip` | 64 dp tall, shows volume + glass icon |
-| `FloatingNavBar` | pill, ink bg, 4 icons + labels (Home, Stats, Family, Me) with center FAB gap; height 68; selected = accent pill behind icon |
+| `FloatingNavBar` | pill, `nav` bg, 4 icons + always-visible labels (Home, Stats, Family, Me) with center FAB gap; height 68; selected = accent pill behind icon |
 | `QuotaMeter` | label "42 / 60 chats", bar 8 px, states Normal/Low/Empty (DS-1 status colors), reset date |
 | `StatusBadge` | DS-1 status, icon + text |
-| `UndoSnackbar` | ink bg, onInk text, "Undo" accent-on-dark `#4FD1C1`, 5 s |
+| `UndoSnackbar` | ink bg, onInk text, "Undo" `snackAction`, 5 s |
 | `AdCard` | BentoCard + "Ad" label top-left (label style) + "Report ad" overflow; same size as neighbors |
 | `SippyBubble` | Sippy 48–96 dp + speech bubble (surface, radius lg) |
 | `BottomSheet` | radius 28 top, drag handle, max 90% height |
@@ -134,7 +138,7 @@ Rule: hit areas ≥ 48dp even where the design draws a smaller control (switches
 8. Haptics on log (light impact) and goal reached (success), toggleable.
 
 ## DS-7 Iconography & illustration
-- Icons: rounded 2 px stroke set (e.g. Phosphor or Lucide, decide at T-010), 24 dp default.
+- Icons: **Lucide** (package `lucide_icons_flutter`, D-28), rounded 2 px stroke, 24 dp default.
 - Illustration intensity: Kids profile = high; Normal = Sippy at key moments (Home, empty states, celebrations); Stats/settings = clean, no illustration.
 
 ## DS-8 Sippy (mascot)

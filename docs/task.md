@@ -53,12 +53,13 @@
 - [x] **T-008 Claude Design: design system + key screens** (owner runs prompts UI-00…UI-18).
   Refs: claude-design-prompts.md, DS-1…DS-10 · Owner: Rendy · Verify: screens exported, reviewed against DS-6 checklist.
   Note 2026-10-09: all UI-00…UI-18 exported to `design/source/` and audited (`design/README.md`). Open: owner approval of DS-1b extended tokens (T-008a).
-- [ ] **T-008a Approve extended tokens DS-1b** — owner reviews the tokens found in the design export; on approval merge into DS-1 and add a decision D-xx.
+- [x] **T-008a Approve extended tokens DS-1b** — owner reviews the tokens found in the design export; on approval merge into DS-1 and add a decision D-xx.
   Refs: DS-1b, design/README.md · Owner: Rendy · Deps: T-008 · Verify: DS-1b marked approved.
+  Note 2026-10-11: approved per audit (with WCAG fixes); merged into DS-1; font and icon choices recorded (D-28).
 - [ ] **T-009 Design test with older adults** — 3–5 people 60+ try Simple Mode + onboarding prototype.
   Refs: F-11, Goal 3 · Owner: Rendy · Verify: findings logged as D-xx or tasks.
 - [ ] **T-010 Theme** — tokens from DS-1/DS-2/DS-4 to `app/theme/`, light/dark, fonts, icon set decision.
-  Refs: DS-1…DS-4, DS-1b, DS-7, design/source/Main + Components · Deps: T-008a · Verify: golden tests light/dark.
+  Refs: DS-1…DS-4, DS-7, D-28, design/source/Main + Components · Deps: T-008a · Verify: golden tests light/dark.
 - [ ] **T-011 Core components** — DS-5 list incl. `QuotaMeter`, `AdCard`, `FloatingNavBar`.
   Refs: DS-5, DS-6 · Verify: golden tests at 100% and 200% text, LTR + RTL.
 - [x] **T-012 Feature flag service (kill switch)** — fetch + cache + 6 h refresh; default ON for reviewed features.
