@@ -76,8 +76,9 @@
 
 - [ ] **T-020 Verify drink database** — run `data/verify_fdc.py`, review `confidence: low` rows, set `verified: true`.
   Refs: F-03, D-24 · Deps: O-07 · Verify: report attached; all rows verified or removed.
-- [ ] **T-021 Drink catalog** — bundle `drinks.json`, loader, search, favorites/recents, custom drinks, "Data sources" screen.
+- [~] **T-021 Drink catalog** — bundle `drinks.json`, loader, search, favorites/recents, custom drinks, "Data sources" screen.
   Refs: F-03, BR-03 · Verify: search finds "es teh manis" in ID and "iced sweet tea" in EN.
+  Note 2026-10-11: part 1 done — `data/drinks.json` bundled as the asset (single source), `Drink` model + BR-03 hydration, `DrinkCatalog.search` (EN/ID/local names, case/accent/word-order insensitive, prefix first), `drinkCatalogProvider`; verify searches pass. Open: favorites/recents and custom drinks (need T-026/T-027), "Data sources" screen (with UI-05, T-032). Data still unverified (T-020).
 - [ ] **T-022 Review goal constants** — check BR-01 values against EFSA/IOM/NHS sources; owner signs off.
   Refs: BR-01, Q-03 · Owner: Rendy (approve) · Verify: sources listed in `core/config/goal_rules.dart` comments.
 - [ ] **T-023 Goal calculator** — BR-01 (base, restriction, weather, activity, kids, caps) pure Dart.
