@@ -88,8 +88,9 @@
 - [x] **T-025 Domain rules** — BR-02 catch-up, BR-03 counting, BR-07 streak.
   Refs: BR-02, BR-03, BR-07 · Verify: unit tests.
   Note 2026-10-11: `features/logging/domain/hydration.dart` (BR-03), `features/reminders/domain/catch_up.dart` (BR-02 pace, catch-up, behind message), `features/streaks/domain/streak.dart` (BR-07 + freezes); open points settled in D-31. BR-06 warnings stay with T-024.
-- [ ] **T-026 Local DB** — Drift schema (SD-4.2) + SQLCipher + key in secure storage + migrations.
+- [x] **T-026 Local DB** — Drift schema (SD-4.2) + SQLCipher + key in secure storage + migrations.
   Refs: SD-4.2, SD-7 · Verify: DB file unreadable without key; migration test.
+  Note 2026-10-11: SQLite3MultipleCiphers via sqlite3 3.x hooks instead of SQLCipher (D-32); schema in `core/db/tables.drift`, 32-byte key in secure storage (`core/db/db_key_store.dart`), `PRAGMA key` + cipher/key check in drift setup. Tested: file round-trip (same key reads; other key / no key fail with NOTADB; no plaintext header or content), key store create/reuse, v1 schema vs `drift_schemas/` (`make-migrations` adds upgrade tests from v2).
 - [ ] **T-027 Repositories** — profiles, logs, settings, outbox writes in same transaction.
   Refs: SD-3.2, SD-5 · Verify: repository tests.
 - [ ] **T-030 Onboarding** (UI-02).

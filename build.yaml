@@ -1,0 +1,12 @@
+targets:
+  $default:
+    builders:
+      drift_dev:
+        options:
+          databases:
+            app_database: lib/core/db/app_database.dart
+          schema_dir: drift_schemas/
+          test_dir: test/drift/
+          # ISO-8601 text keeps microseconds, matching Postgres timestamptz
+          # (SD-5 pulls compare `updated_at`).
+          store_date_time_values_as_text: true
