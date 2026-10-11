@@ -41,4 +41,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sippyWaiting => 'سيبي ينتظر بصبر';
+
+  @override
+  String get fabLogLabel => 'سجّل مشروبًا';
+
+  @override
+  String get statusHydrated => 'مرتوٍ';
+
+  @override
+  String get statusThirsty => 'بدأ العطش';
+
+  @override
+  String get statusBehind => 'متأخر';
+
+  @override
+  String get undo => 'تراجع';
+
+  @override
+  String get adLabel => 'إعلان';
+
+  @override
+  String get adOptions => 'خيارات الإعلان';
+
+  @override
+  String get adReport => 'الإبلاغ عن الإعلان';
+
+  @override
+  String quotaLeft(int count) {
+    return 'متبقٍ $count';
+  }
+
+  @override
+  String quotaResets(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'يُجدَّد $dateString';
+  }
+
+  @override
+  String progressGlassLabel(String percent) {
+    return 'الكوب ممتلئ بنسبة $percent';
+  }
 }

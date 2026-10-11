@@ -41,4 +41,46 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get sippyWaiting => 'Sippy menunggu dengan sabar';
+
+  @override
+  String get fabLogLabel => 'Catat minuman';
+
+  @override
+  String get statusHydrated => 'Terhidrasi';
+
+  @override
+  String get statusThirsty => 'Mulai haus';
+
+  @override
+  String get statusBehind => 'Tertinggal';
+
+  @override
+  String get undo => 'Urungkan';
+
+  @override
+  String get adLabel => 'Iklan';
+
+  @override
+  String get adOptions => 'Opsi iklan';
+
+  @override
+  String get adReport => 'Laporkan iklan';
+
+  @override
+  String quotaLeft(int count) {
+    return 'Sisa $count';
+  }
+
+  @override
+  String quotaResets(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Direset $dateString';
+  }
+
+  @override
+  String progressGlassLabel(String percent) {
+    return 'Gelas terisi $percent';
+  }
 }

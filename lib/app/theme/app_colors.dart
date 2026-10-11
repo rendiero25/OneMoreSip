@@ -38,6 +38,10 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.navOn,
     required this.navOff,
     required this.snackAction,
+    required this.sun,
+    required this.coral,
+    required this.water,
+    required this.waterBack,
     required this.hcBg,
     required this.hcInk,
     required this.hcButton,
@@ -76,6 +80,10 @@ class AppColors extends ThemeExtension<AppColors> {
     navOn: Color(0xFFFFFFFF),
     navOff: Color.fromRGBO(255, 255, 255, .68),
     snackAction: Color(0xFF4FD1C1),
+    sun: Color(0xFFFFD27A),
+    coral: Color(0xFFFF9E87),
+    water: Color(0xFF4FD1C1),
+    waterBack: Color(0xFF9BE8DE),
     hcBg: Color(0xFFFFFFFF),
     hcInk: Color(0xFF000000),
     hcButton: Color(0xFF00524B),
@@ -114,6 +122,10 @@ class AppColors extends ThemeExtension<AppColors> {
     navOn: Color(0xFFECEEEC),
     navOff: Color.fromRGBO(236, 238, 236, .66),
     snackAction: Color(0xFF0A6E66),
+    sun: Color.fromRGBO(242, 184, 92, .5),
+    coral: Color.fromRGBO(255, 143, 122, .5),
+    water: Color(0xFF4FD1C1),
+    waterBack: Color(0xFF9BE8DE),
     hcBg: Color(0xFF000000),
     hcInk: Color(0xFFFFFFFF),
     hcButton: Color(0xFF7FF0E2),
@@ -214,6 +226,18 @@ class AppColors extends ThemeExtension<AppColors> {
   /// "Undo" on the snackbar.
   final Color snackAction;
 
+  /// Decorative only (blobs, medals); text on it is [ink] (D-30).
+  final Color sun;
+
+  /// Decorative only (blobs, medals) (D-30).
+  final Color coral;
+
+  /// Decorative only: primary water in the glass, both themes (D-30).
+  final Color water;
+
+  /// Decorative only: back wave in the glass, both themes (D-30).
+  final Color waterBack;
+
   /// High contrast (Simple Mode option): background.
   final Color hcBg;
 
@@ -230,7 +254,7 @@ class AppColors extends ThemeExtension<AppColors> {
   @override
   AppColors copyWith() => this;
 
-  // Swaps sets halfway through a theme animation instead of blending 34
+  // Swaps sets halfway through a theme animation instead of blending 38
   // colors; the light/dark switch is rare and brief.
   @override
   AppColors lerp(AppColors? other, double t) => t < .5 ? this : other ?? this;

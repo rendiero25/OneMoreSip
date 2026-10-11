@@ -69,7 +69,14 @@ Selected tab = `accent` pill behind the icon (DS-5) + `navOn`; never color/weigh
 | card border | 3 px `#000000` | 3 px `#FFFFFF` | — |
 
 ### Decorative only (blobs behind Sippy, medals; never text color, never the only signal)
-`sun #FFD27A`, `coral #FF9E87` (dark: translucent variants `rgba(242,184,92,.45–.6)`, `rgba(255,143,122,.45–.6)`), `waterSoft` `#4FD1C1` / `#9BE8DE` (second water tone in the glass). Exception: `sun` may fill a badge (e.g. "Premium") when its text is `ink` (13.10).
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `sun` | `#FFD27A` | `rgba(242,184,92,.5)` | blobs, medals |
+| `coral` | `#FF9E87` | `rgba(255,143,122,.5)` | blobs, medals |
+| `water` | `#4FD1C1` | `#4FD1C1` | `waterSoft` pair: primary water in `ProgressGlass` |
+| `waterBack` | `#9BE8DE` | `#9BE8DE` | `waterSoft` pair: back wave in `ProgressGlass` |
+
+The two `waterSoft` tones are the same in both themes (D-30). Exception: `sun` may fill a badge (e.g. "Premium") when its text is `ink` (13.10).
 
 ### Rules
 - No text opacity: use `inkMuted` / `mutedOnTint` instead of faded text.
@@ -89,10 +96,12 @@ Merged into DS-1 on 2026-10-11 (D-28, T-008a). Removed names and their replaceme
 - Both fonts ship as bundled `.ttf` assets (no runtime font fetching, e.g. no `google_fonts` downloads).
 - All sizes in logical px (pt/sp) and scale with system text size.
 
+Letter-spacing is 0 except `hero` (−0.02em) and `display` (−0.01em), as in the export (D-30).
+
 | Style | Size / line | Weight | Use |
 |---|---|---|---|
-| `hero` | 64 / 68 | 700 | today's ml on Home |
-| `display` | 40 / 44 | 700 | stat numbers |
+| `hero` | 64 / 68, −0.02em | 700 | today's ml on Home |
+| `display` | 40 / 44, −0.01em | 700 | stat numbers |
 | `h1` | 30 / 36 | 700 | screen titles |
 | `h2` | 24 / 30 | 700 | card titles |
 | `title` | 20 / 26 | 600 | list titles, buttons L |

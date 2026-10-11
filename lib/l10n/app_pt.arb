@@ -10,5 +10,16 @@
   "sippyTired": "Sippy está sem energia",
   "sippySleeping": "Sippy está dormindo",
   "sippyCelebrating": "Sippy está comemorando",
-  "sippyWaiting": "Sippy espera com paciência"
+  "sippyWaiting": "Sippy espera com paciência",
+  "fabLogLabel": "Registrar bebida",
+  "statusHydrated": "Hidratado",
+  "statusThirsty": "Com um pouco de sede",
+  "statusBehind": "Atrasado",
+  "undo": "Desfazer",
+  "adLabel": "Anúncio",
+  "adOptions": "Opções do anúncio",
+  "adReport": "Denunciar anúncio",
+  "quotaLeft": "Restam {count}",
+  "quotaResets": "Reinicia em {date}",
+  "progressGlassLabel": "Copo {percent} cheio"
 }

@@ -43,5 +43,66 @@
   "sippyWaiting": "Sippy is waiting patiently",
   "@sippyWaiting": {
     "description": "Screen-reader label for the Sippy mascot in its \"waiting\" state (DS-8)."
+  },
+  "fabLogLabel": "Log drink",
+  "@fabLogLabel": {
+    "description": "Screen-reader label of the round \"+\" button in the navbar that opens the log-drink sheet (DS-5 FabLog)."
+  },
+  "statusHydrated": "Hydrated",
+  "@statusHydrated": {
+    "description": "Hydration status badge: the user is at or ahead of today's pace (DS-1 status)."
+  },
+  "statusThirsty": "Getting thirsty",
+  "@statusThirsty": {
+    "description": "Hydration status badge: the user is 10-30% behind today's pace (DS-1 status). Friendly, no shame."
+  },
+  "statusBehind": "Behind",
+  "@statusBehind": {
+    "description": "Hydration status badge: the user is more than 30% behind today's pace (DS-1 status). Friendly, no shame."
+  },
+  "undo": "Undo",
+  "@undo": {
+    "description": "Snackbar action that reverts the drink that was just logged (DS-5 UndoSnackbar)."
+  },
+  "adLabel": "Ad",
+  "@adLabel": {
+    "description": "Short label on a native ad card that marks it as an advertisement (F-24). Keep very short."
+  },
+  "adOptions": "Ad options",
+  "@adOptions": {
+    "description": "Screen-reader label and tooltip of the \"...\" menu button on an ad card (F-24)."
+  },
+  "adReport": "Report ad",
+  "@adReport": {
+    "description": "Menu item on an ad card to report the ad (F-24)."
+  },
+  "quotaLeft": "{count} left",
+  "@quotaLeft": {
+    "description": "AI quota meter: how many uses remain this period (DS-5 QuotaMeter), e.g. \"8 left\".",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quotaResets": "Resets {date}",
+  "@quotaResets": {
+    "description": "AI quota meter: the date the monthly quota resets (DS-5 QuotaMeter), e.g. \"Resets Nov 1\".",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMd"
+      }
+    }
+  },
+  "progressGlassLabel": "Glass {percent} full",
+  "@progressGlassLabel": {
+    "description": "Screen-reader label of the water glass that shows today's progress (DS-5 ProgressGlass), e.g. \"Glass 54% full\".",
+    "placeholders": {
+      "percent": {
+        "type": "String",
+        "example": "54%"
+      }
+    }
   }
 }

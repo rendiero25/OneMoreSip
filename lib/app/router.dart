@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:onemoresip/app/app_shell.dart';
 import 'package:onemoresip/app/debug/sippy_debug_screen.dart';
 import 'package:onemoresip/app/placeholder_screen.dart';
 import 'package:onemoresip/core/flags/feature_flag.dart';
@@ -101,8 +102,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       placeholder(Routes.welcome, 'UI-01-welcome'),
       placeholder(Routes.onboarding, 'UI-02'),
       StatefulShellRoute.indexedStack(
-        // FloatingNavBar (DS-5) replaces this bare shell in T-011.
-        builder: (context, state, navigationShell) => navigationShell,
+        builder: (context, state, navigationShell) =>
+            AppShell(navigationShell: navigationShell),
         branches: [
           StatefulShellBranch(routes: [placeholder(Routes.home, 'UI-03')]),
           StatefulShellBranch(routes: [placeholder(Routes.stats, 'UI-09')]),
