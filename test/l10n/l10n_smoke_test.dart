@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onemoresip/app/app.dart';
 import 'package:onemoresip/l10n/gen/app_localizations.dart';
+
+import '../helpers/flags.dart';
 
 /// Smoke screen: a localized label followed by a directional icon.
 class _SmokeScreen extends StatelessWidget {
@@ -82,9 +83,7 @@ void main() {
   });
 
   testWidgets('App applies the requested locale', (tester) async {
-    await tester.pumpWidget(
-      const ProviderScope(child: App(locale: Locale('ar'))),
-    );
+    await pumpWithFlags(tester, child: const App(locale: Locale('ar')));
     await tester.pumpAndSettle();
 
     final context = tester.element(find.byKey(const ValueKey('UI-03')));
