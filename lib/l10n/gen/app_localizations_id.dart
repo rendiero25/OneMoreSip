@@ -20,4 +20,25 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get navMe => 'Saya';
+
+  @override
+  String get sippyFresh => 'Sippy terlihat segar';
+
+  @override
+  String get sippyHappy => 'Sippy senang';
+
+  @override
+  String get sippyThirsty => 'Sippy agak haus';
+
+  @override
+  String get sippyTired => 'Sippy lemas';
+
+  @override
+  String get sippySleeping => 'Sippy sedang tidur';
+
+  @override
+  String get sippyCelebrating => 'Sippy sedang merayakan';
+
+  @override
+  String get sippyWaiting => 'Sippy menunggu dengan sabar';
 }

@@ -3,5 +3,12 @@
   "navHome": "الرئيسية",
   "navStats": "الإحصاءات",
   "navFamily": "العائلة",
-  "navMe": "أنا"
+  "navMe": "أنا",
+  "sippyFresh": "سيبي يبدو منتعشًا",
+  "sippyHappy": "سيبي سعيد",
+  "sippyThirsty": "سيبي عطشان قليلًا",
+  "sippyTired": "سيبي متعب",
+  "sippySleeping": "سيبي نائم",
+  "sippyCelebrating": "سيبي يحتفل",
+  "sippyWaiting": "سيبي ينتظر بصبر"
 }

@@ -127,6 +127,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Me'**
   String get navMe;
+
+  /// Screen-reader label for the Sippy mascot in its "fresh" state (DS-8).
+  ///
+  /// In en, this message translates to:
+  /// **'Sippy looks fresh'**
+  String get sippyFresh;
+
+  /// Screen-reader label for the Sippy mascot in its "happy" state (DS-8).
+  ///
+  /// In en, this message translates to:
+  /// **'Sippy is happy'**
+  String get sippyHappy;
+
+  /// Screen-reader label for the Sippy mascot in its "thirsty" state (DS-8).
+  ///
+  /// In en, this message translates to:
+  /// **'Sippy is a little thirsty'**
+  String get sippyThirsty;
+
+  /// Screen-reader label for the Sippy mascot in its "tired" state (DS-8).
+  ///
+  /// In en, this message translates to:
+  /// **'Sippy is tired'**
+  String get sippyTired;
+
+  /// Screen-reader label for the Sippy mascot in its "sleeping" state (DS-8).
+  ///
+  /// In en, this message translates to:
+  /// **'Sippy is sleeping'**
+  String get sippySleeping;
+
+  /// Screen-reader label for the Sippy mascot in its "celebrating" state (DS-8).
+  ///
+  /// In en, this message translates to:
+  /// **'Sippy is celebrating'**
+  String get sippyCelebrating;
+
+  /// Screen-reader label for the Sippy mascot in its "waiting" state (DS-8).
+  ///
+  /// In en, this message translates to:
+  /// **'Sippy is waiting patiently'**
+  String get sippyWaiting;
 }
 
 class _AppLocalizationsDelegate

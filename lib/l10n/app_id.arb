@@ -3,5 +3,12 @@
   "navHome": "Beranda",
   "navStats": "Statistik",
   "navFamily": "Keluarga",
-  "navMe": "Saya"
+  "navMe": "Saya",
+  "sippyFresh": "Sippy terlihat segar",
+  "sippyHappy": "Sippy senang",
+  "sippyThirsty": "Sippy agak haus",
+  "sippyTired": "Sippy lemas",
+  "sippySleeping": "Sippy sedang tidur",
+  "sippyCelebrating": "Sippy sedang merayakan",
+  "sippyWaiting": "Sippy menunggu dengan sabar"
 }
