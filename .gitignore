@@ -57,3 +57,9 @@ app.*.map.json
 *.p12
 *.pem
 *.mobileprovision
+
+# Node tooling (Supabase CLI)
+node_modules/
+
+# Claude Code sub-agent worktrees
+.claude/worktrees/
