@@ -41,4 +41,46 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get sippyWaiting => 'Sippy espera com paciência';
+
+  @override
+  String get fabLogLabel => 'Registrar bebida';
+
+  @override
+  String get statusHydrated => 'Hidratado';
+
+  @override
+  String get statusThirsty => 'Com um pouco de sede';
+
+  @override
+  String get statusBehind => 'Atrasado';
+
+  @override
+  String get undo => 'Desfazer';
+
+  @override
+  String get adLabel => 'Anúncio';
+
+  @override
+  String get adOptions => 'Opções do anúncio';
+
+  @override
+  String get adReport => 'Denunciar anúncio';
+
+  @override
+  String quotaLeft(int count) {
+    return 'Restam $count';
+  }
+
+  @override
+  String quotaResets(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Reinicia em $dateString';
+  }
+
+  @override
+  String progressGlassLabel(String percent) {
+    return 'Copo $percent cheio';
+  }
 }

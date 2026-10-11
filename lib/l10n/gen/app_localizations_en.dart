@@ -41,4 +41,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sippyWaiting => 'Sippy is waiting patiently';
+
+  @override
+  String get fabLogLabel => 'Log drink';
+
+  @override
+  String get statusHydrated => 'Hydrated';
+
+  @override
+  String get statusThirsty => 'Getting thirsty';
+
+  @override
+  String get statusBehind => 'Behind';
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String get adLabel => 'Ad';
+
+  @override
+  String get adOptions => 'Ad options';
+
+  @override
+  String get adReport => 'Report ad';
+
+  @override
+  String quotaLeft(int count) {
+    return '$count left';
+  }
+
+  @override
+  String quotaResets(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return 'Resets $dateString';
+  }
+
+  @override
+  String progressGlassLabel(String percent) {
+    return 'Glass $percent full';
+  }
 }

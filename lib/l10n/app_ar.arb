@@ -10,5 +10,16 @@
   "sippyTired": "سيبي متعب",
   "sippySleeping": "سيبي نائم",
   "sippyCelebrating": "سيبي يحتفل",
-  "sippyWaiting": "سيبي ينتظر بصبر"
+  "sippyWaiting": "سيبي ينتظر بصبر",
+  "fabLogLabel": "سجّل مشروبًا",
+  "statusHydrated": "مرتوٍ",
+  "statusThirsty": "بدأ العطش",
+  "statusBehind": "متأخر",
+  "undo": "تراجع",
+  "adLabel": "إعلان",
+  "adOptions": "خيارات الإعلان",
+  "adReport": "الإبلاغ عن الإعلان",
+  "quotaLeft": "متبقٍ {count}",
+  "quotaResets": "يُجدَّد {date}",
+  "progressGlassLabel": "الكوب ممتلئ بنسبة {percent}"
 }

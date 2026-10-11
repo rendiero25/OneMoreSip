@@ -169,6 +169,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sippy is waiting patiently'**
   String get sippyWaiting;
+
+  /// Screen-reader label of the round "+" button in the navbar that opens the log-drink sheet (DS-5 FabLog).
+  ///
+  /// In en, this message translates to:
+  /// **'Log drink'**
+  String get fabLogLabel;
+
+  /// Hydration status badge: the user is at or ahead of today's pace (DS-1 status).
+  ///
+  /// In en, this message translates to:
+  /// **'Hydrated'**
+  String get statusHydrated;
+
+  /// Hydration status badge: the user is 10-30% behind today's pace (DS-1 status). Friendly, no shame.
+  ///
+  /// In en, this message translates to:
+  /// **'Getting thirsty'**
+  String get statusThirsty;
+
+  /// Hydration status badge: the user is more than 30% behind today's pace (DS-1 status). Friendly, no shame.
+  ///
+  /// In en, this message translates to:
+  /// **'Behind'**
+  String get statusBehind;
+
+  /// Snackbar action that reverts the drink that was just logged (DS-5 UndoSnackbar).
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// Short label on a native ad card that marks it as an advertisement (F-24). Keep very short.
+  ///
+  /// In en, this message translates to:
+  /// **'Ad'**
+  String get adLabel;
+
+  /// Screen-reader label and tooltip of the "..." menu button on an ad card (F-24).
+  ///
+  /// In en, this message translates to:
+  /// **'Ad options'**
+  String get adOptions;
+
+  /// Menu item on an ad card to report the ad (F-24).
+  ///
+  /// In en, this message translates to:
+  /// **'Report ad'**
+  String get adReport;
+
+  /// AI quota meter: how many uses remain this period (DS-5 QuotaMeter), e.g. "8 left".
+  ///
+  /// In en, this message translates to:
+  /// **'{count} left'**
+  String quotaLeft(int count);
+
+  /// AI quota meter: the date the monthly quota resets (DS-5 QuotaMeter), e.g. "Resets Nov 1".
+  ///
+  /// In en, this message translates to:
+  /// **'Resets {date}'**
+  String quotaResets(DateTime date);
+
+  /// Screen-reader label of the water glass that shows today's progress (DS-5 ProgressGlass), e.g. "Glass 54% full".
+  ///
+  /// In en, this message translates to:
+  /// **'Glass {percent} full'**
+  String progressGlassLabel(String percent);
 }
 
 class _AppLocalizationsDelegate

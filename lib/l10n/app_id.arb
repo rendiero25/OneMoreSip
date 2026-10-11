@@ -10,5 +10,16 @@
   "sippyTired": "Sippy lemas",
   "sippySleeping": "Sippy sedang tidur",
   "sippyCelebrating": "Sippy sedang merayakan",
-  "sippyWaiting": "Sippy menunggu dengan sabar"
+  "sippyWaiting": "Sippy menunggu dengan sabar",
+  "fabLogLabel": "Catat minuman",
+  "statusHydrated": "Terhidrasi",
+  "statusThirsty": "Mulai haus",
+  "statusBehind": "Tertinggal",
+  "undo": "Urungkan",
+  "adLabel": "Iklan",
+  "adOptions": "Opsi iklan",
+  "adReport": "Laporkan iklan",
+  "quotaLeft": "Sisa {count}",
+  "quotaResets": "Direset {date}",
+  "progressGlassLabel": "Gelas terisi {percent}"
 }
