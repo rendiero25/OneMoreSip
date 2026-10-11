@@ -39,9 +39,9 @@
 - [x] **T-003 CI** — GitHub Actions: format, analyze, test, secret scan, dependency audit.
   Refs: SD-11 · Verify: PR shows green checks; a planted fake secret fails the build.
   Note 2026-10-11: gitleaks (+ `.gitleaks.toml` Supabase secret-key rule) and osv-scanner on `pubspec.lock`. PR #1 green; PR #2 with a fake `api_key` failed "Secret scan" (leak detected). pgTAP / deno jobs come with T-061 / T-063.
-- [~] **T-004 Supabase projects** — `oms-dev`, `oms-prod`, CLI linked, `supabase/` folder, local stack.
+- [x] **T-004 Supabase projects** — `oms-dev`, `oms-prod`, CLI linked, `supabase/` folder, local stack.
   Refs: SD-11, Q-04 · Verify: `supabase start` + `db reset` work.
-  Note 2026-10-11: `oms-dev` created in ap-southeast-1 (Singapore, Free, ref `uqowkgmuzohseyeadwic`) per Q-04; old Sydney project deleted by owner. Supabase CLI 2.120.0 as npm dev-dependency (`npx supabase`), `supabase/` initialised and linked to oms-dev. `oms-prod` is created before release (Pro plan). Open: local stack verify (`supabase start`/`db reset`) needs WSL2 + Docker Desktop on the owner's PC.
+  Note 2026-10-11: `oms-dev` created in ap-southeast-1 (Singapore, Free, ref `uqowkgmuzohseyeadwic`) per Q-04; old Sydney project deleted by owner. Supabase CLI 2.120.0 as npm dev-dependency (`npx supabase`), `supabase/` initialised and linked to oms-dev. Local stack verified on Windows/WSL2 Docker (`npx supabase start` + `db reset` OK); local `[analytics]` off (vector cannot read the Docker socket on Windows). `oms-prod` deferred to release prep (Pro plan).
 - [x] **T-005 Telemetry wrappers** — Sentry + PostHog behind an allowlist API (only SD-9 events/props compile).
   Refs: SD-9, SC-13 · Verify: unit test rejects forbidden property names.
   Note 2026-10-11: `lib/core/analytics/`: sealed SD-9 events + property allowlist/denylist guard + Sentry scrubber; D-26 (analytics off until consent). `feature_discovered`, `paywall_viewed`, `purchase_started` are added with T-038/T-081/T-080. No-op until O-10 keys exist. PostHog native AUTO_INIT disabled.
