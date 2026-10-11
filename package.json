@@ -1,0 +1,8 @@
+{
+  "name": "onemoresip-tooling",
+  "private": true,
+  "description": "Dev tooling only (Supabase CLI). The app itself is Flutter; see pubspec.yaml.",
+  "devDependencies": {
+    "supabase": "^2.120.0"
+  }
+}
