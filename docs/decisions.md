@@ -97,3 +97,7 @@ Why: GDPR/EEA safety before the Privacy center (T-071) and UMP (T-090) exist. Po
 
 **D-27 — Sippy never looks thirsty or tired under a fluid restriction** (2026-10-11)
 Why: F-28 forbids nudging users with a doctor's limit to drink more; a thirsty/tired mascot is such a nudge. With `fluid_restricted`, `sippyStateFor` shows fresh instead. Extends DS-8.
+
+**D-29 — Sippy is animated in Flutter from the SVG art, not Rive** (2026-10-11)
+Why: No designer or `.riv` file is available; animating the existing SVG art in Flutter code avoids a dependency and keeps one art source.
+Consequence: Supersedes the Rive part of D-21 and DS-8's Rive state machine; O-11 closes; no `rive` dependency.

@@ -64,9 +64,9 @@
 - [x] **T-012 Feature flag service (kill switch)** — fetch + cache + 6 h refresh; default ON for reviewed features.
   Refs: F-33, SD-11, D-14, SC-01 · Verify: turning a flag off hides the feature without a crash; no code path enables unreleased features.
   Note 2026-10-11: `lib/core/flags/`. Effective state = default ON AND remote, so remote rows can only switch off; unknown keys ignored. A row applies to listed platforms and builds >= `min_build` (null = all). Cache in shared_preferences. `FlagSource` is a no-remote stub until the Supabase table exists (T-004/T-060). Routes of switched-off features redirect to Home; navbar gating (Family tab) comes with T-011.
-- [~] **T-013 Sippy integration** — Rive state machine inputs (DS-8), static fallbacks, Reduce Motion.
+- [x] **T-013 Sippy integration** — Rive state machine inputs (DS-8), static fallbacks, Reduce Motion.
   Refs: F-29, DS-8, design/source/Sippy.dc.html (SVG of all 7 states → static fallbacks now; Rive animation later) · Deps: Sippy `.riv` asset (O-11) · Verify: each state reachable in a debug screen.
-  Note 2026-10-11: static part done — 7 SVG fallbacks (`assets/sippy/`, from Sippy.dc.html), `sippyStateFor` (DS-8 priority + D-27), `Sippy` widget with localized semantics, debug-only `/debug/sippy`. Open: Rive state machine + Reduce Motion switch once the `.riv` exists (O-11).
+  Note 2026-10-11: 7 static SVG fallbacks (`assets/sippy/`) animated in Flutter code per D-29 (idle bob + 250 ms state cross-fade, no Rive); Reduce Motion = static art only. `sippyStateFor` (DS-8 + D-27), debug-only `/debug/sippy`.
 
 ## M1 — Core tracking
 
@@ -320,5 +320,5 @@
 - [ ] **O-08** Recruit 15–20 Android testers + 10 iOS testers (Google accounts, active for 14 days). → unblocks T-170.
 - [ ] **O-09** After launch: RevenueCat Experiments on tier-1 prices (D-08).
 - [ ] **O-10** Service accounts: support email (`support@onemoresip.app`), Resend, Anthropic API (set budget cap), WeatherKit key, Firebase project (FCM), Sentry, PostHog, AdMob account. → unblocks T-065, T-070, T-110, T-121.
-- [ ] **O-11** Sippy illustration & Rive file (designer or self-made) based on DS-8. → unblocks T-013.
+- [x] **O-11** Sippy illustration & Rive file (designer or self-made) based on DS-8. → unblocks T-013. Note: closed by D-29 (no Rive).
 - [ ] **O-12** Pajak, rekening, dan konsultasi pajak penghasilan (owner menangani sendiri).

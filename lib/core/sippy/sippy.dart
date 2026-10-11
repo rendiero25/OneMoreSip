@@ -5,9 +5,10 @@ import 'package:onemoresip/l10n/gen/app_localizations.dart';
 
 /// Sippy mascot (F-29, DS-8).
 ///
-/// Shows the static fallback for [state]. The Rive animation (O-11) will
-/// replace it except under Reduce Motion, where the static art stays.
-class Sippy extends StatelessWidget {
+/// Animated in code from the static art (D-29): a gentle idle bob and a
+/// short cross-fade when [state] changes (DS-9). Under Reduce Motion only
+/// the static art is shown.
+class Sippy extends StatefulWidget {
   /// Creates Sippy in [state], [size] logical pixels square.
   const new({required this.state, this.size = 120, super.key});
 
@@ -21,20 +22,75 @@ class Sippy extends StatelessWidget {
   static String assetFor(SippyState state) => 'assets/sippy/${state.name}.svg';
 
   @override
+  State<Sippy> createState() => _SippyState();
+}
+
+class _SippyState extends State<Sippy> with SingleTickerProviderStateMixin {
+  late final AnimationController _idle = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1600),
+  );
+
+  bool get _reduceMotion =>
+      MediaQuery.maybeDisableAnimationsOf(context) ?? false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_reduceMotion) {
+      _idle.stop();
+    } else if (!_idle.isAnimating) {
+      _idle.repeat(reverse: true);
+    }
+  }
+
+  @override
+  void dispose() {
+    _idle.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final art = SvgPicture.asset(
+      Sippy.assetFor(widget.state),
+      key: ValueKey(Sippy.assetFor(widget.state)),
+      width: widget.size,
+      height: widget.size,
+      excludeFromSemantics: true,
+    );
     return Semantics(
       image: true,
       label: _label(AppLocalizations.of(context)),
-      child: SvgPicture.asset(
-        assetFor(state),
-        width: size,
-        height: size,
-        excludeFromSemantics: true,
+      child: _reduceMotion ? art : _animated(art),
+    );
+  }
+
+  Widget _animated(Widget art) {
+    final lift = widget.size * 0.025;
+    return AnimatedBuilder(
+      animation: _idle,
+      builder: (context, child) => Transform.translate(
+        offset: Offset(0, -lift * Curves.easeInOut.transform(_idle.value)),
+        child: child,
+      ),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        switchInCurve: Curves.easeOutCubic,
+        switchOutCurve: Curves.easeOutCubic,
+        transitionBuilder: (child, animation) => FadeTransition(
+          opacity: animation,
+          child: ScaleTransition(
+            scale: Tween<double>(begin: 0.9, end: 1).animate(animation),
+            child: child,
+          ),
+        ),
+        child: art,
       ),
     );
   }
 
-  String _label(AppLocalizations l10n) => switch (state) {
+  String _label(AppLocalizations l10n) => switch (widget.state) {
     SippyState.fresh => l10n.sippyFresh,
     SippyState.happy => l10n.sippyHappy,
     SippyState.thirsty => l10n.sippyThirsty,
