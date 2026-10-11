@@ -63,3 +63,5 @@ Checked automatically over all 69 files, then by hand where flagged.
 | Touch targets ≥ 48dp | ⚠️ a few compact controls drawn smaller: toggles 34px, "Set it up" link 40px, "Try 7 days free" 44px, some Me-tab pills 42–44px. Rule for Flutter: visual size may stay, **hit area must be ≥ 48dp** (padding / `MaterialTapTargetSize.padded`) |
 | Store-metadata wording ("for kids") | ℹ️ Appears only in the Foundations board description ("for kids to grandparents"); fine in design docs, **must not** be used in store listings (SC-11) |
 | Canvas title says "UI-00 & UI-01" although it holds all screens | ℹ️ cosmetic; rename in Claude Design if you like |
+
+Correction 2026-10-11 (T-008a): the contrast row above is wrong. White-92% text on light `accent` is 4.39:1, the Onboarding wheel picker (muted at 60% on `mint`) is ~2.3:1, and several control borders (`line`, `fieldBorder`, `trackOff`) are below 3:1. All are fixed by the approved tokens in DS-1 (D-28); where the export differs, DS-1 values win.
