@@ -170,4 +170,39 @@ void main() {
 
     expect(await repo.hydrationMlOn(profileId, day), 250);
   });
+
+  test(
+    'sum since a time: inclusive start, this profile, not deleted',
+    () async {
+      final since = day.subtract(const Duration(hours: 1));
+      await add(water, 400, at: since.subtract(const Duration(minutes: 1)));
+      await add(water, 300, at: since);
+      await add(water, 200, at: day);
+      final removed = await add(water, 900, at: day);
+      await repo.delete(removed.id);
+      await repo.add(
+        profileId: 'other',
+        drink: water,
+        volumeMl: 700,
+        source: 'app',
+        loggedAt: day,
+      );
+
+      expect(await repo.hydrationMlSince(profileId, since), 500);
+    },
+  );
+
+  test('recent drink ids are distinct, newest first, limited', () async {
+    final tea = _drink('tea');
+    final juice = _drink('juice');
+    await add(water, 250, at: day.subtract(const Duration(hours: 3)));
+    await add(tea, 250, at: day.subtract(const Duration(hours: 2)));
+    await add(water, 250, at: day.subtract(const Duration(hours: 1)));
+    final removed = await add(juice, 250, at: day);
+    await repo.delete(removed.id);
+
+    expect(await repo.recentDrinkIds(profileId), ['water', 'tea']);
+    expect(await repo.recentDrinkIds(profileId, limit: 1), ['water']);
+    expect(await repo.recentDrinkIds('other'), isEmpty);
+  });
 }

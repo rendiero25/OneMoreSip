@@ -99,8 +99,9 @@
   Refs: F-01, UF-01 · Deps: T-023, T-024 · Verify: completes ≤ 90 s; 200% text; skips work; widget test.
 - [ ] **T-031 Home** (UI-03) — hero number, progress, status badge, Sippy, quick-add, FAB, education card slot.
   Refs: F-02, F-29, DS-5 · Verify: log in ≤ 2 taps; RTL + 200% goldens.
-- [ ] **T-032 Log sheet, drink picker, custom volume, undo** (UI-04, UI-05).
+- [x] **T-032 Log sheet, drink picker, custom volume, undo** (UI-04, UI-05).
   Refs: F-02, F-03, UF-04 · Verify: undo within 5 s restores state; works offline.
+  Note 2026-10-11: FAB opens the log sheet as a bottom sheet over the current tab (`/log` route removed); recent drinks (distinct, newest first, no alcohol) with water + common fallback, 150/250/350/500 ml + custom 50–1,500 ml / 10 ml (D-35), BR-03 note, live BR-06 notice, undo snackbar 5 s (soft delete), `drink_logged{in_app}` only; `/drinks` picker with search, categories, sugar/caffeine badges, alcohol "Logged, not counted". Local DB only (offline). Guest profile timezone is an `Etc/GMT±N` offset name until T-030 sets the real IANA zone. Deferred: AI photo button (T-113), custom drink creation + "Data sources" + "Popular in …" section (T-021), haptics on log (toggle in T-073).
 - [ ] **T-033 History** with edit/delete (UI-09).
   Refs: F-14 · Verify: edits recalculate today and streak.
 - [ ] **T-034 Statistics** — 7-day free, full premium gate, CSV export (premium).

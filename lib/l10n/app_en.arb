@@ -183,5 +183,209 @@
   "overDrinkingDailyBody": "Go easy for the rest of today. Talk to a doctor if you often feel very thirsty.",
   "@overDrinkingDailyBody": {
     "description": "Body of the daily over-drinking warning card (BR-06). Must keep the advice to talk to a doctor. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logSheetTitle": "Add a drink",
+  "@logSheetTitle": {
+    "description": "Title of the log-drink bottom sheet opened from the \"+\" button (UI-04). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logRecentDrinks": "Recent drinks",
+  "@logRecentDrinks": {
+    "description": "Label above the drink tiles in the log sheet: the user's most recently logged drinks, or common drinks when there is no history (UI-04, F-02). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logAllDrinks": "All drinks",
+  "@logAllDrinks": {
+    "description": "Button in the log sheet that opens the full drink picker with search (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logAmount": "Amount",
+  "@logAmount": {
+    "description": "Label above the volume chips in the log sheet (UI-04). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logVolumeMl": "{volume} ml",
+  "@logVolumeMl": {
+    "description": "A drink volume in millilitres, e.g. \"250 ml\" on a volume chip or the custom amount (UI-04). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "volume": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "logCustom": "Custom",
+  "@logCustom": {
+    "description": "Volume chip that opens the custom amount stepper and slider (UI-04, F-02). Keep short. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logCustomAmount": "Custom amount",
+  "@logCustomAmount": {
+    "description": "Screen-reader label of the custom volume slider in the log sheet (UI-04). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logDecrease": "Decrease by {step} ml",
+  "@logDecrease": {
+    "description": "Screen-reader label and tooltip of the minus button of the custom drink volume (UI-04). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      }
+    }
+  },
+  "logIncrease": "Increase by {step} ml",
+  "@logIncrease": {
+    "description": "Screen-reader label and tooltip of the plus button of the custom drink volume (UI-04). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      }
+    }
+  },
+  "logCountsAs": "Counts as {counted} ml",
+  "@logCountsAs": {
+    "description": "Note in the log sheet: how much of the chosen drink counts toward the water goal (BR-03), e.g. \"Counts as 230 ml\". Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "logCountsAsWithSugar": "Counts as {counted} ml · {sugar} g sugar",
+  "@logCountsAsWithSugar": {
+    "description": "Note in the log sheet for a drink with sugar: counted amount (BR-03) and estimated sugar for the chosen volume, e.g. \"Counts as 230 ml · 20 g sugar\". Informational, not a judgement. Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "sugar": {
+        "type": "int"
+      }
+    }
+  },
+  "drinkNotCounted": "Logged, not counted",
+  "@drinkNotCounted": {
+    "description": "Shown for alcoholic drinks in the log sheet and drink picker: they are saved but never count toward the water goal (D-23). Neutral, never encouraging. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logAddButton": "Add drink",
+  "@logAddButton": {
+    "description": "Main button of the log sheet that saves the drink (UI-04). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "logAdded": "Added {volume} ml {drink}",
+  "@logAdded": {
+    "description": "Undo snackbar message after a drink was logged, e.g. \"Added 250 ml Water\"; {drink} is the drink name as shown in the picker (DS-5 UndoSnackbar). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "volume": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "drink": {
+        "type": "String"
+      }
+    }
+  },
+  "logLoadError": "Couldn't load your drinks. Close and try again.",
+  "@logLoadError": {
+    "description": "Shown in the log sheet if the local drink data cannot be read (UI-04, UI-18). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "pickerTitle": "Choose a drink",
+  "@pickerTitle": {
+    "description": "Title of the full-screen drink picker (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "pickerSearch": "Search drinks",
+  "@pickerSearch": {
+    "description": "Hint text of the search field in the drink picker (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "pickerCategoryAll": "All",
+  "@pickerCategoryAll": {
+    "description": "Category chip in the drink picker that shows drinks of every category (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryWater": "Water",
+  "@drinkCategoryWater": {
+    "description": "Drink category chip: plain and flavoured water (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryCoconut": "Coconut",
+  "@drinkCategoryCoconut": {
+    "description": "Drink category chip: coconut water (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryCoffee": "Coffee",
+  "@drinkCategoryCoffee": {
+    "description": "Drink category chip: coffee drinks (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryTea": "Tea",
+  "@drinkCategoryTea": {
+    "description": "Drink category chip: tea drinks (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryDairy": "Milk",
+  "@drinkCategoryDairy": {
+    "description": "Drink category chip: dairy milk drinks (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryPlantMilk": "Plant milk",
+  "@drinkCategoryPlantMilk": {
+    "description": "Drink category chip: soy, oat, almond and other plant-based milks (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryJuice": "Juice",
+  "@drinkCategoryJuice": {
+    "description": "Drink category chip: fruit and vegetable juices (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategorySmoothie": "Smoothie",
+  "@drinkCategorySmoothie": {
+    "description": "Drink category chip: smoothies (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategorySoda": "Soda",
+  "@drinkCategorySoda": {
+    "description": "Drink category chip: soft drinks (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategorySports": "Sports",
+  "@drinkCategorySports": {
+    "description": "Drink category chip: sports and electrolyte drinks (UI-05). Keep short. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryEnergy": "Energy",
+  "@drinkCategoryEnergy": {
+    "description": "Drink category chip: energy drinks (UI-05). Keep short. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryTraditional": "Traditional",
+  "@drinkCategoryTraditional": {
+    "description": "Drink category chip: traditional drinks such as wedang jahe (UI-05). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "drinkCategoryAlcohol": "Alcohol",
+  "@drinkCategoryAlcohol": {
+    "description": "Drink category chip: alcoholic drinks, which are logged but never counted (UI-05, D-23). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "pickerAlcoholNote": "Alcohol is logged for your records but never counts toward your water goal.",
+  "@pickerAlcoholNote": {
+    "description": "Info note shown when the Alcohol category is selected in the drink picker (D-23). Neutral, never encouraging. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "pickerPerGlass": "Sugar and caffeine per {volume} ml glass · values are estimates",
+  "@pickerPerGlass": {
+    "description": "Caption above the drink list explaining the badges and that values are estimates (F-03, UI-05). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "volume": {
+        "type": "int"
+      }
+    }
+  },
+  "drinkSugarBadge": "{grams} g sugar",
+  "@drinkSugarBadge": {
+    "description": "Badge on a drink row: estimated sugar per glass (F-03, UI-05). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "grams": {
+        "type": "int"
+      }
+    }
+  },
+  "drinkCaffeineBadge": "{mg} mg caffeine",
+  "@drinkCaffeineBadge": {
+    "description": "Badge on a drink row: estimated caffeine per glass (F-03, UI-05). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "mg": {
+        "type": "int"
+      }
+    }
+  },
+  "pickerNoResults": "No drink called “{query}” yet.",
+  "@pickerNoResults": {
+    "description": "Shown in the drink picker when the search finds nothing; {query} is what the user typed (UI-05). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
   }
 }

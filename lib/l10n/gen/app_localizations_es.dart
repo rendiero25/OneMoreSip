@@ -145,4 +145,150 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get overDrinkingDailyBody =>
       'Tómatelo con calma el resto del día. Habla con un médico si a menudo sientes mucha sed.';
+
+  @override
+  String get logSheetTitle => 'Añadir una bebida';
+
+  @override
+  String get logRecentDrinks => 'Bebidas recientes';
+
+  @override
+  String get logAllDrinks => 'Todas las bebidas';
+
+  @override
+  String get logAmount => 'Cantidad';
+
+  @override
+  String logVolumeMl(int volume) {
+    final intl.NumberFormat volumeNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String volumeString = volumeNumberFormat.format(volume);
+
+    return '$volumeString ml';
+  }
+
+  @override
+  String get logCustom => 'Otra';
+
+  @override
+  String get logCustomAmount => 'Cantidad personalizada';
+
+  @override
+  String logDecrease(int step) {
+    return 'Reducir $step ml';
+  }
+
+  @override
+  String logIncrease(int step) {
+    return 'Aumentar $step ml';
+  }
+
+  @override
+  String logCountsAs(int counted) {
+    final intl.NumberFormat countedNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countedString = countedNumberFormat.format(counted);
+
+    return 'Cuenta como $countedString ml';
+  }
+
+  @override
+  String logCountsAsWithSugar(int counted, int sugar) {
+    final intl.NumberFormat countedNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countedString = countedNumberFormat.format(counted);
+
+    return 'Cuenta como $countedString ml · $sugar g de azúcar';
+  }
+
+  @override
+  String get drinkNotCounted => 'Registrado, no cuenta';
+
+  @override
+  String get logAddButton => 'Añadir bebida';
+
+  @override
+  String logAdded(int volume, String drink) {
+    final intl.NumberFormat volumeNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String volumeString = volumeNumberFormat.format(volume);
+
+    return 'Añadido: $volumeString ml de $drink';
+  }
+
+  @override
+  String get logLoadError =>
+      'No se pudieron cargar tus bebidas. Cierra e inténtalo de nuevo.';
+
+  @override
+  String get pickerTitle => 'Elige una bebida';
+
+  @override
+  String get pickerSearch => 'Buscar bebidas';
+
+  @override
+  String get pickerCategoryAll => 'Todas';
+
+  @override
+  String get drinkCategoryWater => 'Agua';
+
+  @override
+  String get drinkCategoryCoconut => 'Coco';
+
+  @override
+  String get drinkCategoryCoffee => 'Café';
+
+  @override
+  String get drinkCategoryTea => 'Té';
+
+  @override
+  String get drinkCategoryDairy => 'Leche';
+
+  @override
+  String get drinkCategoryPlantMilk => 'Bebida vegetal';
+
+  @override
+  String get drinkCategoryJuice => 'Jugo';
+
+  @override
+  String get drinkCategorySmoothie => 'Batido';
+
+  @override
+  String get drinkCategorySoda => 'Refresco';
+
+  @override
+  String get drinkCategorySports => 'Isotónicas';
+
+  @override
+  String get drinkCategoryEnergy => 'Energéticas';
+
+  @override
+  String get drinkCategoryTraditional => 'Tradicionales';
+
+  @override
+  String get drinkCategoryAlcohol => 'Alcohol';
+
+  @override
+  String get pickerAlcoholNote =>
+      'El alcohol se registra en tu historial, pero nunca cuenta para tu meta de agua.';
+
+  @override
+  String pickerPerGlass(int volume) {
+    return 'Azúcar y cafeína por vaso de $volume ml · valores estimados';
+  }
+
+  @override
+  String drinkSugarBadge(int grams) {
+    return '$grams g de azúcar';
+  }
+
+  @override
+  String drinkCaffeineBadge(int mg) {
+    return '$mg mg de cafeína';
+  }
+
+  @override
+  String pickerNoResults(String query) {
+    return 'Aún no hay ninguna bebida llamada “$query”.';
+  }
 }

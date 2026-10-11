@@ -36,18 +36,23 @@ class MemoryFlagCache implements FlagCache {
   Future<void> write(CachedFlags flags) async => value = flags;
 }
 
-/// Pumps [child] in a [ProviderScope] with [flagOverrides] and returns its
-/// container. The scope belongs to the widget tree, so the 6 h refresh
-/// timer is cancelled when the test tears the tree down.
+/// Pumps [child] in a [ProviderScope] with [flagOverrides] plus
+/// [overrides] and returns its container. The scope belongs to the widget
+/// tree, so the 6 h refresh timer is cancelled when the test tears the
+/// tree down.
 Future<ProviderContainer> pumpWithFlags(
   WidgetTester tester, {
   Widget child = const SizedBox(),
   FlagSource? source,
   FlagCache? cache,
+  List<Override> overrides = const [],
 }) async {
   await tester.pumpWidget(
     ProviderScope(
-      overrides: flagOverrides(source: source, cache: cache),
+      overrides: [
+        ...flagOverrides(source: source, cache: cache),
+        ...overrides,
+      ],
       child: child,
     ),
   );

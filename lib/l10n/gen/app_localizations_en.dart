@@ -144,4 +144,149 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get overDrinkingDailyBody =>
       'Go easy for the rest of today. Talk to a doctor if you often feel very thirsty.';
+
+  @override
+  String get logSheetTitle => 'Add a drink';
+
+  @override
+  String get logRecentDrinks => 'Recent drinks';
+
+  @override
+  String get logAllDrinks => 'All drinks';
+
+  @override
+  String get logAmount => 'Amount';
+
+  @override
+  String logVolumeMl(int volume) {
+    final intl.NumberFormat volumeNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String volumeString = volumeNumberFormat.format(volume);
+
+    return '$volumeString ml';
+  }
+
+  @override
+  String get logCustom => 'Custom';
+
+  @override
+  String get logCustomAmount => 'Custom amount';
+
+  @override
+  String logDecrease(int step) {
+    return 'Decrease by $step ml';
+  }
+
+  @override
+  String logIncrease(int step) {
+    return 'Increase by $step ml';
+  }
+
+  @override
+  String logCountsAs(int counted) {
+    final intl.NumberFormat countedNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countedString = countedNumberFormat.format(counted);
+
+    return 'Counts as $countedString ml';
+  }
+
+  @override
+  String logCountsAsWithSugar(int counted, int sugar) {
+    final intl.NumberFormat countedNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countedString = countedNumberFormat.format(counted);
+
+    return 'Counts as $countedString ml · $sugar g sugar';
+  }
+
+  @override
+  String get drinkNotCounted => 'Logged, not counted';
+
+  @override
+  String get logAddButton => 'Add drink';
+
+  @override
+  String logAdded(int volume, String drink) {
+    final intl.NumberFormat volumeNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String volumeString = volumeNumberFormat.format(volume);
+
+    return 'Added $volumeString ml $drink';
+  }
+
+  @override
+  String get logLoadError => 'Couldn\'t load your drinks. Close and try again.';
+
+  @override
+  String get pickerTitle => 'Choose a drink';
+
+  @override
+  String get pickerSearch => 'Search drinks';
+
+  @override
+  String get pickerCategoryAll => 'All';
+
+  @override
+  String get drinkCategoryWater => 'Water';
+
+  @override
+  String get drinkCategoryCoconut => 'Coconut';
+
+  @override
+  String get drinkCategoryCoffee => 'Coffee';
+
+  @override
+  String get drinkCategoryTea => 'Tea';
+
+  @override
+  String get drinkCategoryDairy => 'Milk';
+
+  @override
+  String get drinkCategoryPlantMilk => 'Plant milk';
+
+  @override
+  String get drinkCategoryJuice => 'Juice';
+
+  @override
+  String get drinkCategorySmoothie => 'Smoothie';
+
+  @override
+  String get drinkCategorySoda => 'Soda';
+
+  @override
+  String get drinkCategorySports => 'Sports';
+
+  @override
+  String get drinkCategoryEnergy => 'Energy';
+
+  @override
+  String get drinkCategoryTraditional => 'Traditional';
+
+  @override
+  String get drinkCategoryAlcohol => 'Alcohol';
+
+  @override
+  String get pickerAlcoholNote =>
+      'Alcohol is logged for your records but never counts toward your water goal.';
+
+  @override
+  String pickerPerGlass(int volume) {
+    return 'Sugar and caffeine per $volume ml glass · values are estimates';
+  }
+
+  @override
+  String drinkSugarBadge(int grams) {
+    return '$grams g sugar';
+  }
+
+  @override
+  String drinkCaffeineBadge(int mg) {
+    return '$mg mg caffeine';
+  }
+
+  @override
+  String pickerNoResults(String query) {
+    return 'No drink called “$query” yet.';
+  }
 }

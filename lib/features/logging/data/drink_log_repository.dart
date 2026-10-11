@@ -96,6 +96,35 @@ class DrinkLogRepository {
     return (await query.getSingle()).read<int>(total) ?? 0;
   }
 
+  /// Millilitres counted toward the goal (BR-03) logged at or after [since]
+  /// (BR-06 hourly window).
+  Future<int> hydrationMlSince(String profileId, DateTime since) async {
+    final total = _db.drinkLogs.hydrationMl.sum();
+    final logs = _db.drinkLogs;
+    final query = _db.selectOnly(logs)
+      ..addColumns([total])
+      ..where(
+        logs.profileId.equals(profileId) &
+            logs.deletedAt.isNull() &
+            logs.loggedAt.isBiggerOrEqualValue(since.toUtc()),
+      );
+    return (await query.getSingle()).read<int>(total) ?? 0;
+  }
+
+  /// Distinct drink ids of [profileId]'s non-deleted logs, most recently
+  /// logged first, at most [limit].
+  Future<List<String>> recentDrinkIds(String profileId, {int limit = 8}) {
+    final logs = _db.drinkLogs;
+    final latest = logs.loggedAt.max();
+    final query = _db.selectOnly(logs)
+      ..addColumns([logs.drinkId, latest])
+      ..where(logs.profileId.equals(profileId) & logs.deletedAt.isNull())
+      ..groupBy([logs.drinkId])
+      ..orderBy([OrderingTerm.desc(latest)])
+      ..limit(limit);
+    return query.map((row) => row.read(logs.drinkId)!).get();
+  }
+
   Expression<bool> _onDay(String profileId, DateTime day) {
     final start = DateTime(day.year, day.month, day.day);
     final end = DateTime(day.year, day.month, day.day + 1);
