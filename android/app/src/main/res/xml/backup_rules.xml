@@ -3,10 +3,14 @@
      is excluded: its key is not backed up, so a restored copy could never be
      opened. drift_flutter stores it in getApplicationDocumentsDirectory(),
      i.e. <dataDir>/app_flutter/onemoresip.sqlite (core/db/database_providers.dart).
+     flutter_secure_storage prefs (holding the DB key, encrypted with a
+     Keystore key that is never restored) are excluded too.
      Everything else keeps the default backup behaviour. -->
 <full-backup-content>
     <exclude domain="root" path="app_flutter/onemoresip.sqlite" />
     <exclude domain="root" path="app_flutter/onemoresip.sqlite-journal" />
     <exclude domain="root" path="app_flutter/onemoresip.sqlite-wal" />
     <exclude domain="root" path="app_flutter/onemoresip.sqlite-shm" />
+    <exclude domain="sharedpref" path="FlutterSecureStorage.xml" />
+    <exclude domain="sharedpref" path="FlutterSecureKeyStorage.xml" />
 </full-backup-content>

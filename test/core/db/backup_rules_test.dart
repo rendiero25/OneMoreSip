@@ -5,9 +5,9 @@ import 'package:onemoresip/core/db/database_providers.dart';
 
 const _res = 'android/app/src/main/res/xml';
 
-/// `<exclude>` paths in the `root` domain inside the [section] element of
+/// `<exclude>` paths in the [domain] inside the [section] element of
 /// [file] (or in the whole file when [section] is null).
-Set<String> _excludedRootPaths(String file, [String? section]) {
+Set<String> _excluded(String file, String domain, [String? section]) {
   var xml = File('$_res/$file').readAsStringSync();
   if (section != null) {
     xml = RegExp(
@@ -17,7 +17,7 @@ Set<String> _excludedRootPaths(String file, [String? section]) {
   }
   return {
     for (final m in RegExp(
-      r'<exclude\s+domain="root"\s+path="([^"]+)"\s*/>',
+      '<exclude\\s+domain="$domain"\\s+path="([^"]+)"\\s*/>',
     ).allMatches(xml))
       m.group(1)!,
   };
@@ -42,18 +42,27 @@ void main() {
     expect(manifest, isNot(contains('android:allowBackup')));
   });
 
-  test('Android 11 and lower: DB files excluded from backup', () {
-    expect(_excludedRootPaths('backup_rules.xml'), dbFiles);
+  // flutter_secure_storage keeps the DB key in these prefs, encrypted with a
+  // Keystore key that is never restored.
+  const keyPrefs = {'FlutterSecureStorage.xml', 'FlutterSecureKeyStorage.xml'};
+
+  test('Android 11 and lower: DB files and key prefs excluded', () {
+    expect(_excluded('backup_rules.xml', 'root'), dbFiles);
+    expect(_excluded('backup_rules.xml', 'sharedpref'), keyPrefs);
   });
 
-  test('Android 12+: DB files excluded from cloud backup and transfer', () {
-    expect(
-      _excludedRootPaths('data_extraction_rules.xml', 'cloud-backup'),
-      dbFiles,
-    );
-    expect(
-      _excludedRootPaths('data_extraction_rules.xml', 'device-transfer'),
-      dbFiles,
-    );
+  test('Android 12+: DB files and key prefs excluded everywhere', () {
+    for (final section in ['cloud-backup', 'device-transfer']) {
+      expect(
+        _excluded('data_extraction_rules.xml', 'root', section),
+        dbFiles,
+        reason: section,
+      );
+      expect(
+        _excluded('data_extraction_rules.xml', 'sharedpref', section),
+        keyPrefs,
+        reason: section,
+      );
+    }
   });
 }
