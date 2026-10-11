@@ -114,7 +114,7 @@ Precedence when docs disagree: **decisions.md > PRD.md > system-design.md > desi
 ## 9. Tech conventions
 
 - Flutter stable (pin with FVM), Dart null-safety, `very_good_analysis` lints.
-- Architecture: feature-first folders, Riverpod for state, go_router for navigation, Drift (SQLCipher) for local DB. Details: SD-3.
+- Architecture: feature-first folders, Riverpod for state, go_router for navigation, Drift (encrypted with SQLite3MultipleCiphers, D-32) for local DB. Details: SD-3.
 - Prefer platform/package defaults over custom infrastructure. Check the latest package version and changelog before adding a dependency; justify every new dependency in the PR/commit body.
 - Native code (Swift/Kotlin) only where Flutter can't: widgets, Live Activity, App Intents, watch apps, Health SDKs not covered by packages.
 - Edge Functions: TypeScript (Deno), input validated with zod, one function per responsibility.

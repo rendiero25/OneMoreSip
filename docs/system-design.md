@@ -12,7 +12,7 @@ Implements PRD v1.0. Section IDs (`SD-x`) are referenced from `task.md`. Package
 flowchart LR
   subgraph Device
     APP[Flutter app<br/>Riverpod · go_router]
-    DB[(Drift + SQLCipher<br/>local DB)]
+    DB[(Drift + SQLite3MultipleCiphers<br/>local DB)]
     NAT[Native: WidgetKit · Live Activity · App Intents<br/>Glance widgets · Watch apps]
     HK[HealthKit / Health Connect / Samsung SDK]
     APP <--> DB
@@ -301,7 +301,7 @@ Client shows rewarded ad with `customData = account_id` (or a signed nonce for g
 - No identity (name, email) sent to the model.
 
 **Data protection**
-- Local DB encrypted (SQLCipher) with key in Keychain/Keystore; screenshots allowed (accessibility) but sensitive screens (fluid restriction) can be blurred in app switcher.
+- Local DB encrypted (SQLite3MultipleCiphers, D-32) with key in Keychain/Keystore, excluded from device backups (D-33); screenshots allowed (accessibility) but sensitive screens (fluid restriction) can be blurred in app switcher.
 - TLS only; certificate pinning not used (Supabase/CDN rotation risk) — rely on attestation + TLS.
 - Logs (Sentry, function logs) never include health values, photos, chat text, emails, tokens.
 - Account deletion removes all rows (cascade) within 30 days max; immediate for app-initiated deletion.
