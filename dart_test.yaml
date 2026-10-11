@@ -1,0 +1,3 @@
+tags:
+  # Pixel goldens; verified locally on Windows, excluded on CI (T-010).
+  golden:
