@@ -83,4 +83,63 @@ class AppLocalizationsAr extends AppLocalizations {
   String progressGlassLabel(String percent) {
     return 'الكوب ممتلئ بنسبة $percent';
   }
+
+  @override
+  String get medicalDisclaimer =>
+      'One More Sip ليس جهازًا طبيًا. إذا كانت لديك أسئلة عن صحتك، تحدّث إلى طبيبك.';
+
+  @override
+  String get restrictionQuestion => 'هل حدّد لك طبيب كمية ما يمكنك شربه؟';
+
+  @override
+  String get restrictionYes => 'نعم';
+
+  @override
+  String get restrictionNo => 'لا';
+
+  @override
+  String get restrictionLimitLabel => 'الحد اليومي (مل)';
+
+  @override
+  String get restrictionHint => 'استخدم القيمة الدقيقة التي أعطاك إياها طبيبك.';
+
+  @override
+  String get restrictionReassurance => 'لن نطلب منك أبدًا أن تشرب أكثر من ذلك.';
+
+  @override
+  String restrictionInvalid(int min, int max, int step) {
+    final intl.NumberFormat minNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String minString = minNumberFormat.format(min);
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'أدخل من $minString إلى $maxString مل، بخطوات $step مل.';
+  }
+
+  @override
+  String restrictionDecrease(int step) {
+    return 'إنقاص $step مل';
+  }
+
+  @override
+  String restrictionIncrease(int step) {
+    return 'زيادة $step مل';
+  }
+
+  @override
+  String get overDrinkingHourlyTitle => 'هذه كمية كبيرة في ساعة واحدة.';
+
+  @override
+  String get overDrinkingHourlyBody => 'على مهلك، اشرب ببطء.';
+
+  @override
+  String get overDrinkingDailyTitle => 'هذه كمية كبيرة ليوم واحد.';
+
+  @override
+  String get overDrinkingDailyBody =>
+      'خفّف لبقية اليوم. تحدّث إلى طبيب إذا كنت تشعر بعطش شديد كثيرًا.';
 }

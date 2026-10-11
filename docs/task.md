@@ -83,8 +83,9 @@
   Refs: BR-01, Q-03 · Owner: Rendy (approve) · Verify: sources listed in `core/config/goal_rules.dart` comments.
 - [ ] **T-023 Goal calculator** — BR-01 (base, restriction, weather, activity, kids, caps) pure Dart.
   Refs: BR-01, D-22 · Verify: ≥ 30 unit tests incl. edge cases.
-- [ ] **T-024 Medical safety** — fluid restriction flow, BR-06 warnings, disclaimers.
+- [x] **T-024 Medical safety** — fluid restriction flow, BR-06 warnings, disclaimers.
   Refs: F-28, BR-01a, BR-06, SC-03 · Verify: tests: restriction disables adjustments, catch-up nudges and "drink more" copy.
+  Note 2026-10-11: `features/safety/domain` (`SafetyPolicy` incl. `effectiveGoal` and the `nudge*` drink-more copy guard, restriction validation 500–3,000 ml / 50 ml steps, BR-06 `overDrinkingWarning` with the restriction as daily threshold, daily card wins) and `features/safety/presentation` (`MedicalDisclaimer`, `FluidRestrictionField`, `OverDrinkingNotice`); owner decisions in D-34. No persistence here: wired in T-027 (profile), T-030 (onboarding) and T-073 (settings).
 - [x] **T-025 Domain rules** — BR-02 catch-up, BR-03 counting, BR-07 streak.
   Refs: BR-02, BR-03, BR-07 · Verify: unit tests.
   Note 2026-10-11: `features/logging/domain/hydration.dart` (BR-03), `features/reminders/domain/catch_up.dart` (BR-02 pace, catch-up, behind message), `features/streaks/domain/streak.dart` (BR-07 + freezes); open points settled in D-31. BR-06 warnings stay with T-024.

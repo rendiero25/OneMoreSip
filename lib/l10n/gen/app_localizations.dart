@@ -235,6 +235,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Glass {percent} full'**
   String progressGlassLabel(String percent);
+
+  /// Disclaimer shown in onboarding, About and AI screens (F-28, SC-03). Calm, no health claims. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'One More Sip is not a medical device. For questions about your health, talk to your doctor.'**
+  String get medicalDisclaimer;
+
+  /// Onboarding/settings question about a doctor's fluid restriction (F-01, F-28), answered Yes/No. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Has a doctor limited how much you can drink?'**
+  String get restrictionQuestion;
+
+  /// Answer to the fluid restriction question: a doctor has set a limit (F-28). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get restrictionYes;
+
+  /// Answer to the fluid restriction question: no doctor's limit (F-28). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get restrictionNo;
+
+  /// Label of the field where the user enters the doctor's daily fluid limit in millilitres (F-28). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily limit (ml)'**
+  String get restrictionLimitLabel;
+
+  /// Hint under the daily fluid limit field (F-28). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the exact amount your doctor gave you.'**
+  String get restrictionHint;
+
+  /// Reassurance shown once a fluid limit is entered (F-28, BR-01a). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll never ask you to drink more than this.'**
+  String get restrictionReassurance;
+
+  /// Validation message when the typed fluid limit is out of range or not a multiple of the step (D-34), e.g. "Enter 500–3,000 ml, in steps of 50 ml.". Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter {min}–{max} ml, in steps of {step} ml.'**
+  String restrictionInvalid(int min, int max, int step);
+
+  /// Screen-reader label and tooltip of the minus button next to the fluid limit field (F-28). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease by {step} ml'**
+  String restrictionDecrease(int step);
+
+  /// Screen-reader label and tooltip of the plus button next to the fluid limit field (F-28). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase by {step} ml'**
+  String restrictionIncrease(int step);
+
+  /// Gentle note after more than 1,000 ml was logged within 60 minutes (BR-06). Never shames. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s a lot in one hour.'**
+  String get overDrinkingHourlyTitle;
+
+  /// Second line of the hourly over-drinking note (BR-06). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Take it easy — sip slowly.'**
+  String get overDrinkingHourlyBody;
+
+  /// Title of the warning card when today's total is above the daily threshold or the doctor's limit (BR-06, BR-01a). Never shames. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s a lot for one day.'**
+  String get overDrinkingDailyTitle;
+
+  /// Body of the daily over-drinking warning card (BR-06). Must keep the advice to talk to a doctor. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Go easy for the rest of today. Talk to a doctor if you often feel very thirsty.'**
+  String get overDrinkingDailyBody;
 }
 
 class _AppLocalizationsDelegate

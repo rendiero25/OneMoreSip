@@ -21,5 +21,19 @@
   "adReport": "الإبلاغ عن الإعلان",
   "quotaLeft": "متبقٍ {count}",
   "quotaResets": "يُجدَّد {date}",
-  "progressGlassLabel": "الكوب ممتلئ بنسبة {percent}"
+  "progressGlassLabel": "الكوب ممتلئ بنسبة {percent}",
+  "medicalDisclaimer": "One More Sip ليس جهازًا طبيًا. إذا كانت لديك أسئلة عن صحتك، تحدّث إلى طبيبك.",
+  "restrictionQuestion": "هل حدّد لك طبيب كمية ما يمكنك شربه؟",
+  "restrictionYes": "نعم",
+  "restrictionNo": "لا",
+  "restrictionLimitLabel": "الحد اليومي (مل)",
+  "restrictionHint": "استخدم القيمة الدقيقة التي أعطاك إياها طبيبك.",
+  "restrictionReassurance": "لن نطلب منك أبدًا أن تشرب أكثر من ذلك.",
+  "restrictionInvalid": "أدخل من {min} إلى {max} مل، بخطوات {step} مل.",
+  "restrictionDecrease": "إنقاص {step} مل",
+  "restrictionIncrease": "زيادة {step} مل",
+  "overDrinkingHourlyTitle": "هذه كمية كبيرة في ساعة واحدة.",
+  "overDrinkingHourlyBody": "على مهلك، اشرب ببطء.",
+  "overDrinkingDailyTitle": "هذه كمية كبيرة ليوم واحد.",
+  "overDrinkingDailyBody": "خفّف لبقية اليوم. تحدّث إلى طبيب إذا كنت تشعر بعطش شديد كثيرًا."
 }

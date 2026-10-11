@@ -21,5 +21,19 @@
   "adReport": "Laporkan iklan",
   "quotaLeft": "Sisa {count}",
   "quotaResets": "Direset {date}",
-  "progressGlassLabel": "Gelas terisi {percent}"
+  "progressGlassLabel": "Gelas terisi {percent}",
+  "medicalDisclaimer": "One More Sip bukan alat medis. Untuk pertanyaan tentang kesehatanmu, bicarakan dengan doktermu.",
+  "restrictionQuestion": "Apakah dokter membatasi berapa banyak kamu boleh minum?",
+  "restrictionYes": "Ya",
+  "restrictionNo": "Tidak",
+  "restrictionLimitLabel": "Batas harian (ml)",
+  "restrictionHint": "Gunakan angka persis dari doktermu.",
+  "restrictionReassurance": "Kami tidak akan pernah memintamu minum lebih dari ini.",
+  "restrictionInvalid": "Masukkan {min}–{max} ml, kelipatan {step} ml.",
+  "restrictionDecrease": "Kurangi {step} ml",
+  "restrictionIncrease": "Tambah {step} ml",
+  "overDrinkingHourlyTitle": "Itu cukup banyak dalam satu jam.",
+  "overDrinkingHourlyBody": "Santai saja — minum pelan-pelan.",
+  "overDrinkingDailyTitle": "Itu cukup banyak untuk satu hari.",
+  "overDrinkingDailyBody": "Pelan-pelan saja untuk sisa hari ini. Bicarakan dengan dokter jika kamu sering merasa sangat haus."
 }
