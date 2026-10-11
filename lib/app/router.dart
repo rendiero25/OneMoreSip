@@ -1,6 +1,7 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:onemoresip/app/debug/sippy_debug_screen.dart';
 import 'package:onemoresip/app/placeholder_screen.dart';
 import 'package:onemoresip/core/flags/feature_flag.dart';
 import 'package:onemoresip/core/flags/feature_flags.dart';
@@ -31,7 +32,7 @@ abstract final class Routes {
   /// UI-15 me, settings, account & privacy (navbar tab).
   static const me = '/me';
 
-  /// UI-03b Simple Mode — separate route tree, no navbar (SD-3.2, F-11).
+  /// UI-03b Simple Mode â€” separate route tree, no navbar (SD-3.2, F-11).
   static const simple = '/simple';
 
   /// UI-04 log drink sheet.
@@ -69,6 +70,9 @@ abstract final class Routes {
 
   /// Challenge join deep link (SD-2, F-17).
   static const challengeJoin = '/c/:code';
+
+  /// Debug-only gallery of Sippy states (T-013); absent in release builds.
+  static const debugSippy = '/debug/sippy';
 }
 
 /// App router. Every screen is a placeholder until its task replaces it.
@@ -125,6 +129,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         'challenge-join',
         FeatureFlag.challenges,
       ),
+      if (kDebugMode)
+        GoRoute(
+          path: Routes.debugSippy,
+          builder: (context, state) => const SippyDebugScreen(),
+        ),
     ],
   );
   ref.onDispose(router.dispose);

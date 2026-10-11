@@ -94,3 +94,6 @@ Why: Matches the planned domain `onemoresip.app` (O-03); Play `applicationId` ca
 
 **D-26 — Analytics off until consent; crash reporting on when configured** (2026-10-11)
 Why: GDPR/EEA safety before the Privacy center (T-071) and UMP (T-090) exist. PostHog sends nothing until the user consents; Sentry runs whenever a DSN is set, with PII and health data scrubbed (no user, request, extras, messages, exception values or breadcrumb data). Supersedes the "opt-out" default in SD-9 for analytics. Both must be declared in App Privacy / Data safety (SC-13, SC-25).
+
+**D-27 — Sippy never looks thirsty or tired under a fluid restriction** (2026-10-11)
+Why: F-28 forbids nudging users with a doctor's limit to drink more; a thirsty/tired mascot is such a nudge. With `fluid_restricted`, `sippyStateFor` shows fresh instead. Extends DS-8.

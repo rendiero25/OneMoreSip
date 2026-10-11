@@ -20,4 +20,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navMe => 'Me';
+
+  @override
+  String get sippyFresh => 'Sippy looks fresh';
+
+  @override
+  String get sippyHappy => 'Sippy is happy';
+
+  @override
+  String get sippyThirsty => 'Sippy is a little thirsty';
+
+  @override
+  String get sippyTired => 'Sippy is tired';
+
+  @override
+  String get sippySleeping => 'Sippy is sleeping';
+
+  @override
+  String get sippyCelebrating => 'Sippy is celebrating';
+
+  @override
+  String get sippyWaiting => 'Sippy is waiting patiently';
 }

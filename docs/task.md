@@ -64,8 +64,9 @@
 - [x] **T-012 Feature flag service (kill switch)** — fetch + cache + 6 h refresh; default ON for reviewed features.
   Refs: F-33, SD-11, D-14, SC-01 · Verify: turning a flag off hides the feature without a crash; no code path enables unreleased features.
   Note 2026-10-11: `lib/core/flags/`. Effective state = default ON AND remote, so remote rows can only switch off; unknown keys ignored. A row applies to listed platforms and builds >= `min_build` (null = all). Cache in shared_preferences. `FlagSource` is a no-remote stub until the Supabase table exists (T-004/T-060). Routes of switched-off features redirect to Home; navbar gating (Family tab) comes with T-011.
-- [ ] **T-013 Sippy integration** — Rive state machine inputs (DS-8), static fallbacks, Reduce Motion.
+- [~] **T-013 Sippy integration** — Rive state machine inputs (DS-8), static fallbacks, Reduce Motion.
   Refs: F-29, DS-8, design/source/Sippy.dc.html (SVG of all 7 states → static fallbacks now; Rive animation later) · Deps: Sippy `.riv` asset (O-11) · Verify: each state reachable in a debug screen.
+  Note 2026-10-11: static part done — 7 SVG fallbacks (`assets/sippy/`, from Sippy.dc.html), `sippyStateFor` (DS-8 priority + D-27), `Sippy` widget with localized semantics, debug-only `/debug/sippy`. Open: Rive state machine + Reduce Motion switch once the `.riv` exists (O-11).
 
 ## M1 — Core tracking
 

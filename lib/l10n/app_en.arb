@@ -15,5 +15,33 @@
   "navMe": "Me",
   "@navMe": {
     "description": "Bottom navbar tab label for the Me / settings screen (UI-15)."
+  },
+  "sippyFresh": "Sippy looks fresh",
+  "@sippyFresh": {
+    "description": "Screen-reader label for the Sippy mascot in its \"fresh\" state (DS-8)."
+  },
+  "sippyHappy": "Sippy is happy",
+  "@sippyHappy": {
+    "description": "Screen-reader label for the Sippy mascot in its \"happy\" state (DS-8)."
+  },
+  "sippyThirsty": "Sippy is a little thirsty",
+  "@sippyThirsty": {
+    "description": "Screen-reader label for the Sippy mascot in its \"thirsty\" state (DS-8)."
+  },
+  "sippyTired": "Sippy is tired",
+  "@sippyTired": {
+    "description": "Screen-reader label for the Sippy mascot in its \"tired\" state (DS-8)."
+  },
+  "sippySleeping": "Sippy is sleeping",
+  "@sippySleeping": {
+    "description": "Screen-reader label for the Sippy mascot in its \"sleeping\" state (DS-8)."
+  },
+  "sippyCelebrating": "Sippy is celebrating",
+  "@sippyCelebrating": {
+    "description": "Screen-reader label for the Sippy mascot in its \"celebrating\" state (DS-8)."
+  },
+  "sippyWaiting": "Sippy is waiting patiently",
+  "@sippyWaiting": {
+    "description": "Screen-reader label for the Sippy mascot in its \"waiting\" state (DS-8)."
   }
 }

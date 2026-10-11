@@ -3,5 +3,12 @@
   "navHome": "Inicio",
   "navStats": "Estadísticas",
   "navFamily": "Familia",
-  "navMe": "Yo"
+  "navMe": "Yo",
+  "sippyFresh": "Sippy tiene energía",
+  "sippyHappy": "Sippy está feliz",
+  "sippyThirsty": "Sippy tiene un poco de sed",
+  "sippyTired": "Sippy no tiene energía",
+  "sippySleeping": "Sippy duerme",
+  "sippyCelebrating": "Sippy celebra",
+  "sippyWaiting": "Sippy espera con paciencia"
 }

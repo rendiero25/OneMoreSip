@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 0 134 134">
+<defs>
+<linearGradient id="sippy-body" x1="0.35" y1="0" x2="0.65" y2="1">
+<stop offset="0" stop-color="#0B7F75"></stop>
+<stop offset="1" stop-color="#4FD1C1"></stop>
+</linearGradient>
+</defs>
+<path d="M60 8 C72 26 104 58 104 86 A44 44 0 0 1 16 86 C16 58 48 26 60 8 Z" fill="url(#sippy-body)"></path>
+<ellipse cx="36" cy="72" rx="6" ry="12" transform="rotate(25 36 72)" fill="#FFFFFF" opacity="0.75"></ellipse>
+<circle cx="43" cy="52" r="3" fill="#FFFFFF" opacity="0.75"></circle>
+<circle cx="47" cy="86" r="4.5" fill="#0E2A27"></circle>
+<circle cx="73" cy="86" r="4.5" fill="#0E2A27"></circle>
+<path d="M52 99 Q60 106 68 99" fill="none" stroke="#0E2A27" stroke-width="3.2" stroke-linecap="round"></path>
+<path d="M100 20 L102 27 L109 29 L102 31 L100 38 L98 31 L91 29 L98 27 Z" fill="#4FD1C1"></path>
+</svg>
