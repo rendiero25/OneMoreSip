@@ -58,8 +58,9 @@
   Note 2026-10-11: approved per audit (with WCAG fixes); merged into DS-1; font and icon choices recorded (D-28).
 - [ ] **T-009 Design test with older adults** — 3–5 people 60+ try Simple Mode + onboarding prototype.
   Refs: F-11, Goal 3 · Owner: Rendy · Verify: findings logged as D-xx or tasks.
-- [ ] **T-010 Theme** — tokens from DS-1/DS-2/DS-4 to `app/theme/`, light/dark, fonts, icon set decision.
+- [x] **T-010 Theme** — tokens from DS-1/DS-2/DS-4 to `app/theme/`, light/dark, fonts, icon set decision.
   Refs: DS-1…DS-4, DS-7, D-28, design/source/Main + Components · Deps: T-008a · Verify: golden tests light/dark.
+  Note 2026-10-11: `lib/app/theme/` (`AppColors` ThemeExtension, `AppTypography`, `AppSpacing`/`AppRadius`/`AppElevation`, M3 `AppTheme` light/dark, system mode); fonts bundled from google/fonts (Plus Jakarta Sans variable, IBM Plex Sans Arabic 400–700 as fallback) + OFL in licenses; `lucide_icons_flutter`; unit tests check every DS-1 text pair ≥ 4.5:1. Goldens are local-only on Windows (`flutter test --tags golden`); CI runs `--exclude-tags golden`. DS-1 decorative colors (`sun`, `coral`, `waterSoft`) not added yet (no user until T-011).
 - [ ] **T-011 Core components** — DS-5 list incl. `QuotaMeter`, `AdCard`, `FloatingNavBar`.
   Refs: DS-5, DS-6 · Verify: golden tests at 100% and 200% text, LTR + RTL.
 - [x] **T-012 Feature flag service (kill switch)** — fetch + cache + 6 h refresh; default ON for reviewed features.

@@ -36,6 +36,7 @@ dependencies:
   flutter_svg: ^2.3.0
   go_router: ^18.0.2
   intl: ^0.20.3
+  lucide_icons_flutter: ^3.1.24
   package_info_plus: ^10.2.2
   posthog_flutter: ^5.53.0
   sentry_flutter: ^10.0.0
@@ -63,6 +64,26 @@ flutter:
 
   assets:
     - assets/sippy/
+    # Font licenses, shown on the licenses page (T-010).
+    - assets/fonts/plus_jakarta_sans/OFL.txt
+    - assets/fonts/ibm_plex_sans_arabic/OFL.txt
+
+  # Bundled fonts, no runtime fetching (DS-2, D-28).
+  fonts:
+    - family: PlusJakartaSans
+      fonts:
+        # Variable font (wght 200-800); google/fonts ships no static files.
+        - asset: assets/fonts/plus_jakarta_sans/PlusJakartaSans-VariableFont_wght.ttf
+    - family: IBMPlexSansArabic
+      fonts:
+        - asset: assets/fonts/ibm_plex_sans_arabic/IBMPlexSansArabic-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/ibm_plex_sans_arabic/IBMPlexSansArabic-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/ibm_plex_sans_arabic/IBMPlexSansArabic-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/ibm_plex_sans_arabic/IBMPlexSansArabic-Bold.ttf
+          weight: 700
 
   # To add assets to your application, add an assets section, like this:
   # assets:
