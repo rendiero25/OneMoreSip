@@ -135,7 +135,7 @@ fvm flutter analyze
 fvm flutter test
 fvm flutter test --tags golden     # goldens, Windows only (CI excludes them)
 fvm flutter run --flavor dev -t lib/main_dev.dart --dart-define-from-file=env/dev.json
-supabase start                     # local stack
-supabase db reset                  # re-run migrations + seed
-supabase functions serve           # local edge functions
+npx supabase start                 # local stack (Docker Desktop running)
+npx supabase db reset              # re-run migrations + seed
+npx supabase functions serve       # local edge functions
 ```
