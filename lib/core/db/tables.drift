@@ -1,0 +1,142 @@
+-- Local schema (SD-4.2). Synced tables mirror the Postgres columns in SD-4.1:
+-- uuid -> TEXT (UUIDv7 from the device, SD-5), timestamptz -> DATETIME
+-- (ISO-8601 text, see build.yaml), date -> TEXT 'YYYY-MM-DD',
+-- time -> TEXT 'HH:MM', numeric -> REAL, jsonb and time[] -> TEXT (JSON).
+-- Guest mode stores account_id = 'guest' until sign-up re-keys the rows.
+
+CREATE TABLE profiles (
+  id TEXT NOT NULL PRIMARY KEY,
+  account_id TEXT NOT NULL,
+  kind TEXT NOT NULL,
+  display_name TEXT NOT NULL,
+  birth_year INTEGER,
+  weight_kg REAL,
+  sex TEXT,
+  activity_level TEXT,
+  wake_time TEXT,
+  sleep_time TEXT,
+  timezone TEXT NOT NULL,
+  units TEXT NOT NULL DEFAULT 'ml',
+  locale TEXT NOT NULL DEFAULT 'en',
+  experience TEXT NOT NULL DEFAULT 'normal',
+  fluid_restriction_ml INTEGER,
+  goal_override_ml INTEGER,
+  adaptive_weather BOOLEAN NOT NULL DEFAULT TRUE,
+  adaptive_activity BOOLEAN NOT NULL DEFAULT TRUE,
+  updated_at DATETIME NOT NULL,
+  deleted_at DATETIME
+);
+
+CREATE TABLE drink_logs (
+  id TEXT NOT NULL PRIMARY KEY,
+  profile_id TEXT NOT NULL,
+  drink_id TEXT NOT NULL,
+  volume_ml INTEGER NOT NULL,
+  hydration_ml INTEGER NOT NULL,
+  caffeine_mg REAL,
+  sugar_g REAL,
+  source TEXT NOT NULL,
+  logged_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  deleted_at DATETIME
+);
+
+CREATE INDEX drink_logs_profile_logged_at ON drink_logs (profile_id, logged_at);
+
+CREATE TABLE custom_drinks (
+  id TEXT NOT NULL PRIMARY KEY,
+  account_id TEXT,
+  name TEXT,
+  icon TEXT,
+  water_pct REAL,
+  sugar_g_100ml REAL,
+  caffeine_mg_100ml REAL,
+  updated_at DATETIME,
+  deleted_at DATETIME
+);
+
+CREATE TABLE daily_goals (
+  profile_id TEXT NOT NULL,
+  day TEXT NOT NULL,
+  base_ml INTEGER,
+  weather_ml INTEGER,
+  activity_ml INTEGER,
+  final_ml INTEGER,
+  reason TEXT,
+  PRIMARY KEY (profile_id, day)
+);
+
+CREATE TABLE reminder_settings (
+  profile_id TEXT NOT NULL PRIMARY KEY,
+  mode TEXT,
+  interval_min INTEGER,
+  fixed_times TEXT,
+  weekdays TEXT,
+  quiet_start TEXT,
+  quiet_end TEXT,
+  skip_if_logged_min INTEGER DEFAULT 30,
+  vibration_pattern TEXT,
+  text_style TEXT,
+  updated_at DATETIME
+);
+
+CREATE TABLE fasting_settings (
+  profile_id TEXT NOT NULL PRIMARY KEY,
+  enabled BOOLEAN,
+  type TEXT,
+  custom_days TEXT,
+  if_window TEXT,
+  calc_method TEXT,
+  split_pattern TEXT DEFAULT '2-4-2',
+  updated_at DATETIME
+);
+
+-- Pending sync writes, written in the same transaction as the row (SD-5).
+CREATE TABLE outbox (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "table" TEXT NOT NULL AS targetTable,
+  row_id TEXT NOT NULL,
+  op TEXT NOT NULL,
+  payload TEXT NOT NULL,
+  created_at DATETIME NOT NULL,
+  attempts INTEGER NOT NULL DEFAULT 0
+) AS OutboxEntry;
+
+CREATE TABLE sync_state (
+  "table" TEXT NOT NULL PRIMARY KEY AS targetTable,
+  last_pulled_at DATETIME
+) AS SyncStateEntry;
+
+-- Display only, never authoritative (SD-6). Mirrors `entitlements`.
+CREATE TABLE cached_entitlement (
+  account_id TEXT NOT NULL PRIMARY KEY,
+  premium BOOLEAN NOT NULL DEFAULT FALSE,
+  family BOOLEAN NOT NULL DEFAULT FALSE,
+  remove_ads BOOLEAN NOT NULL DEFAULT FALSE,
+  in_trial BOOLEAN NOT NULL DEFAULT FALSE,
+  premium_source TEXT,
+  expires_at DATETIME,
+  updated_at DATETIME
+) AS CachedEntitlementEntry;
+
+-- Display only, never authoritative. Last `consume_ai_quota` result per
+-- kind ('photo' or 'chat'), SD-6.2.
+CREATE TABLE cached_quota (
+  account_id TEXT NOT NULL,
+  kind TEXT NOT NULL,
+  monthly_left INTEGER NOT NULL,
+  credits_left INTEGER NOT NULL,
+  daily_left INTEGER NOT NULL,
+  resets_at DATETIME,
+  PRIMARY KEY (account_id, kind)
+) AS CachedQuotaEntry;
+
+-- Logs from widget, notification and watch queues, waiting to be imported
+-- into drink_logs (SD-3.4). `id` is the UUIDv7 the source generated.
+CREATE TABLE pending_external_logs (
+  id TEXT NOT NULL PRIMARY KEY,
+  drink_id TEXT NOT NULL,
+  volume_ml INTEGER NOT NULL,
+  source TEXT NOT NULL,
+  logged_at DATETIME NOT NULL
+);

@@ -46,7 +46,7 @@ Principles: offline-first device, server authoritative for money/quota/family, s
 | App | Flutter stable via FVM | iOS 16+, Android API 28+ |
 | State | `flutter_riverpod` (+ codegen) | |
 | Routing | `go_router` | deep links `/i/:token`, `/c/:code` |
-| Local DB | `drift` + SQLCipher (`sqlcipher_flutter_libs`) | key in `flutter_secure_storage` |
+| Local DB | `drift` + SQLite3MultipleCiphers (`sqlite3` hooks, D-32) | key in `flutter_secure_storage` |
 | Backend | `supabase_flutter` | Auth, PostgREST, Functions |
 | Payments | `purchases_flutter` (RevenueCat), `purchases_ui_flutter` optional | custom paywall preferred for design control |
 | Ads | `google_mobile_ads` + UMP | non-personalized |
