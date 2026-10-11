@@ -21,5 +21,19 @@
   "adReport": "Denunciar anúncio",
   "quotaLeft": "Restam {count}",
   "quotaResets": "Reinicia em {date}",
-  "progressGlassLabel": "Copo {percent} cheio"
+  "progressGlassLabel": "Copo {percent} cheio",
+  "medicalDisclaimer": "One More Sip não é um dispositivo médico. Se tiver dúvidas sobre sua saúde, fale com seu médico.",
+  "restrictionQuestion": "Um médico limitou quanto você pode beber?",
+  "restrictionYes": "Sim",
+  "restrictionNo": "Não",
+  "restrictionLimitLabel": "Limite diário (ml)",
+  "restrictionHint": "Use o valor exato que seu médico informou.",
+  "restrictionReassurance": "Nunca vamos pedir que você beba mais do que isso.",
+  "restrictionInvalid": "Digite de {min} a {max} ml, em passos de {step} ml.",
+  "restrictionDecrease": "Diminuir {step} ml",
+  "restrictionIncrease": "Aumentar {step} ml",
+  "overDrinkingHourlyTitle": "Isso é muito para uma hora.",
+  "overDrinkingHourlyBody": "Com calma: beba devagar.",
+  "overDrinkingDailyTitle": "Isso é muito para um dia.",
+  "overDrinkingDailyBody": "Vá com calma pelo resto do dia. Fale com um médico se você costuma sentir muita sede."
 }

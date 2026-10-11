@@ -104,5 +104,84 @@
         "example": "54%"
       }
     }
+  },
+  "medicalDisclaimer": "One More Sip is not a medical device. For questions about your health, talk to your doctor.",
+  "@medicalDisclaimer": {
+    "description": "Disclaimer shown in onboarding, About and AI screens (F-28, SC-03). Calm, no health claims. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "restrictionQuestion": "Has a doctor limited how much you can drink?",
+  "@restrictionQuestion": {
+    "description": "Onboarding/settings question about a doctor's fluid restriction (F-01, F-28), answered Yes/No. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "restrictionYes": "Yes",
+  "@restrictionYes": {
+    "description": "Answer to the fluid restriction question: a doctor has set a limit (F-28). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "restrictionNo": "No",
+  "@restrictionNo": {
+    "description": "Answer to the fluid restriction question: no doctor's limit (F-28). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "restrictionLimitLabel": "Daily limit (ml)",
+  "@restrictionLimitLabel": {
+    "description": "Label of the field where the user enters the doctor's daily fluid limit in millilitres (F-28). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "restrictionHint": "Use the exact amount your doctor gave you.",
+  "@restrictionHint": {
+    "description": "Hint under the daily fluid limit field (F-28). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "restrictionReassurance": "We'll never ask you to drink more than this.",
+  "@restrictionReassurance": {
+    "description": "Reassurance shown once a fluid limit is entered (F-28, BR-01a). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "restrictionInvalid": "Enter {min}–{max} ml, in steps of {step} ml.",
+  "@restrictionInvalid": {
+    "description": "Validation message when the typed fluid limit is out of range or not a multiple of the step (D-34), e.g. \"Enter 500–3,000 ml, in steps of 50 ml.\". Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "min": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "step": {
+        "type": "int"
+      }
+    }
+  },
+  "restrictionDecrease": "Decrease by {step} ml",
+  "@restrictionDecrease": {
+    "description": "Screen-reader label and tooltip of the minus button next to the fluid limit field (F-28). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      }
+    }
+  },
+  "restrictionIncrease": "Increase by {step} ml",
+  "@restrictionIncrease": {
+    "description": "Screen-reader label and tooltip of the plus button next to the fluid limit field (F-28). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      }
+    }
+  },
+  "overDrinkingHourlyTitle": "That's a lot in one hour.",
+  "@overDrinkingHourlyTitle": {
+    "description": "Gentle note after more than 1,000 ml was logged within 60 minutes (BR-06). Never shames. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "overDrinkingHourlyBody": "Take it easy — sip slowly.",
+  "@overDrinkingHourlyBody": {
+    "description": "Second line of the hourly over-drinking note (BR-06). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "overDrinkingDailyTitle": "That's a lot for one day.",
+  "@overDrinkingDailyTitle": {
+    "description": "Title of the warning card when today's total is above the daily threshold or the doctor's limit (BR-06, BR-01a). Never shames. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "overDrinkingDailyBody": "Go easy for the rest of today. Talk to a doctor if you often feel very thirsty.",
+  "@overDrinkingDailyBody": {
+    "description": "Body of the daily over-drinking warning card (BR-06). Must keep the advice to talk to a doctor. Non-EN translations are drafts for review in T-130/T-131."
   }
 }

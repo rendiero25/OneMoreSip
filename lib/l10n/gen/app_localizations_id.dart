@@ -83,4 +83,65 @@ class AppLocalizationsId extends AppLocalizations {
   String progressGlassLabel(String percent) {
     return 'Gelas terisi $percent';
   }
+
+  @override
+  String get medicalDisclaimer =>
+      'One More Sip bukan alat medis. Untuk pertanyaan tentang kesehatanmu, bicarakan dengan doktermu.';
+
+  @override
+  String get restrictionQuestion =>
+      'Apakah dokter membatasi berapa banyak kamu boleh minum?';
+
+  @override
+  String get restrictionYes => 'Ya';
+
+  @override
+  String get restrictionNo => 'Tidak';
+
+  @override
+  String get restrictionLimitLabel => 'Batas harian (ml)';
+
+  @override
+  String get restrictionHint => 'Gunakan angka persis dari doktermu.';
+
+  @override
+  String get restrictionReassurance =>
+      'Kami tidak akan pernah memintamu minum lebih dari ini.';
+
+  @override
+  String restrictionInvalid(int min, int max, int step) {
+    final intl.NumberFormat minNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String minString = minNumberFormat.format(min);
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'Masukkan $minString–$maxString ml, kelipatan $step ml.';
+  }
+
+  @override
+  String restrictionDecrease(int step) {
+    return 'Kurangi $step ml';
+  }
+
+  @override
+  String restrictionIncrease(int step) {
+    return 'Tambah $step ml';
+  }
+
+  @override
+  String get overDrinkingHourlyTitle => 'Itu cukup banyak dalam satu jam.';
+
+  @override
+  String get overDrinkingHourlyBody => 'Santai saja — minum pelan-pelan.';
+
+  @override
+  String get overDrinkingDailyTitle => 'Itu cukup banyak untuk satu hari.';
+
+  @override
+  String get overDrinkingDailyBody =>
+      'Pelan-pelan saja untuk sisa hari ini. Bicarakan dengan dokter jika kamu sering merasa sangat haus.';
 }
