@@ -13,7 +13,7 @@ abstract final class AppTypography {
   /// Arabic family (bundled, D-28).
   static const arabic = 'IBMPlexSansArabic';
 
-  /// Today's ml on Home: 64 / 68, 700.
+  /// Today's ml on Home: 64 / 68, 700, letter-spacing -0.02em (D-30).
   static const hero = TextStyle(
     fontFamily: latin,
     fontFamilyFallback: [arabic],
@@ -21,9 +21,10 @@ abstract final class AppTypography {
     fontSize: 64,
     height: 68 / 64,
     fontWeight: FontWeight.w700,
+    letterSpacing: 64 * -0.02,
   );
 
-  /// Stat numbers: 40 / 44, 700.
+  /// Stat numbers: 40 / 44, 700, letter-spacing -0.01em (D-30).
   static const display = TextStyle(
     fontFamily: latin,
     fontFamilyFallback: [arabic],
@@ -31,6 +32,7 @@ abstract final class AppTypography {
     fontSize: 40,
     height: 44 / 40,
     fontWeight: FontWeight.w700,
+    letterSpacing: 40 * -0.01,
   );
 
   /// Screen titles: 30 / 36, 700.
