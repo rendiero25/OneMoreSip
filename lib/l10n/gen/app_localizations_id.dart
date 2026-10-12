@@ -406,4 +406,63 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get historyEditSave => 'Simpan';
+
+  @override
+  String get notificationChannelReminders => 'Pengingat minum';
+
+  @override
+  String get notificationChannelRemindersDescription =>
+      'Pengingat dari Sippy sepanjang harimu.';
+
+  @override
+  String get notificationChannelProgress => 'Progres';
+
+  @override
+  String get notificationChannelProgressDescription =>
+      'Progres hari ini sebagai notifikasi yang terus tampil.';
+
+  @override
+  String get notificationChannelFamily => 'Peringatan keluarga';
+
+  @override
+  String get notificationChannelFamilyDescription =>
+      'Kabar tentang anggota keluarga yang kamu dampingi.';
+
+  @override
+  String get notificationChannelWeather => 'Perubahan target karena cuaca';
+
+  @override
+  String get notificationChannelWeatherDescription =>
+      'Saat cuaca hari ini mengubah targetmu, maksimal sekali sehari.';
+
+  @override
+  String get notificationChannelInsights => 'Pencapaian & wawasan';
+
+  @override
+  String get notificationChannelInsightsDescription =>
+      'Streak, pencapaian, dan wawasan mingguanmu.';
+
+  @override
+  String get notificationChannelPromotions => 'Promosi';
+
+  @override
+  String get notificationChannelPromotionsDescription =>
+      'Penawaran dan berita. Nonaktif kecuali kamu menyalakannya.';
+
+  @override
+  String get reminderNotificationTitle => 'Pesan dari Sippy';
+
+  @override
+  String get reminderNotificationBody =>
+      'Sekadar menyapa. Catat minumanmu kapan pun kamu minum.';
+
+  @override
+  String nudgeReminderNotificationBody(int ml) {
+    final intl.NumberFormat mlNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String mlString = mlNumberFormat.format(ml);
+
+    return 'Saatnya minum sekitar $mlString ml. Kamu pasti bisa!';
+  }
 }

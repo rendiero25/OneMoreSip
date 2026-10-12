@@ -404,4 +404,62 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get historyEditSave => 'حفظ';
+
+  @override
+  String get notificationChannelReminders => 'تذكيرات الشرب';
+
+  @override
+  String get notificationChannelRemindersDescription =>
+      'تذكيرات من سيبي على مدار يومك.';
+
+  @override
+  String get notificationChannelProgress => 'التقدّم';
+
+  @override
+  String get notificationChannelProgressDescription =>
+      'تقدّم اليوم كإشعار مستمر.';
+
+  @override
+  String get notificationChannelFamily => 'تنبيهات العائلة';
+
+  @override
+  String get notificationChannelFamilyDescription =>
+      'أخبار أفراد العائلة الذين ترعاهم.';
+
+  @override
+  String get notificationChannelWeather => 'تغييرات الهدف بسبب الطقس';
+
+  @override
+  String get notificationChannelWeatherDescription =>
+      'عندما يغيّر طقس اليوم هدفك، مرة واحدة يوميًا على الأكثر.';
+
+  @override
+  String get notificationChannelInsights => 'الإنجازات والملخصات';
+
+  @override
+  String get notificationChannelInsightsDescription =>
+      'سلاسل الأيام والإنجازات وملخصك الأسبوعي.';
+
+  @override
+  String get notificationChannelPromotions => 'العروض';
+
+  @override
+  String get notificationChannelPromotionsDescription =>
+      'عروض وأخبار. متوقفة ما لم تفعّلها.';
+
+  @override
+  String get reminderNotificationTitle => 'رسالة من سيبي';
+
+  @override
+  String get reminderNotificationBody => 'مجرد تحية. سجّل مشروبك متى شربت.';
+
+  @override
+  String nudgeReminderNotificationBody(int ml) {
+    final intl.NumberFormat mlNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String mlString = mlNumberFormat.format(ml);
+
+    return 'حان وقت نحو $mlString مل. أنت قادر!';
+  }
 }
