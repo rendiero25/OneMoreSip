@@ -45,6 +45,18 @@ class ProfileRepository {
         return profile;
       });
 
+  /// The guest's main profile, or `null` while there is none.
+  Stream<Profile?> watchGuest() =>
+      (_db.select(_db.profiles)
+            ..where(
+              (p) =>
+                  p.accountId.equals(guestAccountId) &
+                  p.kind.equals('main') &
+                  p.deletedAt.isNull(),
+            )
+            ..limit(1))
+          .watchSingleOrNull();
+
   /// Saves [profile] and returns it with the new `updated_at`.
   Future<Profile> update(Profile profile) => _db.transaction(() async {
     final saved = profile.copyWith(updatedAt: DateTime.now().toUtc());
@@ -59,4 +71,11 @@ class ProfileRepository {
 /// The [ProfileRepository] over the app database.
 final profileRepositoryProvider = Provider<ProfileRepository>(
   (ref) => ProfileRepository(ref.watch(appDatabaseProvider)),
+);
+
+/// The profile whose data the screens show: the guest's main profile, or
+/// `null` until onboarding (T-030) creates it. Accounts and profile
+/// switching replace this in T-070 and the family tasks.
+final currentProfileProvider = StreamProvider<Profile?>(
+  (ref) => ref.watch(profileRepositoryProvider).watchGuest(),
 );

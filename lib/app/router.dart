@@ -7,6 +7,7 @@ import 'package:onemoresip/app/placeholder_screen.dart';
 import 'package:onemoresip/core/flags/feature_flag.dart';
 import 'package:onemoresip/core/flags/feature_flags.dart';
 import 'package:onemoresip/features/drinks/presentation/drink_picker_screen.dart';
+import 'package:onemoresip/features/stats/presentation/history_screen.dart';
 
 /// Route paths, one per screen group in docs/claude-design-prompts.md.
 ///
@@ -105,7 +106,15 @@ final routerProvider = Provider<GoRouter>((ref) {
             AppShell(navigationShell: navigationShell),
         branches: [
           StatefulShellBranch(routes: [placeholder(Routes.home, 'UI-03')]),
-          StatefulShellBranch(routes: [placeholder(Routes.stats, 'UI-09')]),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.stats,
+                builder: (context, state) =>
+                    const HistoryScreen(key: ValueKey('UI-09')),
+              ),
+            ],
+          ),
           StatefulShellBranch(
             routes: [placeholder(Routes.family, 'UI-12', FeatureFlag.family)],
           ),

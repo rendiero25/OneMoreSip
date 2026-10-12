@@ -387,5 +387,169 @@
         "type": "String"
       }
     }
+  },
+  "historyTitle": "History",
+  "@historyTitle": {
+    "description": "Title of the drink history list in the Stats tab (UI-09, F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyToday": "Today",
+  "@historyToday": {
+    "description": "Day header in the drink history for today (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyYesterday": "Yesterday",
+  "@historyYesterday": {
+    "description": "Day header in the drink history for yesterday (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyDate": "{date}",
+  "@historyDate": {
+    "description": "Day header in the drink history for older days, e.g. \"Wed, Oct 7\" (F-14). Non-EN translations are drafts for review in T-130.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMEd"
+      }
+    }
+  },
+  "historyDayTotal": "{total} / {goal} ml",
+  "@historyDayTotal": {
+    "description": "Day header in the drink history: millilitres counted that day and the day's goal, e.g. \"1,250 / 2,200 ml\" (F-14). Non-EN translations are drafts for review in T-130.",
+    "placeholders": {
+      "total": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "goal": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyDayTotalLimit": "{total} / {limit} ml limit",
+  "@historyDayTotalLimit": {
+    "description": "Day header in the drink history under a doctor's fluid limit: millilitres counted and the daily limit, e.g. \"1,250 / 1,500 ml limit\" (F-28). Neutral, never a target. Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "total": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "limit": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyGoalMet": "Goal met",
+  "@historyGoalMet": {
+    "description": "Badge (with a check icon) in a history day header when that day's goal was reached (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyNoDrinksToday": "No drinks logged yet today.",
+  "@historyNoDrinksToday": {
+    "description": "Shown under today's header in the drink history when nothing was logged yet (F-14). Friendly, no shame. Non-EN translations are drafts for review in T-130."
+  },
+  "historyVolume": "{volume} ml",
+  "@historyVolume": {
+    "description": "Logged volume of one drink in the history list, e.g. \"250 ml\" (F-14). Non-EN translations are drafts for review in T-130.",
+    "placeholders": {
+      "volume": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyCounts": "Counts {ml} ml",
+  "@historyCounts": {
+    "description": "How much of a logged drink counts toward the goal when it differs from the volume, e.g. \"Counts 270 ml\" for 300 ml of juice (BR-03). Non-EN translations are drafts for review in T-130.",
+    "placeholders": {
+      "ml": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "historyNotCounted": "Logged, not counted",
+  "@historyNotCounted": {
+    "description": "Shown on an alcoholic drink in the history: it is logged but counts 0 toward the goal (D-23). Neutral, never encouraging. Non-EN translations are drafts for review in T-130."
+  },
+  "historyUnknownDrink": "Drink",
+  "@historyUnknownDrink": {
+    "description": "Generic name for a logged drink that is not in the drink database (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyEditLog": "Edit {drink} at {time}",
+  "@historyEditLog": {
+    "description": "Screen-reader label and tooltip of the pencil button on a history row, e.g. \"Edit Water at 14:05\" (F-14). Non-EN translations are drafts for review in T-130.",
+    "placeholders": {
+      "drink": {
+        "type": "String",
+        "example": "Water"
+      },
+      "time": {
+        "type": "String",
+        "example": "14:05"
+      }
+    }
+  },
+  "historyDeleteLog": "Delete {drink} at {time}",
+  "@historyDeleteLog": {
+    "description": "Screen-reader label and tooltip of the trash button on a history row, e.g. \"Delete Water at 14:05\" (F-14). Non-EN translations are drafts for review in T-130.",
+    "placeholders": {
+      "drink": {
+        "type": "String",
+        "example": "Water"
+      },
+      "time": {
+        "type": "String",
+        "example": "14:05"
+      }
+    }
+  },
+  "historyDeleted": "Drink deleted",
+  "@historyDeleted": {
+    "description": "Snackbar text after deleting a drink from the history; it has an Undo action (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyEditTitle": "Edit drink",
+  "@historyEditTitle": {
+    "description": "Title of the bottom sheet that edits a logged drink (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyEditDrinkLabel": "Drink",
+  "@historyEditDrinkLabel": {
+    "description": "Section label for the drink type in the edit sheet (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyEditChangeDrink": "Change drink",
+  "@historyEditChangeDrink": {
+    "description": "Button in the edit sheet that opens the drink search (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyEditSearch": "Search drinks",
+  "@historyEditSearch": {
+    "description": "Label of the search field for choosing another drink in the edit sheet (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyEditAmount": "Amount",
+  "@historyEditAmount": {
+    "description": "Section label for the volume in the edit sheet (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyEditDecrease": "Decrease by {step} ml",
+  "@historyEditDecrease": {
+    "description": "Screen-reader label and tooltip of the minus button for the volume in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      }
+    }
+  },
+  "historyEditIncrease": "Increase by {step} ml",
+  "@historyEditIncrease": {
+    "description": "Screen-reader label and tooltip of the plus button for the volume in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      }
+    }
+  },
+  "historyEditTime": "Time",
+  "@historyEditTime": {
+    "description": "Section label for the time of the drink in the edit sheet (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "historyEditSave": "Save",
+  "@historyEditSave": {
+    "description": "Button that saves the changes in the edit sheet (F-14). Non-EN translations are drafts for review in T-130."
   }
 }

@@ -79,6 +79,32 @@ class DrinkLogRepository {
     await _db.enqueue(_db.drinkLogs, id, OutboxOp.delete, log);
   });
 
+  /// Undoes [delete] of the log [id]: clears `deleted_at` and queues an
+  /// update (Undo snackbar, F-14).
+  Future<DrinkLog> restore(String id) => _db.transaction(() async {
+    final deleted =
+        await (_db.select(_db.drinkLogs)
+              ..where((l) => l.id.equals(id) & l.deletedAt.isNotNull()))
+            .getSingleOrNull();
+    if (deleted == null) {
+      throw StateError('Deleted drink log $id does not exist');
+    }
+    final log = deleted.copyWith(
+      updatedAt: DateTime.now().toUtc(),
+      deletedAt: const Value(null),
+    );
+    await _db.update(_db.drinkLogs).replace(log);
+    await _db.enqueue(_db.drinkLogs, id, OutboxOp.update, log);
+    return log;
+  });
+
+  /// All non-deleted logs of [profileId], newest first.
+  Stream<List<DrinkLog>> watchAll(String profileId) =>
+      (_db.select(_db.drinkLogs)
+            ..where((l) => l.profileId.equals(profileId) & l.deletedAt.isNull())
+            ..orderBy([(l) => OrderingTerm.desc(l.loggedAt)]))
+          .watch();
+
   /// Non-deleted logs of [profileId] on the local calendar day of [day],
   /// oldest first.
   Stream<List<DrinkLog>> watchDay(String profileId, DateTime day) =>

@@ -142,6 +142,39 @@ void main() {
     expect(() => repo.delete(removed.id), throwsStateError);
   });
 
+  test('restore undoes a delete and queues one update', () async {
+    final log = await add(water, 300);
+    await repo.delete(log.id);
+
+    final restored = await repo.restore(log.id);
+
+    expect(restored.deletedAt, isNull);
+    expect(restored.volumeMl, 300);
+    expect(restored.updatedAt.isBefore(log.updatedAt), isFalse);
+    expect((await repo.watchDay(profileId, day).first).single.id, log.id);
+    final entries = await outbox();
+    expect(entries.map((e) => e.op), ['insert', 'delete', 'update']);
+    expect(jsonDecode(entries.last.payload), containsPair('deleted_at', null));
+    expect(() => repo.restore(log.id), throwsStateError);
+  });
+
+  test('watchAll lists the profile’s live logs, newest first', () async {
+    final older = await add(water, 100, at: DateTime(2026, 10, 9));
+    final newer = await add(water, 200, at: DateTime(2026, 10, 11));
+    final removed = await add(water, 300, at: DateTime(2026, 10, 10));
+    await repo.delete(removed.id);
+    await repo.add(
+      profileId: 'other',
+      drink: water,
+      volumeMl: 400,
+      source: 'app',
+      loggedAt: day,
+    );
+
+    final logs = await repo.watchAll(profileId).first;
+    expect(logs.map((l) => l.id), [newer.id, older.id]);
+  });
+
   test('day queries only include that local day and profile', () async {
     final first = await add(water, 100, at: DateTime(2026, 10, 11));
     final last = await add(water, 200, at: DateTime(2026, 10, 11, 23, 59));

@@ -289,4 +289,121 @@ class AppLocalizationsId extends AppLocalizations {
   String pickerNoResults(String query) {
     return 'Belum ada minuman bernama “$query”.';
   }
+
+  @override
+  String get historyTitle => 'Riwayat';
+
+  @override
+  String get historyToday => 'Hari ini';
+
+  @override
+  String get historyYesterday => 'Kemarin';
+
+  @override
+  String historyDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.MMMEd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String historyDayTotal(int total, int goal) {
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+    final intl.NumberFormat goalNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String goalString = goalNumberFormat.format(goal);
+
+    return '$totalString / $goalString ml';
+  }
+
+  @override
+  String historyDayTotalLimit(int total, int limit) {
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+    final intl.NumberFormat limitNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String limitString = limitNumberFormat.format(limit);
+
+    return '$totalString / batas $limitString ml';
+  }
+
+  @override
+  String get historyGoalMet => 'Target tercapai';
+
+  @override
+  String get historyNoDrinksToday => 'Belum ada minuman yang dicatat hari ini.';
+
+  @override
+  String historyVolume(int volume) {
+    final intl.NumberFormat volumeNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String volumeString = volumeNumberFormat.format(volume);
+
+    return '$volumeString ml';
+  }
+
+  @override
+  String historyCounts(int ml) {
+    final intl.NumberFormat mlNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String mlString = mlNumberFormat.format(ml);
+
+    return 'Dihitung $mlString ml';
+  }
+
+  @override
+  String get historyNotCounted => 'Dicatat, tidak dihitung';
+
+  @override
+  String get historyUnknownDrink => 'Minuman';
+
+  @override
+  String historyEditLog(String drink, String time) {
+    return 'Ubah $drink pukul $time';
+  }
+
+  @override
+  String historyDeleteLog(String drink, String time) {
+    return 'Hapus $drink pukul $time';
+  }
+
+  @override
+  String get historyDeleted => 'Minuman dihapus';
+
+  @override
+  String get historyEditTitle => 'Ubah minuman';
+
+  @override
+  String get historyEditDrinkLabel => 'Minuman';
+
+  @override
+  String get historyEditChangeDrink => 'Ganti minuman';
+
+  @override
+  String get historyEditSearch => 'Cari minuman';
+
+  @override
+  String get historyEditAmount => 'Jumlah';
+
+  @override
+  String historyEditDecrease(int step) {
+    return 'Kurangi $step ml';
+  }
+
+  @override
+  String historyEditIncrease(int step) {
+    return 'Tambah $step ml';
+  }
+
+  @override
+  String get historyEditTime => 'Waktu';
+
+  @override
+  String get historyEditSave => 'Simpan';
 }

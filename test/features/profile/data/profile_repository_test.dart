@@ -62,4 +62,20 @@ void main() {
     );
     expect((await outbox()).length, 1);
   });
+
+  test('watchGuest emits null, then the guest and its updates', () async {
+    final seen = <Profile?>[];
+    final sub = repo.watchGuest().listen(seen.add);
+    await pumpEventQueue();
+    final guest = await repo.getOrCreateGuest(timezone: 'Asia/Jakarta');
+    await pumpEventQueue();
+    await repo.update(guest.copyWith(goalOverrideMl: const Value(2500)));
+    await pumpEventQueue();
+    await sub.cancel();
+
+    expect(seen, hasLength(3));
+    expect(seen.first, isNull);
+    expect(seen[1]?.id, guest.id);
+    expect(seen.last?.goalOverrideMl, 2500);
+  });
 }

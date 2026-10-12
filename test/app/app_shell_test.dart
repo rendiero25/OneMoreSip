@@ -6,6 +6,7 @@ import 'package:onemoresip/app/widgets/floating_nav_bar.dart';
 import 'package:onemoresip/core/flags/feature_flag.dart';
 import 'package:onemoresip/features/logging/presentation/log_sheet.dart';
 
+import '../helpers/database.dart';
 import '../helpers/flags.dart';
 import '../helpers/logging.dart';
 
@@ -13,7 +14,11 @@ void main() {
   testWidgets('navbar shows Home, Stats, Family, Me; tabs switch', (
     tester,
   ) async {
-    await pumpWithFlags(tester, child: const App());
+    await pumpWithFlags(
+      tester,
+      child: const App(),
+      overrides: loggingOverrides(memoryDatabase()),
+    );
     await tester.pumpAndSettle();
 
     expect(find.byType(FloatingNavBar), findsOneWidget);
@@ -28,6 +33,7 @@ void main() {
     await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
     expect(find.byKey(const ValueKey('UI-15')), findsOneWidget);
+    await unmountApp(tester);
   });
 
   testWidgets('FAB opens the log sheet over the current tab', (tester) async {

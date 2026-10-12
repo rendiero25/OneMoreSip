@@ -535,6 +535,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No drink called “{query}” yet.'**
   String pickerNoResults(String query);
+
+  /// Title of the drink history list in the Stats tab (UI-09, F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get historyTitle;
+
+  /// Day header in the drink history for today (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get historyToday;
+
+  /// Day header in the drink history for yesterday (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get historyYesterday;
+
+  /// Day header in the drink history for older days, e.g. "Wed, Oct 7" (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}'**
+  String historyDate(DateTime date);
+
+  /// Day header in the drink history: millilitres counted that day and the day's goal, e.g. "1,250 / 2,200 ml" (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'{total} / {goal} ml'**
+  String historyDayTotal(int total, int goal);
+
+  /// Day header in the drink history under a doctor's fluid limit: millilitres counted and the daily limit, e.g. "1,250 / 1,500 ml limit" (F-28). Neutral, never a target. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'{total} / {limit} ml limit'**
+  String historyDayTotalLimit(int total, int limit);
+
+  /// Badge (with a check icon) in a history day header when that day's goal was reached (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal met'**
+  String get historyGoalMet;
+
+  /// Shown under today's header in the drink history when nothing was logged yet (F-14). Friendly, no shame. Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'No drinks logged yet today.'**
+  String get historyNoDrinksToday;
+
+  /// Logged volume of one drink in the history list, e.g. "250 ml" (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'{volume} ml'**
+  String historyVolume(int volume);
+
+  /// How much of a logged drink counts toward the goal when it differs from the volume, e.g. "Counts 270 ml" for 300 ml of juice (BR-03). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Counts {ml} ml'**
+  String historyCounts(int ml);
+
+  /// Shown on an alcoholic drink in the history: it is logged but counts 0 toward the goal (D-23). Neutral, never encouraging. Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged, not counted'**
+  String get historyNotCounted;
+
+  /// Generic name for a logged drink that is not in the drink database (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink'**
+  String get historyUnknownDrink;
+
+  /// Screen-reader label and tooltip of the pencil button on a history row, e.g. "Edit Water at 14:05" (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit {drink} at {time}'**
+  String historyEditLog(String drink, String time);
+
+  /// Screen-reader label and tooltip of the trash button on a history row, e.g. "Delete Water at 14:05" (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {drink} at {time}'**
+  String historyDeleteLog(String drink, String time);
+
+  /// Snackbar text after deleting a drink from the history; it has an Undo action (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink deleted'**
+  String get historyDeleted;
+
+  /// Title of the bottom sheet that edits a logged drink (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit drink'**
+  String get historyEditTitle;
+
+  /// Section label for the drink type in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink'**
+  String get historyEditDrinkLabel;
+
+  /// Button in the edit sheet that opens the drink search (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Change drink'**
+  String get historyEditChangeDrink;
+
+  /// Label of the search field for choosing another drink in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Search drinks'**
+  String get historyEditSearch;
+
+  /// Section label for the volume in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get historyEditAmount;
+
+  /// Screen-reader label and tooltip of the minus button for the volume in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease by {step} ml'**
+  String historyEditDecrease(int step);
+
+  /// Screen-reader label and tooltip of the plus button for the volume in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase by {step} ml'**
+  String historyEditIncrease(int step);
+
+  /// Section label for the time of the drink in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get historyEditTime;
+
+  /// Button that saves the changes in the edit sheet (F-14). Non-EN translations are drafts for review in T-130.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get historyEditSave;
 }
 
 class _AppLocalizationsDelegate
