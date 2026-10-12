@@ -679,6 +679,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get historyEditSave;
+
+  /// Android notification channel name, shown in the system notification settings (F-06). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink reminders'**
+  String get notificationChannelReminders;
+
+  /// Android notification channel description for drink reminders (F-06). Must not nudge to drink more (F-28). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders from Sippy across your day.'**
+  String get notificationChannelRemindersDescription;
+
+  /// Android notification channel name for the ongoing progress notification (F-06). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get notificationChannelProgress;
+
+  /// Android notification channel description (F-06). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s progress as an ongoing notification.'**
+  String get notificationChannelProgressDescription;
+
+  /// Android notification channel name for caregiver alerts (F-06, F-13). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Family alerts'**
+  String get notificationChannelFamily;
+
+  /// Android notification channel description (F-06). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates about the family members you care for.'**
+  String get notificationChannelFamilyDescription;
+
+  /// Android notification channel name for weather-based goal changes (F-06, F-09). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather goal changes'**
+  String get notificationChannelWeather;
+
+  /// Android notification channel description (F-06). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'When today\'s weather changes your goal, at most once a day.'**
+  String get notificationChannelWeatherDescription;
+
+  /// Android notification channel name for achievements and the weekly insight digest (F-06). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements & insights'**
+  String get notificationChannelInsights;
+
+  /// Android notification channel description (F-06). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Streaks, achievements and your weekly insight.'**
+  String get notificationChannelInsightsDescription;
+
+  /// Android notification channel name for offers (F-06). Off unless the user opts in (SC-08). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Promotions'**
+  String get notificationChannelPromotions;
+
+  /// Android notification channel description (F-06, SC-08). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers and news. Off unless you turn them on.'**
+  String get notificationChannelPromotionsDescription;
+
+  /// Title of a drink reminder notification (F-04), in Sippy's voice (DS-10). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'A note from Sippy'**
+  String get reminderNotificationTitle;
+
+  /// Body of a drink reminder without an amount, e.g. under a doctor's fluid limit (F-28): never says to drink more. Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle check-in. Log a drink whenever you have one.'**
+  String get reminderNotificationBody;
+
+  /// Body of a drink reminder with the suggested amount (F-04, F-05, BR-02), e.g. "Time for about 250 ml. You've got this!". Drink-more copy: never shown under a fluid limit (D-34). Non-EN translations are drafts for review in T-130/T-131.
+  ///
+  /// In en, this message translates to:
+  /// **'Time for about {ml} ml. You\'ve got this!'**
+  String nudgeReminderNotificationBody(int ml);
 }
 
 class _AppLocalizationsDelegate

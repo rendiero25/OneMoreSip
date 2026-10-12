@@ -95,5 +95,20 @@
   "historyEditDecrease": "Kurangi {step} ml",
   "historyEditIncrease": "Tambah {step} ml",
   "historyEditTime": "Waktu",
-  "historyEditSave": "Simpan"
+  "historyEditSave": "Simpan",
+  "notificationChannelReminders": "Pengingat minum",
+  "notificationChannelRemindersDescription": "Pengingat dari Sippy sepanjang harimu.",
+  "notificationChannelProgress": "Progres",
+  "notificationChannelProgressDescription": "Progres hari ini sebagai notifikasi yang terus tampil.",
+  "notificationChannelFamily": "Peringatan keluarga",
+  "notificationChannelFamilyDescription": "Kabar tentang anggota keluarga yang kamu dampingi.",
+  "notificationChannelWeather": "Perubahan target karena cuaca",
+  "notificationChannelWeatherDescription": "Saat cuaca hari ini mengubah targetmu, maksimal sekali sehari.",
+  "notificationChannelInsights": "Pencapaian & wawasan",
+  "notificationChannelInsightsDescription": "Streak, pencapaian, dan wawasan mingguanmu.",
+  "notificationChannelPromotions": "Promosi",
+  "notificationChannelPromotionsDescription": "Penawaran dan berita. Nonaktif kecuali kamu menyalakannya.",
+  "reminderNotificationTitle": "Pesan dari Sippy",
+  "reminderNotificationBody": "Sekadar menyapa. Catat minumanmu kapan pun kamu minum.",
+  "nudgeReminderNotificationBody": "Saatnya minum sekitar {ml} ml. Kamu pasti bisa!"
 }

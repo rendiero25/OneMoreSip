@@ -95,5 +95,20 @@
   "historyEditDecrease": "Restar {step} ml",
   "historyEditIncrease": "Sumar {step} ml",
   "historyEditTime": "Hora",
-  "historyEditSave": "Guardar"
+  "historyEditSave": "Guardar",
+  "notificationChannelReminders": "Recordatorios para beber",
+  "notificationChannelRemindersDescription": "Recordatorios de Sippy a lo largo del día.",
+  "notificationChannelProgress": "Progreso",
+  "notificationChannelProgressDescription": "El progreso de hoy como notificación continua.",
+  "notificationChannelFamily": "Alertas familiares",
+  "notificationChannelFamilyDescription": "Novedades sobre los familiares que cuidas.",
+  "notificationChannelWeather": "Cambios de meta por el clima",
+  "notificationChannelWeatherDescription": "Cuando el clima de hoy cambia tu meta, como máximo una vez al día.",
+  "notificationChannelInsights": "Logros y resúmenes",
+  "notificationChannelInsightsDescription": "Rachas, logros y tu resumen semanal.",
+  "notificationChannelPromotions": "Promociones",
+  "notificationChannelPromotionsDescription": "Ofertas y novedades. Desactivadas salvo que las actives.",
+  "reminderNotificationTitle": "Un mensaje de Sippy",
+  "reminderNotificationBody": "Solo pasaba a saludar. Registra una bebida cuando tomes una.",
+  "nudgeReminderNotificationBody": "Es hora de unos {ml} ml. ¡Tú puedes!"
 }

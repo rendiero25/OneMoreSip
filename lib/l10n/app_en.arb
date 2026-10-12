@@ -551,5 +551,71 @@
   "historyEditSave": "Save",
   "@historyEditSave": {
     "description": "Button that saves the changes in the edit sheet (F-14). Non-EN translations are drafts for review in T-130."
+  },
+  "notificationChannelReminders": "Drink reminders",
+  "@notificationChannelReminders": {
+    "description": "Android notification channel name, shown in the system notification settings (F-06). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelRemindersDescription": "Reminders from Sippy across your day.",
+  "@notificationChannelRemindersDescription": {
+    "description": "Android notification channel description for drink reminders (F-06). Must not nudge to drink more (F-28). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelProgress": "Progress",
+  "@notificationChannelProgress": {
+    "description": "Android notification channel name for the ongoing progress notification (F-06). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelProgressDescription": "Today's progress as an ongoing notification.",
+  "@notificationChannelProgressDescription": {
+    "description": "Android notification channel description (F-06). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelFamily": "Family alerts",
+  "@notificationChannelFamily": {
+    "description": "Android notification channel name for caregiver alerts (F-06, F-13). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelFamilyDescription": "Updates about the family members you care for.",
+  "@notificationChannelFamilyDescription": {
+    "description": "Android notification channel description (F-06). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelWeather": "Weather goal changes",
+  "@notificationChannelWeather": {
+    "description": "Android notification channel name for weather-based goal changes (F-06, F-09). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelWeatherDescription": "When today's weather changes your goal, at most once a day.",
+  "@notificationChannelWeatherDescription": {
+    "description": "Android notification channel description (F-06). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelInsights": "Achievements & insights",
+  "@notificationChannelInsights": {
+    "description": "Android notification channel name for achievements and the weekly insight digest (F-06). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelInsightsDescription": "Streaks, achievements and your weekly insight.",
+  "@notificationChannelInsightsDescription": {
+    "description": "Android notification channel description (F-06). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelPromotions": "Promotions",
+  "@notificationChannelPromotions": {
+    "description": "Android notification channel name for offers (F-06). Off unless the user opts in (SC-08). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "notificationChannelPromotionsDescription": "Offers and news. Off unless you turn them on.",
+  "@notificationChannelPromotionsDescription": {
+    "description": "Android notification channel description (F-06, SC-08). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "reminderNotificationTitle": "A note from Sippy",
+  "@reminderNotificationTitle": {
+    "description": "Title of a drink reminder notification (F-04), in Sippy's voice (DS-10). Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "reminderNotificationBody": "A gentle check-in. Log a drink whenever you have one.",
+  "@reminderNotificationBody": {
+    "description": "Body of a drink reminder without an amount, e.g. under a doctor's fluid limit (F-28): never says to drink more. Non-EN translations are drafts for review in T-130/T-131."
+  },
+  "nudgeReminderNotificationBody": "Time for about {ml} ml. You've got this!",
+  "@nudgeReminderNotificationBody": {
+    "description": "Body of a drink reminder with the suggested amount (F-04, F-05, BR-02), e.g. \"Time for about 250 ml. You've got this!\". Drink-more copy: never shown under a fluid limit (D-34). Non-EN translations are drafts for review in T-130/T-131.",
+    "placeholders": {
+      "ml": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
   }
 }

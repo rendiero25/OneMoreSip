@@ -95,5 +95,20 @@
   "historyEditDecrease": "إنقاص {step} مل",
   "historyEditIncrease": "زيادة {step} مل",
   "historyEditTime": "الوقت",
-  "historyEditSave": "حفظ"
+  "historyEditSave": "حفظ",
+  "notificationChannelReminders": "تذكيرات الشرب",
+  "notificationChannelRemindersDescription": "تذكيرات من سيبي على مدار يومك.",
+  "notificationChannelProgress": "التقدّم",
+  "notificationChannelProgressDescription": "تقدّم اليوم كإشعار مستمر.",
+  "notificationChannelFamily": "تنبيهات العائلة",
+  "notificationChannelFamilyDescription": "أخبار أفراد العائلة الذين ترعاهم.",
+  "notificationChannelWeather": "تغييرات الهدف بسبب الطقس",
+  "notificationChannelWeatherDescription": "عندما يغيّر طقس اليوم هدفك، مرة واحدة يوميًا على الأكثر.",
+  "notificationChannelInsights": "الإنجازات والملخصات",
+  "notificationChannelInsightsDescription": "سلاسل الأيام والإنجازات وملخصك الأسبوعي.",
+  "notificationChannelPromotions": "العروض",
+  "notificationChannelPromotionsDescription": "عروض وأخبار. متوقفة ما لم تفعّلها.",
+  "reminderNotificationTitle": "رسالة من سيبي",
+  "reminderNotificationBody": "مجرد تحية. سجّل مشروبك متى شربت.",
+  "nudgeReminderNotificationBody": "حان وقت نحو {ml} مل. أنت قادر!"
 }
