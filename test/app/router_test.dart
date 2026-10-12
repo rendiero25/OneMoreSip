@@ -5,6 +5,7 @@ import 'package:onemoresip/app/app.dart';
 import 'package:onemoresip/app/router.dart';
 import 'package:onemoresip/features/drinks/presentation/drink_picker_screen.dart';
 
+import '../helpers/database.dart';
 import '../helpers/flags.dart';
 import '../helpers/logging.dart';
 
@@ -31,7 +32,11 @@ void main() {
   };
 
   Future<GoRouter> pumpApp(WidgetTester tester) async {
-    final container = await pumpWithFlags(tester, child: const App());
+    final container = await pumpWithFlags(
+      tester,
+      child: const App(),
+      overrides: loggingOverrides(memoryDatabase()),
+    );
     final router = container.read(routerProvider);
     await tester.pumpAndSettle();
     return router;
@@ -45,6 +50,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byKey(ValueKey(id)), findsOneWidget, reason: path);
     }
+    await unmountApp(tester);
   });
 
   testWidgets('deep links expose their parameter', (tester) async {

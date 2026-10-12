@@ -102,8 +102,9 @@
 - [x] **T-032 Log sheet, drink picker, custom volume, undo** (UI-04, UI-05).
   Refs: F-02, F-03, UF-04 · Verify: undo within 5 s restores state; works offline.
   Note 2026-10-11: FAB opens the log sheet as a bottom sheet over the current tab (`/log` route removed); recent drinks (distinct, newest first, no alcohol) with water + common fallback, 150/250/350/500 ml + custom 50–1,500 ml / 10 ml (D-35), BR-03 note, live BR-06 notice, undo snackbar 5 s (soft delete), `drink_logged{in_app}` only; `/drinks` picker with search, categories, sugar/caffeine badges, alcohol "Logged, not counted". Local DB only (offline). Guest profile timezone is an `Etc/GMT±N` offset name until T-030 sets the real IANA zone. Deferred: AI photo button (T-113), custom drink creation + "Data sources" + "Popular in …" section (T-021), haptics on log (toggle in T-073).
-- [ ] **T-033 History** with edit/delete (UI-09).
+- [x] **T-033 History** with edit/delete (UI-09).
   Refs: F-14 · Verify: edits recalculate today and streak.
+  Note 2026-10-11: `/stats` shows `HistoryScreen` (`features/stats/presentation`): last 7 days (today always), day total vs goal + "Goal met" badge, rows with locale time/name, volume, counted ml or "Logged, not counted"; edit sheet (drink search, preset chips + 50 ml stepper, time) and delete with 5 s Undo (`DrinkLogRepository.restore`). Providers: `currentProfileProvider`, `currentGoalProvider` (temporary fallback: goal override or 2,200 ml until T-023), `dayHydrationProvider`, `historyProvider`, `currentStreakProvider` (no freezes until T-035). Statistics part is T-034; native ad is T-091. Choices in D-36.
 - [ ] **T-034 Statistics** — 7-day free, full premium gate, CSV export (premium).
   Refs: F-14, §7.1 · Deps: T-085 for gate · Verify: free user sees lock card after 7 days.
 - [ ] **T-035 Streaks & achievements**.
