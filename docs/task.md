@@ -121,9 +121,9 @@
 - [x] **T-040 Reminder planner** (domain) — schedule from settings, BR-09 skips, catch-up amounts, DST/time-zone.
   Refs: F-04, F-05, BR-02, BR-09, SD-8 · Verify: unit tests incl. DST and quiet hours.
   Note 2026-10-11: `features/reminders/domain/reminder_planner.dart` with package:timezone; day capped at 12 evenly spread; goal reached = no more drink reminders today (the one congratulation is T-043); fasting hours come in as blocked windows from T-123.
-- [~] **T-041 Android scheduling** — channels, inexact alarms, optional `SCHEDULE_EXACT_ALARM` with rationale, boot receiver, WorkManager re-plan.
+- [x] **T-041 Android scheduling** — channels, inexact alarms, optional `SCHEDULE_EXACT_ALARM` with rationale, boot receiver, WorkManager re-plan.
   Refs: SD-8, SC-22 · Verify: survives reboot and app update; never declares `USE_EXACT_ALARM`.
-  Note 2026-10-11: `core/notifications` (six F-06 channels, `ReminderScheduler` inexact unless exact alarms granted, re-plan on start/resume/daily WorkManager, boot receiver), D-37; device verification (reboot/update survival) pending.
+  Note 2026-10-11: `core/notifications` (six F-06 channels, `ReminderScheduler` inexact unless exact alarms granted, re-plan on start/resume/daily WorkManager, boot receiver), D-37; verified on the Pixel 10 emulator 2026-10-12: 21 inexact alarms scheduled, future ones survive reboot and an update (versionCode 2) without opening the app, WorkManager job registered, merged manifest has no USE_EXACT_ALARM.
 - [ ] **T-042 iOS scheduling** — rolling window under 64, BGAppRefresh, re-plan on log.
   Refs: SD-8 · Verify: 7-day simulated schedule never exceeds 64 pending.
 - [ ] **T-043 Notification categories & settings** — promotions default OFF.
